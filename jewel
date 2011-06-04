@@ -1,10 +1,13 @@
 #!/usr/bin/ruby
 
+$version = "0.0.1"
+
 $: << File.expand_path(File.dirname(__FILE__))
 
 require "rubygems"
 
 require "json"
+require "thor"
 
 def local_dir dirname
   home = ENV["HOME"] + "/.jewel/"
@@ -14,12 +17,60 @@ def local_dir dirname
   path
 end
 
-manifest_dir = local_dir "manifests"
-
-Dir.glob( "#{manifest_dir}/*.manifest" ).sort.each do |filename|
-  File.open filename do |file|
-    manifest = JSON file.read
-    
-    puts manifest["name"] + "-" + manifest["version"]
+def get_involved text, id = nil
+  puts "You can help and get involved:"
+  puts text
+  if id
+    puts "More info: https://github.com/cornelius/jewel/issues/#{id}"
   end
 end
+
+$manifest_dir = local_dir "manifests"
+
+class List < Thor
+
+  default_task :global
+
+  class_option :version, :type => :boolean, :desc => "Show version"
+
+  desc "list", "List jewels"
+  method_option :remote, :type => :boolean, :aliases => "-r",
+    :desc => "List remote jewels"
+  def list
+    if options[:remote]
+      Dir.glob( "#{$manifest_dir}/*.manifest" ).sort.each do |filename|
+        File.open filename do |file|
+          manifest = JSON file.read
+
+          puts manifest["name"] + "-" + manifest["version"]
+        end
+      end
+    else
+      get_involved "Add support for listing installed libraries"
+    end
+  end
+
+  desc "global", "Global options", :hide => true
+  def global
+    if options[:version]
+      puts "Jewel: #{$version}"
+
+      qmake_out = `qmake -v`
+      qmake_out =~ /Qt version (.*) in/
+      puts "Qt: #{$1}"
+
+      File.open "/etc/SuSE-release" do |file|
+        if file.readline =~ /^openSUSE/
+          file.readline =~ /VERSION = (.*)/
+          puts "OS: openSUSE #{$1}"
+        end
+      end
+    else
+      List.help shell
+    end
+  end
+
+end
+
+List.check_unknown_options!
+List.start ARGV
