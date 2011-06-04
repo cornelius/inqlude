@@ -1,0 +1,43 @@
+#!/usr/bin/ruby
+
+$: << File.expand_path(File.dirname(__FILE__))
+
+require "rubygems"
+
+require "json"
+
+manifest = {
+  :schema_version => 1,
+  :name => "qjson",
+  :version => "0.7.1",
+  :homepage => "http://qjson.sourceforge.net",
+  :apidocs => "",
+  :authors => [ "Flavio Castelli" ],
+  :maturity => :stable,
+  :summary => "QJson is a qt-based library that maps JSON data to QVariant objects",
+  :license => "LGPL",
+  :packages => {
+    :source => {
+      :url => "http://sourceforge.net/projects/qjson/files/qjson/0.7.1/qjson-0.7.1.tar.bz2/download"
+    },
+    :open_suse => [
+      [
+        :version => "11.4",
+        :repository => {
+          :name => "openSUSE:11.4",
+          :url => "http://download.opensuse.org/distribution/11.4/repo/oss/"
+        },
+        :package_name => "libqjson0"
+      ]
+    ]
+  },
+  :description => <<-EOT
+JSON (JavaScript Object Notation) is a lightweight data-interchange format.
+It can represent integer, real number, string, an ordered sequence of value,
+and a collection of name/value pairs. QJson is a qt-based library that maps
+JSON data to QVariant objects. JSON arrays will be mapped to QVariantList
+instances, while JSON's objects will be mapped to QVariantMap.
+EOT
+}
+
+puts JSON.pretty_generate manifest

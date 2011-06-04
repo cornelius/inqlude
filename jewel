@@ -1,0 +1,25 @@
+#!/usr/bin/ruby
+
+$: << File.expand_path(File.dirname(__FILE__))
+
+require "rubygems"
+
+require "json"
+
+def local_dir dirname
+  home = ENV["HOME"] + "/.jewel/"
+  Dir::mkdir home unless File.exists? home
+  path = home + dirname
+  Dir::mkdir path unless File.exists? path
+  path
+end
+
+manifest_dir = local_dir "manifests"
+
+Dir.glob( "#{manifest_dir}/*.manifest" ).sort.each do |filename|
+  File.open filename do |file|
+    manifest = JSON file.read
+    
+    puts manifest["name"] + "-" + manifest["version"]
+  end
+end
