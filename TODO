@@ -1,0 +1,10 @@
+* Show installed libraries
+* Install a library
+* Show documentation of an library
+* Add "How to use" data
+* Generate web page of all libraries
+* Tool to create jewel manifests from installed libraries (parsing rpm files,
+  looking for requires and provides)
+* Define maturity scale
+* Expand to apps
+* Retrieve data from qt-apps and kde-apps
