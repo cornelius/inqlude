@@ -1,15 +1,14 @@
 #!/usr/bin/ruby
 
-IO.popen "rpm -qa" do |f|
+IO.popen "rpmqpack" do |f|
   while line = f.gets do
-    line =~ /^(.*)-(.*)-(.*)\.[^\.]+$/
-    line.chomp!
-    rpm_name = $1
+    rpm_name = line.chomp
     if rpm_name
       IO.popen "rpm -q --requires #{rpm_name}" do |f2|
         while line2 = f2.gets do
           if line2 =~ /Qt/
             if rpm_name =~ /^lib(.*)/
+              puts "Found #{rpm_name}"
               name = $1
               filename = ENV["HOME"] + "/.inqlude/manifests/#{name}.manifest" 
               File.open( filename, "w") do |f2|
@@ -42,7 +41,14 @@ IO.popen "rpm -qa" do |f|
                 description.gsub! /"/, "\\\""
                 f2.puts "  \"description\": \"#{description.strip}\","
                 f2.puts '  "authors": [' + authors.join(",") + '],'
-                f2.puts '  "maturity": "stable"'
+                f2.puts '  "maturity": "stable",'
+                f2.puts '  "packages": {'
+                f2.puts '    "openSUSE": {'
+                f2.puts '      "11.4": {'
+                f2.puts "        \"package_name\": \"#{rpm_name}\""
+                f2.puts '      }'
+                f2.puts '    }'
+                f2.puts '  }'
                 f2.puts '}'
               end
             end
