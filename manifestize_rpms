@@ -7,9 +7,16 @@ IO.popen "rpmqpack" do |f|
       IO.popen "rpm -q --requires #{rpm_name}" do |f2|
         while line2 = f2.gets do
           if line2 =~ /Qt/
-            if rpm_name =~ /^lib(.*)/
-              puts "Found #{rpm_name}"
+            if rpm_name =~ /^(.*)-devel$/
               name = $1
+              puts "Found #{rpm_name}"
+              if name =~ /^lib/
+                name = name[3..name.length]
+              end
+              
+              puts name
+              break
+              
               filename = ENV["HOME"] + "/.inqlude/manifests/#{name}.manifest" 
               File.open( filename, "w") do |f2|
                 f2.puts '{';
