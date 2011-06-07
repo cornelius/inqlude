@@ -3,10 +3,16 @@
 * Show documentation of an library
 * Add "How to use" data
 * Generate web page of all libraries
-* Tool to create jewel manifests from installed libraries (parsing rpm files,
-  looking for requires and provides)
 * Define maturity scale
-* Expand to apps
 * Retrieve data from qt-apps and kde-apps
 * "How to package libraries"
 * Add tags for searching
+* Sync local repo with remote repo
+* Look for local search
+* Distro specific backends
+* Only look at devel packages when creating RPM based list
+* Get manifests from build service
+* Add option to verify given or all manifests
+* Add show option for showing library details
+* List libraries with available packages
+* Put Cli in own file.
