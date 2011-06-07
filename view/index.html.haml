@@ -1,1 +1,6 @@
 %h1 Inqlude
+
+%ul
+  - manifests.each do |manifest|
+    %li
+      = link_to_manifest manifest["name"]
