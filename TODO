@@ -9,7 +9,6 @@
 * Add tags for searching
 * Sync local repo with remote repo
 * Look for local search
-* Distro specific backends
 * Only look at devel packages when creating RPM based list
 * Get manifests from build service
 * Add option to verify given or all manifests
