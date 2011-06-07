@@ -14,4 +14,3 @@
 * Add option to verify given or all manifests
 * Add show option for showing library details
 * List libraries with available packages
-* Put Cli in own file.
