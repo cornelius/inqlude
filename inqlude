@@ -9,6 +9,9 @@ require "rubygems"
 require "json"
 require "thor"
 
+require "lib/manifest_handler"
+require "lib/view"
+
 def local_dir dirname
   home = ENV["HOME"] + "/.inqlude/"
   Dir::mkdir home unless File.exists? home
@@ -68,6 +71,14 @@ class Cli < Thor
     else
       get_involved "Add support for listing installed libraries"
     end
+  end
+
+  desc "view", "Create view"
+  method_option :output_dir, :type => :string, :aliases => "-o",
+    :desc => "Output directory", :required => true
+  def view
+    view = View.new ManifestHandler.new
+    view.create options[:output_dir]
   end
 
 end
