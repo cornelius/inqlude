@@ -11,7 +11,7 @@ IO.popen "rpm -qa" do |f|
           if line2 =~ /Qt/
             if rpm_name =~ /^lib(.*)/
               name = $1
-              filename = ENV["HOME"] + "/.jewel/manifests/#{name}.manifest" 
+              filename = ENV["HOME"] + "/.inqlude/manifests/#{name}.manifest" 
               File.open( filename, "w") do |f2|
                 f2.puts '{';
                 f2.puts "  \"name\": \"#{name}\","
