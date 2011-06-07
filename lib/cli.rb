@@ -32,15 +32,17 @@ class Cli < Thor
     :desc => "List remote libraries"
   def list
     handler = ManifestHandler.new
+    handler.read_remote
 
     if options[:remote]
-      handler.read_remote
-      
       handler.manifests.each do |manifest|
         puts manifest["name"] + "-" + manifest["version"]
       end
     else
-      get_involved "Add support for listing installed libraries"
+      manifests = @@distro.installed handler
+      manifests.each do |manifest|
+        puts manifest["name"]
+      end
     end
   end
 

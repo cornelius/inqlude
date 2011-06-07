@@ -1,4 +1,3 @@
-* Show installed libraries
 * Install a library
 * Show documentation of an library
 * Add "How to use" data
@@ -14,3 +13,4 @@
 * Add option to verify given or all manifests
 * Add show option for showing library details
 * List libraries with available packages
+* Update manifest data to have complete package data
