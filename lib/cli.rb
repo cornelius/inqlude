@@ -52,4 +52,14 @@ class Cli < Thor
     view.create options[:output_dir]
   end
 
+  desc "show <library_name>", "Show library details"
+  def show name
+    get_involved "Add command for showing library details"
+  end
+
+  desc "verify", "Verify manifests"
+  def verify
+    get_involved "Add command for verifying manifests"
+  end
+
 end
