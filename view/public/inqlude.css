@@ -1,5 +1,5 @@
 body {
-  background-color: #aaaaaa;
+  background-color: yellowgreen;
   margin: 0px;
 }
 
@@ -43,7 +43,7 @@ ul {
 }
 
 .menu {
-  width: 100%;
+  width: 85%;
   height: 20px;
   background-color: green;
 }
