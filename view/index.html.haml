@@ -17,7 +17,10 @@
   .menu
 
   .content.center
-    %ul
+    %table
       - manifests.each do |manifest|
-        %li
-          = link_to_manifest manifest["name"]
+        %tr
+          %td
+            = link_to_manifest manifest["name"]
+          %td.last
+            = manifest["summary"]

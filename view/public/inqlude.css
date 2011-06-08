@@ -53,3 +53,11 @@ ul {
   background-color: white;
   padding: 10px;
 }
+
+table {
+  margin: auto;
+}
+
+td {
+  padding-right: 8px;
+}
