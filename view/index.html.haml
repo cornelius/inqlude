@@ -1,6 +1,23 @@
-%h1 Inqlude
+%head
+  %link{ :rel => "stylesheet", :type => "text/css",
+         :href => "public/inqlude.css" }
 
-%ul
-  - manifests.each do |manifest|
-    %li
-      = link_to_manifest manifest["name"]
+%body
+  .header.center
+    %h1
+      %span.logo><
+        \#in
+      %span.logo.green><
+        q
+      %span.logo><
+        lude
+      %span.subtitle
+        The Qt library archive
+
+  .menu
+
+  .content.center
+    %ul
+      - manifests.each do |manifest|
+        %li
+          = link_to_manifest manifest["name"]

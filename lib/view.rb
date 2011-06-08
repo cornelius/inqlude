@@ -8,17 +8,20 @@ class View
     @manifest_handler = handler
   end
 
-  def create dirname
-    assert_dir dirname
+  def create output_dir
+    assert_dir output_dir
+
+    assert_dir "#{output_dir}/public"
+    system "cp #{view_dir}/public/* #{output_dir}/public/"
 
     index = template "index"
     engine = Haml::Engine.new index
 
-    File.open "#{dirname}/index.html", "w" do |file|
+    File.open "#{output_dir}/index.html", "w" do |file|
       file.puts engine.render( binding )
     end
 
-    library_path = "#{dirname}/libraries/"
+    library_path = "#{output_dir}/libraries/"
     assert_dir library_path
 
     engine = Haml::Engine.new template "library"
@@ -54,8 +57,11 @@ class View
   end    
   
   def template name
-    File.read( File.expand_path( File.dirname( __FILE__ ) +
-      "/../view/#{name}.html.haml" ) )
+    File.read( view_dir + "#{name}.html.haml" )
+  end
+
+  def view_dir
+    File.expand_path( File.dirname( __FILE__ ) + "/../view/" ) + "/"
   end
 
 end

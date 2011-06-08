@@ -1,14 +1,32 @@
-%h1
-  = m "name"
+%head
+  %link{ :rel => "stylesheet", :type => "text/css",
+         :href => "../public/inqlude.css" }
 
-%p
-  %em
-    Version
-    = m "version"
-  
-%p
-  = m "summary"
-  
-%p
-  = m "description"
+%body
+  .header.center
+    %h1
+      %span.logo><
+        \#in
+      %span.logo.green><
+        q
+      %span.logo><
+        lude
+      %span.subtitle
+        The Qt library archive
 
+  .menu
+
+  .content.center
+    %h2
+      = m "name"
+
+    %p
+      %em
+        Version
+        = m "version"
+
+    %p
+      = m "summary"
+
+    %p
+      = m "description"
