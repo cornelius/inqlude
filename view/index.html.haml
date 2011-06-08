@@ -1,7 +1,7 @@
 %head
   %link{ :rel => "stylesheet", :type => "text/css",
          :href => "public/inqlude.css" }
-
+  <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
 %body
   .header.center
     %h1
@@ -20,7 +20,7 @@
     %table
       - manifests.each do |manifest|
         %tr
-          %td
+          %td.first
             = link_to_manifest manifest["name"]
           %td.last
             = manifest["summary"]
