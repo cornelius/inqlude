@@ -43,6 +43,10 @@ class View
     "<a href=\"libraries/#{name}.html\">#{name}</a>"
   end
 
+  def link url
+    "<a href=\"#{url}\" target=\"_blank\">#{url}</a>"
+  end
+
   def manifests
     if @manifest_handler.manifests.empty?
       @manifest_handler.read_remote
