@@ -6,6 +6,10 @@ class RpmManifestizer
 
   attr_accessor :dry_run
 
+  def initialize
+    @cut_off_exceptions = [ "qt4-x11" ]
+  end
+
   def create_manifest rpm_name, name
     filename = ENV["HOME"] + "/.inqlude/manifests/#{name}.manifest" 
     File.open( filename, "w") do |f2|
@@ -75,9 +79,13 @@ class RpmManifestizer
   end
 
   def cut_off_number_suffix name
+    if @cut_off_exceptions.include? name
+      return name
+    end
+
     i = name.length - 1
     while i > 0
-      if name[i].chr !~ /[_0-9]/
+      if name[i].chr !~ /[\-_0-9]/
         break
       end
       i -= 1
