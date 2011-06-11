@@ -1,68 +1,90 @@
 #!/usr/bin/ruby
 
+def create_manifest rpm_name, name
+  filename = ENV["HOME"] + "/.inqlude/manifests/#{name}.manifest" 
+  File.open( filename, "w") do |f2|
+    f2.puts '{';
+    f2.puts '  "schema_version": 1,'
+    f2.puts "  \"name\": \"#{name}\","
+    qf = '  "version": "%{VERSION}",\n'
+    qf += '  "summary": "%{SUMMARY}",\n'
+    qf += '  "homepage": "%{URL}",\n'
+    qf += '  "license": "%{LICENSE}",\n'
+    f2.puts `rpm -q --queryformat '#{qf}' #{rpm_name}`
+
+    raw = `rpm -q --queryformat '%{DESCRIPTION}' #{rpm_name}`
+    parse_authors = false
+    description = ""
+    authors = Array.new
+    raw.each_line do |line3|
+      if line3 =~ /^Authors:/
+        parse_authors = true
+        next
+      end
+      if parse_authors
+        if line3 =~ /^---/
+          next
+        end
+        authors.push "\"#{line3.strip}\""
+      else
+        description += line3.chomp + "\\n"
+      end
+    end
+    description.gsub! /"/, "\\\""
+    f2.puts "  \"description\": \"#{description.strip}\","
+    f2.puts '  "authors": [' + authors.join(",") + '],'
+    f2.puts '  "maturity": "stable",'
+    f2.puts '  "packages": {'
+    f2.puts '    "openSUSE": {'
+    f2.puts '      "11.4": {'
+    f2.puts "        \"package_name\": \"#{rpm_name}\","
+    f2.puts '        "repository": {'
+    f2.puts '          "url": "http://download.opensuse.org/distribution/11.4/repo/oss/",'
+    f2.puts '          "name": "openSUSE-11.4-Oss"'
+    f2.puts '        }'
+    f2.puts '      }'
+    f2.puts '    }'
+    f2.puts '  }'
+    f2.puts '}'
+  end
+end
+
+def requires_qt? rpm_name
+  IO.popen "rpm -q --requires #{rpm_name}" do |f2|
+    while line2 = f2.gets do
+      if line2 =~ /Qt/
+        return true
+      end
+    end
+  end
+  false
+end
+
+def is_library? rpm_name
+  rpm_name =~ /^lib/
+end
+
+def is_32bit? rpm_name
+  rpm_name =~ /\-32bit/
+end
+
 IO.popen "rpmqpack" do |f|
   while line = f.gets do
     rpm_name = line.chomp
     if rpm_name
-      IO.popen "rpm -q --requires #{rpm_name}" do |f2|
-        while line2 = f2.gets do
-          if line2 =~ /Qt/
-            if rpm_name =~ /^(.*)-devel$/
-              name = $1
-              puts "Found #{rpm_name}"
-              if name =~ /^lib/
-                name = name[3..name.length]
-              end
-              
-              puts name
-              break
-              
-              filename = ENV["HOME"] + "/.inqlude/manifests/#{name}.manifest" 
-              File.open( filename, "w") do |f2|
-                f2.puts '{';
-                f2.puts "  \"name\": \"#{name}\","
-                qf = '  "version": "%{VERSION}",\n'
-                qf += '  "summary": "%{SUMMARY}",\n'
-                qf += '  "homepage": "%{URL}",\n'
-                qf += '  "license": "%{LICENSE}",\n'
-                f2.puts `rpm -q --queryformat '#{qf}' #{rpm_name}`
+      next unless requires_qt? rpm_name
+      next unless is_library? rpm_name
+      next if is_32bit? rpm_name
 
-                raw = `rpm -q --queryformat '%{DESCRIPTION}' #{rpm_name}`
-                parse_authors = false
-                description = ""
-                authors = Array.new
-                raw.each_line do |line3|
-                  if line3 =~ /^Authors:/
-                    parse_authors = true
-                    next
-                  end
-                  if parse_authors
-                    if line3 =~ /^---/
-                      next
-                    end
-                    authors.push "\"#{line3.strip}\""
-                  else
-                    description += line3.chomp + "\\n"
-                  end
-                end
-                description.gsub! /"/, "\\\""
-                f2.puts "  \"description\": \"#{description.strip}\","
-                f2.puts '  "authors": [' + authors.join(",") + '],'
-                f2.puts '  "maturity": "stable",'
-                f2.puts '  "packages": {'
-                f2.puts '    "openSUSE": {'
-                f2.puts '      "11.4": {'
-                f2.puts "        \"package_name\": \"#{rpm_name}\""
-                f2.puts '      }'
-                f2.puts '    }'
-                f2.puts '  }'
-                f2.puts '}'
-              end
-            end
-            break
-          end
-        end
+      if rpm_name =~ /^lib(.*)/
+        name = $1
+      else
+        name = rpm_name
       end
+
+      puts "Found #{name}"
+
+      create_manifest rpm_name, name              
     end
   end
 end
