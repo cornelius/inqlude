@@ -1,5 +1,29 @@
 #!/usr/bin/ruby
 
+require "optparse"
+
+dry_run = false
+
+opt = OptionParser.new
+opt.banner = "Usage: manifestize_rpms [options]"
+
+opt.on( "-h", "--help", "Print this message" ) do
+  puts opt
+  exit
+end
+
+opt.on( "-d", "--dry-run", "Dry run. Don't write files." ) do
+  dry_run = true
+end
+
+begin
+  opt.parse!( ARGV )
+rescue OptionParser::InvalidOption
+  STDERR.puts $!
+  STDERR.puts opt
+  exit
+end
+
 def create_manifest rpm_name, name
   filename = ENV["HOME"] + "/.inqlude/manifests/#{name}.manifest" 
   File.open( filename, "w") do |f2|
@@ -82,9 +106,11 @@ IO.popen "rpmqpack" do |f|
         name = rpm_name
       end
 
-      puts "Found #{name}"
+      puts "Found #{name} (#{rpm_name})"
 
-      create_manifest rpm_name, name              
+      if !dry_run
+        create_manifest rpm_name, name
+      end
     end
   end
 end
