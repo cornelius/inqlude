@@ -92,6 +92,20 @@ def is_32bit? rpm_name
   rpm_name =~ /\-32bit/
 end
 
+def cut_off_number_suffix name
+  i = name.length - 1
+  while i > 0
+    if name[i].chr !~ /[_0-9]/
+      break
+    end
+    i -= 1
+  end
+  if i > 0
+    return name[0..i]
+  end
+  name
+end
+
 IO.popen "rpmqpack" do |f|
   while line = f.gets do
     rpm_name = line.chomp
@@ -105,6 +119,8 @@ IO.popen "rpmqpack" do |f|
       else
         name = rpm_name
       end
+
+      name = cut_off_number_suffix name
 
       puts "Found #{name} (#{rpm_name})"
 
