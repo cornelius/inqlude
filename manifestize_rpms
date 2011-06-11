@@ -13,15 +13,8 @@ class RpmManifestizer
   def create_manifest rpm_name, name
     filename = ENV["HOME"] + "/.inqlude/manifests/#{name}.manifest" 
     File.open( filename, "w") do |f2|
-      f2.puts '{';
-      f2.puts '  "schema_version": 1,'
-      f2.puts "  \"name\": \"#{name}\","
-      qf = '  "version": "%{VERSION}",\n'
-      qf += '  "summary": "%{SUMMARY}",\n'
-      qf += '  "homepage": "%{URL}",\n'
-      qf += '  "license": "%{LICENSE}",\n'
-      f2.puts `rpm -q --queryformat '#{qf}' #{rpm_name}`
-
+      source_rpm = `rpm -q --queryformat '%{SOURCERPM}' #{rpm_name}`
+    
       raw = `rpm -q --queryformat '%{DESCRIPTION}' #{rpm_name}`
       parse_authors = false
       description = ""
@@ -41,7 +34,19 @@ class RpmManifestizer
         end
       end
       description.gsub! /"/, "\\\""
-      f2.puts "  \"description\": \"#{description.strip}\","
+      description.strip!
+
+      qf = '  "version": "%{VERSION}",\n'
+      qf += '  "summary": "%{SUMMARY}",\n'
+      qf += '  "homepage": "%{URL}",\n'
+      qf += '  "license": "%{LICENSE}",\n'
+      header = `rpm -q --queryformat '#{qf}' #{rpm_name}`
+
+      f2.puts '{';
+      f2.puts '  "schema_version": 1,'
+      f2.puts "  \"name\": \"#{name}\","
+      f2.puts header
+      f2.puts "  \"description\": \"#{description}\","
       f2.puts '  "authors": [' + authors.join(",") + '],'
       f2.puts '  "maturity": "stable",'
       f2.puts '  "packages": {'
@@ -51,7 +56,8 @@ class RpmManifestizer
       f2.puts '        "repository": {'
       f2.puts '          "url": "http://download.opensuse.org/distribution/11.4/repo/oss/",'
       f2.puts '          "name": "openSUSE-11.4-Oss"'
-      f2.puts '        }'
+      f2.puts '        },'
+      f2.puts "        \"source_rpm\": \"#{source_rpm}\""
       f2.puts '      }'
       f2.puts '    }'
       f2.puts '  }'
