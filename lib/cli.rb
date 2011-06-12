@@ -64,4 +64,20 @@ class Cli < Thor
     get_involved "Add command for verifying manifests"
   end
 
+  desc "create", "Create manifest"
+  method_option :dry_run, :type => :boolean,
+    :desc => "Dry run. Don't write files."
+  method_option :show_source_rpms, :type => :boolean,
+    :desc => "Show source RPMs"
+  def create
+    m = RpmManifestizer.new
+    m.dry_run = options[:dry_run]
+    
+    m.process_all_rpms
+    
+    if options[:show_source_rpms]
+      m.show_source_rpms
+    end
+  end
+
 end

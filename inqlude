@@ -13,6 +13,7 @@ require "lib/cli"
 require "lib/manifest_handler"
 require "lib/view"
 require "lib/distro"
+require "lib/rpm_manifestizer"
 
 def local_dir dirname
   home = ENV["HOME"] + "/.inqlude/"

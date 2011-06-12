@@ -1,20 +1,18 @@
-#!/usr/bin/ruby
-
-require "optparse"
-
 class RpmManifestizer
 
   attr_accessor :dry_run
 
   def initialize
     @cut_off_exceptions = [ "qt4-x11" ]
+    @source_rpms = Hash.new
   end
 
   def create_manifest rpm_name, name
     filename = ENV["HOME"] + "/.inqlude/manifests/#{name}.manifest" 
     File.open( filename, "w") do |f2|
       source_rpm = `rpm -q --queryformat '%{SOURCERPM}' #{rpm_name}`
-    
+      @source_rpms[source_rpm] = Array.new
+
       raw = `rpm -q --queryformat '%{DESCRIPTION}' #{rpm_name}`
       parse_authors = false
       description = ""
@@ -126,31 +124,27 @@ class RpmManifestizer
           end
         end
       end
-    end  
+    end
+  end
+
+  def show_source_rpms
+    sources = Hash.new
+    IO.popen "rpmqpack" do |f|
+      while line = f.gets do
+        rpm_name = line.chomp
+        source_rpm = `rpm -q --queryformat '%{SOURCERPM}' #{rpm_name}`
+        sources[rpm_name] = source_rpm
+      end
+    end
+
+    @source_rpms.keys.sort.each do |source_rpm|
+      puts source_rpm
+      sources.keys.sort.each do |rpm|
+        if sources[rpm] == source_rpm
+          puts "  #{rpm}"
+        end
+      end
+    end
   end
 
 end
-
-m = RpmManifestizer.new
-
-opt = OptionParser.new
-opt.banner = "Usage: manifestize_rpms [options]"
-
-opt.on( "-h", "--help", "Print this message" ) do
-  puts opt
-  exit
-end
-
-opt.on( "-d", "--dry-run", "Dry run. Don't write files." ) do
-  m.dry_run = true
-end
-
-begin
-  opt.parse!( ARGV )
-rescue OptionParser::InvalidOption
-  STDERR.puts $!
-  STDERR.puts opt
-  exit
-end
-
-m.process_all_rpms
