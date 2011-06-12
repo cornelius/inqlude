@@ -16,3 +16,4 @@
 * List libraries with available packages
 * Update manifest data to have complete package data
 * Add tests
+* Properly identify repository (use vendor?)
