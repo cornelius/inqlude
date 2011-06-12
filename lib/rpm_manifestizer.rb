@@ -9,7 +9,7 @@ class RpmManifestizer
     @source_rpms = Hash.new
   end
 
-  def create_manifest rpm_name, name
+  def create_manifest name, rpm_name
     filename =  "#{@settings.manifest_dir}/#{name}.manifest" 
     File.open( filename, "w") do |f2|
       source_rpm = `rpm -q --queryformat '%{SOURCERPM}' #{rpm_name}`
@@ -103,51 +103,59 @@ class RpmManifestizer
   end
 
   def process_all_rpms
-    sources = Hash.new
-    File.open @settings.cache_dir + "/source.json" do |file|
-      sources = JSON file.read
-    end
-
-    rpms = Hash.new    
-    sources.each do |rpm,source|
-      if rpms.has_key? source
-        rpms[source] = rpms[source].push rpm
-      else
-        rpms[source] = Array.new.push rpm
-      end
+    if !File.exist? @settings.cache_dir + "/qt_source.json"
+      create_qt_source_cache
     end
     
     qt_sources = Hash.new
-    sources.each do |rpm,source|
-      next unless requires_qt? rpm
-      next unless is_library? rpm
-      next if is_32bit? rpm
-
-      qt_sources[source] = rpms[source]
-
-      puts "Found RPM #{rpm} (#{source})"
+    File.open @settings.cache_dir + "/qt_source.json" do |file|
+      qt_sources = JSON file.read
     end
-  
-    qt_sources.each do |source,rpms|
-      rpms.each do |rpm|
+
+    qt_sources.each do |source,sections|
+      sections["all"].each do |rpm|
         if rpm =~ /(.*)-devel$/
           name = $1
 
           if name =~ /^lib(.*)/
             name = $1
           end
+
+          lib_rpm = ""
+          sections["lib"].each do |lib|
+            if lib !~ /\-devel$/
+              lib_rpm = lib
+              break
+            end
+          end
+          if lib_rpm.empty?
+            lib_rpm = rpm
+          end
         
-          puts "Found devel package: #{name}"
+          puts "Identified manifest: #{name} (Library RPM: #{lib_rpm})"
         
           if !dry_run
-            create_manifest rpm, name
+            create_manifest name, lib_rpm
           end
         end
       end
     end
   end
 
-  def create_cache
+  def read_source_cache
+    if !File.exist? @settings.cache_dir + "/source.json"
+      create_source_cache
+    end
+  
+    sources = Hash.new
+    File.open @settings.cache_dir + "/source.json" do |file|
+      sources = JSON file.read
+    end
+
+    sources
+  end
+
+  def create_source_cache
     puts "Creating cache of RPM meta data"
     get_involved "Create more friendly progress display for cache creation"
     sources = Hash.new
@@ -163,16 +171,43 @@ class RpmManifestizer
     File.open @settings.cache_dir + "/source.json", "w" do |f|
       f.puts sources.to_json
     end
+  end
 
-    return
+  def create_qt_source_cache
+    puts "Creating cache of Qt library RPMs"
 
-    @source_rpms.keys.sort.each do |source_rpm|
-      puts source_rpm
-      sources.keys.sort.each do |rpm|
-        if sources[rpm] == source_rpm
-          puts "  #{rpm}"
-        end
+    sources = read_source_cache
+
+    rpms = Hash.new    
+    sources.each do |rpm,source|
+      if rpms.has_key? source
+        rpms[source] = rpms[source].push rpm
+      else
+        rpms[source] = Array.new.push rpm
       end
+    end
+
+    qt_sources = Hash.new
+    sources.each do |rpm,source|
+      next unless requires_qt? rpm
+      next unless is_library? rpm
+      next if is_32bit? rpm
+
+      if !qt_sources.has_key? source
+        sections = Hash.new
+        sections[:all] = Array.new
+        sections[:lib] = Array.new
+        qt_sources[source] = sections
+      end
+      
+      qt_sources[source][:all] = rpms[source]
+      qt_sources[source][:lib] = qt_sources[source][:lib].push rpm
+
+      puts "Found RPM #{rpm} (#{source})"
+    end
+  
+    File.open @settings.cache_dir + "/qt_source.json", "w" do |f|
+      f.puts JSON.pretty_generate qt_sources
     end
   end
 

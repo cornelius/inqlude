@@ -1,6 +1,4 @@
-* Cache list of Qt library RPMs
-* Get description and summary from non-devel package.
-
+* Smarter match for source RPMs, which contain more than one library
 * Install a library
 * Show documentation of an library
 * Add "How to use" data
@@ -17,3 +15,4 @@
 * Add show option for showing library details
 * List libraries with available packages
 * Update manifest data to have complete package data
+* Add tests

@@ -71,14 +71,20 @@ class Cli < Thor
   desc "create", "Create manifest"
   method_option :dry_run, :type => :boolean,
     :desc => "Dry run. Don't write files."
-  method_option :recreate_cache, :type => :boolean,
+  method_option :recreate_source_cache, :type => :boolean,
     :desc => "Recreate cache with meta data of installed RPMs"
+  method_option :recreate_qt_source_cache, :type => :boolean,
+    :desc => "Recreate cache with meta data of Qt library RPMs"
   def create
     m = RpmManifestizer.new @@settings
     m.dry_run = options[:dry_run]
 
-    if options[:recreate_cache]
-      m.create_cache
+    if options[:recreate_source_cache]
+      m.create_source_cache
+    end
+    
+    if options[:recreate_qt_source_cache]
+      m.create_qt_source_cache
     end
     
     m.process_all_rpms
