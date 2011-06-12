@@ -2,13 +2,15 @@ class RpmManifestizer
 
   attr_accessor :dry_run
 
-  def initialize
+  def initialize settings
+    @settings = settings
+  
     @cut_off_exceptions = [ "qt4-x11" ]
     @source_rpms = Hash.new
   end
 
   def create_manifest rpm_name, name
-    filename = ENV["HOME"] + "/.inqlude/manifests/#{name}.manifest" 
+    filename =  "#{@settings.manifest_dir}/#{name}.manifest" 
     File.open( filename, "w") do |f2|
       source_rpm = `rpm -q --queryformat '%{SOURCERPM}' #{rpm_name}`
       @source_rpms[source_rpm] = Array.new

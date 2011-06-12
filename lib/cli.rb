@@ -4,6 +4,10 @@ class Cli < Thor
 
   class_option :version, :type => :boolean, :desc => "Show version"
 
+  def self.settings= s
+    @@settings = s
+  end
+
   def self.distro= d
     @@distro = d
   end
@@ -11,7 +15,7 @@ class Cli < Thor
   desc "global", "Global options", :hide => true
   def global
     if options[:version]
-      puts "Inqlude: #{$version}"
+      puts "Inqlude: #{@@settings.version}"
 
       qmake_out = `qmake -v`
       qmake_out =~ /Qt version (.*) in/
@@ -31,7 +35,7 @@ class Cli < Thor
   method_option :remote, :type => :boolean, :aliases => "-r",
     :desc => "List remote libraries"
   def list
-    handler = ManifestHandler.new
+    handler = ManifestHandler.new @@settings
     handler.read_remote
 
     if options[:remote]
@@ -50,7 +54,7 @@ class Cli < Thor
   method_option :output_dir, :type => :string, :aliases => "-o",
     :desc => "Output directory", :required => true
   def view
-    view = View.new ManifestHandler.new
+    view = View.new ManifestHandler.new @@settings
     view.create options[:output_dir]
   end
 
@@ -70,7 +74,7 @@ class Cli < Thor
   method_option :show_source_rpms, :type => :boolean,
     :desc => "Show source RPMs"
   def create
-    m = RpmManifestizer.new
+    m = RpmManifestizer.new @@settings
     m.dry_run = options[:dry_run]
     
     m.process_all_rpms

@@ -1,7 +1,5 @@
 #!/usr/bin/ruby
 
-$version = "0.0.1"
-
 $: << File.expand_path(File.dirname(__FILE__))
 
 require "rubygems"
@@ -14,14 +12,7 @@ require "lib/manifest_handler"
 require "lib/view"
 require "lib/distro"
 require "lib/rpm_manifestizer"
-
-def local_dir dirname
-  home = ENV["HOME"] + "/.inqlude/"
-  Dir::mkdir home unless File.exists? home
-  path = home + dirname
-  Dir::mkdir path unless File.exists? path
-  path
-end
+require "lib/settings"
 
 def get_involved text, id = nil
   puts "You can help and get involved:"
@@ -31,13 +22,12 @@ def get_involved text, id = nil
   end
 end
 
-$manifest_dir = local_dir "manifests"
-
 distro = Distro.detect
 if !distro
   STDERR.puts "Warning: unable to detect distro."
 end
 
+Cli.settings = Settings.new
 Cli.distro = distro
 
 Cli.check_unknown_options!
