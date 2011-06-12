@@ -1,3 +1,6 @@
+* Cache list of Qt library RPMs
+* Get description and summary from non-devel package.
+
 * Install a library
 * Show documentation of an library
 * Add "How to use" data

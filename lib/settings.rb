@@ -4,6 +4,10 @@ class Settings
     local_dir "manifests"
   end
 
+  def cache_dir
+    local_dir "cache"
+  end
+
   def version
     "0.0.1"
   end

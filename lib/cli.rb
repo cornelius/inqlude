@@ -71,17 +71,17 @@ class Cli < Thor
   desc "create", "Create manifest"
   method_option :dry_run, :type => :boolean,
     :desc => "Dry run. Don't write files."
-  method_option :show_source_rpms, :type => :boolean,
-    :desc => "Show source RPMs"
+  method_option :recreate_cache, :type => :boolean,
+    :desc => "Recreate cache with meta data of installed RPMs"
   def create
     m = RpmManifestizer.new @@settings
     m.dry_run = options[:dry_run]
+
+    if options[:recreate_cache]
+      m.create_cache
+    end
     
     m.process_all_rpms
-    
-    if options[:show_source_rpms]
-      m.show_source_rpms
-    end
   end
 
 end

@@ -103,41 +103,68 @@ class RpmManifestizer
   end
 
   def process_all_rpms
-    IO.popen "rpmqpack" do |f|
-      while line = f.gets do
-        rpm_name = line.chomp
-        if rpm_name
-          next unless requires_qt? rpm_name
-          next unless is_library? rpm_name
-          next if is_32bit? rpm_name
+    sources = Hash.new
+    File.open @settings.cache_dir + "/source.json" do |file|
+      sources = JSON file.read
+    end
 
-          if rpm_name =~ /^lib(.*)/
+    rpms = Hash.new    
+    sources.each do |rpm,source|
+      if rpms.has_key? source
+        rpms[source] = rpms[source].push rpm
+      else
+        rpms[source] = Array.new.push rpm
+      end
+    end
+    
+    qt_sources = Hash.new
+    sources.each do |rpm,source|
+      next unless requires_qt? rpm
+      next unless is_library? rpm
+      next if is_32bit? rpm
+
+      qt_sources[source] = rpms[source]
+
+      puts "Found RPM #{rpm} (#{source})"
+    end
+  
+    qt_sources.each do |source,rpms|
+      rpms.each do |rpm|
+        if rpm =~ /(.*)-devel$/
+          name = $1
+
+          if name =~ /^lib(.*)/
             name = $1
-          else
-            name = rpm_name
           end
-
-          name = cut_off_number_suffix name
-
-          puts "Found #{name} (#{rpm_name})"
-
+        
+          puts "Found devel package: #{name}"
+        
           if !dry_run
-            create_manifest rpm_name, name
+            create_manifest rpm, name
           end
         end
       end
     end
   end
 
-  def show_source_rpms
+  def create_cache
+    puts "Creating cache of RPM meta data"
+    get_involved "Create more friendly progress display for cache creation"
     sources = Hash.new
     IO.popen "rpmqpack" do |f|
       while line = f.gets do
         rpm_name = line.chomp
+        puts "SCAN #{rpm_name}"
         source_rpm = `rpm -q --queryformat '%{SOURCERPM}' #{rpm_name}`
         sources[rpm_name] = source_rpm
       end
     end
+
+    File.open @settings.cache_dir + "/source.json", "w" do |f|
+      f.puts sources.to_json
+    end
+
+    return
 
     @source_rpms.keys.sort.each do |source_rpm|
       puts source_rpm
