@@ -90,4 +90,22 @@ class Cli < Thor
     m.process_all_rpms
   end
 
+  desc "get_involved", "Information about how to get involved"
+  def get_involved
+    puts
+    puts "If you would like to help with development of the Inqlude tool,"
+    puts "have a look at the git repository, in particular the list of open"
+    puts "issues: https://github.com/cornelius/inqlude/issues"
+    puts
+    puts "If you would like to contribute information about a Qt based"
+    puts "library, have a look at the git repository containing the library"
+    puts "meta data: https://github.com/cornelius/inqlude_data"
+    puts
+    puts "Your help is appreciated."
+    puts
+    puts "If you have questions or comments, please let me know:"
+    puts "Cornelius Schumacher <schumacher@kde.org>"
+    puts
+  end
+
 end
