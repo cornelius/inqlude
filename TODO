@@ -1,19 +1,15 @@
 * Smarter match for source RPMs, which contain more than one library
 * Show documentation of an library
 * Add "How to use" data
-* Generate web page of all libraries
 * Define maturity scale
 * Retrieve data from qt-apps and kde-apps
 * "How to package libraries"
 * Add tags for searching
-* Sync local repo with remote repo
 * Look for local search
-* Only look at devel packages when creating RPM based list
 * Get manifests from build service
 * Add option to verify given or all manifests
 * Add show option for showing library details
 * List libraries with available packages
 * Update manifest data to have complete package data
-* Add tests
 * Properly identify repository (use vendor?)
 * One-click install for SUSE systems
