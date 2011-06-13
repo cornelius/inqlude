@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 #
 # Copyright (C) 2011 Cornelius Schumacher <schumacher@kde.org>
 #
@@ -16,19 +16,8 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-$: << File.expand_path(File.dirname(__FILE__))
 
-require "rubygems"
-
-require "json"
-require "thor"
-
-require "lib/cli"
-require "lib/manifest_handler"
-require "lib/view"
-require "lib/distro"
-require "lib/rpm_manifestizer"
-require "lib/settings"
+require File.expand_path('../lib/inqlude',__FILE__)
 
 def get_involved text, id = nil
   puts "You can help and get involved:"
