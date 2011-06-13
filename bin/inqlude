@@ -17,7 +17,7 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
-require File.expand_path('../lib/inqlude',__FILE__)
+require File.expand_path('../../lib/inqlude',__FILE__)
 
 def get_involved text, id = nil
   puts "You can help and get involved:"
