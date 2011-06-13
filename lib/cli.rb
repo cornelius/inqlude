@@ -114,4 +114,26 @@ class Cli < Thor
     Upstream.print_info
   end
 
+  desc "uninstall", "Uninstall library"
+  def uninstall name
+    handler = ManifestHandler.new @@settings
+    manifest = handler.manifest name
+    if !manifest
+      STDERR.puts "Manifest for '#{name}' not found"
+    else
+      @@distro.uninstall manifest
+    end
+  end
+
+  desc "install", "Install library"
+  def install name
+    handler = ManifestHandler.new @@settings
+    manifest = handler.manifest name
+    if !manifest
+      STDERR.puts "Manifest for '#{name}' not found"
+    else
+      @@distro.install manifest
+    end
+  end
+
 end

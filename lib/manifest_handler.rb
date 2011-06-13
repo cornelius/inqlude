@@ -24,6 +24,16 @@ class ManifestHandler
     @manifests = Array.new
   end
 
+  def manifest name
+    read_remote
+    @manifests.each do |manifest|
+      if manifest["name"] == name
+        return manifest
+      end
+    end
+    nil
+  end
+
   def read_remote
     fetch_remote
   

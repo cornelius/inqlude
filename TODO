@@ -1,5 +1,4 @@
 * Smarter match for source RPMs, which contain more than one library
-* Install a library
 * Show documentation of an library
 * Add "How to use" data
 * Generate web page of all libraries

@@ -65,4 +65,43 @@ class Suse
     installed
   end
 
+  def uninstall manifest
+    package_name = get_package_name manifest
+    if package_name
+      system "sudo zypper rm #{package_name}"
+    end
+  end
+
+  def install manifest
+    package_name = get_package_name manifest
+    if package_name
+      system "sudo zypper install #{package_name}"
+    end
+  end
+
+  def get_package_name manifest
+    package_section = manifest["packages"]
+    if !package_section
+      STDERR.puts "No packages section in metadata"
+    else
+      name_section = package_section[name]
+      if !name_section
+        STDERR.puts "No section '#{name}' found in packages section."
+      else
+        version_section = name_section[version]
+        if !version_section
+          STDERR.puts "No section '#{version}' found in section '#{name}'"
+        else
+          package_name = version_section["package_name"]
+          if !package_name || package_name.empty?
+            STDERR.puts "No package name found"
+          else
+            return package_name
+          end
+        end
+      end
+    end
+    nil
+  end
+
 end
