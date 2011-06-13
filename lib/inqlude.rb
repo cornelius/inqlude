@@ -3,6 +3,7 @@ require "rubygems"
 require "thor"
 require "json"
 
+require File.expand_path('../version', __FILE__)
 require File.expand_path('../cli', __FILE__)
 require File.expand_path('../manifest_handler', __FILE__)
 require File.expand_path('../view', __FILE__)

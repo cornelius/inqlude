@@ -25,7 +25,7 @@ class Settings
   end
 
   def version
-    "0.0.1"
+    Inqlude::VERSION
   end
 
   private
