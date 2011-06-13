@@ -1,0 +1,28 @@
+# Inqlude - the Qt library archive
+
+Inqlude is a tool to handle Qt based libraries. It provides developers using Qt
+with an easy way to find, install, and use liraries, in particular 3rd party
+libraries.
+
+Inqlude comes as a Ruby gem, which can easily be installed, and provides a
+command line interface to handle Qt libraries in a similar way as Ruby gems.
+There are commands to list available libraries and installed libraries, and
+more. 
+
+Libraries are described by manifest files, which are maintained in a separate
+git repository. Inqlude integrates with this git repository and uses it as the
+list of available gems. One way to contribute information about libraries to the
+archive is to simply provide patches to the manifest repository. The repository
+can be found at https://github.com/cornelius/inqlude_data.
+
+Inqlude also integrates with native package managers. If the meta information is
+available, the libraries are transparently handled by installing packages with
+the native tools.
+
+There also is an option to generate an HTML overview of all available libraries.
+This can be hosted or used locally.
+
+Inqlude is licensed under the GPL.
+
+If you have questions or comments, please contact Cornelius Schumacher
+<schumacher@kde.org>.
