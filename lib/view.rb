@@ -4,6 +4,8 @@ require "haml"
 
 class View
 
+  attr_accessor :enable_disqus
+
   def initialize handler
     @manifest_handler = handler
   end
@@ -52,6 +54,10 @@ class View
       @manifest_handler.read_remote
     end
     @manifest_handler.manifests
+  end
+
+  def disqus_enabled?
+    @enable_disqus
   end
 
   private

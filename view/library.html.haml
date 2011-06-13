@@ -33,3 +33,21 @@
 
     %p
       = link m( "homepage" )
+
+    - if disqus_enabled?
+      %hr
+
+      #disqus_thread
+
+      :javascript
+        var disqus_shortname = 'inqlude';
+
+        var disqus_identifier = '#{m "name"}';
+        var disqus_url = 'http://inqlude.org/libraries/#{m "name"}.html';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();

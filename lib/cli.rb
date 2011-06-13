@@ -53,8 +53,11 @@ class Cli < Thor
   desc "view", "Create view"
   method_option :output_dir, :type => :string, :aliases => "-o",
     :desc => "Output directory", :required => true
+  method_option :enable_disqus, :type => :boolean,
+    :desc => "Enable Disqus based comments on generate web pages. Works only on actual domain."
   def view
     view = View.new ManifestHandler.new @@settings
+    view.enable_disqus = options[:enable_disqus]
     view.create options[:output_dir]
   end
 
