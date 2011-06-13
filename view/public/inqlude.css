@@ -40,8 +40,19 @@ h1 .subtitle {
 
 .menu {
   width: 85%;
-  height: 20px;
   background-color: green;
+  padding-top: 4px;
+  padding-bottom: 6px;
+  padding-right: 10px;
+  text-align: right;
+}
+
+.menu_items {
+  color: white;
+}
+
+.menu_items a {
+  color: white;
 }
 
 .content {
@@ -49,6 +60,14 @@ h1 .subtitle {
   background-color: white;
   padding: 10px;
 }
+
+.code {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  font-family: monospace;
+  margin: 6px;
+}  
 
 table {
   margin: auto;

@@ -1,0 +1,46 @@
+%head
+  %link{ :rel => "stylesheet", :type => "text/css",
+         :href => "public/inqlude.css" }
+  <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+%body
+  .header.center
+    %h1
+      %span.logo><
+        \#in
+      %span.logo.green><
+        q
+      %span.logo><
+        lude
+      %span.subtitle
+        The Qt library archive
+
+  .menu.center
+    %span.menu_items
+      = link_to "How to get libraries", "get"
+      |
+      = link_to "How to contribute", "contribute"
+      |
+      = link_to "About", "about"
+
+  .content.center
+    %p
+      Inqlude is the independent archive of Qt based libraries. Its mission is
+      to make it as easy as possible for developers using Qt to find and use
+      libraries, in particular 3rd party ones.
+    %p
+      Inqlude comes with a command line client for handling libraries. See the
+      = link_to "instructions how to get libraries", "get"
+      for more details.
+    %p
+      Inqlude tries to be a complete archive of all available Qt based
+      libraries. If you notice that there is some information missing, outdated
+      or inaccurate, please consider contributing the missing data. See the
+      = link_to "instructions how to contribute", "contribute"
+      for more details.
+    %p
+      %em
+        Note that Inqlude is currently a proof-of-concept. It's not ready for
+        production use yet. Feedback and input is appreciated.
+    %p
+      If you have questions of comments please feel free to contact
+      = link_to( "Cornelius Schumacher", "mailto:schumacher@kde.org" ) + "."

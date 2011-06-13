@@ -28,12 +28,10 @@ class View
     assert_dir "#{output_dir}/public"
     system "cp #{view_dir}/public/* #{output_dir}/public/"
 
-    index = template "index"
-    engine = Haml::Engine.new index
-
-    File.open "#{output_dir}/index.html", "w" do |file|
-      file.puts engine.render( binding )
-    end
+    render_template "index", output_dir
+    render_template "about", output_dir
+    render_template "get", output_dir
+    render_template "contribute", output_dir
 
     library_path = "#{output_dir}/libraries/"
     assert_dir library_path
@@ -46,7 +44,15 @@ class View
         file.puts engine.render( binding )
       end
     end
+  end
 
+  def render_template name, output_dir
+    page = template name
+    engine = Haml::Engine.new page
+
+    File.open "#{output_dir}/#{name}.html", "w" do |file|
+      file.puts engine.render( binding )
+    end
   end
 
   def m attr
@@ -59,6 +65,13 @@ class View
 
   def link url
     "<a href=\"#{url}\" target=\"_blank\">#{url}</a>"
+  end
+
+  def link_to title, url
+    if url !~ /^mailto:/ && url !~ /^http:/
+      url += ".html"
+    end
+    "<a href=\"#{url}\">#{title}</a>"
   end
 
   def manifests
