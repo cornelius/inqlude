@@ -41,6 +41,8 @@ class ManifestHandler
       end
       system "git clone https://github.com/cornelius/inqlude_data.git " +
         "#{@settings.manifest_path}"
+    else
+      system "cd #{@settings.manifest_path}; git pull"
     end
   end
 
