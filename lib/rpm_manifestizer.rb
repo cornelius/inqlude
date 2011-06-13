@@ -173,7 +173,7 @@ class RpmManifestizer
 
   def create_source_cache
     puts "Creating cache of RPM meta data"
-    get_involved "Create more friendly progress display for cache creation"
+    Upstream.get_involved "Create more friendly progress display for cache creation", 3
     sources = Hash.new
     IO.popen "rpmqpack" do |f|
       while line = f.gets do

@@ -19,14 +19,6 @@
 
 require File.expand_path('../../lib/inqlude',__FILE__)
 
-def get_involved text, id = nil
-  puts "You can help and get involved:"
-  puts text
-  if id
-    puts "More info: https://github.com/cornelius/inqlude/issues/#{id}"
-  end
-end
-
 distro = Distro.detect
 if !distro
   STDERR.puts "Warning: unable to detect distro."
