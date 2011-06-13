@@ -16,8 +16,8 @@
 
 class Settings
 
-  def manifest_dir
-    local_dir "manifests"
+  def manifest_path
+    local_path "manifests"
   end
 
   def cache_dir
@@ -30,10 +30,14 @@ class Settings
 
   private
 
-  def local_dir dirname
+  def local_path dirname
     home = ENV["HOME"] + "/.inqlude/"
     Dir::mkdir home unless File.exists? home
-    path = home + dirname
+    home + dirname
+  end
+
+  def local_dir dirname
+    path = local_path dirname
     Dir::mkdir path unless File.exists? path
     path
   end

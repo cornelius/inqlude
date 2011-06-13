@@ -25,10 +25,22 @@ class ManifestHandler
   end
 
   def read_remote
-    Dir.glob( "#{@settings.manifest_dir}/*.manifest" ).sort.each do |filename|
+    fetch_remote
+  
+    Dir.glob( "#{@settings.manifest_path}/*.manifest" ).sort.each do |filename|
       File.open filename do |file|
         manifests.push JSON file.read
       end
+    end
+  end
+
+  def fetch_remote
+    if !File.exists? @settings.manifest_path + "/.git"
+      if File.exists? @settings.manifest_path
+        system "rm -r #{@settings.manifest_path}"
+      end
+      system "git clone https://github.com/cornelius/inqlude_data.git " +
+        "#{@settings.manifest_path}"
     end
   end
 

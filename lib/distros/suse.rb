@@ -57,9 +57,11 @@ class Suse
         unknown -= 1
       end
     end
-    
-    STDERR.puts "Warning: #{unknown} libraries don't have package information"
-    
+
+    if unknown > 0
+      STDERR.puts "Warning: #{unknown} libraries don't have package information"
+    end  
+  
     installed
   end
 
