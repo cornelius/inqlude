@@ -1,67 +1,42 @@
-%head
-  %link{ :rel => "stylesheet", :type => "text/css",
-         :href => "public/inqlude.css" }
-  <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
-%body
-  .header.center
-    %h1
-      %span.logo><
-        \#in
-      %span.logo.green><
-        q
-      %span.logo><
-        lude
-      %span.subtitle
-        The Qt library archive
+%p
+  This page is about how to use Inqlude as a user, a developer using Qt
+  based libraries in her projects.
+%p
+  First you can just use the web site. Find the information about libraries
+  here, and get the libraries manually with the provided links. This works,
+  but there is a more convenient way.
+%p
+  You can also use the command line client. This client makes it easy to get
+  the libraries you need with just a few commands, without having to know
+  URLs, or how libraries are packages.
+%p
+  First you need to get the command line client. It's available as a Ruby
+  gem, so when you have rubygems installed you can simply do a
+  .code
+    sudo gem install inqlude
+  (For instructions how to get rubygems, see
+  = link_to( "rubygems.org", "http://rubygems.org" ) + ")."
+%p
+  Once you have the client, you can get help about the available commands
+  with
+  .code
+    inqlude
+  get a list of available libraries with
+  .code
+    inqlude list -r
 
-  .menu.center
-    %span.menu_items
-      = link_to "How to get libraries", "get"
-      |
-      = link_to "How to contribute", "contribute"
-      |
-      = link_to "About", "about"
+  install a library with 
+  .code
+    inqlude install <library_name>
 
-  .content.center
-    %p
-      This page is about how to use Inqlude as a user, a developer using Qt
-      based libraries in her projects.
-    %p
-      First you can just use the web site. Find the information about libraries
-      here, and get the libraries manually with the provided links. This works,
-      but there is a more convenient way.
-    %p
-      You can also use the command line client. This client makes it easy to get
-      the libraries you need with just a few commands, without having to know
-      URLs, or how libraries are packages.
-    %p
-      First you need to get the command line client. It's available as a Ruby
-      gem, so when you have rubygems installed you can simply do a
-      .code
-        sudo gem install inqlude
-      (For instructions how to get rubygems, see
-      = link_to( "rubygems.org", "http://rubygems.org" ) + ")."
-    %p
-      Once you have the client, you can get help about the available commands
-      with
-      .code
-        inqlude
-      get a list of available libraries with
-      .code
-        inqlude list -r
-
-      install a library with 
-      .code
-        inqlude install <library_name>
-
-      and get a list of installed libraries with
-      .code
-        inqlude list
-    %p
-      The command line client uses your native package management system. In
-      case there is no meta data available for your system, the client falls
-      back to handling sources. Please consider helping to get your system
-      supported by contributing meta data or implementing a backend for your
-      system. See the
-      = link_to "instructions how to contribute", "contribute"
-      for more details.
+  and get a list of installed libraries with
+  .code
+    inqlude list
+%p
+  The command line client uses your native package management system. In
+  case there is no meta data available for your system, the client falls
+  back to handling sources. Please consider helping to get your system
+  supported by contributing meta data or implementing a backend for your
+  system. See the
+  = link_to "instructions how to contribute", "contribute"
+  for more details.

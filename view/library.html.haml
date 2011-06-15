@@ -1,59 +1,34 @@
-%head
-  %link{ :rel => "stylesheet", :type => "text/css",
-         :href => "../public/inqlude.css" }
+%h2
+  = m "name"
 
-%body
-  .header.center
-    %h1
-      %span.logo><
-        \#in
-      %span.logo.green><
-        q
-      %span.logo><
-        lude
-      %span.subtitle
-        The Qt library archive
+%p
+  %em
+    Version
+    = m "version"
 
-  .menu.center
-    %span.menu_items
-      = link_to "How to get libraries", "get"
-      |
-      = link_to "How to contribute", "contribute"
-      |
-      = link_to "About", "about"
+%p
+  = m "summary"
 
-  .content.center
-    %h2
-      = m "name"
-  
-    %p
-      %em
-        Version
-        = m "version"
+%p
+  = m "description"
 
-    %p
-      = m "summary"
+%p
+  = link m( "homepage" )
 
-    %p
-      = m "description"
+- if disqus_enabled?
+  %hr
 
-    %p
-      = link m( "homepage" )
+  #disqus_thread
 
-    - if disqus_enabled?
-      %hr
+  :javascript
+    var disqus_shortname = 'inqlude';
 
-      #disqus_thread
+    var disqus_identifier = '#{m "name"}';
+    var disqus_url = 'http://inqlude.org/libraries/#{m "name"}.html';
 
-      :javascript
-        var disqus_shortname = 'inqlude';
-
-        var disqus_identifier = '#{m "name"}';
-        var disqus_url = 'http://inqlude.org/libraries/#{m "name"}.html';
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();

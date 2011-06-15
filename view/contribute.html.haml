@@ -1,57 +1,32 @@
-%head
-  %link{ :rel => "stylesheet", :type => "text/css",
-         :href => "public/inqlude.css" }
-  <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
-%body
-  .header.center
-    %h1
-      %span.logo><
-        \#in
-      %span.logo.green><
-        q
-      %span.logo><
-        lude
-      %span.subtitle
-        The Qt library archive
+%h2 Contributing data about libraries
 
-  .menu.center
-    %span.menu_items
-      = link_to "How to get libraries", "get"
-      |
-      = link_to "How to contribute", "contribute"
-      |
-      = link_to "About", "about"
+%p
+  To get a complete overview about all available Qt based libraries, we need
+  to collect data about these libraries. This includes descriptions,
+  instructions how to use them, as well as links to sources or installable
+  packages.
+%p
+  The meta data used by Inqlude is collected in a git repository at
+  = link( "http://github.com/cornelius/inqlude_data" ) + "."
+  It contains a manifest file in JSON format for each library, which has the
+  meta data in a structured machine-readable form. JSON is easy enough for
+  humans to read and edit as well.
+%p
+  You can contribute meta data by providing patches to the inqlude_data
+  repository. Use the github mechanisms or just send patches by email.
+  Contributions are welcome.
 
-  .content.center
-    %h2 Contributing data about libraries
-    
-    %p
-      To get a complete overview about all available Qt based libraries, we need
-      to collect data about these libraries. This includes descriptions,
-      instructions how to use them, as well as links to sources or installable
-      packages.
-    %p
-      The meta data used by Inqlude is collected in a git repository at
-      = link( "http://github.com/cornelius/inqlude_data" ) + "."
-      It contains a manifest file in JSON format for each library, which has the
-      meta data in a structured machine-readable form. JSON is easy enough for
-      humans to read and edit as well.
-    %p
-      You can contribute meta data by providing patches to the inqlude_data
-      repository. Use the github mechanisms or just send patches by email.
-      Contributions are welcome.
-    
-    %h2 Contributing to the Inqlude tools
-    
-    %p
-      The command line tool is developed in another git repository at
-      = link( "http://github.com/cornelius/inqlude" ) + "."
-      It's still in a proof-of-concept state, so there is quite a bit work left.
-      Have a look at the
-      = link_to "list of open issues", "http://github.com/cornelius/inqlude/issues"
-      or read the source and come up with your own ideas what to improve.
-    %p
-      Especially welcome are contributions for adding support for native
-      package systems on the variety of Linux distributions and other systems
-      out there.
-      
+%h2 Contributing to the Inqlude tools
+
+%p
+  The command line tool is developed in another git repository at
+  = link( "http://github.com/cornelius/inqlude" ) + "."
+  It's still in a proof-of-concept state, so there is quite a bit work left.
+  Have a look at the
+  = link_to "list of open issues", "http://github.com/cornelius/inqlude/issues"
+  or read the source and come up with your own ideas what to improve.
+%p
+  Especially welcome are contributions for adding support for native
+  package systems on the variety of Linux distributions and other systems
+  out there.
+

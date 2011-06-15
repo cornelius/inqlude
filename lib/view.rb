@@ -28,6 +28,8 @@ class View
     assert_dir "#{output_dir}/public"
     system "cp #{view_dir}/public/* #{output_dir}/public/"
 
+    @root = ""
+
     render_template "index", output_dir
     render_template "about", output_dir
     render_template "get", output_dir
@@ -36,23 +38,40 @@ class View
     library_path = "#{output_dir}/libraries/"
     assert_dir library_path
 
-    engine = Haml::Engine.new template "library"
+    @root = "../"
 
     manifests.each do |manifest|
-      File.open library_path + manifest["name"] + ".html", "w" do |file|
-        @manifest = manifest
-        file.puts engine.render( binding )
-      end
+      @manifest = manifest
+      file_name = "libraries/" + manifest["name"]
+      render_template "library", output_dir, file_name
     end
   end
 
-  def render_template name, output_dir
-    page = template name
-    engine = Haml::Engine.new page
+  def render_template name, output_dir, file_name = nil
+    layout = template "layout"
+    layout_engine = Haml::Engine.new layout
 
-    File.open "#{output_dir}/#{name}.html", "w" do |file|
-      file.puts engine.render( binding )
+    page = template name
+    @content = Haml::Engine.new( page ).render( binding )
+
+    output_path = ""
+    if file_name
+      output_path = "#{output_dir}/#{file_name}.html"
+    else
+      output_path = "#{output_dir}/#{name}.html"
     end
+
+    File.open output_path, "w" do |file|
+      file.puts layout_engine.render( binding )
+    end
+  end
+
+  def yank
+    @content
+  end
+
+  def style_sheet
+    "<link href='#{@root}public/inqlude.css' rel='stylesheet' type='text/css' />"
   end
 
   def m attr
@@ -68,8 +87,8 @@ class View
   end
 
   def link_to title, url
-    if url !~ /^mailto:/ && url !~ /^http:/
-      url += ".html"
+    if url !~ /^mailto:/ && url !~ /^http:/ && url !~ /^https:/
+      url = "#{@root}#{url}.html"
     end
     "<a href=\"#{url}\">#{title}</a>"
   end

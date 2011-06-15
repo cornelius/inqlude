@@ -13,4 +13,3 @@
 * Update manifest data to have complete package data
 * Properly identify repository (use vendor?)
 * One-click install for SUSE systems
-* Don't duplicate partials in views

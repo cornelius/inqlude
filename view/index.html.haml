@@ -1,32 +1,7 @@
-%head
-  %link{ :rel => "stylesheet", :type => "text/css",
-         :href => "public/inqlude.css" }
-  <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
-%body
-  .header.center
-    %h1
-      %span.logo><
-        \#in
-      %span.logo.green><
-        q
-      %span.logo><
-        lude
-      %span.subtitle
-        The Qt library archive
-
-  .menu.center
-    %span.menu_items
-      = link_to "How to get libraries", "get"
-      |
-      = link_to "How to contribute", "contribute"
-      |
-      = link_to "About", "about"
-
-  .content.center
-    %table
-      - manifests.each do |manifest|
-        %tr
-          %td.first
-            = link_to_manifest manifest["name"]
-          %td.last
-            = manifest["summary"]
+%table
+  - manifests.each do |manifest|
+    %tr
+      %td.first
+        = link_to_manifest manifest["name"]
+      %td.last
+        = manifest["summary"]
