@@ -35,7 +35,9 @@ class ManifestHandler
   end
 
   def read_remote
-    fetch_remote
+    if !@settings.offline
+      fetch_remote
+    end
   
     Dir.glob( "#{@settings.manifest_path}/*.manifest" ).sort.each do |filename|
       File.open filename do |file|

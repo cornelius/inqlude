@@ -19,6 +19,7 @@ class Cli < Thor
   default_task :global
 
   class_option :version, :type => :boolean, :desc => "Show version"
+  class_option :offline, :type => :boolean, :desc => "Work offline"
 
   def self.settings= s
     @@settings = s
@@ -72,6 +73,8 @@ class Cli < Thor
   method_option :enable_disqus, :type => :boolean,
     :desc => "Enable Disqus based comments on generate web pages. Works only on actual domain."
   def view
+    process_global_options options
+  
     view = View.new ManifestHandler.new @@settings
     view.enable_disqus = options[:enable_disqus]
     view.create options[:output_dir]
@@ -134,6 +137,12 @@ class Cli < Thor
     else
       @@distro.install manifest
     end
+  end
+
+  private
+  
+  def process_global_options options
+    @@settings.offline = options[:offline]
   end
 
 end

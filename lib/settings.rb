@@ -16,6 +16,12 @@
 
 class Settings
 
+  attr_accessor :offline
+
+  def initialize
+    @offline = false
+  end
+
   def manifest_path
     local_path "manifests"
   end
