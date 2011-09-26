@@ -13,7 +13,7 @@
 * Update manifest data to have complete package data
 * Properly identify repository (use vendor?)
 * One-click install for SUSE systems
-
+* Contribute back package description changes
 * Directory structure
 
 qjson/qjson.20110820.manifest (0.7.1)
