@@ -26,55 +26,56 @@ class RpmManifestizer
   end
 
   def create_manifest name, rpm_name
-    filename =  "#{@settings.manifest_path}/#{name}.manifest" 
-    File.open( filename, "w") do |f2|
-      qf = 'version:%{VERSION}\n'
-      qf += 'summary:%{SUMMARY}\n'
-      qf += 'homepage:%{URL}\n'
-      qf += 'license:%{LICENSE}\n'
-      qf += 'sourcerpm:%{SOURCERPM}\n'
-      header = `rpm -q --queryformat '#{qf}' #{rpm_name}`
+    qf = 'version:%{VERSION}\n'
+    qf += 'summary:%{SUMMARY}\n'
+    qf += 'homepage:%{URL}\n'
+    qf += 'license:%{LICENSE}\n'
+    qf += 'sourcerpm:%{SOURCERPM}\n'
+    header = `rpm -q --queryformat '#{qf}' #{rpm_name}`
 
-      header_strings = header.split "\n"
-      
-      headers = Hash.new
-      header_strings.each do |header_string|
-        header_string =~ /^(.*?):(.*)$/
-        headers[$1] = $2
+    header_strings = header.split "\n"
+    
+    headers = Hash.new
+    header_strings.each do |header_string|
+      header_string =~ /^(.*?):(.*)$/
+      headers[$1] = $2
+    end
+
+    source_rpm = headers["sourcerpm"]
+    @source_rpms[source_rpm] = Array.new
+
+    raw = `rpm -q --queryformat '%{DESCRIPTION}' #{rpm_name}`
+    parse_authors = false
+    description = ""
+    authors = Array.new
+    raw.each_line do |line3|
+      if line3 =~ /^Authors:/
+        parse_authors = true
+        next
       end
-
-      source_rpm = headers["sourcerpm"]
-      @source_rpms[source_rpm] = Array.new
-
-      raw = `rpm -q --queryformat '%{DESCRIPTION}' #{rpm_name}`
-      parse_authors = false
-      description = ""
-      authors = Array.new
-      raw.each_line do |line3|
-        if line3 =~ /^Authors:/
-          parse_authors = true
+      if parse_authors
+        if line3 =~ /^---/
           next
         end
-        if parse_authors
-          if line3 =~ /^---/
-            next
-          end
-          authors.push "\"#{line3.strip}\""
-        else
-          description += line3.chomp + "\\n"
-        end
+        authors.push "\"#{line3.strip}\""
+      else
+        description += line3.chomp + "\\n"
       end
-      description.gsub! /"/, "\\\""
-      description.strip!
-      
-      release_date = Date.parse "1970-01-01"
+    end
+    description.gsub! /"/, "\\\""
+    description.strip!
+    
+    release_date = Date.parse "1970-01-01"
 
-      licenses = Array.new
-      headers["license"].split(";").each do |l|
-        licenses.push "\"#{l.strip}\""
-      end
-      licenses_string = licenses.join ","
-      
+    licenses = Array.new
+    headers["license"].split(";").each do |l|
+      licenses.push "\"#{l.strip}\""
+    end
+    licenses_string = licenses.join ","
+
+    filename =  "#{@settings.manifest_path}/#{name}.manifest" 
+
+    File.open( filename, "w") do |f2|      
       f2.puts '{';
       f2.puts '  "schema_version": 1,'
       f2.puts "  \"name\": \"#{name}\","
