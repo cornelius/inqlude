@@ -1,16 +1,10 @@
-commit 568552e4fd1fbec7e38fb6876c5debfb1a24ae2f
-Author: Christian Muehlhaeuser <muesli@gmail.com>
-Date:   Fri Sep 16 11:19:22 2011 +0300
-
-    Should be qt3 instead of qt4 in the description and summary - I'd guess :-)
-
-diff --git a/klfbackend-qt3.manifest b/klfbackend-qt3.manifest
-index 8d330aa..eeffbc5 100644
---- a/klfbackend-qt3.manifest
-+++ b/klfbackend-qt3.manifest
-@@ -2,10 +2,10 @@
-   "schema_version": 1,
+diff --git a/klfbackend-qt3/klfbackend-qt3.1970-01-01.manifest b/klfbackend-qt3/klfbackend-qt3.1970-01-01.manifest
+index 90561d7..489d6f5 100644
+--- a/klfbackend-qt3/klfbackend-qt3.1970-01-01.manifest
++++ b/klfbackend-qt3/klfbackend-qt3.1970-01-01.manifest
+@@ -3,10 +3,10 @@
    "name": "klfbackend-qt3",
+   "release_date": "1970-01-01",
    "version": "3.2.2",
 -  "summary": "KLatexFormula backend library (Qt4)",
 +  "summary": "KLatexFormula backend library (Qt3)",

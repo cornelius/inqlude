@@ -73,7 +73,11 @@ class RpmManifestizer
     end
     licenses_string = licenses.join ","
 
-    filename =  "#{@settings.manifest_path}/#{name}.manifest" 
+    manifest_path = "#{@settings.manifest_path}/#{name}"
+    if !File.exists? manifest_path
+      Dir.mkdir manifest_path
+    end
+    filename =  "#{manifest_path}/#{name}.#{release_date}.manifest" 
 
     File.open( filename, "w") do |f2|      
       f2.puts '{';
@@ -181,7 +185,7 @@ class RpmManifestizer
     
     if !dry_run
       patch = @settings.data_path + "/manifest.patch"
-      cmd = "cd #{@settings.manifest_path}; patch <#{patch}";
+      cmd = "cd #{@settings.manifest_path}; patch -p1 <#{patch}";
       puts "Patching manifests with #{patch}"
       system cmd
     end
