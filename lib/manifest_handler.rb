@@ -51,7 +51,7 @@ class ManifestHandler
       if File.exists? @settings.manifest_path
         system "rm -r #{@settings.manifest_path}"
       end
-      system "git clone https://github.com/cornelius/inqlude_data.git " +
+      system "git clone https://github.com/cornelius/inqlude-data.git " +
         "#{@settings.manifest_path}"
     else
       system "cd #{@settings.manifest_path}; git pull"
