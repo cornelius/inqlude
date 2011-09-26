@@ -26,7 +26,7 @@ class RpmManifestizer
   end
 
   def create_manifest name, rpm_name
-    filename =  "#{@settings.manifest_dir}/#{name}.manifest" 
+    filename =  "#{@settings.manifest_path}/#{name}.manifest" 
     File.open( filename, "w") do |f2|
       source_rpm = `rpm -q --queryformat '%{SOURCERPM}' #{rpm_name}`
       @source_rpms[source_rpm] = Array.new
@@ -155,6 +155,13 @@ class RpmManifestizer
           end
         end
       end
+    end
+    
+    if !dry_run
+      patch = @settings.data_path + "/manifest.patch"
+      cmd = "cd #{@settings.manifest_path}; patch <#{patch}";
+      puts "Patching manifests with #{patch}"
+      system cmd
     end
   end
 

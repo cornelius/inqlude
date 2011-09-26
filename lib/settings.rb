@@ -26,6 +26,10 @@ class Settings
     local_path "manifests"
   end
 
+  def data_path
+    File.expand_path('../../data',__FILE__)
+  end
+  
   def cache_dir
     local_dir "cache"
   end
