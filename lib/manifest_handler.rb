@@ -39,7 +39,7 @@ class ManifestHandler
       fetch_remote
     end
   
-    Dir.glob( "#{@settings.manifest_path}/*.manifest" ).sort.each do |filename|
+    Dir.glob( "#{@settings.manifest_path}/*/*.manifest" ).sort.each do |filename|
       File.open filename do |file|
         manifests.push JSON file.read
       end
