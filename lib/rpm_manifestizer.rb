@@ -28,7 +28,22 @@ class RpmManifestizer
   def create_manifest name, rpm_name
     filename =  "#{@settings.manifest_path}/#{name}.manifest" 
     File.open( filename, "w") do |f2|
-      source_rpm = `rpm -q --queryformat '%{SOURCERPM}' #{rpm_name}`
+      qf = 'version:%{VERSION}\n'
+      qf += 'summary:%{SUMMARY}\n'
+      qf += 'homepage:%{URL}\n'
+      qf += 'license:%{LICENSE}\n'
+      qf += 'sourcerpm:%{SOURCERPM}\n'
+      header = `rpm -q --queryformat '#{qf}' #{rpm_name}`
+
+      header_strings = header.split "\n"
+      
+      headers = Hash.new
+      header_strings.each do |header_string|
+        header_string =~ /^(.*?):(.*)$/
+        headers[$1] = $2
+      end
+
+      source_rpm = headers["sourcerpm"]
       @source_rpms[source_rpm] = Array.new
 
       raw = `rpm -q --queryformat '%{DESCRIPTION}' #{rpm_name}`
@@ -51,17 +66,23 @@ class RpmManifestizer
       end
       description.gsub! /"/, "\\\""
       description.strip!
+      
+      release_date = Date.parse "1970-01-01"
 
-      qf = '  "version": "%{VERSION}",\n'
-      qf += '  "summary": "%{SUMMARY}",\n'
-      qf += '  "homepage": "%{URL}",\n'
-      qf += '  "license": "%{LICENSE}",\n'
-      header = `rpm -q --queryformat '#{qf}' #{rpm_name}`
-
+      licenses = Array.new
+      headers["license"].split(";").each do |l|
+        licenses.push "\"#{l.strip}\""
+      end
+      licenses_string = licenses.join ","
+      
       f2.puts '{';
       f2.puts '  "schema_version": 1,'
       f2.puts "  \"name\": \"#{name}\","
-      f2.puts header
+      f2.puts "  \"release_date\": \"#{release_date}\","
+      [ "version", "summary", "homepage" ].each do |key|
+        f2.puts "  \"#{key}\": \"#{headers[key]}\","
+      end
+      f2.puts "  \"licenses\": [#{licenses_string}],"
       f2.puts "  \"description\": \"#{description}\","
       f2.puts '  "authors": [' + authors.join(",") + '],'
       f2.puts '  "maturity": "stable",'
