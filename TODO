@@ -13,3 +13,10 @@
 * Update manifest data to have complete package data
 * Properly identify repository (use vendor?)
 * One-click install for SUSE systems
+
+* Directory structure
+
+qjson/qjson.20110820.manifest (0.7.1)
+qjson/qjson.20110822.manifest (0.7.2)
+qjson/qjson.20110823.manifest (0.8 Beta 1)
+kimap/kimap.20110101.manifest (1.0)
