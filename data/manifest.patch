@@ -8,7 +8,9 @@ index 90561d7..489d6f5 100644
    "version": "3.2.2",
 -  "summary": "KLatexFormula backend library (Qt4)",
 +  "summary": "KLatexFormula backend library (Qt3)",
-   "homepage": "http://klatexformula.sourceforge.net/",
+   "urls": {
+     "homepage": "http://klatexformula.sourceforge.net/"
+   },
    "licenses": ["GPLv2+"],
 -  "description": "A C++/Qt library to generate images (PNG, EPS, PDF, plus all Qt-supported image\nformats) from LaTeX equations.\n\nThis library implements the base functionality of KLatexFormula. This library\nis compiled for Qt 4.\n\nSee also packages klatexformula and libklfbackend-qt3.\n",
 +  "description": "A C++/Qt library to generate images (PNG, EPS, PDF, plus all Qt-supported image\nformats) from LaTeX equations.\n\nThis library implements the base functionality of KLatexFormula. This library\nis compiled for Qt 3.\n\nSee also packages klatexformula.\n",

@@ -87,7 +87,13 @@ class Cli < Thor
 
   desc "verify", "Verify manifests"
   def verify
-    Upstream.get_involved "Add command for verifying manifests", 2
+    v = Verifier.new @@settings
+
+    handler = ManifestHandler.new @@settings
+    handler.read_remote
+    handler.manifests.each do |manifest|
+      v.verify manifest
+    end
   end
 
   desc "create", "Create manifest"

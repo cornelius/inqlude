@@ -84,9 +84,11 @@ class RpmManifestizer
       f2.puts '  "schema_version": 1,'
       f2.puts "  \"name\": \"#{name}\","
       f2.puts "  \"release_date\": \"#{release_date}\","
-      [ "version", "summary", "homepage" ].each do |key|
-        f2.puts "  \"#{key}\": \"#{headers[key]}\","
-      end
+      f2.puts "  \"version\": \"#{headers["version"]}\","
+      f2.puts "  \"summary\": \"#{headers["summary"]}\","
+      f2.puts '  "urls": {'
+      f2.puts "    \"homepage\": \"#{headers["homepage"]}\""
+      f2.puts '  },'
       f2.puts "  \"licenses\": [#{licenses_string}],"
       f2.puts "  \"description\": \"#{description}\","
       f2.puts '  "authors": [' + authors.join(",") + '],'
