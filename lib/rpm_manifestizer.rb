@@ -190,6 +190,11 @@ class RpmManifestizer
       cmd = "cd #{@settings.manifest_path}; patch -p1 <#{patch}";
       puts "Patching manifests with #{patch}"
       system cmd
+
+      patch = @settings.data_path + "/manifest2.patch"
+      cmd = "cd #{@settings.manifest_path}; patch -p1 <#{patch}";
+      puts "Patching manifests with #{patch}"
+      system cmd
     end
   end
 
