@@ -74,8 +74,12 @@ class View
     "<link href='#{@root}public/inqlude.css' rel='stylesheet' type='text/css' />"
   end
 
-  def m attr
-    @manifest[ attr ]
+  def m attr, subattr = nil
+    if subattr
+      @manifest[ attr ][ subattr ]
+    else
+      @manifest[ attr ]
+    end
   end
 
   def link_to_manifest name

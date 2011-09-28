@@ -1,4 +1,3 @@
-* Fix showing homepage on views.
 * Correctly read manifests, if there are multiple versions
 * Smarter match for source RPMs, which contain more than one library
 * Show documentation of an library
