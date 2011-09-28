@@ -93,6 +93,7 @@ class RpmManifestizer
       f2.puts "  \"description\": \"#{description}\","
       f2.puts '  "authors": [' + authors.join(",") + '],'
       f2.puts '  "maturity": "stable",'
+      f2.puts '  "platforms": [ "Linux" ],'
       f2.puts '  "packages": {'
       f2.puts '    "openSUSE": {'
       f2.puts '      "11.4": {'
