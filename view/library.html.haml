@@ -5,6 +5,7 @@
   %em
     Version
     = m "version"
+    = "(#{m "maturity"})"
 
 %p
   = m "summary"
@@ -13,7 +14,39 @@
   = m "description"
 
 %p
+  - licenses = m( "licenses" )
+  - if licenses.size > 1
+    Licenses:
+    = licenses.join ","
+  - else
+    License:
+    = licenses
+
+- if m("platforms")
+  %p
+    - platforms = m( "platforms" )
+    - if platforms.size > 1
+      Platforms:
+      = platforms.join ","
+    - else
+      Platform:
+      = platforms
+
+%p
   = link m( "urls", "homepage" )
+
+- if more_urls?
+  %h3 Read more
+  %ul
+    - if m( "urls","api_docs" )
+      %li
+        = link_to "API documentation", m( "urls","api_docs" )
+    - if m( "urls","readme" )
+      %li
+        = link_to "README", m( "urls","readme" )
+    - if m( "urls","vcs" )
+      %li
+        = link_to "Source code repository", m( "urls", "vcs" )
 
 - if disqus_enabled?
   %hr

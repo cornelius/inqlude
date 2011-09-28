@@ -108,6 +108,17 @@ class View
     @enable_disqus
   end
 
+  def more_urls?
+    if @manifest["urls"]
+      @manifest["urls"].each do |name,url|
+        if name != "homepage" && name != "screenshots" && name != "logo"
+          return true
+        end
+      end
+    end
+    return false
+  end
+  
   private
   
   def assert_dir name
