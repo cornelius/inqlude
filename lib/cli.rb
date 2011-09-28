@@ -135,13 +135,15 @@ class Cli < Thor
   end
 
   desc "install", "Install library"
+  method_option :dry_run, :type => :boolean,
+    :desc => "Only show what would happen, don't install anything."
   def install name
     handler = ManifestHandler.new @@settings
     manifest = handler.manifest name
     if !manifest
       STDERR.puts "Manifest for '#{name}' not found"
     else
-      @@distro.install manifest
+      @@distro.install manifest, :dry_run => options[:dry_run]
     end
   end
 

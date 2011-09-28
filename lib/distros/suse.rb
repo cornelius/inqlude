@@ -72,10 +72,14 @@ class Suse
     end
   end
 
-  def install manifest
+  def install manifest, options = {}
     package_name = get_package_name manifest
+    cmd_options = Array.new
+    if options[:dry_run]
+      cmd_options.push "--dry-run"
+    end
     if package_name
-      system "sudo zypper install #{package_name}"
+      system "sudo zypper install #{cmd_options.join(" ")} #{package_name}"
     end
   end
 
