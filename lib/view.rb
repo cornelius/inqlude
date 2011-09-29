@@ -97,6 +97,41 @@ class View
     "<a href=\"#{url}\">#{title}</a>"
   end
 
+  def list_attribute attribute
+    attr = m attribute
+    return "" if !attr || attr.size == 0
+
+    # We assume attribute is plural formed by adding an 's'
+
+    label = attribute.capitalize
+
+    entries = Array.new
+    attr.each do |a|
+      entries.push markup_email( a )
+    end
+    
+    out = "<p>"
+    if attr.size > 1
+      out += label + ": " + entries.join(", ")
+    else
+      out += label[0..-2] + ": " + entries.first
+    end
+    out += "</p>"
+    
+    out
+  end
+  
+  def markup_email email
+    if email =~ /(.*) <(.*)>/
+      name = $1
+      email = $2
+      
+      return "<a href=\"mailto:#{email}\">#{name}</a>"
+    else
+      return email
+    end
+  end
+  
   def manifests
     if @manifest_handler.manifests.empty?
       @manifest_handler.read_remote

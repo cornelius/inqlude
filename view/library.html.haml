@@ -13,24 +13,9 @@
 %p
   = m "description"
 
-%p
-  - licenses = m( "licenses" )
-  - if licenses.size > 1
-    Licenses:
-    = licenses.join ","
-  - else
-    License:
-    = licenses
-
-- if m("platforms")
-  %p
-    - platforms = m( "platforms" )
-    - if platforms.size > 1
-      Platforms:
-      = platforms.join ","
-    - else
-      Platform:
-      = platforms
+= list_attribute "licenses"
+= list_attribute "platforms"
+= list_attribute "authors"
 
 %p
   = link m( "urls", "homepage" )
