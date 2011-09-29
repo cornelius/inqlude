@@ -48,6 +48,11 @@
       %li
         = link_to "Source code repository", m( "urls", "vcs" )
 
+%p{:class => "edit-link"}
+  = link_to "[Edit]", editor_url
+
+%br{:clear => "all"}
+
 - if disqus_enabled?
   %hr
 

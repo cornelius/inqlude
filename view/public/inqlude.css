@@ -81,3 +81,8 @@ td {
 .footer {
   float: right;
 }
+
+.edit-link {
+  float: right;
+  font-size: 80%;
+}

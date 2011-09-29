@@ -119,6 +119,13 @@ class View
     return false
   end
   
+  def editor_url
+    url = "https://github.com/cornelius/inqlude-data/blob/master/"
+    url += @manifest["name"]
+    url += "/#{@manifest["name"]}.#{@manifest["release_date"]}.manifest"
+    url
+  end
+    
   private
   
   def assert_dir name
