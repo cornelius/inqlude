@@ -13,7 +13,7 @@ Libraries are described by manifest files, which are maintained in a separate
 git repository. Inqlude integrates with this git repository and uses it as the
 list of available gems. One way to contribute information about libraries to the
 archive is to simply provide patches to the manifest repository. The repository
-can be found at https://github.com/cornelius/inqlude_data.
+can be found at https://github.com/cornelius/inqlude-data.
 
 Inqlude also integrates with native package managers. If the meta information is
 available, the libraries are transparently handled by installing packages with

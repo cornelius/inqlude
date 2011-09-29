@@ -32,7 +32,7 @@ class Upstream
     puts
     puts "If you would like to contribute information about a Qt based"
     puts "library, have a look at the git repository containing the library"
-    puts "meta data: https://github.com/cornelius/inqlude_data"
+    puts "meta data: https://github.com/cornelius/inqlude-data"
     puts
     puts "Your help is appreciated."
     puts
