@@ -17,7 +17,8 @@
 class View
 
   attr_accessor :enable_disqus
-
+  attr_reader :root
+  
   def initialize handler
     @manifest_handler = handler
   end

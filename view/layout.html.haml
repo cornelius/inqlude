@@ -45,6 +45,6 @@
       var customSearchControl = new google.search.CustomSearchControl('012526638842992167133:g7thmrlp2uw');
       customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
       var options = new google.search.DrawOptions();
-      options.enableSearchboxOnly("search.html");
+      options.enableSearchboxOnly("#{root}search.html");
       customSearchControl.draw('cse-search-form', options);
     }, true);
