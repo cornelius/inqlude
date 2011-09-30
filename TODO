@@ -20,4 +20,5 @@
   packages e.g. openSUSE 1-click install
 * Make sure all manifests have a download link
 * Add links to upstream source code repositories
+* Check match of filename and release date
 
