@@ -159,7 +159,7 @@ class View
   def more_urls?
     if @manifest["urls"]
       @manifest["urls"].each do |name,url|
-        if name != "homepage" && name != "screenshots" && name != "logo"
+        if name != "homepage" && name != "screenshots" && name != "logo" && name != "description_source"
           return true
         end
       end
