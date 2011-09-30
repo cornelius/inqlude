@@ -21,4 +21,7 @@
 * Make sure all manifests have a download link
 * Add links to upstream source code repositories
 * Check match of filename and release date
+* Add short explanation at top of home page and link to inqlude@kde.org as
+  contact address
+* Add footer with info who is doing this project
 
