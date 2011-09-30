@@ -16,3 +16,8 @@
 * One-click install for SUSE systems
 * Contribute back package description changes
 * Document manifest format
+* Add download section on library page with source code download and links to
+  packages e.g. openSUSE 1-click install
+* Make sure all manifests have a download link
+* Add links to upstream source code repositories
+
