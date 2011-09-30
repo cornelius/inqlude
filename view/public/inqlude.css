@@ -43,8 +43,16 @@ h1 .subtitle {
   background-color: green;
   padding-top: 4px;
   padding-bottom: 6px;
-  padding-right: 10px;
-  text-align: right;
+  padding-left: 10px;
+  text-align: left;
+}
+
+#cse-search-form {
+  float: right;
+  width: 250px;
+}
+#cse {
+  width: 90%;
 }
 
 .menu_items {

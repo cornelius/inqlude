@@ -34,6 +34,7 @@ class View
     render_template "about", output_dir
     render_template "get", output_dir
     render_template "contribute", output_dir
+    render_template "search", output_dir
 
     library_path = "#{output_dir}/libraries/"
     assert_dir library_path
