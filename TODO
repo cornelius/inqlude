@@ -1,3 +1,4 @@
+* Second round of manifest cleanup
 * Correctly read manifests, if there are multiple versions
 * Smarter match for source RPMs, which contain more than one library
 * Show documentation of an library
@@ -24,4 +25,3 @@
 * Add short explanation at top of home page and link to inqlude@kde.org as
   contact address
 * Add footer with info who is doing this project
-
