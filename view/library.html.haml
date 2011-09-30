@@ -23,15 +23,10 @@
 - if more_urls?
   %h3 Read more
   %ul
-    - if m( "urls","api_docs" )
-      %li
-        = link_to "API documentation", m( "urls","api_docs" )
-    - if m( "urls","readme" )
-      %li
-        = link_to "README", m( "urls","readme" )
-    - if m( "urls","vcs" )
-      %li
-        = link_to "Source code repository", m( "urls", "vcs" )
+    = link_item "api_docs", "API documentation"
+    = link_item "readme", "README"
+    = link_item "tutorial", "Tutorial"
+    = link_item "vcs", "Source code repository"
 
 %p{:class => "edit-link"}
   = link_to "[Edit]", editor_url

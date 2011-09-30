@@ -133,6 +133,17 @@ class View
       return email
     end
   end
+
+  def link_item key, label
+    if m( "urls", key )
+      out = "<li><a href=\""
+      out += m( "urls", key )
+      out += "\">#{label}</a>"
+      return out
+    else
+      return ""
+    end
+  end
   
   def manifests
     if @manifest_handler.manifests.empty?
