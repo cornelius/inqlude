@@ -144,6 +144,17 @@ class View
       return ""
     end
   end
+
+  def custom_urls
+    out = ""
+    urls = m "urls", "custom"
+    if urls && !urls.empty?
+      urls.each do |text,url|
+        out += "<li><a href=\"#{url}\">#{text}</a></li>"
+      end
+    end
+    out
+  end
   
   def manifests
     if @manifest_handler.manifests.empty?
