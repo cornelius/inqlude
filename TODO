@@ -25,3 +25,11 @@
 * Add short explanation at top of home page and link to inqlude@kde.org as
   contact address
 * Add footer with info who is doing this project
+* Look for latest versions of libraries
+* Consistently make all manifest names lowercase
+* Show release date on library page, if it's not 1970-01-01
+* State policy for inclusion of libraries (at least one stable release, no qt3,
+  open source, provides a Qt API, published API docs)
+* Handle binding consistently (suffix -qt, common description, maybe special
+  tags in meta data for bound library)
+* Document manifest format
