@@ -21,14 +21,21 @@ class Verifier
 
     @allowed_keys = [ "schema_version", "name", "version", "release_date",
       "summary", "urls", "licenses", "description", "authors", "maturity",
-      "platforms", "packages", "keywords", "dependencies" ]
+      "platforms", "packages", "keywords", "dependencies", "filename" ]
   end
 
   def verify manifest
     @errors = Array.new
-    
-    print "Verify manifest #{manifest[:name]}..."
 
+    filename = manifest["filename"]
+    expected_filename = "#{manifest["name"]}.#{manifest["release_date"]}.manifest"
+    
+    print "Verify manifest #{filename}..."
+    
+    if filename != expected_filename
+      @errors.push "Expected file name: #{expected_filename}"
+    end
+    
     manifest.keys.each do |key|
       if !@allowed_keys.include? key
         @errors.push "Illegal entry: #{key}"
@@ -37,11 +44,13 @@ class Verifier
     
     if @errors.empty?
       puts "ok"
+      return true
     else
       puts "error"
       @errors.each do |error|
         puts "  #{error}"
       end
+      return false
     end
   end
   

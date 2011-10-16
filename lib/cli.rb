@@ -91,9 +91,17 @@ class Cli < Thor
 
     handler = ManifestHandler.new @@settings
     handler.read_remote
+    count_ok = 0
+    count_error = 0
     handler.manifests.each do |manifest|
-      v.verify manifest
+      if v.verify manifest
+        count_ok += 1
+      else
+        count_error += 1
+      end
     end
+    puts "#{handler.manifests.count} manifests checked. #{count_ok} ok, " +
+      "#{count_error} with error."
   end
 
   desc "create", "Create manifest"

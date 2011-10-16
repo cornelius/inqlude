@@ -41,7 +41,9 @@ class ManifestHandler
   
     Dir.glob( "#{@settings.manifest_path}/*/*.manifest" ).sort.each do |filename|
       File.open filename do |file|
-        manifests.push JSON file.read
+        manifest = JSON file.read
+        manifest["filename"] = File.basename filename
+        manifests.push manifest
       end
     end
   end
