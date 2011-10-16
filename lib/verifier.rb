@@ -35,6 +35,10 @@ class Verifier
     if filename != expected_filename
       @errors.push "Expected file name: #{expected_filename}"
     end
+
+    if manifest["release_date"] == "1970-01-01"
+      @errors.push "Invalid release date: #{manifest["release_date"]}"
+    end
     
     manifest.keys.each do |key|
       if !@allowed_keys.include? key
