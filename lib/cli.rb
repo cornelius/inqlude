@@ -52,6 +52,8 @@ class Cli < Thor
   method_option :remote, :type => :boolean, :aliases => "-r",
     :desc => "List remote libraries"
   def list
+    process_global_options options
+
     handler = ManifestHandler.new @@settings
     handler.read_remote
 
