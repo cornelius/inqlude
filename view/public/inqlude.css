@@ -100,6 +100,10 @@ h1 .subtitle {
   margin: 6px;
 }  
 
+.old-versions {
+  font-size: 80%;
+}
+
 table {
   margin: auto;
 }

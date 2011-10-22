@@ -58,8 +58,8 @@ class Cli < Thor
     handler.read_remote
 
     if options[:remote]
-      handler.manifests.each do |manifest|
-        puts manifest["name"] + "-" + manifest["version"]
+      handler.libraries.each do |library|
+        puts library.name + " (" + library.versions.join(", ") + ")"
       end
     else
       manifests = @@distro.installed handler
@@ -89,17 +89,21 @@ class Cli < Thor
 
   desc "verify", "Verify manifests"
   def verify
+    process_global_options options
+
     v = Verifier.new @@settings
 
     handler = ManifestHandler.new @@settings
     handler.read_remote
     count_ok = 0
     count_error = 0
-    handler.manifests.each do |manifest|
-      if v.verify manifest
-        count_ok += 1
-      else
-        count_error += 1
+    handler.libraries.each do |library|
+      library.manifests.each do |manifest|
+        if v.verify manifest
+          count_ok += 1
+        else
+          count_error += 1
+        end
       end
     end
     puts "#{handler.manifests.count} manifests checked. #{count_ok} ok, " +

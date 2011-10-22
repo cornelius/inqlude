@@ -1,7 +1,7 @@
 %table
-  - manifests.each do |manifest|
+  - libraries.each do |library|
     %tr
       %td.first
-        = link_to_manifest manifest["name"]
+        = link_to_manifest library.name
       %td.last
-        = manifest["summary"]
+        = library.manifests.last["summary"]

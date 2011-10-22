@@ -42,9 +42,10 @@ class View
 
     @root = "../"
 
-    manifests.each do |manifest|
-      @manifest = manifest
-      file_name = "libraries/" + manifest["name"]
+    @manifest_handler.libraries.each do |library|
+      @library = library
+      @manifest = library.manifests.last
+      file_name = "libraries/" + library.name
       render_template "library", output_dir, file_name
     end
   end
@@ -156,11 +157,11 @@ class View
     out
   end
   
-  def manifests
-    if @manifest_handler.manifests.empty?
+  def libraries
+    if @manifest_handler.libraries.empty?
       @manifest_handler.read_remote
     end
-    @manifest_handler.manifests
+    @manifest_handler.libraries
   end
 
   def disqus_enabled?
@@ -184,7 +185,16 @@ class View
     url += "/#{@manifest["name"]}.#{@manifest["release_date"]}.manifest"
     url
   end
-    
+
+  def old_versions
+    versions = Array.new
+    count = @library.manifests.count
+    if count > 1
+      versions = @library.manifests[0..count-2].map {|m| m["version"] }
+    end
+    versions.reverse
+  end
+
   private
   
   def assert_dir name

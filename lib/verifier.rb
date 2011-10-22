@@ -21,14 +21,15 @@ class Verifier
 
     @allowed_keys = [ "schema_version", "name", "version", "release_date",
       "summary", "urls", "licenses", "description", "authors", "maturity",
-      "platforms", "packages", "keywords", "dependencies", "filename" ]
+      "platforms", "packages", "keywords", "dependencies", "filename",
+      "libraryname" ]
   end
 
   def verify manifest
     @errors = Array.new
 
     filename = manifest["filename"]
-    expected_filename = "#{manifest["name"]}.#{manifest["release_date"]}.manifest"
+    expected_filename = "#{manifest["libraryname"]}.#{manifest["release_date"]}.manifest"
     
     print "Verify manifest #{filename}..."
     

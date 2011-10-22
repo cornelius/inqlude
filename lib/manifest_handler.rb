@@ -16,19 +16,20 @@
 
 class ManifestHandler
 
-  attr_reader :manifests
+  attr_reader :manifests, :libraries
   
   def initialize settings
     @settings = settings
-  
+
+    @libraries = Array.new
     @manifests = Array.new
   end
 
   def manifest name
     read_remote
-    @manifests.each do |manifest|
-      if manifest["name"] == name
-        return manifest
+    @libraries.each do |library|
+      if library.name == name
+        return library.manifests.last
       end
     end
     nil
@@ -38,13 +39,24 @@ class ManifestHandler
     if !@settings.offline
       fetch_remote
     end
-  
-    Dir.glob( "#{@settings.manifest_path}/*/*.manifest" ).sort.each do |filename|
-      File.open filename do |file|
-        manifest = JSON file.read
-        manifest["filename"] = File.basename filename
-        manifests.push manifest
+
+    Dir.glob( "#{@settings.manifest_path}/*" ).sort.each do |dirname|
+      next if !File.directory?( dirname )
+
+      library = Library.new
+      library.name = File.basename dirname
+      local_manifests = Array.new
+      Dir.glob( "#{dirname}/*.manifest" ).sort.each do |filename|
+        File.open filename do |file|
+          manifest = JSON file.read
+          manifest["filename"] = File.basename filename
+          manifest["libraryname"] = library.name
+          local_manifests.push manifest
+          manifests.push manifest
+        end
       end
+      library.manifests = local_manifests
+      libraries.push library
     end
   end
 
