@@ -17,6 +17,7 @@
 class View
 
   attr_accessor :enable_disqus
+  attr_accessor :enable_search
   attr_reader :root
   
   def initialize handler
