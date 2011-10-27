@@ -125,3 +125,9 @@ td {
   float: right;
   font-size: 80%;
 }
+
+.legal {
+  margin: 4px;
+  text-align: center;
+  font-size: 70%;
+}
