@@ -1,8 +1,8 @@
 # Inqlude - the Qt library archive
 
 Inqlude is a tool to handle Qt based libraries. It provides developers using Qt
-with an easy way to find, install, and use liraries, in particular 3rd party
-libraries.
+with an easy way to find, install, and use libraries, in particular 3rd party
+libraries. A public version of the library runs at http://inqlude.org.
 
 Inqlude comes as a Ruby gem, which can easily be installed, and provides a
 command line interface to handle Qt libraries in a similar way as Ruby gems.
