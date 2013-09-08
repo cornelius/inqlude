@@ -6,6 +6,8 @@
     Version
     = m "version"
     = "(#{m "maturity"})"
+    %span{:class => "release-date"}
+      released on #{m "release_date"}
     - if !old_versions.empty?
       %span{:class => "old-versions"}
         = "(older versions: #{old_versions.join(", ")})"

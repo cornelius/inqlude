@@ -104,6 +104,11 @@ h2 {
   margin: 6px;
 }  
 
+.release-date {
+  font-size: 80%;
+  margin-left: 5px;
+}
+
 .old-versions {
   font-size: 80%;
 }
