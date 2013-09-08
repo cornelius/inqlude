@@ -136,6 +136,14 @@ actual domain."
     m.process_all_rpms
   end
 
+  desc "create <manifest_name> <version> <release_date>", "Create new or updated manifest"
+  def create name, version, release_date
+    @@settings.manifest_path = "."
+    creator = Creator.new @@settings, name
+    creator.validate_directory
+    creator.create version, release_date
+  end
+  
   desc "get_involved", "Information about how to get involved"
   def get_involved
     Upstream.print_info

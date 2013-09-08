@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "name": "awesomelib",
+  "release_date": "2013-09-08",
+  "version": "0.2.0",
+  "summary": "Awesome library",
+  "urls": {
+    "homepage": "http://example.com",
+    "download": "http://example.com/download"
+  },
+  "licenses": ["LGPLv2.1+"],
+  "description": "This is an awesome library.",
+  "authors": ["Cornelius Schumacher <schumacher@kde.org>"],
+  "maturity": "stable",
+  "platforms": [ "Linux" ],
+  "packages": {
+    "source": "ftp://example.com/download/awesomelib-0.2.0.tar.gz"
+  }
+}

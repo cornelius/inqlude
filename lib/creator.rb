@@ -1,4 +1,4 @@
-# Copyright (C) 2011 Cornelius Schumacher <schumacher@kde.org>
+# Copyright (C) 2013 Cornelius Schumacher <schumacher@kde.org>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,39 +14,35 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-class Settings
+class Creator
 
-  attr_accessor :offline, :manifest_path
-
-  def initialize
-    @offline = false
-    @manifest_path = local_path "manifests"
-  end
-
-  def data_path
-    File.expand_path('../../data',__FILE__)
+  def initialize settings, name
+    @settings = settings
+    @settings.offline = true
+    @name = name
+    @dir = File.join settings.manifest_path, name
   end
   
-  def cache_dir
-    local_dir "cache"
+  def validate_directory
+    if !File.exists? @dir
+      raise "Unable to find manifest directory '#{@dir}'"
+    end
   end
 
-  def version
-    Inqlude::VERSION
-  end
+  def create version, release_date
+    filename = File.join @settings.manifest_path, @name,
+      "#{@name}.#{release_date}.manifest"
+    
+    mh = ManifestHandler.new @settings
+    mh.read_remote
 
-  private
-
-  def local_path dirname
-    home = ENV["HOME"] + "/.inqlude/"
-    Dir::mkdir home unless File.exists? home
-    home + dirname
-  end
-
-  def local_dir dirname
-    path = local_path dirname
-    Dir::mkdir path unless File.exists? path
-    path
+    m = mh.manifest @name
+    m["version"] = version
+    m["release_date"] = release_date
+    
+    File.open( filename, "w" ) do |file|
+      file.puts JSON.pretty_generate(m)
+    end
   end
 
 end
