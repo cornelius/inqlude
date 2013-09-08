@@ -23,6 +23,7 @@
 = list_attribute "authors"
 
 %p
+  Home page:
   = link m( "urls", "homepage" )
 
 - if more_urls?
@@ -34,6 +35,11 @@
     = link_item "download", "Download sources"
     = link_item "vcs", "Source code repository"
     = custom_urls
+
+- if m("packages") && m( "packages", "source" )
+  %h3 Packages
+
+  = link_to "Source code", m( "packages", "source" )
 
 %p{:class => "edit-link"}
   = link_to "[Edit]", editor_url

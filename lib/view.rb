@@ -97,7 +97,7 @@ class View
   end
 
   def link_to title, url
-    if url !~ /^mailto:/ && url !~ /^http:/ && url !~ /^https:/
+    if url !~ /^mailto:/ && url !~ /^http:/ && url !~ /^https:/ && url !~ /^ftp:/
       url = "#{@root}#{url}.html"
     end
     "<a href=\"#{url}\">#{title}</a>"
