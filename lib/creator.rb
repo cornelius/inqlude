@@ -38,6 +38,7 @@ class Creator
 
     m = mh.manifest @name
     m.delete "filename"
+    m.delete "libraryname"
     m["version"] = version
     m["release_date"] = release_date
     

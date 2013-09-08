@@ -46,7 +46,7 @@ describe Creator do
     end
 
     m = JSON File.read(filename)
-    m.keys.count.should == 13
+    m.keys.count.should == 12
   end
 
   after(:each) do
