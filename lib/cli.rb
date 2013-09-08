@@ -114,14 +114,14 @@ actual domain."
       "#{count_error} with error."
   end
 
-  desc "create", "Create manifest"
+  desc "system_scan", "Scan system for installed Qt libraries and create manifests"
   method_option :dry_run, :type => :boolean,
     :desc => "Dry run. Don't write files."
   method_option :recreate_source_cache, :type => :boolean,
     :desc => "Recreate cache with meta data of installed RPMs"
   method_option :recreate_qt_source_cache, :type => :boolean,
     :desc => "Recreate cache with meta data of Qt library RPMs"
-  def create
+  def system_scan
     m = RpmManifestizer.new @@settings
     m.dry_run = options[:dry_run]
 
