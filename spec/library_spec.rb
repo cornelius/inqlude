@@ -1,8 +1,8 @@
-require File.expand_path('../test_helper', __FILE__)
+require File.expand_path('../spec_helper', __FILE__)
 
-class LibraryTest < Test::Unit::TestCase
+describe Library do
 
-  def test_versions
+  it "lists versions" do
     versions = [ "1.0", "2.0" ]
 
     manifests = Array.new
@@ -13,7 +13,7 @@ class LibraryTest < Test::Unit::TestCase
     library = Library.new
     library.manifests = manifests
 
-    assert_equal versions, library.versions
+    library.versions.should == versions
   end
 
 end
