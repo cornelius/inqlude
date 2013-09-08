@@ -25,6 +25,8 @@ class View
   end
 
   def create output_dir
+    puts "Creating web site in '#{output_dir}' from '#{@manifest_handler.settings.manifest_path}'"
+    
     assert_dir output_dir
 
     assert_dir "#{output_dir}/public"

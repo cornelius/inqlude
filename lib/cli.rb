@@ -72,6 +72,8 @@ class Cli < Thor
   desc "view", "Create view"
   method_option :output_dir, :type => :string, :aliases => "-o",
     :desc => "Output directory", :required => true
+  method_option :manifest_dir, :type => :string, :aliases => "-m",
+    :desc => "Manifest directory", :required => false
   method_option :enable_disqus, :type => :boolean,
     :desc => "Enable Disqus based comments on generate web pages. Works only on
 actual domain."
@@ -79,7 +81,11 @@ actual domain."
     :desc => "Disable Google based search."
   def view
     process_global_options options
-  
+
+    if options[:manifest_dir]
+      @@settings.manifest_path = options[:manifest_dir]
+    end
+    
     view = View.new ManifestHandler.new @@settings
     view.enable_disqus = options[:enable_disqus]
     view.enable_search = !options[:disable_search]

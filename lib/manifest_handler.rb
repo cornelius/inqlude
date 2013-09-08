@@ -16,7 +16,7 @@
 
 class ManifestHandler
 
-  attr_reader :manifests, :libraries
+  attr_reader :manifests, :libraries, :settings
   
   def initialize settings
     @settings = settings
