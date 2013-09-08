@@ -37,6 +37,7 @@ class Creator
     mh.read_remote
 
     m = mh.manifest @name
+    m.delete "filename"
     m["version"] = version
     m["release_date"] = release_date
     

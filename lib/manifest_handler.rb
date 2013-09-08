@@ -36,6 +36,9 @@ class ManifestHandler
   end
 
   def read_remote
+    @libraries.clear
+    @manifests.clear
+    
     if !@settings.offline
       fetch_remote
     end

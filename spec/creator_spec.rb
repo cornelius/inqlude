@@ -8,6 +8,10 @@ describe Creator do
     s.offline = true
     s
   end
+
+  let(:filename) do
+    File.expand_path('../data/awesomelib/awesomelib.2013-10-01.manifest', __FILE__)
+  end
   
   it "checks directory" do
     c = Creator.new settings, "xxx"
@@ -20,8 +24,6 @@ describe Creator do
   it "create updated manifest" do
     c = Creator.new settings, "awesomelib"
 
-    filename = File.expand_path('../data/awesomelib/awesomelib.2013-10-01.manifest', __FILE__)
-    File.delete filename if File.exists? filename
     File.exists?(filename).should be_false
 
     c.create "1.0", "2013-10-01"
@@ -37,8 +39,18 @@ describe Creator do
     m["version"].should == "1.0"
     m["release_date"].should == "2013-10-01"
     m["summary"].should == "Awesome library"
-    
-    File.delete filename
+
+    mh.manifests.count.should == 2
+    mh.manifests.each do |manifest|
+      manifest.keys.count.should == 14
+    end
+
+    m = JSON File.read(filename)
+    m.keys.count.should == 13
   end
 
+  after(:each) do
+    File.delete filename if File.exists? filename
+  end
+  
 end
