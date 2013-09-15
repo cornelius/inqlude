@@ -14,9 +14,7 @@ The manifest directory is under version control by git.
 
 Each library reprented in the Inqlude system has its own sub-directory in the
 manifest directory. The name of the sub-directory is the name of the library.
-The name of the library has to be a lower-case string with only alphanumeric
-characters. It has to be identical with the name attribute of the manifest
-files. See there for more information about how it's used.
+See there for more information about its specification and how it's used.
 
 Each version of the library has its own manifest file in the library
 sub-directory. The name of the manifest file is of the format:
@@ -51,6 +49,15 @@ This document specifies schema version 1.
 ### name
 
 Name of the library
+
+The name of the library has to be a lower-case string with only alphanumeric
+characters. It has to be identical with the name part of the manifest file names
+and the name of the directory where the manifest is stored in the manifest
+repository.
+
+As a convention Qt bindings to other libraries are named with the name of the
+other library and a "-qt" suffix. For example the Qt bindings to PackageKit
+are named "packagekit-qt" in Inqlude.
 
 It's used as internal handle by the tools and shows up where it
 needs to be processed by software, e.g. as an identifier as paramezer of the
