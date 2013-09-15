@@ -16,6 +16,31 @@
 
 class Verifier
 
+  class Result
+    attr_accessor :valid, :errors, :name
+    
+    def initialize
+      @valid = false
+      @errors = Array.new
+    end
+    
+    def valid?
+      @valid
+    end
+
+    def print_result
+      print "Verify manifest #{@name}..."
+      if valid?
+        puts "ok"
+      else
+        puts "error"
+        @errors.each do |error|
+          puts "  #{error}"
+        end
+      end
+    end
+  end
+  
   def initialize settings
     @settings = settings
 
@@ -23,39 +48,55 @@ class Verifier
       "summary", "urls", "licenses", "description", "authors", "maturity",
       "platforms", "packages", "keywords", "dependencies", "filename",
       "libraryname" ]
+    @mandatory_keys = [ "schema_version", "name", "version", "release_date",
+      "summary", "urls", "licenses", "description", "maturity",
+      "platforms", "packages" ]
   end
 
   def verify manifest
-    @errors = Array.new
+    @result = Result.new
 
-    filename = manifest["filename"]
-    expected_filename = "#{manifest["libraryname"]}.#{manifest["release_date"]}.manifest"
-    
-    print "Verify manifest #{filename}..."
-    
-    if filename != expected_filename
-      @errors.push "Expected file name: #{expected_filename}"
-    end
-
-    if manifest["release_date"] == "1970-01-01"
-      @errors.push "Invalid release date: #{manifest["release_date"]}"
-    end
-    
-    manifest.keys.each do |key|
-      if !@allowed_keys.include? key
-        @errors.push "Illegal entry: #{key}"
-      end
-    end
-    
-    if @errors.empty?
-      puts "ok"
-      return true
+    if !manifest["filename"]
+      @result.errors = "Unable to determine filename"
+      @result.name = "<unknown>"
     else
-      puts "error"
-      @errors.each do |error|
-        puts "  #{error}"
+      @result.name = manifest["filename"]
+    end
+    if !manifest["libraryname"]
+      @result.errors = "Unable to determine libraryname"
+    end
+
+    if @result.errors.empty?
+      filename = manifest["filename"]
+      expected_filename = "#{manifest["libraryname"]}.#{manifest["release_date"]}.manifest"
+
+      if filename != expected_filename
+        @result.errors.push "Expected file name: #{expected_filename}"
       end
-      return false
+
+      if manifest["release_date"] == "1970-01-01"
+        @result.errors.push "Invalid release date: #{manifest["release_date"]}"
+      end
+
+      manifest.keys.each do |key|
+        if !@allowed_keys.include? key
+          @result.errors.push "Illegal entry: #{key}"
+        end
+      end
+
+      @mandatory_keys.each do |key|
+        if !manifest.keys.include? key
+          @result.errors.push "Mandatory attribute is missing: #{key}"
+        end
+      end
+    end
+    
+    if @result.errors.empty?
+      @result.valid = true
+      return @result
+    else
+      @result.valid = false
+      return @result
     end
   end
   

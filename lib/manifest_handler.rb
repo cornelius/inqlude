@@ -32,7 +32,7 @@ class ManifestHandler
         return library.manifests.last
       end
     end
-    nil
+    raise "Unable to find manifest '#{name}'"
   end
 
   def read_remote

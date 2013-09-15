@@ -19,4 +19,12 @@ describe ManifestHandler do
     mh.libraries.count.should == 1
   end
 
+  it "provides access to manifests" do
+    mh = ManifestHandler.new settings
+    mh.read_remote
+
+    mh.manifest("awesomelib").class.should == Hash
+    expect { mh.manifest("nonexisting") }.to raise_error
+  end
+  
 end

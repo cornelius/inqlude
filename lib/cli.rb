@@ -109,7 +109,9 @@ actual domain."
     count_error = 0
     handler.libraries.each do |library|
       library.manifests.each do |manifest|
-        if v.verify manifest
+        result = v.verify manifest
+        result.print_result
+        if result.valid?
           count_ok += 1
         else
           count_error += 1

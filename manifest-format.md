@@ -46,6 +46,8 @@ schema version number has to be increased.
 
 This document specifies schema version 1.
 
+*schema_version is a mandatory attribute*
+
 ### name
 
 Name of the library
@@ -56,19 +58,27 @@ command line tool or as part of the URL on the web site. The name has to be
 identical with the value of the name attribute of the manifest files
 representing the different versions of the library.
 
+*name is a mandatory attribute*
+
 ### release_date
 
 Date, when the version was released
 
+*release_date is a mandatory attribute*
+
 ### version
 
 Version of the release
+
+*version is a mandatory attribute*
 
 ### summary
 
 One-line summary describing the library
 
 This is the main description of the library used in summary lists etc.
+
+*summary is a mandatory attribute*
 
 ### urls
 
@@ -92,6 +102,8 @@ The following types are recognized:
 * "description_source": If the description text is taken from another source
   this URL points to the source.
 
+*the homepage is a mandatory url attribute*
+
 ### licenses
 
 List of licenses under which the library can be used
@@ -104,6 +116,8 @@ strings for the most often used licenses:
 * "GPLv2+": GNU Public License v2 or later
 * "GPLv3+": GNU Public License v3 or later
 
+*there must be at least one license*
+
 ### description
 
 Full description of the library
@@ -111,6 +125,8 @@ Full description of the library
 The description is a text describing the library. It can be of arbitrary length.
 No special formatting is supported other than using newlines to start a new
 paragraph.
+
+*description is a mandatory attribute*
 
 ### authors
 
@@ -133,6 +149,8 @@ The flag has to be one of the following identifiers:
   recommended for production use
 * "alpha": preview releases, not suitable for production use
 
+*maturity is a mandatory attribute*
+
 ### platforms
 
 List of supported platforms
@@ -144,6 +162,8 @@ Supported values are:
 * "Linux"
 * "Windows"
 * "Mac"
+
+*there must be at least one platform*
 
 ### packages
 
@@ -160,6 +180,8 @@ package. The following types are supported:
 
 This is the source code of the release. It has one URL to the file, which
 can be used to download the code.
+
+*source is a mandatory package attribute*
 
 #### openSUSE
 
