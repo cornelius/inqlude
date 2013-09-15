@@ -108,6 +108,8 @@ The following types are recognized:
 * "api_docs": URL to reference documentation of the API of the library.
 * "description_source": If the description text is taken from another source
   this URL points to the source.
+* "announcement": Link to release announcement
+* "custom": Array of pairs of title and URL of custom links
 
 *the homepage is a mandatory url attribute*
 
