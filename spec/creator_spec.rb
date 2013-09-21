@@ -12,6 +12,14 @@ describe Creator do
   let(:filename) do
     File.expand_path('../data/awesomelib/awesomelib.2013-10-01.manifest', __FILE__)
   end
+
+  let(:new_filename) do
+    File.expand_path('../data/newawesomelib/newawesomelib.2013-09-01.manifest', __FILE__)
+  end
+
+  let(:new_dirname) do
+    File.expand_path('../data/newawesomelib', __FILE__)
+  end
   
   it "checks directory" do
     c = Creator.new settings, "xxx"
@@ -21,12 +29,12 @@ describe Creator do
     c.validate_directory
   end
 
-  it "create updated manifest" do
+  it "creates updated manifest" do
     c = Creator.new settings, "awesomelib"
 
     File.exists?(filename).should be_false
 
-    c.create "1.0", "2013-10-01"
+    c.update "1.0", "2013-10-01"
 
     File.exists?(filename).should be_true
 
@@ -49,8 +57,35 @@ describe Creator do
     m.keys.count.should == 12
   end
 
+  it "creates new manifest" do
+    c = Creator.new settings, "newawesomelib"
+    File.exists?(new_filename).should be_false
+    
+    c.create "edge", "2013-09-01"
+    
+    File.exists?(new_filename).should be_true
+
+    mh = ManifestHandler.new settings
+    mh.read_remote
+
+    mh.libraries.count.should == 2
+    m = mh.manifest "newawesomelib"
+    m["name"].should == "newawesomelib"
+    m["version"].should == "edge"
+    m["release_date"].should == "2013-09-01"
+    
+    v = Verifier.new settings
+    result = v.verify m
+    if !result.valid?
+      result.print_result
+    end
+    expect(result.valid?).to be_true
+  end
+  
   after(:each) do
     File.delete filename if File.exists? filename
+    File.delete new_filename if File.exists? new_filename
+    Dir.delete new_dirname if File.exists? new_dirname
   end
   
 end

@@ -22,6 +22,10 @@ class Creator
     @name = name
     @dir = File.join settings.manifest_path, name
   end
+
+  def is_new?
+    return File.exists? @dir
+  end
   
   def validate_directory
     if !File.exists? @dir
@@ -29,7 +33,7 @@ class Creator
     end
   end
 
-  def create version, release_date
+  def update version, release_date
     filename = File.join @settings.manifest_path, @name,
       "#{@name}.#{release_date}.manifest"
     
@@ -41,6 +45,34 @@ class Creator
     m.delete "libraryname"
     m["version"] = version
     m["release_date"] = release_date
+    
+    File.open( filename, "w" ) do |file|
+      file.puts JSON.pretty_generate(m)
+    end
+  end
+
+  def create version, release_date
+    filename = File.join @settings.manifest_path, @name,
+      "#{@name}.#{release_date}.manifest"
+
+    Dir.mkdir File.join(@settings.manifest_path,@name)
+    
+    m = Hash.new
+    m["schema_version"] = 1
+    m["name"] = @name
+    m["version"] = version
+    m["release_date"] = release_date
+    m["summary"] = ""
+    m["urls"] = { "homepage" => "", "vcs" => "" }
+    m["licenses"] = [ "" ]
+    m["description"] = ""
+    if version == "edge"
+      m["maturity"] = "edge"
+    else
+      m["maturity"] = "stable"
+    end
+    m["platforms"] = [ "Linux" ]
+    m["packages"] = { "source" => "" }
     
     File.open( filename, "w" ) do |file|
       file.puts JSON.pretty_generate(m)

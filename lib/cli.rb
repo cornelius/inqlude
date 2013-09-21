@@ -148,8 +148,12 @@ actual domain."
   def create name, version, release_date
     @@settings.manifest_path = "."
     creator = Creator.new @@settings, name
-    creator.validate_directory
-    creator.create version, release_date
+    if creator.is_new?
+      creator.validate_directory
+      creator.update version, release_date
+    else
+      creator.create version, release_date
+    end
   end
   
   desc "get_involved", "Information about how to get involved"
