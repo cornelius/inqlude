@@ -156,6 +156,8 @@ td {
 
 .footer {
   float: right;
+  font-size: 80%;
+  font-style: italic;
 }
 
 .edit-link {
