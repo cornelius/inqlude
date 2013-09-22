@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "name": "bleedingedge",
+  "release_date": "2012-01-01",
+  "version": "edge",
+  "summary": "Bleeding edge version of a library",
+  "urls": {
+    "homepage": "http://example.org",
+    "download": "http://example.org/download"
+  },
+  "licenses": ["GPLv3"],
+  "description": "This is an awesome library. It's bleeding edge.",
+  "authors": ["Cornelius Schumacher <schumacher@kde.org>"],
+  "maturity": "edge",
+  "platforms": [ "Linux" ],
+  "packages": {
+    "source": "ftp://example.org/download/bleedingedge-latest.tar.gz"
+  }
+}

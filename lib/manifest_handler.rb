@@ -16,7 +16,7 @@
 
 class ManifestHandler
 
-  attr_reader :manifests, :libraries, :settings
+  attr_reader :manifests, :settings
   
   def initialize settings
     @settings = settings
@@ -25,6 +25,14 @@ class ManifestHandler
     @manifests = Array.new
   end
 
+  def libraries maturity = nil
+    if !maturity
+      return @libraries
+    else
+      return @libraries.select { |l| l.manifests.last["maturity"] == maturity.to_s }
+    end    
+  end
+  
   def manifest name
     read_remote
     @libraries.each do |library|
