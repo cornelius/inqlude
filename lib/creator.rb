@@ -95,8 +95,8 @@ class Creator
 
     m = create_manifest version, release_date
 
-    m["authors"] = "The KDE Community"
-    m["licenses"] = "LGPLv2.1+"
+    m["authors"] = [ "The KDE Community" ]
+    m["licenses"] = [ "LGPLv2.1+" ]
 
     vcs = "https://projects.kde.org/projects/kde/kdelibs/repository/revisions/frameworks/show/tier1/"
     vcs += @name
