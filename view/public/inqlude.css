@@ -5,6 +5,23 @@ body {
   font-family: 'Droid Sans', arial, serif;
 }
 
+a:link {
+  color: #44a51c;
+  text-decoration: none;
+}
+a:visited {
+  color: #2F7213;
+  text-decoration: none;
+}
+a:hover {
+  color: #44a51c;
+  text-decoration: underline;
+}
+a:active {
+  color: #2F7213;
+  text-decoration: underline;
+}
+
 .ribbon {
   background-color: #a00;
   overflow: hidden;
@@ -44,7 +61,7 @@ h1 .logo {
 }
 
 h1 .green {
-  color: green;
+  color: #80C342;
 }
 
 
