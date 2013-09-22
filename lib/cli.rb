@@ -145,6 +145,8 @@ actual domain."
   end
 
   desc "create <manifest_name> <version> <release_date>", "Create new or updated manifest"
+  method_option :kf5, :type => :boolean,
+    :desc => "Create KDE Framworks 5 template", :required => false
   def create name, version, release_date
     @@settings.manifest_path = "."
     creator = Creator.new @@settings, name
@@ -152,7 +154,11 @@ actual domain."
       creator.validate_directory
       creator.update version, release_date
     else
-      creator.create version, release_date
+      if options[:kf5]
+        creator.create_kf5 version, release_date
+      else
+        creator.create version, release_date
+      end
     end
   end
   

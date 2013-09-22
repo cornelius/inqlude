@@ -51,12 +51,11 @@ class Creator
     end
   end
 
-  def create version, release_date
-    filename = File.join @settings.manifest_path, @name,
-      "#{@name}.#{release_date}.manifest"
-
+  def create_dir
     Dir.mkdir File.join(@settings.manifest_path,@name)
-    
+  end
+
+  def create_manifest version, release_date
     m = Hash.new
     m["schema_version"] = 1
     m["name"] = @name
@@ -73,10 +72,44 @@ class Creator
     end
     m["platforms"] = [ "Linux" ]
     m["packages"] = { "source" => "" }
-    
+    m
+  end
+
+  def write_manifest manifest
+    filename = File.join @settings.manifest_path, @name,
+      "#{@name}.#{manifest["release_date"]}.manifest"
+
     File.open( filename, "w" ) do |file|
-      file.puts JSON.pretty_generate(m)
+      file.puts JSON.pretty_generate(manifest)
     end
+  end
+  
+  def create version, release_date
+    create_dir
+    m = create_manifest version, release_date
+    write_manifest m
+  end
+
+  def create_kf5 version, release_date
+    create_dir
+
+    m = create_manifest version, release_date
+
+    m["authors"] = "The KDE Community"
+    m["licenses"] = "LGPLv2.1+"
+
+    vcs = "https://projects.kde.org/projects/kde/kdelibs/repository/revisions/frameworks/show/tier1/"
+    vcs += @name
+    m["urls"] = {
+      "vcs" => vcs,
+      "homepage" => "http://community.kde.org/Frameworks"
+    }
+    
+    m["packages"] = {
+      "source" => "http://anongit.kde.org/kdelibs/kdelibs-latest.tar.gz"
+    }
+
+    write_manifest m
   end
 
 end
