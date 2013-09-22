@@ -70,7 +70,6 @@ h1 .subtitle {
 }
 
 h2 {
-  text-align: center;
 }
 
 .container {
@@ -171,4 +170,21 @@ td {
   margin: 12px;
   text-align: center;
   font-size: 70%;
+}
+
+.attribute {
+  margin: 8px;
+}
+
+.attribute .label {
+  display: inline;
+  color: #555;
+  width: 120px;
+  text-align: right;
+  float: left;
+  margin-right: 8px;
+}
+
+.attribute .value {
+  display: inline;
 }

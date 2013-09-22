@@ -116,15 +116,33 @@ class View
     attr.each do |a|
       entries.push markup_email( a )
     end
-    
-    out = "<p>"
+
     if attr.size > 1
-      out += label + ": " + entries.join(", ")
+      return list_attribute_content label, entries.join(", ")
     else
-      out += label[0..-2] + ": " + entries.first
+      return list_attribute_content label[0..-2], entries.first
     end
-    out += "</p>"
-    
+  end
+
+  def list_attribute_content label, value
+    out = "<div class='attribute'>"
+    out += "  <div class='label'>" + label + ":" + "</div>"
+    out += "  <div class='value'>" + value + "</div>"
+    out += "</div>"
+    out
+  end
+
+  def version_content
+    out = @manifest["version"]
+    out += " (#{@manifest["maturity"]})"
+    out += "<span class='release-date'>"
+    out += "released on #{@manifest["release_date"]}"
+    out += "</span>"
+    if !old_versions.empty?
+      out += "<span class='old-versions'>"
+      out += "(older versions: #{old_versions.join(", ")})"
+      out += "</span>"
+    end
     out
   end
   

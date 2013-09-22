@@ -2,29 +2,16 @@
   = m "name"
 
 %p
-  %em
-    Version
-    = m "version"
-    = "(#{m "maturity"})"
-    %span{:class => "release-date"}
-      released on #{m "release_date"}
-    - if !old_versions.empty?
-      %span{:class => "old-versions"}
-        = "(older versions: #{old_versions.join(", ")})"
-
-%p
   = m "summary"
 
 %p
   = m "description"
 
+= list_attribute_content "Version", version_content
 = list_attribute "licenses"
 = list_attribute "platforms"
 = list_attribute "authors"
-
-%p
-  Home page:
-  = link m( "urls", "homepage" )
+= list_attribute_content "Home page", link( m( "urls", "homepage" ) )
 
 - if more_urls?
   %h3 Read more
@@ -39,8 +26,9 @@
 
 - if m("packages") && m( "packages", "source" )
   %h3 Packages
-
-  = link_to "Source code", m( "packages", "source" )
+  %ul
+    %li
+      = link_to "Source code", m( "packages", "source" )
 
 %p{:class => "edit-link"}
   = link_to "[Edit]", editor_url
