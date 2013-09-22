@@ -10,41 +10,44 @@
   .ribbon
     = link_to "Alpha", "about"
 
-  .header.center
-    %h1
-      %span.logo><
-        \#in
-      %span.logo.green><
-        q
-      %span.logo><
-        lude
-      %span.subtitle
-        The Qt library archive
+  .container
+    .header
+      .logo
+        %h1
+          %span.logo><
+            \#in
+          %span.logo.green><
+            q
+          %span.logo><
+            lude
+        %h2
+          %span.subtitle
+            The Qt library archive
+      .menu
+        %ul
+          %li
+            = link_to "Home", "index"
+          %li
+            = link_to "How to get libraries", "get"
+          %li
+            = link_to "How to contribute", "contribute"
+          %li
+            = link_to "About", "about"
+        .search
+          - if enable_search
+            #cse-search-form Loading...
+      %br{ :clear => "all" }
 
-  .menu.center
-    %span.menu_items
-      = link_to "Home", "index"
-      |
-      = link_to "How to get libraries", "get"
-      |
-      = link_to "How to contribute", "contribute"
-      |
-      = link_to "About", "about"
+    .content
+      = yank
 
-    - if enable_search
-      #cse-search-form Loading...
+      %hr
 
-      
-  .content.center
-    = yank
+      %span.footer
+        %em
+          Last updated on #{Date.today}
 
-    %hr
-
-    %span.footer
-      %em
-        Last updated on #{Date.today}
-
-    %br{ :clear => "all" }
+      %br{ :clear => "all" }
 
   .legal
     Inqlude is a

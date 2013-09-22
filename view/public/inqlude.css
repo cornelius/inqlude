@@ -1,5 +1,6 @@
 body {
-  background-color: yellowgreen;
+  background-color: #eee;
+  color: #111;
   margin: 0px;
   font-family: 'Droid Sans', arial, serif;
 }
@@ -27,11 +28,6 @@ body {
   text-shadow: 0 0 0.5em #444;
 }
 
-.center {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 h1 {
   text-align: center;
   font-family: monospace;
@@ -44,6 +40,7 @@ h1 {
 h1 .logo {
   font-size: 200%;
   font-weight: bold;
+  margin: 0px;
 }
 
 h1 .green {
@@ -59,23 +56,46 @@ h2 {
   text-align: center;
 }
 
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 18px;
+  width: 940px;
+  background-color: #f8f8f8;
+  padding: 20px;
+  padding-top: 0px;
+  -webkit-box-shadow: 0px 6px 15px rgba(50, 50, 50, 0.6);
+  -moz-box-shadow:    0px 6px 15px rgba(50, 50, 50, 0.6);
+  box-shadow:         0px 6px 15px rgba(50, 50, 50, 0.6);
+}
+
 .header {
-  width: 80%;
-  background-color: white;
+  margin-left: -30px;
+  width: 980px;
+  background-color: #fafafa;
   padding: 10px;
+  -webkit-box-shadow: 0px 6px 20px rgba(50, 50, 50, 0.5);
+  -moz-box-shadow:    0px 6px 20px rgba(50, 50, 50, 0.5);
+  box-shadow:         0px 6px 20px rgba(50, 50, 50, 0.5);
+}
+
+.logo {
+  float: left;
+  margin: 20px;
 }
 
 .menu {
-  width: 85%;
-  background-color: green;
-  padding-top: 4px;
-  padding-bottom: 6px;
-  padding-left: 10px;
-  text-align: left;
+  margin-right: 20px;
+  padding: 0px;
+  text-align: right;
+  float: right;
+}
+
+.menu ul {
+  list-style-type: none;
 }
 
 #cse-search-form {
-  float: right;
   width: 250px;
 }
 #cse {
@@ -91,14 +111,12 @@ h2 {
 }
 
 .content {
-  width: 80%;
-  background-color: white;
-  padding: 10px;
+  padding-top: 10px;
 }
 
 .code {
-  background-color: black;
-  color: white;
+  background-color: #111;
+  color: #eee;
   padding: 10px;
   font-family: monospace;
   margin: 6px;
@@ -133,7 +151,7 @@ td {
 }
 
 .legal {
-  margin: 4px;
+  margin: 12px;
   text-align: center;
   font-size: 70%;
 }
