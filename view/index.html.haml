@@ -12,10 +12,10 @@
   = link_to "inqlude.kde.org", "https://mail.kde.org/mailman/listinfo/inqlude"
   to directly talk to us. See you there.
 
-%h2 All libraries
+%h2 Stable libraries | #{link_to "Development versions", "edge"}
 
 %table
-  - libraries.each do |library|
+  - libraries(:stable).each do |library|
     %tr
       %td.first
         = link_to_manifest library.name

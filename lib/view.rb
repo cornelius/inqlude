@@ -35,6 +35,7 @@ class View
     @root = ""
 
     render_template "index", output_dir
+    render_template "edge", output_dir
     render_template "about", output_dir
     render_template "get", output_dir
     render_template "contribute", output_dir
@@ -160,11 +161,11 @@ class View
     out
   end
   
-  def libraries
-    if @manifest_handler.libraries.empty?
+  def libraries maturity = nil
+    if @manifest_handler.libraries(maturity).empty?
       @manifest_handler.read_remote
     end
-    @manifest_handler.libraries
+    @manifest_handler.libraries(maturity)
   end
 
   def disqus_enabled?

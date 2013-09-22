@@ -1,0 +1,9 @@
+%h2 Development versions | #{link_to "Stable libraries", "index"}
+
+%table
+  - libraries(:edge).each do |library|
+    %tr
+      %td.first
+        = link_to_manifest library.name
+      %td.last
+        = library.manifests.last["summary"]
