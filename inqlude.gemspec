@@ -4,6 +4,7 @@ require File.expand_path("../lib/version", __FILE__)
 Gem::Specification.new do |s|
   s.name        = "inqlude"
   s.version     = Inqlude::VERSION
+  s.license     = 'GPL-2'
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Cornelius Schumacher']
   s.email       = ['schumacher@kde.org']
