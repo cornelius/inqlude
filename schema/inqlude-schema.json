@@ -3,41 +3,49 @@
   "type": "object",
   "properties": {
     "schema_version": {
-      "type": "integer"
+      "type": "integer",
+      "required": true
     },
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "release_date": {
-      "type": "date"
+      "type": "date",
+      "required": true
     },
     "version": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "summary": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "urls": {
       "type": "object",
       "properties": {
         "homepage": {
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "download": {
           "type": "string"
         }
       },
-      "required": [ "homepage" ]
+      "required": true
     },
     "licenses": {
       "type": "array",
       "items": {
         "type": "string"
       },
-      "minItems": 1
+      "minItems": 1,
+      "required": true
     },
     "description": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "authors": {
       "type": "array",
@@ -46,25 +54,26 @@
       }
     },
     "maturity": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "platforms": {
       "type": "array",
       "items": {
         "type": "string"
       },
-      "minItems": 1
+      "minItems": 1,
+      "required": true
     },
     "packages": {
       "type": "object",
       "properties": {
         "source": {
-          "type": "string"
+          "type": "string",
+          "required": true
         }
       },
-      "required": "source"
+      "required": true
     }
-  },
-  "required": ["schema_version","name","release_date","version","summary",
-               "urls","description","maturity"]
+  }
 }
