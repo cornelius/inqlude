@@ -1,0 +1,58 @@
+{
+  "title": "Inqlude Manifest Schema",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "summary": {
+      "type": "string",
+      "required": true
+    },
+    "urls": {
+      "type": "object",
+      "properties": {
+        "homepage": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "required": true
+    },
+    "licenses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "authors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "maturity": {
+      "type": "string",
+      "required": true
+    },
+    "platforms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "required": true
+    }
+  }
+}
