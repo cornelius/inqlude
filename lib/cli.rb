@@ -97,29 +97,34 @@ actual domain."
     Upstream.get_involved "Add command for showing library details", 1
   end
 
-  desc "verify", "Verify manifests"
-  def verify
+  desc "verify [filename]", "Verify all manifests or specific file if filename is given"
+  def verify filename=nil
     process_global_options options
 
     v = Verifier.new @@settings
 
-    handler = ManifestHandler.new @@settings
-    handler.read_remote
-    count_ok = 0
-    count_error = 0
-    handler.libraries.each do |library|
-      library.manifests.each do |manifest|
-        result = v.verify manifest
-        result.print_result
-        if result.valid?
-          count_ok += 1
-        else
-          count_error += 1
+    if filename
+      result = v.verify_file filename
+      result.print_result
+    else
+      handler = ManifestHandler.new @@settings
+      handler.read_remote
+      count_ok = 0
+      count_error = 0
+      handler.libraries.each do |library|
+        library.manifests.each do |manifest|
+          result = v.verify manifest
+          result.print_result
+          if result.valid?
+            count_ok += 1
+          else
+            count_error += 1
+          end
         end
       end
+      puts "#{handler.manifests.count} manifests checked. #{count_ok} ok, " +
+        "#{count_error} with error."
     end
-    puts "#{handler.manifests.count} manifests checked. #{count_ok} ok, " +
-      "#{count_error} with error."
   end
 
   desc "system_scan", "Scan system for installed Qt libraries and create manifests"

@@ -56,4 +56,13 @@ describe Verifier do
     verifier.verify(manifest).valid?.should be_false
   end
 
+  it "verifies file" do
+    filename = File.join settings.manifest_path,
+      "awesomelib/awesomelib.2013-09-08.manifest"
+    
+    verifier = Verifier.new settings
+
+    expect( verifier.verify_file( filename ).valid? ).to be_true
+  end
+  
 end

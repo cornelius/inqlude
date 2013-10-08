@@ -99,5 +99,13 @@ class Verifier
       return @result
     end
   end
-  
+
+  def verify_file filename
+    manifest = JSON File.read filename
+    manifest["filename"] = filename
+    filename =~ /^(.*?)\./
+    manifest["libraryname"] = $1
+    verify manifest
+  end
+
 end
