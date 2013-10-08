@@ -127,6 +127,18 @@ actual domain."
     end
   end
 
+  desc "review", "Review pull requests on GitHub"
+  def review repo, action = nil
+    if !action
+      GitHubTool.review repo
+    elsif action == "accept"
+      GitHubTool.accept repo
+    else
+      STDERR.puts "Unknown review action: '#{action}'"
+      exit 1
+    end
+  end
+  
   desc "system_scan", "Scan system for installed Qt libraries and create manifests"
   method_option :dry_run, :type => :boolean,
     :desc => "Dry run. Don't write files."
