@@ -1,10 +1,9 @@
 # Alpha (first announcement, ready for early adopters)
 
-* Update get involved
+* Release it
 
 # Beta (ready for contributors of meta data)
 
-* Document manifest format
 * Define maturity scale
 * State policy for inclusion of libraries (at least one stable release, no qt3,
   open source, provides a Qt API, published API docs)
@@ -12,17 +11,9 @@
   tags in meta data for bound library)
 
 * Check validity of links
-* Add option to verify given manifest
 * Add show option for showing library details
 
-* Look for latest versions of libraries
-* Make sure all manifests have a download link
-* Add links to upstream source code repositories for all libraries
-
-* Add download section on library page with source code download and links to
-  packages e.g. openSUSE 1-click install
-* Show release date on library page
-* Add page with older versions of each library
+* Release it
 
 # 1.0 (ready for end users of the web site)
 
@@ -30,6 +21,8 @@
 * Add tags for searching
 * Update manifest data to have complete package data
 * Check existence of packages
+
+* Release it
 
 # Later (ready for end users of the command line tool)
 
