@@ -57,13 +57,13 @@ class Verifier
     @result = Result.new
 
     if !manifest["filename"]
-      @result.errors = "Unable to determine filename"
+      @result.errors.push "Unable to determine filename"
       @result.name = "<unknown>"
     else
       @result.name = manifest["filename"]
     end
     if !manifest["libraryname"]
-      @result.errors = "Unable to determine libraryname"
+      @result.errors.push "Unable to determine libraryname"
     end
 
     if @result.errors.empty?
@@ -84,10 +84,12 @@ class Verifier
         end
       end
 
-      @mandatory_keys.each do |key|
-        if !manifest.keys.include? key
-          @result.errors.push "Mandatory attribute is missing: #{key}"
-        end
+      schema_name = File.expand_path('../../schema/inqlude-schema.json', 
+                                     __FILE__)
+
+      errors = JSON::Validator.fully_validate(schema_name, manifest)
+      errors.each do |error|
+        @result.errors.push "Schema validation error: #{error}"
       end
     end
     

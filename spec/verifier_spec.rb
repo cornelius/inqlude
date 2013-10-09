@@ -64,5 +64,21 @@ describe Verifier do
 
     expect( verifier.verify_file( filename ).valid? ).to be_true
   end
+
+  it "verifies schema" do
+    manifest = Hash.new
+    manifest["name"] = "mylib"
+    manifest["release_date"] = "2013-02-28"
+    manifest["filename"] = "mylib.2013-02-28.manifest"
+    manifest["libraryname"] = "mylib"
+    
+    verifier = Verifier.new settings
+    
+    errors = verifier.verify(manifest).errors
+
+    expect( errors.class ).to be_equal Array    
+    errors[0].should =~ /^Schema validation error/
+    errors.count.should == 9
+  end
   
 end
