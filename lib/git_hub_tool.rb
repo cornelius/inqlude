@@ -45,7 +45,8 @@ class GitHubTool
     
     run "git checkout master"
     run "git merge #{branchname}"
-    run "git push origin master"    
+    run "git push origin master"
+    run "git branch -d #{branchname}"
   end
   
   def self.check_directory
