@@ -98,11 +98,18 @@ actual domain."
   end
 
   desc "verify [filename]", "Verify all manifests or specific file if filename is given"
+  method_option :check_links, :type => :boolean,
+    :desc => "Check links for reachability."
   def verify filename=nil
     process_global_options options
 
     v = Verifier.new @@settings
 
+    if options[:check_links]
+      Upstream.get_involved "Implement --check-links option", 11
+      exit 1
+    end
+    
     if filename
       result = v.verify_file filename
       result.print_result
