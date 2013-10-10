@@ -134,7 +134,7 @@ actual domain."
     end
   end
 
-  desc "review", "Review pull requests on GitHub"
+  desc "review <repo>", "Review pull requests on GitHub. Use 'username:branch' as repo parameter."
   def review repo, action = nil
     if !action
       GitHubTool.review repo
