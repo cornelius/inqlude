@@ -28,7 +28,12 @@ class GitHubTool
     user,branch = parse_repo repo
     
     run "git checkout -b #{user}-#{branch} master"
-    run "git pull git@github.com:#{user}/inqlude-data.git #{branch}"
+    begin
+      run "git pull git@github.com:#{user}/inqlude-data.git #{branch}"
+    rescue
+      run "git checkout master"
+      run "git branch -d #{user}-#{branch}"
+    end
   end
 
   def self.accept repo
