@@ -62,7 +62,7 @@ class Creator
     m["version"] = version
     m["release_date"] = release_date
     m["summary"] = ""
-    m["urls"] = { "homepage" => "", "vcs" => "" }
+    m["urls"] = { "homepage" => "", "vcs" => "", "download" => "" }
     m["licenses"] = [ "" ]
     m["description"] = ""
     if version == "edge"
@@ -70,6 +70,7 @@ class Creator
     else
       m["maturity"] = "stable"
     end
+    m["authors"] = [ "" ]
     m["platforms"] = [ "Linux" ]
     m["packages"] = { "source" => "" }
     m
