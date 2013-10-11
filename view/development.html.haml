@@ -1,5 +1,27 @@
 %h2 Development versions | #{link_to "Stable libraries", "index"}
 
+%h3 Beta
+
+%table
+  - libraries(:beta).each do |library|
+    %tr
+      %td.first
+        = link_to_manifest library.name
+      %td.last
+        = library.manifests.last["summary"]
+
+%h3 Alpha
+
+%table
+  - libraries(:alpha).each do |library|
+    %tr
+      %td.first
+        = link_to_manifest library.name
+      %td.last
+        = library.manifests.last["summary"]
+
+%h3 Bleeding edge
+
 %table
   - libraries(:edge).each do |library|
     %tr

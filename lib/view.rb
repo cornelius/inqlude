@@ -35,7 +35,7 @@ class View
     @root = ""
 
     render_template "index", output_dir
-    render_template "edge", output_dir
+    render_template "development", output_dir
     render_template "about", output_dir
     render_template "get", output_dir
     render_template "contribute", output_dir
