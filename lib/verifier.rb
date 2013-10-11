@@ -47,7 +47,7 @@ class Verifier
     @allowed_keys = [ "schema_version", "name", "version", "release_date",
       "summary", "urls", "licenses", "description", "authors", "maturity",
       "platforms", "packages", "keywords", "dependencies", "filename",
-      "libraryname" ]
+      "libraryname", "display_name" ]
     @mandatory_keys = [ "schema_version", "name", "version", "release_date",
       "summary", "urls", "licenses", "description", "maturity",
       "platforms", "packages" ]
