@@ -31,6 +31,9 @@ class View
 
     assert_dir "#{output_dir}/public"
     system "cp #{view_dir}/public/* #{output_dir}/public/"
+    
+    assert_dir "#{output_dir}/schema"
+    system "cp #{schema_dir}/* #{output_dir}/schema"
 
     @root = ""
 
@@ -229,6 +232,10 @@ class View
 
   def view_dir
     File.expand_path( File.dirname( __FILE__ ) + "/../view/" ) + "/"
+  end
+
+  def schema_dir
+    File.expand_path( File.dirname( __FILE__ ) + "/../schema/" ) + "/"
   end
 
 end

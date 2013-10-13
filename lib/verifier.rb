@@ -84,7 +84,7 @@ class Verifier
         end
       end
 
-      schema_name = File.expand_path('../../schema/inqlude-schema.json', 
+      schema_name = File.expand_path('../../schema/release-manifest-v1', 
                                      __FILE__)
 
       errors = JSON::Validator.fully_validate(schema_name, manifest)
