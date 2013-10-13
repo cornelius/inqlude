@@ -4,9 +4,6 @@
   "title": "Inqlude Manifest Schema",
   "type": "object",
   "properties": {
-    "schema_version": {
-      "type": "integer"
-    },
     "name": {
       "type": "string"
     },
@@ -67,7 +64,7 @@
       "required": [ "source" ]
     }
   },
-  "required": [ "schema_version", "name", "release_date", "version", "summary",
+  "required": [ "$schema", "name", "release_date", "version", "summary",
                 "urls", "licenses", "description", "maturity", "platforms",
                 "packages" ]
 }

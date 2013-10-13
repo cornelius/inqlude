@@ -44,11 +44,11 @@ class Verifier
   def initialize settings
     @settings = settings
 
-    @allowed_keys = [ "schema_version", "name", "version", "release_date",
+    @allowed_keys = [ "$schema", "name", "version", "release_date",
       "summary", "urls", "licenses", "description", "authors", "maturity",
       "platforms", "packages", "keywords", "dependencies", "filename",
       "libraryname", "display_name" ]
-    @mandatory_keys = [ "schema_version", "name", "version", "release_date",
+    @mandatory_keys = [ "$schema", "name", "version", "release_date",
       "summary", "urls", "licenses", "description", "maturity",
       "platforms", "packages" ]
   end
