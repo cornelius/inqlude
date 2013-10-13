@@ -1,51 +1,45 @@
 {
+  "id": "http://inqlude.org/schema/release-manifest-v1#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Inqlude Manifest Schema",
   "type": "object",
   "properties": {
     "schema_version": {
-      "type": "integer",
-      "required": true
+      "type": "integer"
     },
     "name": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "release_date": {
-      "type": "date",
-      "required": true
+      "type": "string"
     },
     "version": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "summary": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "urls": {
       "type": "object",
       "properties": {
         "homepage": {
-          "type": "string",
-          "required": true
+          "type": "string"
         },
         "download": {
           "type": "string"
         }
       },
-      "required": true
+      "required": [ "homepage" ]
     },
     "licenses": {
       "type": "array",
       "items": {
         "type": "string"
       },
-      "minItems": 1,
-      "required": true
+      "minItems": 1
     },
     "description": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "authors": {
       "type": "array",
@@ -54,26 +48,26 @@
       }
     },
     "maturity": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "platforms": {
       "type": "array",
       "items": {
         "type": "string"
       },
-      "minItems": 1,
-      "required": true
+      "minItems": 1
     },
     "packages": {
       "type": "object",
       "properties": {
         "source": {
-          "type": "string",
-          "required": true
+          "type": "string"
         }
       },
-      "required": true
+      "required": [ "source" ]
     }
-  }
+  },
+  "required": [ "schema_version", "name", "release_date", "version", "summary",
+                "urls", "licenses", "description", "maturity", "platforms",
+                "packages" ]
 }
