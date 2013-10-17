@@ -29,6 +29,8 @@ class View
     
     assert_dir output_dir
 
+    system "cp #{view_dir}/favicon.ico #{output_dir}"
+    
     assert_dir "#{output_dir}/public"
     system "cp #{view_dir}/public/* #{output_dir}/public/"
     
