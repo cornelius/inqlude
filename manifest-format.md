@@ -51,7 +51,7 @@ and while we will try to not break things, there might be some incompatible
 changes without changing the version number during development. This will stop,
 when we have reached beta state.
 
-*schema_version is a mandatory attribute*
+*$schema is a mandatory attribute*
 
 ### name
 
