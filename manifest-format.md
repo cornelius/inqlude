@@ -32,9 +32,13 @@ concrete file.
 
 These are the attributes:
 
-### schema_version
+### $schema
 
-Version number of the schema used in this manifest
+This is a reference to the schema which is used in the manifest file. The
+schema follows the [JSON Schema](http://json-schema.org) specification.
+
+The current schema identifier is
+"http://inqlude.org/schema/release-manifest-v1#".
 
 This is used to make expectations of tools and processing explicit and adapt
 to schema changes.
@@ -42,7 +46,10 @@ to schema changes.
 If the schema is changed in a way incompatible with processing tools, the
 schema version number has to be increased.
 
-This document specifies schema version 1.
+As Inqlude currently still is in alpha, changes to the schema are to be expected
+and while we will try to not break things, there might be some incompatible
+changes without changing the version number during development. This will stop,
+when we have reached beta state.
 
 *schema_version is a mandatory attribute*
 
