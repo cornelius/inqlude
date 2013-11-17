@@ -1,22 +1,24 @@
 # Alpha (first announcement, ready for early adopters)
 
-* Implement generic schema
+* Display unreleased libraries
 * Test generation of web site with aruba, especially exit code on error and
   success
 * No output on successful pull
 * Use kde git URL
 * Replace manifest hash by Manifest object
 * Implement display_name (including schema versioning)
-* Stabilize schema
+
 * Release it
 
-# Beta (ready for contributors of meta data)
+# Beta (ready for contributors of meta data, schema stable)
 
 * Define maturity scale
 * State policy for inclusion of libraries (at least one stable release, no qt3,
   open source, provides a Qt API, published API docs)
 * Handle binding consistently (suffix -qt, common description, maybe special
   tags in meta data for bound library)
+
+* Stabilize schema
 
 * Check validity of links
 * Add show option for showing library details
