@@ -93,7 +93,7 @@ class Creator
     m["$schema"] = Manifest.generic_schema_id
     m["name"] = @name
     m["summary"] = ""
-    m["urls"] = { "homepage" => "", "vcs" => "", "download" => "" }
+    m["urls"] = { "homepage" => "", "vcs" => "" }
     m["licenses"] = [ "" ]
     m["description"] = ""
     m["authors"] = [ "" ]
