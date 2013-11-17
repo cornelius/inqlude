@@ -30,7 +30,20 @@ class ManifestHandler
       return @libraries
     else
       return @libraries.select { |l| l.manifests.last["maturity"] == maturity.to_s }
-    end    
+    end
+  end
+
+  def unreleased_libraries
+    return @libraries.select { |l| l.manifests.last["schema_type"] == "generic" }
+  end
+  
+  def library name
+    @libraries.each do |library|
+      if library.name == name
+        return library
+      end
+    end
+    nil
   end
   
   def manifest name

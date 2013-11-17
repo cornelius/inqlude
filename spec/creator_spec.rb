@@ -17,6 +17,10 @@ describe Creator do
     File.expand_path('../data/newawesomelib/newawesomelib.2013-09-01.manifest', __FILE__)
   end
 
+  let(:new_generic_filename) do
+    File.expand_path('../data/newawesomelib/newawesomelib.manifest', __FILE__)
+  end
+
   let(:new_dirname) do
     File.expand_path('../data/newawesomelib', __FILE__)
   end
@@ -85,10 +89,27 @@ describe Creator do
     end
     expect(result.valid?).to be_true
   end
+
+  it "creates new generic manifest" do
+    c = Creator.new settings, "newawesomelib"
+    File.exists?(new_generic_filename).should be_false
+    
+    c.create_generic
+    
+    File.exists?(new_generic_filename).should be_true
+
+    v = Verifier.new settings
+    result = v.verify_file new_generic_filename
+    if !result.valid?
+      result.print_result
+    end
+    expect(result.valid?).to be_true
+  end
   
   after(:each) do
     File.delete filename if File.exists? filename
     File.delete new_filename if File.exists? new_filename
+    File.delete new_generic_filename if File.exists? new_generic_filename
     Dir.delete new_dirname if File.exists? new_dirname
   end
   

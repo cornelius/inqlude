@@ -16,8 +16,7 @@
 
 class View
 
-  attr_accessor :enable_disqus
-  attr_accessor :enable_search
+  attr_accessor :enable_disqus,:enable_search,:manifest,:library
   attr_reader :root
   
   def initialize handler
@@ -41,6 +40,7 @@ class View
 
     render_template "index", output_dir
     render_template "development", output_dir
+    render_template "unreleased", output_dir
     render_template "about", output_dir
     render_template "get", output_dir
     render_template "contribute", output_dir
@@ -138,6 +138,9 @@ class View
   end
 
   def version_content
+    if @manifest["schema_type"] == "generic"
+      raise "Can't get version for generic manifest '#{@manifest["name"]}'"
+    end
     out = @manifest["version"]
     out += " (#{@manifest["maturity"]})"
     out += "<span class='release-date'>"
@@ -189,6 +192,10 @@ class View
       @manifest_handler.read_remote
     end
     @manifest_handler.libraries(maturity)
+  end
+  
+  def unreleased_libraries
+    @manifest_handler.unreleased_libraries
   end
 
   def disqus_enabled?

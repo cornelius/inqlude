@@ -79,7 +79,7 @@ class Verifier
       elsif manifest["schema_type"] == "release"
         expected_filename = "#{manifest["libraryname"]}.#{manifest["release_date"]}.manifest"
       end
-
+      
       if filename != expected_filename
         @result.errors.push "Expected file name: #{expected_filename}"
       end

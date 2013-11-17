@@ -24,7 +24,7 @@ class Creator
   end
 
   def is_new?
-    return File.exists? @dir
+    return !File.exists?( @dir )
   end
   
   def validate_directory
@@ -57,7 +57,7 @@ class Creator
 
   def create_manifest version, release_date
     m = Hash.new
-    m["$schema"] = Manifest.schema_id
+    m["$schema"] = Manifest.release_schema_id
     m["name"] = @name
     m["version"] = version
     m["release_date"] = release_date
@@ -77,12 +77,34 @@ class Creator
   end
 
   def write_manifest manifest
-    filename = File.join @settings.manifest_path, @name,
-      "#{@name}.#{manifest["release_date"]}.manifest"
+    filename = File.join @settings.manifest_path, @name, @name
+    if manifest["release_date"]
+      filename += ".#{manifest["release_date"]}"
+    end
+    filename += ".manifest"
 
     File.open( filename, "w" ) do |file|
       file.puts JSON.pretty_generate(manifest)
     end
+  end
+  
+  def create_generic_manifest
+    m = Hash.new
+    m["$schema"] = Manifest.generic_schema_id
+    m["name"] = @name
+    m["summary"] = ""
+    m["urls"] = { "homepage" => "", "vcs" => "", "download" => "" }
+    m["licenses"] = [ "" ]
+    m["description"] = ""
+    m["authors"] = [ "" ]
+    m["platforms"] = [ "Linux" ]
+    m
+  end
+
+  def create_generic
+    create_dir
+    m = create_generic_manifest
+    write_manifest m
   end
   
   def create version, release_date

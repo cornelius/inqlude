@@ -1,0 +1,16 @@
+%h2
+  Unreleased libraries
+  | #{link_to "Stable libraries", "index"}
+  | #{link_to "Development versions", "development"}
+
+%p
+  These libraries are under development, but don't have any official releases
+  yet.
+  
+%table
+  - unreleased_libraries.each do |library|
+    %tr
+      %td.first
+        = link_to_manifest library.name
+      %td.last
+        = library.manifests.last["summary"]

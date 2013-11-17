@@ -1,11 +1,16 @@
 class Manifest
 
-  def self.schema_id
+  def self.release_schema_id
     "http://inqlude.org/schema/release-manifest-v1#"
   end
 
-  def self.parse_file filename
-    manifest = JSON File.read filename
+  def self.generic_schema_id
+    "http://inqlude.org/schema/generic-manifest-v1#"
+  end
+
+  def self.parse_file path
+    manifest = JSON File.read path
+    filename = File.basename path
     manifest["filename"] = filename
     filename =~ /^(.*?)\./
     manifest["libraryname"] = $1

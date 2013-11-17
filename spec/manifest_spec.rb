@@ -5,7 +5,11 @@ describe Manifest do
   include_context "manifest_files"
   
   it "provides schema identifier" do
-    expect(Manifest.schema_id).to include("inqlude.org")
+    expect(Manifest.release_schema_id).to include("inqlude.org")
+    expect(Manifest.release_schema_id).to include("release")
+
+    expect(Manifest.generic_schema_id).to include("inqlude.org")
+    expect(Manifest.generic_schema_id).to include("generic")
   end
   
   it "parses schema id" do
@@ -32,7 +36,8 @@ describe Manifest do
     manifest = Manifest.parse_file filename
     expect(manifest["name"]).to eq "awesomelib"
     expect(manifest["version"]).to eq "0.2.0"
-    expect(manifest["filename"]).to eq filename
+    expect(manifest["filename"]).to eq "awesomelib.2013-09-08.manifest"
+    expect(manifest["libraryname"]).to eq "awesomelib"
     expect(manifest["schema_type"]).to eq "release"
     expect(manifest["schema_version"]).to eq 1
   end
@@ -42,7 +47,7 @@ describe Manifest do
     manifest = Manifest.parse_file filename
     expect(manifest["name"]).to eq "newlib"
     expect(manifest.has_key? "version").to eq false
-    expect(manifest["filename"]).to eq filename
+    expect(manifest["filename"]).to eq "newlib.manifest"
     expect(manifest["schema_type"]).to eq "generic"
     expect(manifest["schema_version"]).to eq 1
   end

@@ -48,6 +48,11 @@ describe ManifestHandler do
       expect( libraries.first.manifests.last["version"] ).to eq "edge"
     end
 
+    it "returns one library" do
+      library = mh.library "awesomelib"
+      expect( library.name ).to eq "awesomelib"
+    end
+    
   end
   
 end

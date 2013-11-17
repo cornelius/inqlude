@@ -168,21 +168,33 @@ actual domain."
     m.process_all_rpms
   end
 
-  desc "create <manifest_name> <version> <release_date>", "Create new or updated manifest"
+  desc "create <manifest_name> [version] [release_date]", "Create new or updated manifest"
   method_option :kf5, :type => :boolean,
     :desc => "Create KDE Framworks 5 template", :required => false
-  def create name, version, release_date
+  def create name, version=nil, release_date=nil
     @@settings.manifest_path = "."
     creator = Creator.new @@settings, name
     if creator.is_new?
+      if !version && release_date || version && !release_date
+        STDERR.puts "You need to specify both, version and release date"
+        exit 1
+      end
+      if version && release_date
+        if options[:kf5]
+          creator.create_kf5 version, release_date
+        else
+          creator.create version, release_date
+        end
+      else
+        creator.create_generic
+      end
+    else
+      if !version || !release_date
+        STDERR.puts "Updating manifest requires version and release_date"
+        exit 1
+      end
       creator.validate_directory
       creator.update version, release_date
-    else
-      if options[:kf5]
-        creator.create_kf5 version, release_date
-      else
-        creator.create version, release_date
-      end
     end
   end
   
