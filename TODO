@@ -1,5 +1,9 @@
 # Alpha (first announcement, ready for early adopters)
 
+* Implement generic schema
+* Introduce Manifest class
+* Implement display_name (including schema versioning)
+* Stabilize schema
 * Release it
 
 # Beta (ready for contributors of meta data)
