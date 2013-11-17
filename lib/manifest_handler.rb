@@ -58,13 +58,9 @@ class ManifestHandler
       library.name = File.basename dirname
       local_manifests = Array.new
       Dir.glob( "#{dirname}/*.manifest" ).sort.each do |filename|
-        File.open filename do |file|
-          manifest = JSON file.read
-          manifest["filename"] = File.basename filename
-          manifest["libraryname"] = library.name
-          local_manifests.push manifest
-          manifests.push manifest
-        end
+        manifest = Manifest.parse_file filename
+        local_manifests.push manifest
+        manifests.push manifest
       end
       library.manifests = local_manifests
       libraries.push library

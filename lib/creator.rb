@@ -57,7 +57,7 @@ class Creator
 
   def create_manifest version, release_date
     m = Hash.new
-    m["$schema"] = Manifest.schema_uri
+    m["$schema"] = Manifest.schema_id
     m["name"] = @name
     m["version"] = version
     m["release_date"] = release_date

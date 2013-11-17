@@ -41,20 +41,24 @@ describe Creator do
     mh = ManifestHandler.new settings
     mh.read_remote
 
-    mh.libraries.count.should == 2
+    mh.libraries.count.should == 3
     m = mh.manifest "awesomelib"
     m["name"].should == "awesomelib"
     m["version"].should == "1.0"
     m["release_date"].should == "2013-10-01"
     m["summary"].should == "Awesome library"
 
-    mh.manifests.count.should == 3
+    mh.manifests.count.should == 4
     mh.manifests.each do |manifest|
-      manifest.keys.count.should == 14
+      if manifest["schema_type"] == "generic"
+        manifest.keys.count.should == 14
+      else
+        manifest.keys.count.should == 16
+      end
     end
 
     m = JSON File.read(filename)
-    m.keys.count.should == 12
+    m.keys.count.should == 14
   end
 
   it "creates new manifest" do
@@ -68,7 +72,7 @@ describe Creator do
     mh = ManifestHandler.new settings
     mh.read_remote
 
-    mh.libraries.count.should == 3
+    mh.libraries.count.should == 4
     m = mh.manifest "newawesomelib"
     m["name"].should == "newawesomelib"
     m["version"].should == "edge"

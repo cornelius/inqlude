@@ -16,11 +16,11 @@ describe ManifestHandler do
   end
   
   it "reads manifests" do
-    mh.manifests.count.should == 2
-    mh.libraries.count.should == 2
+    mh.manifests.count.should == 3
+    mh.libraries.count.should == 3
     mh.read_remote
-    mh.manifests.count.should == 2
-    mh.libraries.count.should == 2
+    mh.manifests.count.should == 3
+    mh.libraries.count.should == 3
   end
 
   it "provides access to manifests" do
@@ -31,7 +31,7 @@ describe ManifestHandler do
   context "#libraries" do
 
     it "returns all libraries" do
-      expect( mh.libraries.count ).to eq 2
+      expect( mh.libraries.count ).to eq 3
     end
     
     it "returns stable libraries" do

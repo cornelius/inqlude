@@ -1,40 +1,36 @@
 {
-  "title": "Inqlude Manifest Schema",
+  "id": "http://inqlude.org/schema/generic-manifest-v1#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Generic Inqlude Manifest Schema",
   "type": "object",
   "properties": {
-    "schema_version": {
-      "type": "integer",
-      "required": true
-    },
     "name": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "summary": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "urls": {
       "type": "object",
       "properties": {
         "homepage": {
-          "type": "string",
-          "required": true
+          "type": "string"
+        },
+        "download": {
+          "type": "string"
         }
       },
-      "required": true
+      "required": [ "homepage" ]
     },
     "licenses": {
       "type": "array",
       "items": {
         "type": "string"
       },
-      "minItems": 1,
-      "required": true
+      "minItems": 1
     },
     "description": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "authors": {
       "type": "array",
@@ -42,17 +38,14 @@
         "type": "string"
       }
     },
-    "maturity": {
-      "type": "string",
-      "required": true
-    },
     "platforms": {
       "type": "array",
       "items": {
         "type": "string"
       },
-      "minItems": 1,
-      "required": true
+      "minItems": 1
     }
-  }
+  },
+  "required": [ "$schema", "name", "summary",
+                "urls", "licenses", "description", "platforms" ]
 }

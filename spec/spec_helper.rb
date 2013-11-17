@@ -7,3 +7,23 @@ def create_manifest name, version
   m["description"] = "#{name} is a nice library."
   m
 end
+
+shared_context "manifest_files" do
+
+  let(:settings) do
+    s = Settings.new
+    s.manifest_path = File.expand_path('spec/data/')
+    s.offline = true
+    s
+  end
+
+  let(:awesomelib_manifest_file) do
+    "awesomelib/awesomelib.2013-09-08.manifest"
+  end
+
+  let(:newlib_manifest_file) do
+    "newlib/newlib.manifest"
+  end
+
+end
+

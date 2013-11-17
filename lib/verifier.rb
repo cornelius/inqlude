@@ -47,7 +47,7 @@ class Verifier
     @allowed_keys = [ "$schema", "name", "version", "release_date",
       "summary", "urls", "licenses", "description", "authors", "maturity",
       "platforms", "packages", "keywords", "dependencies", "filename",
-      "libraryname", "display_name" ]
+      "libraryname", "display_name", "schema_type", "schema_version" ]
   end
 
   def verify manifest
@@ -62,10 +62,23 @@ class Verifier
     if !manifest["libraryname"]
       @result.errors.push "Unable to determine libraryname"
     end
+    if manifest["$schema"]
+      schema_type = manifest["schema_type"]
+      if schema_type != "generic" && schema_type != "release"
+        @result.errors.push "Unknown schema type '#{schema_type}'"
+      end
+    else
+      @result.errors.push "Unable to find $schema attribute"
+    end
 
     if @result.errors.empty?
       filename = manifest["filename"]
-      expected_filename = "#{manifest["libraryname"]}.#{manifest["release_date"]}.manifest"
+      expected_filename = ""
+      if manifest["schema_type"] == "generic"
+        expected_filename = "#{manifest["libraryname"]}.manifest"
+      elsif manifest["schema_type"] == "release"
+        expected_filename = "#{manifest["libraryname"]}.#{manifest["release_date"]}.manifest"
+      end
 
       if filename != expected_filename
         @result.errors.push "Expected file name: #{expected_filename}"
@@ -81,10 +94,10 @@ class Verifier
         end
       end
 
-      schema_name = File.expand_path('../../schema/release-manifest-v1', 
-                                     __FILE__)
+      schema_name = "#{manifest["schema_type"]}-manifest-v#{manifest["schema_version"]}"
+      schema_file = File.expand_path("../../schema/#{schema_name}", __FILE__)
 
-      errors = JSON::Validator.fully_validate(schema_name, manifest)
+      errors = JSON::Validator.fully_validate(schema_file, manifest)
       errors.each do |error|
         @result.errors.push "Schema validation error: #{error}"
       end
@@ -100,10 +113,7 @@ class Verifier
   end
 
   def verify_file filename
-    manifest = JSON File.read filename
-    manifest["filename"] = filename
-    filename =~ /^(.*?)\./
-    manifest["libraryname"] = $1
+    manifest = Manifest.parse_file filename
     verify manifest
   end
 

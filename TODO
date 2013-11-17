@@ -1,7 +1,9 @@
 # Alpha (first announcement, ready for early adopters)
 
 * Implement generic schema
-* Introduce Manifest class
+* No output on successful pull
+* Use kde git URL
+* Replace manifest hash by Manifest object
 * Implement display_name (including schema versioning)
 * Stabilize schema
 * Release it

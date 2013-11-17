@@ -1,7 +1,7 @@
 {
   "id": "http://inqlude.org/schema/release-manifest-v1#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Inqlude Manifest Schema",
+  "title": "Inqlude Release Manifest Schema",
   "type": "object",
   "properties": {
     "name": {
