@@ -17,7 +17,8 @@
   open source, provides a Qt API, published API docs)
 * Handle binding consistently (suffix -qt, common description, maybe special
   tags in meta data for bound library)
-
+* Allow markdown in description
+  
 * Stabilize schema
 
 * Check validity of links
