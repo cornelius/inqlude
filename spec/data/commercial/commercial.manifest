@@ -5,7 +5,7 @@
   "urls": {
     "homepage": "http://commercial.example.org"
   },
-  "licenses": ["commercial"],
+  "licenses": ["Commercial"],
   "description": "Library only available under commercial license.",
   "authors": ["John Doe <doe@example.org>"],
   "maturity": "stable",

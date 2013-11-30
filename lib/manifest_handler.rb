@@ -32,7 +32,7 @@ class ManifestHandler
       return @libraries.select do |l|
         manifest = l.manifests.last
         manifest["maturity"] == maturity.to_s &&
-            manifest["licenses"] != [ "commercial" ]
+            manifest["licenses"] != [ "Commercial" ]
       end
     end
   end
@@ -41,14 +41,14 @@ class ManifestHandler
     return @libraries.select do |l|
       manifest = l.manifests.last
       manifest["schema_type"] == "generic" &&
-          manifest["licenses"] != [ "commercial" ]
+          manifest["licenses"] != [ "Commercial" ]
     end
   end
   
   def commercial_libraries
     return @libraries.select do |l|
       manifest = l.manifests.last
-      manifest["licenses"].include? "commercial"
+      manifest["licenses"].include? "Commercial"
     end
   end
   
