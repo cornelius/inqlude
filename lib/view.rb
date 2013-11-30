@@ -198,6 +198,10 @@ class View
     @manifest_handler.unreleased_libraries
   end
 
+  def commercial_libraries
+    @manifest_handler.commercial_libraries
+  end
+
   def disqus_enabled?
     @enable_disqus
   end

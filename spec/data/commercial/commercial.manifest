@@ -1,0 +1,13 @@
+{
+  "$schema": "http://inqlude.org/schema/generic-manifest-v1#",
+  "name": "commercial",
+  "summary": "Commercial library",
+  "urls": {
+    "homepage": "http://commercial.example.org"
+  },
+  "licenses": ["commercial"],
+  "description": "Library only available under commercial license.",
+  "authors": ["John Doe <doe@example.org>"],
+  "maturity": "stable",
+  "platforms": [ "Linux", "Windows" ]
+}

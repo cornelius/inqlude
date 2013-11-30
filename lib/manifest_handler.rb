@@ -29,12 +29,27 @@ class ManifestHandler
     if !maturity
       return @libraries
     else
-      return @libraries.select { |l| l.manifests.last["maturity"] == maturity.to_s }
+      return @libraries.select do |l|
+        manifest = l.manifests.last
+        manifest["maturity"] == maturity.to_s &&
+            manifest["licenses"] != [ "commercial" ]
+      end
     end
   end
 
   def unreleased_libraries
-    return @libraries.select { |l| l.manifests.last["schema_type"] == "generic" }
+    return @libraries.select do |l|
+      manifest = l.manifests.last
+      manifest["schema_type"] == "generic" &&
+          manifest["licenses"] != [ "commercial" ]
+    end
+  end
+  
+  def commercial_libraries
+    return @libraries.select do |l|
+      manifest = l.manifests.last
+      manifest["licenses"].include? "commercial"
+    end
   end
   
   def library name

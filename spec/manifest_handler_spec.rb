@@ -16,11 +16,11 @@ describe ManifestHandler do
   end
   
   it "reads manifests" do
-    mh.manifests.count.should == 3
-    mh.libraries.count.should == 3
+    mh.manifests.count.should == 4
+    mh.libraries.count.should == 4
     mh.read_remote
-    mh.manifests.count.should == 3
-    mh.libraries.count.should == 3
+    mh.manifests.count.should == 4
+    mh.libraries.count.should == 4
   end
 
   it "provides access to manifests" do
@@ -31,7 +31,7 @@ describe ManifestHandler do
   context "#libraries" do
 
     it "returns all libraries" do
-      expect( mh.libraries.count ).to eq 3
+      expect( mh.libraries.count ).to eq 4
     end
     
     it "returns stable libraries" do
@@ -47,7 +47,24 @@ describe ManifestHandler do
       expect( libraries.first.manifests.last["name"] ).to eq "bleedingedge"
       expect( libraries.first.manifests.last["version"] ).to eq "edge"
     end
+    
+    it "returns unreleased libraries" do
+      libraries = mh.unreleased_libraries
+      expect( libraries.count ).to eq 1
+      expect( libraries.first.manifests.last["name"] ).to eq "newlib"
+    end
+    
+    it "returns commercial libraries" do
+      libraries = mh.commercial_libraries
+      expect( libraries.count ).to eq 2
+      expect( libraries.first.manifests.last["name"] ).to eq "awesomelib"
+      expect( libraries.last.manifests.last["name"] ).to eq "commercial"
+    end
 
+  end
+  
+  context "#library" do
+    
     it "returns one library" do
       library = mh.library "awesomelib"
       expect( library.name ).to eq "awesomelib"

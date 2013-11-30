@@ -31,8 +31,17 @@ describe View do
     mh.read_remote
     v = View.new mh
     
-    expect(v.unreleased_libraries.count).to eq 1
-    expect(v.unreleased_libraries.first.name).to eq "newlib"
+    expect(v.unreleased_libraries.count).to eq mh.unreleased_libraries.count
+    expect(v.unreleased_libraries.first.name).to eq mh.unreleased_libraries.first.name
+  end
+  
+  it "returns list of commercial libraries" do
+    mh = ManifestHandler.new settings
+    mh.read_remote
+    v = View.new mh
+    
+    expect(v.commercial_libraries.count).to eq mh.commercial_libraries.count
+    expect(v.commercial_libraries.first.name).to eq mh.commercial_libraries.first.name
   end
   
 end

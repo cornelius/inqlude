@@ -8,7 +8,7 @@
     "homepage": "http://example.com",
     "download": "http://example.com/download"
   },
-  "licenses": ["LGPLv2.1+"],
+  "licenses": ["LGPLv2.1+", "commercial"],
   "description": "This is an awesome library.",
   "authors": ["Cornelius Schumacher <schumacher@kde.org>"],
   "maturity": "stable",
