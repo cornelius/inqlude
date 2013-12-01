@@ -1,0 +1,23 @@
+%h2
+  All
+  | #{link_to "Stable libraries", "index"}
+  | #{link_to "Development versions", "development"}
+  | #{link_to "Unreleased", "unreleased"}
+  | #{link_to "Commercial", "commercial"}
+
+%p
+  These are all #{libraries.count} libraries collected on Inqlude.
+
+%table
+  - libraries.each do |library|
+    %tr
+      %td.first
+        = link_to_manifest library.name
+      %td.last
+        = library.manifests.last["summary"]
+        %span{"class" => "library-short-meta-data"}
+          - if library.manifests.last["schema_type"] == "generic"
+            (unreleased,
+          - else
+            (#{library.manifests.last["maturity"]},
+          #{library.manifests.last["licenses"].join(", ")})

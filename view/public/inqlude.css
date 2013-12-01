@@ -145,6 +145,10 @@ h1 .subtitle {
   font-size: 80%;
 }
 
+.library-short-meta-data {
+  font-style: italic;
+}
+
 td {
   vertical-align: top;
   padding-left: 16px;

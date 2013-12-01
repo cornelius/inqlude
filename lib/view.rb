@@ -42,6 +42,7 @@ class View
     render_template "development", output_dir
     render_template "unreleased", output_dir
     render_template "commercial", output_dir
+    render_template "all", output_dir
     render_template "about", output_dir
     render_template "get", output_dir
     render_template "contribute", output_dir
