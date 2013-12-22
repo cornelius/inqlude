@@ -45,17 +45,23 @@ describe Creator do
     mh = ManifestHandler.new settings
     mh.read_remote
 
-    mh.libraries.count.should == 4
+    mh.libraries.count.should == 5
     m = mh.manifest "awesomelib"
     m["name"].should == "awesomelib"
     m["version"].should == "1.0"
     m["release_date"].should == "2013-10-01"
     m["summary"].should == "Awesome library"
 
-    mh.manifests.count.should == 5
+    mh.manifests.count.should == 6
     mh.manifests.each do |manifest|
       if manifest["schema_type"] == "generic"
-        manifest.keys.count.should == 13
+        if manifest["name"] == "commercial"
+          manifest.keys.count.should == 13
+        else
+          manifest.keys.count.should == 12
+        end
+      elsif manifest["schema_type"] == "proprietary-release"
+        manifest.keys.count.should == 15
       else
         manifest.keys.count.should == 16
       end
@@ -76,7 +82,7 @@ describe Creator do
     mh = ManifestHandler.new settings
     mh.read_remote
 
-    mh.libraries.count.should == 5
+    mh.libraries.count.should == 6
     m = mh.manifest "newawesomelib"
     m["name"].should == "newawesomelib"
     m["version"].should == "edge"

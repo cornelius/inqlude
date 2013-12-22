@@ -51,7 +51,7 @@ describe Verifier do
     verifier.verify(manifest).valid?.should be_false
   end
 
-  it "verifies release file" do
+  it "verifies release manifest file" do
     filename = File.join settings.manifest_path, awesomelib_manifest_file
     
     verifier = Verifier.new settings
@@ -59,8 +59,17 @@ describe Verifier do
     expect( verifier.verify_file( filename ).valid? ).to be_true
   end
 
-  it "verifies generic file" do
+  it "verifies generic manifest file" do
     filename = File.join settings.manifest_path, newlib_manifest_file
+    
+    verifier = Verifier.new settings
+
+    verification_result = verifier.verify_file( filename )
+    expect( verification_result.valid? ).to be_true
+  end
+  
+  it "verifies proprietary release manifest file" do
+    filename = File.join settings.manifest_path, proprietarylib_manifest_file
     
     verifier = Verifier.new settings
 

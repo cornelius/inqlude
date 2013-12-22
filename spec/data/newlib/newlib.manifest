@@ -9,6 +9,5 @@
   "licenses": ["GPLv3"],
   "description": "This is an awesome library. It's new.",
   "authors": ["Cornelius Schumacher <schumacher@kde.org>"],
-  "maturity": "development",
   "platforms": [ "Linux", "Windows" ]
 }

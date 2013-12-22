@@ -7,7 +7,7 @@
 %p
   = m "description"
 
-- if m( "schema_type" ) == "release"
+- if m( "schema_type" ) == "release" || m( "schema_type" ) == "proprietary-release"
   = list_attribute_content "Version", version_content
 = list_attribute "licenses"
 = list_attribute "platforms"

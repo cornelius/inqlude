@@ -1,0 +1,60 @@
+{
+  "id": "http://inqlude.org/schema/release-manifest-v1#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Inqlude Release Manifest Schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "release_date": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "urls": {
+      "type": "object",
+      "properties": {
+        "homepage": {
+          "type": "string"
+        },
+        "download": {
+          "type": "string"
+        }
+      },
+      "required": [ "homepage" ]
+    },
+    "licenses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "authors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "maturity": {
+      "type": "string"
+    },
+    "platforms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    }
+  },
+  "required": [ "$schema", "name", "release_date", "version", "summary",
+                "urls", "licenses", "description", "maturity", "platforms" ]
+}

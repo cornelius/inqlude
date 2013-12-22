@@ -1,0 +1,16 @@
+{
+  "$schema": "http://inqlude.org/schema/proprietary-release-manifest-v1#",
+  "name": "proprietarylib",
+  "release_date": "2013-12-22",
+  "version": "1.2.1",
+  "summary": "Awesome proprietary library",
+  "urls": {
+    "homepage": "http://xyz.example.com",
+    "download": "http://xyz.example.com/download"
+  },
+  "licenses": ["LGPLv2.1+", "Commercial"],
+  "description": "This is an awesome proprietarylibrary.",
+  "authors": ["Cool Company"],
+  "maturity": "stable",
+  "platforms": [ "Linux", "Windows", "OS X" ]
+}

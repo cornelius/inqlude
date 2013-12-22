@@ -16,27 +16,33 @@ describe ManifestHandler do
   end
   
   it "reads manifests" do
-    mh.manifests.count.should == 4
-    mh.libraries.count.should == 4
+    mh.manifests.count.should == 5
+    mh.libraries.count.should == 5
     mh.read_remote
-    mh.manifests.count.should == 4
-    mh.libraries.count.should == 4
+    mh.manifests.count.should == 5
+    mh.libraries.count.should == 5
   end
 
   it "provides access to manifests" do
     mh.manifest("awesomelib").class.should == Hash
     expect { mh.manifest("nonexisting") }.to raise_error
   end
+
+  it "reads schema type" do
+    mh.manifest("awesomelib")["schema_type"].should == "release"
+    mh.manifest("newlib")["schema_type"].should == "generic"
+    mh.manifest("proprietarylib")["schema_type"].should == "proprietary-release"
+  end
   
   context "#libraries" do
 
     it "returns all libraries" do
-      expect( mh.libraries.count ).to eq 4
+      expect( mh.libraries.count ).to eq 5
     end
     
     it "returns stable libraries" do
       libraries = mh.libraries :stable
-      expect( libraries.count ).to eq 1
+      expect( libraries.count ).to eq 2
       expect( libraries.first.manifests.last["name"] ).to eq "awesomelib"
       expect( libraries.first.manifests.last["version"] ).to eq "0.2.0"
     end
@@ -56,9 +62,9 @@ describe ManifestHandler do
     
     it "returns commercial libraries" do
       libraries = mh.commercial_libraries
-      expect( libraries.count ).to eq 2
+      expect( libraries.count ).to eq 3
       expect( libraries.first.manifests.last["name"] ).to eq "awesomelib"
-      expect( libraries.last.manifests.last["name"] ).to eq "commercial"
+      expect( libraries[1].manifests.last["name"] ).to eq "commercial"
     end
 
   end

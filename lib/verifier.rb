@@ -1,4 +1,4 @@
-# Copyright (C) 2011 Cornelius Schumacher <schumacher@kde.org>
+# Copyright (C) 2011-2013 Cornelius Schumacher <schumacher@kde.org>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -64,7 +64,8 @@ class Verifier
     end
     if manifest["$schema"]
       schema_type = manifest["schema_type"]
-      if schema_type != "generic" && schema_type != "release"
+      if schema_type != "generic" && schema_type != "release" &&
+         schema_type != "proprietary-release"
         @result.errors.push "Unknown schema type '#{schema_type}'"
       end
     else
@@ -74,9 +75,10 @@ class Verifier
     if @result.errors.empty?
       filename = manifest["filename"]
       expected_filename = ""
-      if manifest["schema_type"] == "generic"
+      schema_type = manifest["schema_type"]
+      if schema_type == "generic"
         expected_filename = "#{manifest["libraryname"]}.manifest"
-      elsif manifest["schema_type"] == "release"
+      elsif schema_type == "release" || schema_type == "proprietary-release"
         expected_filename = "#{manifest["libraryname"]}.#{manifest["release_date"]}.manifest"
       end
       

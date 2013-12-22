@@ -25,5 +25,9 @@ shared_context "manifest_files" do
     "newlib/newlib.manifest"
   end
 
+  let(:proprietarylib_manifest_file) do
+    "proprietarylib/proprietarylib.2013-12-22.manifest"
+  end
+
 end
 

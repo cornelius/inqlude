@@ -10,6 +10,9 @@ describe Manifest do
 
     expect(Manifest.generic_schema_id).to include("inqlude.org")
     expect(Manifest.generic_schema_id).to include("generic")
+
+    expect(Manifest.proprietary_release_schema_id).to include("inqlude.org")
+    expect(Manifest.proprietary_release_schema_id).to include("proprietary")
   end
   
   it "parses schema id" do

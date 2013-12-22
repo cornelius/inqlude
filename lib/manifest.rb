@@ -1,11 +1,15 @@
 class Manifest
 
+  def self.generic_schema_id
+    "http://inqlude.org/schema/generic-manifest-v1#"
+  end
+
   def self.release_schema_id
     "http://inqlude.org/schema/release-manifest-v1#"
   end
 
-  def self.generic_schema_id
-    "http://inqlude.org/schema/generic-manifest-v1#"
+  def self.proprietary_release_schema_id
+    "http://inqlude.org/schema/proprietary-release-manifest-v1#"
   end
 
   def self.parse_file path
