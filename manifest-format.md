@@ -37,11 +37,18 @@ These are the attributes:
 This is a reference to the schema which is used in the manifest file. The
 schema follows the [JSON Schema](http://json-schema.org) specification.
 
-The current schema identifier is
-"http://inqlude.org/schema/release-manifest-v1#".
+The schema comes in three flavors: "generic", "release", and
+"proprietary-release". They differe in what fields are required, the meaning of
+fields is the same in all. "generic" is a subset of "proprietary-release", which
+is a subset of "release".
 
-This is used to make expectations of tools and processing explicit and adapt
-to schema changes.
+Each schema has an identifier. The current identifier for the release schema is
+"http://inqlude.org/schema/release-manifest-v1#". It includes the version
+number. The other identifiers are the same, but instead of "release" they use
+the corresponding sub string indetifying the flavor.
+
+The schema and its versioning is used to make expectations of tools and
+processing explicit and adapt to schema changes.
 
 If the schema is changed in a way incompatible with processing tools, the
 schema version number has to be increased.
@@ -78,13 +85,13 @@ representing the different versions of the library.
 
 Date, when the version was released
 
-*release_date is a mandatory attribute*
+*release_date is a mandatory attribute in the release schemas*
 
 ### version
 
 Version of the release
 
-*version is a mandatory attribute*
+*version is a mandatory attribute in the release schemas*
 
 ### summary
 
@@ -165,7 +172,7 @@ The flag has to be one of the following identifiers:
   recommended for production use
 * "alpha": preview releases, not suitable for production use
 
-*maturity is a mandatory attribute*
+*maturity is a mandatory attribute, it's optional in the generic schema*
 
 ### platforms
 
@@ -197,7 +204,8 @@ package. The following types are supported:
 This is the source code of the release. It has one URL to the file, which
 can be used to download the code.
 
-*source is a mandatory package attribute*
+*source is a mandatory package attribute in the release schema, it's optional
+in the proprietary-release schema*
 
 #### openSUSE
 
