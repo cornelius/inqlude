@@ -1,12 +1,12 @@
 # Alpha (first announcement, ready for early adopters)
 
-* Display unreleased libraries
+* Implement display_name (including schema versioning)
+* Implement groups (e.g. for KDE or Qt)
+* Update KDE Frameworks 5 libraries
 * Test generation of web site with aruba, especially exit code on error and
   success
-* No output on successful pull
 * Use kde git URL
 * Replace manifest hash by Manifest object
-* Implement display_name (including schema versioning)
 
 * Release it
 
