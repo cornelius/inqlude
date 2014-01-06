@@ -30,4 +30,3 @@ shared_context "manifest_files" do
   end
 
 end
-
