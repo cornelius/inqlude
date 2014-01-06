@@ -52,7 +52,7 @@ class Creator
   end
 
   def create_dir
-    Dir.mkdir File.join(@settings.manifest_path,@name)
+    FileUtils.mkdir_p File.join(@settings.manifest_path,@name)
   end
 
   def create_manifest version, release_date

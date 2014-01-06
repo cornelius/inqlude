@@ -197,6 +197,17 @@ actual domain."
       creator.update version, release_date
     end
   end
+
+  desc "create_kde_frameworks <frameworks-git-checkout> <output_dir>",
+    "Create manifests from git checkout of KDE frameworks module in given directory"
+  def create_kde_frameworks checkout_dir, output_dir
+    k = KdeFrameworksCreator.new
+    k.parse_checkout checkout_dir
+    k.create_manifests output_dir
+    k.warnings.each do |warning|
+      puts "#{warning[:name]}: #{warning[:issue]} (#{warning[:details]})"
+    end
+  end
   
   desc "get_involved", "Information about how to get involved"
   def get_involved

@@ -1,4 +1,5 @@
 require File.expand_path('../../lib/inqlude', __FILE__)
+require File.expand_path('../given_filesystem', __FILE__)
 
 def create_manifest name, version
   m = Hash.new

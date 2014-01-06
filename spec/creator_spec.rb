@@ -112,6 +112,37 @@ describe Creator do
     expect(result.valid?).to be_true
   end
   
+  describe "#create_dir" do
+    before(:each) do
+      @given = GivenFilesystem.new
+      @settings = Settings.new
+      @settings.manifest_path = @given.directory
+    end
+    
+    after(:each) do
+      @given.cleanup
+    end
+    
+    it "creates dir" do
+      c = Creator.new( @settings, "one" )
+      c.create_dir()
+      expect( File.exists? File.join( @settings.manifest_path, "one" ) )
+        .to be_true
+      expect( File.directory? File.join( @settings.manifest_path, "one" ) )
+        .to be_true
+    end
+    
+    it "uses existing dir" do
+      c = Creator.new( @settings, "one" )
+      c.create_dir()
+      c.create_dir()
+      expect( File.exists? File.join( @settings.manifest_path, "one" ) )
+        .to be_true
+      expect( File.directory? File.join( @settings.manifest_path, "one" ) )
+        .to be_true
+    end
+  end
+  
   after(:each) do
     File.delete filename if File.exists? filename
     File.delete new_filename if File.exists? new_filename
