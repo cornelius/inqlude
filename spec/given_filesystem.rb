@@ -30,11 +30,18 @@ module HasGivenFilesystem
   end
   
   def given_directory directory_name = nil
-    @given_filesystem.directory directory_name
+    if block_given?
+      path = @given_filesystem.directory directory_name do
+        yield
+      end
+    else
+      path = @given_filesystem.directory directory_name
+    end
+    path
   end
   
   def given_file file_name = nil, options = {}
-    @given_filesystem.file file_name
+    @given_filesystem.file file_name, options
   end
 end
 

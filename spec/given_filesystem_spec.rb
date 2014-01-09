@@ -19,10 +19,11 @@ describe GivenFilesystem do
     end
     
     it "creates nested directory" do
+      path = nil
       given_directory "hello" do
         path = given_directory "world"
-        expect( path ).to match /\/hello\/world$/
       end
+      expect( path ).to match /\/hello\/world$/
     end
     
     it "creates unnamed file" do
@@ -41,9 +42,16 @@ describe GivenFilesystem do
     it "creates file with content" do
       path = given_file "welcome", :from => "testcontent"
       expect( path ).to match /\/welcome$/
+      expect( File.read( path ) ).to eq "This is my test content.\n"
+    end
+    
+    it "creates file in directory" do
+      path = nil
+      given_directory "hello" do
+        path = given_file "world", :from => "testcontent"
+      end
       expect( File.exists? path ).to be_true
-      expect( File.directory? path ).to be_false
-      expect( File.read( path ) ).to eq "GivenFilesystem was here\n"
+      expect( File.read( path ) ).to eq "This is my test content.\n"
     end
 
   end
