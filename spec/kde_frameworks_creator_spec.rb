@@ -1,6 +1,8 @@
 require File.expand_path('../spec_helper', __FILE__)
 
 describe KdeFrameworksCreator do
+  
+  include HasGivenFilesystem
 
   describe "#framework" do
     it "raises error on invalid name" do
@@ -30,28 +32,22 @@ describe KdeFrameworksCreator do
 
   context "parse git checkout" do
     
-    before(:each) do
-      @given = GivenFilesystem.new
-    end
-    
-    after(:each) do
-      @given.cleanup
-    end
+    given_filesystem
 
     context "multi-directory checkout" do
       before(:each) do
-        @checkout_path = @given.directory do
-          @given.directory "karchive" do
-            @given.file "README.md"
-            @given.file "AUTHORS"
+        @checkout_path = given_directory do
+          given_directory "karchive" do
+            given_file "README.md"
+            given_file "AUTHORS"
           end
-          @given.directory "threadweaver" do
-            @given.file "README.md"
-            @given.file "AUTHORS"
+          given_directory "threadweaver" do
+            given_file "README.md"
+            given_file "AUTHORS"
           end
-          @given.directory "kconfig" do
-            @given.file "README.md"
-            @given.file "AUTHORS"
+          given_directory "kconfig" do
+            given_file "README.md"
+            given_file "AUTHORS"
           end
         end
       end
@@ -69,7 +65,7 @@ describe KdeFrameworksCreator do
 
         c.parse_checkout @checkout_path
 
-        output_dir = @given.directory
+        output_dir = given_directory
         
         c.create_manifests output_dir
                 
@@ -85,8 +81,8 @@ describe KdeFrameworksCreator do
     it "parses README" do
       c = KdeFrameworksCreator.new
       
-      framework_path = @given.directory "karchive" do
-        @given.file "README.md", :from => "karchive.readme"
+      framework_path = given_directory "karchive" do
+        given_file "README.md", :from => "karchive.readme"
       end
       
       c.parse_readme framework_path
@@ -102,8 +98,8 @@ describe KdeFrameworksCreator do
     it "parses AUTHORS" do
       c = KdeFrameworksCreator.new
       
-      framework_path = @given.directory "karchive" do
-        @given.file "AUTHORS", :from => "karchive.authors"
+      framework_path = given_directory "karchive" do
+        given_file "AUTHORS", :from => "karchive.authors"
       end
 
       c.parse_authors framework_path
@@ -117,9 +113,9 @@ describe KdeFrameworksCreator do
     it "generates warnings for missing files" do
       c = KdeFrameworksCreator.new
 
-      checkout_path = @given.directory do
-        @given.directory "ki18n" do
-          @given.file "README.md"
+      checkout_path = given_directory do
+        given_directory "ki18n" do
+          given_file "README.md"
         end
       end
       
@@ -133,10 +129,10 @@ describe KdeFrameworksCreator do
       
     context "karchive as full example" do
       before(:each) do
-        @checkout_path = @given.directory do
-          @given.directory "karchive" do
-            @given.file "README.md", :from => "karchive.readme"
-            @given.file "AUTHORS", :from => "karchive.authors"
+        @checkout_path = given_directory do
+          given_directory "karchive" do
+            given_file "README.md", :from => "karchive.readme"
+            given_file "AUTHORS", :from => "karchive.authors"
           end
         end
       end
@@ -158,7 +154,7 @@ describe KdeFrameworksCreator do
 
         c.parse_checkout @checkout_path
 
-        output_dir = @given.directory
+        output_dir = given_directory
         
         c.create_manifests output_dir
                 
@@ -178,7 +174,7 @@ describe KdeFrameworksCreator do
 
         c.parse_checkout @checkout_path
 
-        output_dir = @given.directory
+        output_dir = given_directory
         
         c.create_manifests output_dir
                 

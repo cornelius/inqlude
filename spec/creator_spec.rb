@@ -2,6 +2,8 @@ require File.expand_path('../spec_helper', __FILE__)
 
 describe Creator do
 
+  include HasGivenFilesystem
+  
   let(:settings) do
     s = Settings.new
     s.manifest_path = File.expand_path('spec/data/')
@@ -113,14 +115,11 @@ describe Creator do
   end
   
   describe "#create_dir" do
+    given_filesystem
+
     before(:each) do
-      @given = GivenFilesystem.new
       @settings = Settings.new
-      @settings.manifest_path = @given.directory
-    end
-    
-    after(:each) do
-      @given.cleanup
+      @settings.manifest_path = given_directory
     end
     
     it "creates dir" do
