@@ -14,6 +14,30 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+module HasGivenFilesystem
+  def self.included(example_group)
+    example_group.extend(self)
+  end
+
+  def given_filesystem
+    before do
+      @given_filesystem = GivenFilesystem.new
+    end
+    
+    after do
+      @given_filesystem.cleanup
+    end
+  end
+  
+  def given_directory directory_name = nil
+    @given_filesystem.directory directory_name
+  end
+  
+  def given_file file_name = nil, options = {}
+    @given_filesystem.file file_name
+  end
+end
+
 class GivenFilesystem
   
   def initialize

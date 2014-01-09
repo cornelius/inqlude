@@ -2,6 +2,52 @@ require File.expand_path('../spec_helper', __FILE__)
 
 describe GivenFilesystem do
 
+  include HasGivenFilesystem
+
+  context "using the module" do
+    given_filesystem
+    
+    it "creates unnamed directory" do
+      path = given_directory
+      expect( File.exists? path ).to be_true
+      expect( File.directory? path ).to be_true
+    end
+    
+    it "creates directory" do
+      path = given_directory "hello"
+      expect( path ).to match /\/hello$/      
+    end
+    
+    it "creates nested directory" do
+      given_directory "hello" do
+        path = given_directory "world"
+        expect( path ).to match /\/hello\/world$/
+      end
+    end
+    
+    it "creates unnamed file" do
+      path = given_file
+      expect( File.exists? path ).to be_true
+      expect( File.directory? path ).to be_false
+    end
+    
+    it "creates file" do
+      path = given_file "welcome"
+      expect( path ).to match /\/welcome$/
+      expect( File.exists? path ).to be_true
+      expect( File.directory? path ).to be_false
+    end
+
+    it "creates file with content" do
+      path = given_file "welcome", :from => "testcontent"
+      expect( path ).to match /\/welcome$/
+      expect( File.exists? path ).to be_true
+      expect( File.directory? path ).to be_false
+      expect( File.read( path ) ).to eq "GivenFilesystem was here\n"
+    end
+
+  end
+  
   context "creating directory tree" do
   
     before(:each) do
