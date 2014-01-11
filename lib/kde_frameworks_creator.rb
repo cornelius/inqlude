@@ -16,7 +16,7 @@
 
 class KdeFrameworksCreator
 
-  attr_reader :warnings
+  attr_reader :warnings, :errors
   
   def initialize
     @frameworks = Hash.new
@@ -24,6 +24,7 @@ class KdeFrameworksCreator
   
   def parse_checkout dir_name
     @warnings = []
+    @errors = []
     Dir.entries( dir_name ).each do |entry|
       next if entry =~ /^\./
       
@@ -44,6 +45,8 @@ class KdeFrameworksCreator
   end
   
   def parse_readme path
+    @errors = [] if !@errors
+    
     name = extract_name( path )
     framework = @frameworks[name] || {}
 
@@ -51,6 +54,7 @@ class KdeFrameworksCreator
     File.open(File.join(path,"README.md")).each_line do |line|
       if line =~ /^# (.*)/
         framework["title"] = $1
+        state = :parse_summary
       elsif line =~ /^## Introduction/
         framework["introduction"] = "" 
         state = :parse_introduction
@@ -58,6 +62,16 @@ class KdeFrameworksCreator
       elsif line =~ /^## Links/
         state = :parse_links
         next
+      end
+
+      if state == :parse_summary
+        if line =~ /^##/
+          state = nil
+        else
+          if !line.strip.empty?
+            framework["summary"] = line.strip
+          end
+        end
       end
       
       if state == :parse_introduction
@@ -83,6 +97,12 @@ class KdeFrameworksCreator
             framework["link_#{link_name}"] = url
           end
         end
+      end
+    end
+    
+    [ "title", "summary", "introduction", "link_homepage" ].each do |field|
+      if !framework.has_key?(field) || framework[field].strip.empty?
+        @errors.push( { :name => name, :issue => "missing_" + field } )
       end
     end
 
@@ -131,7 +151,10 @@ class KdeFrameworksCreator
   
   def fill_in_data framework, manifest
     manifest["display_name"] = framework["title"]
+    manifest["summary"] = framework["summary"]
     manifest["description"] = framework["introduction"]
     manifest["urls"]["vcs"] = framework["link_git_repository"]
+    manifest["urls"]["homepage"] = framework["link_homepage"]
+    manifest["urls"]["mailing_list"] = framework["link_mailing_list"]
   end
 end

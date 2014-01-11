@@ -89,10 +89,14 @@ describe KdeFrameworksCreator do
 
       karchive = c.framework("karchive")
       
+      expect( c.errors.count ).to eq 0
+      
       expect(karchive["title"]).to eq "KArchive"
       expect(karchive["introduction"]).to eq "KArchive provides classes for easy reading, creation and manipulation of\n\"archive\" formats like ZIP and TAR.\n\nIf also provides transparent compression and decompression of data, like the\nGZip format, via a subclass of QIODevice."
       expect(karchive["link_mailing_list"]).to eq "https://mail.kde.org/mailman/listinfo/kde-frameworks-devel"
       expect(karchive["link_git_repository"]).to eq "https://projects.kde.org/projects/frameworks/karchive/repository"
+      expect(karchive["link_homepage"]).to eq "https://projects.kde.org/projects/frameworks/karchive"
+      expect(karchive["summary"]).to eq "Reading, creation, and manipulation of file archives"
     end
 
     it "parses AUTHORS" do
@@ -125,6 +129,32 @@ describe KdeFrameworksCreator do
       expect( c.warnings.first[:name] ).to eq "ki18n"
       expect( c.warnings.first[:issue] ).to eq "missing_file"
       expect( c.warnings.first[:details] ).to eq "AUTHORS"
+    end
+
+    it "generates errors for missing fields" do
+      c = KdeFrameworksCreator.new
+
+      checkout_path = given_directory do
+        given_directory "ki18n" do
+          given_file "README.md"
+        end
+      end
+      
+      c.parse_checkout checkout_path
+      
+      f = c.framework("ki18n")
+      
+      expect( c.errors.count ).to eq 4
+      
+      error_hash = {}
+      c.errors.each do |error|
+        error_hash[error[:issue]] = error
+      end
+      
+      expect( error_hash.has_key? "missing_title" ).to be_true
+      expect( error_hash.has_key? "missing_summary" ).to be_true
+      expect( error_hash.has_key? "missing_introduction" ).to be_true
+      expect( error_hash.has_key? "missing_link_homepage" ).to be_true
     end
       
     context "karchive as full example" do
@@ -167,6 +197,10 @@ describe KdeFrameworksCreator do
         expect( manifest["name"] ).to eq "karchive"
         expect( manifest["display_name"] ).to eq "KArchive"
         expect( manifest["urls"]["vcs"] ).to eq "https://projects.kde.org/projects/frameworks/karchive/repository"
+        expect( manifest["urls"]["homepage"] ).to eq "https://projects.kde.org/projects/frameworks/karchive"
+        expect( manifest["description"] ).to eq "KArchive provides classes for easy reading, creation and manipulation of\n\"archive\" formats like ZIP and TAR.\n\nIf also provides transparent compression and decompression of data, like the\nGZip format, via a subclass of QIODevice."
+        expect( manifest["urls"]["mailing_list"] ).to eq "https://mail.kde.org/mailman/listinfo/kde-frameworks-devel"
+        expect( manifest["summary"] ).to eq "Reading, creation, and manipulation of file archives"
       end
       
       it "overwrites existing manifests" do
