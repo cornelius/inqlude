@@ -22,14 +22,14 @@ class KdeFrameworksCreator
     @frameworks = Hash.new
   end
   
-  def parse_checkout dir_name
+  def parse_checkout dir_name, options = {}
     @warnings = []
     @errors = []
     Dir.entries( dir_name ).each do |entry|
       next if entry =~ /^\./
       
       @frameworks[entry] = {}
-      parse_readme File.join(dir_name,entry)
+      parse_readme File.join(dir_name,entry), options
       parse_authors File.join(dir_name,entry)
     end
   end
@@ -44,7 +44,7 @@ class KdeFrameworksCreator
     f
   end
   
-  def parse_readme path
+  def parse_readme path, options = {}
     @errors = [] if !@errors
     
     name = extract_name( path )
@@ -55,6 +55,7 @@ class KdeFrameworksCreator
       if line =~ /^# (.*)/
         framework["title"] = $1
         state = :parse_summary
+        next
       elsif line =~ /^## Introduction/
         framework["introduction"] = "" 
         state = :parse_introduction
@@ -100,7 +101,14 @@ class KdeFrameworksCreator
       end
     end
     
+    required_fields = []
     [ "title", "summary", "introduction", "link_homepage" ].each do |field|
+      if !options[:ignore_errors] || !options[:ignore_errors].include?(field)
+        required_fields.push field
+      end
+    end
+    
+    required_fields.each do |field|
       if !framework.has_key?(field) || framework[field].strip.empty?
         @errors.push( { :name => name, :issue => "missing_" + field } )
       end

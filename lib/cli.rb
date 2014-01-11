@@ -202,9 +202,15 @@ actual domain."
     "Create manifests from git checkout of KDE frameworks module in given directory"
   method_option "show-warnings", :type => :boolean,
     :desc => "Show warnings about missing data", :required => false
+  method_option "ignore-errors-homepage", :type => :boolean,
+    :desc => "Ignore errors about missing home page", :required => false
   def create_kde_frameworks checkout_dir, output_dir
     k = KdeFrameworksCreator.new
-    k.parse_checkout checkout_dir
+    if options["ignore-errors-homepage"]
+      k.parse_checkout checkout_dir, :ignore_errors => [ "link_homepage" ]
+    else
+      k.parse_checkout checkout_dir
+    end
     k.create_manifests output_dir
     k.errors.each do |error|
       puts "#{error[:name]}: #{error[:issue]}"

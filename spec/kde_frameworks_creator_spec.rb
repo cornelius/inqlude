@@ -156,6 +156,44 @@ describe KdeFrameworksCreator do
       expect( error_hash.has_key? "missing_introduction" ).to be_true
       expect( error_hash.has_key? "missing_link_homepage" ).to be_true
     end
+    
+    it "generates error for missing summary" do
+      c = KdeFrameworksCreator.new
+
+      checkout_path = given_directory do
+        given_directory "kservice" do
+          given_file "README.md", :from => "kservice.readme"
+        end
+      end
+      
+      c.parse_checkout checkout_path
+      
+      f = c.framework("kservice")
+      
+      expect( f["title"] ).to eq "KService"
+      expect( f["summary"] ).to be_nil
+      
+      expect( c.errors.count ).to eq 3
+    end
+      
+    it "optionally doesn't generate error for missing summary" do
+      c = KdeFrameworksCreator.new
+
+      checkout_path = given_directory do
+        given_directory "kservice" do
+          given_file "README.md", :from => "kservice.readme"
+        end
+      end
+      
+      c.parse_checkout checkout_path, :ignore_errors => [ "link_homepage" ]
+      
+      f = c.framework("kservice")
+      
+      expect( f["title"] ).to eq "KService"
+      expect( f["summary"] ).to be_nil
+      
+      expect( c.errors.count ).to eq 2
+    end
       
     context "karchive as full example" do
       before(:each) do
