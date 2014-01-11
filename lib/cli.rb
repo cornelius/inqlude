@@ -200,12 +200,19 @@ actual domain."
 
   desc "create_kde_frameworks <frameworks-git-checkout> <output_dir>",
     "Create manifests from git checkout of KDE frameworks module in given directory"
+  method_option "show-warnings", :type => :boolean,
+    :desc => "Show warnings about missing data", :required => false
   def create_kde_frameworks checkout_dir, output_dir
     k = KdeFrameworksCreator.new
     k.parse_checkout checkout_dir
     k.create_manifests output_dir
-    k.warnings.each do |warning|
-      puts "#{warning[:name]}: #{warning[:issue]} (#{warning[:details]})"
+    k.errors.each do |error|
+      puts "#{error[:name]}: #{error[:issue]}"
+    end
+    if options["show-warnings"]
+      k.warnings.each do |warning|
+        puts "#{warning[:name]}: #{warning[:issue]} (#{warning[:details]})"
+      end
     end
   end
   
