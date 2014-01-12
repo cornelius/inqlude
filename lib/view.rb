@@ -108,7 +108,7 @@ class View
   end
 
   def link_to_manifest name
-    "<a href=\"libraries/#{name}.html\">#{name}</a>"
+    "<a href=\"#{@root}libraries/#{name}.html\">#{name}</a>"
   end
 
   def link url
