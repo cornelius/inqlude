@@ -1,16 +1,8 @@
 %h2
-  All
-  | #{link_to "Stable libraries", "index"}
-  | #{link_to "Development versions", "development"}
-  | #{link_to "Unreleased", "unreleased"}
-  | #{link_to "Commercial", "commercial"}
-
-%p
-  These are all #{libraries.count} libraries collected on Inqlude. There also
-  is a group view for #{link_to "KDE Frameworks", "groups/kde-frameworks"}.
+  = group_title
 
 %table
-  - libraries.each do |library|
+  - group.each do |library|
     %tr
       %td.first
         = link_to_manifest library.name
@@ -22,3 +14,7 @@
           - else
             (#{library.manifests.last["maturity"]},
           #{library.manifests.last["licenses"].join(", ")})
+
+%p
+  #{group.count} libraries listed in group #{group_title}.
+

@@ -168,6 +168,6 @@ class KdeFrameworksCreator
     manifest["urls"]["mailing_list"] = framework["link_mailing_list"]
     manifest["licenses"] = [ "LGPLv2.1+" ]
     manifest["authors"] = [ "The KDE Community" ]
-    manifest["group"] = "kde_frameworks"
+    manifest["group"] = "kde-frameworks"
   end
 end

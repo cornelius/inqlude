@@ -44,4 +44,13 @@ describe View do
     expect(v.commercial_libraries.first.name).to eq mh.commercial_libraries.first.name
   end
   
+  it "returns group" do
+    mh = ManifestHandler.new settings
+    mh.read_remote
+    v = View.new mh
+    v.group_name = "kde-frameworks"
+    
+    expect(v.group.count).to eq mh.group("kde-frameworks").count
+    expect(v.group.first.name).to eq mh.group("kde-frameworks").first.name
+  end
 end

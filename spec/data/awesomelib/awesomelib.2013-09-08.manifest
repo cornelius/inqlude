@@ -16,5 +16,5 @@
   "packages": {
     "source": "ftp://example.com/download/awesomelib-0.2.0.tar.gz"
   },
-  "group": "kde"
+  "group": "kde-frameworks"
 }

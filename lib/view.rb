@@ -16,7 +16,7 @@
 
 class View
 
-  attr_accessor :enable_disqus,:enable_search,:manifest,:library
+  attr_accessor :enable_disqus,:enable_search,:manifest,:library,:group_name
   attr_reader :root
   
   def initialize handler
@@ -47,6 +47,17 @@ class View
     render_template "get", output_dir
     render_template "contribute", output_dir
     render_template "search", output_dir
+    
+
+    groups_path = "#{output_dir}/groups/"
+    assert_dir groups_path
+    
+    @root = "../"
+    
+    @group_name = "kde-frameworks"
+    file_name = "groups/kde-frameworks"
+    render_template "group", output_dir, file_name
+    
 
     library_path = "#{output_dir}/libraries/"
     assert_dir library_path
@@ -204,6 +215,17 @@ class View
     @manifest_handler.commercial_libraries
   end
 
+  def group_title
+    if @group_name == "kde-frameworks"
+      return "KDE Frameworks"
+    end
+    ""
+  end
+  
+  def group
+    @manifest_handler.group(@group_name)
+  end
+  
   def disqus_enabled?
     @enable_disqus
   end
