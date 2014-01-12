@@ -95,7 +95,7 @@ describe KdeFrameworksCreator do
       expect(karchive["introduction"]).to eq "KArchive provides classes for easy reading, creation and manipulation of\n\"archive\" formats like ZIP and TAR.\n\nIf also provides transparent compression and decompression of data, like the\nGZip format, via a subclass of QIODevice."
       expect(karchive["link_mailing_list"]).to eq "https://mail.kde.org/mailman/listinfo/kde-frameworks-devel"
       expect(karchive["link_git_repository"]).to eq "https://projects.kde.org/projects/frameworks/karchive/repository"
-      expect(karchive["link_homepage"]).to eq "https://projects.kde.org/projects/frameworks/karchive"
+      expect(karchive["link_home_page"]).to eq "https://projects.kde.org/projects/frameworks/karchive"
       expect(karchive["summary"]).to eq "Reading, creation, and manipulation of file archives"
     end
 
@@ -154,7 +154,7 @@ describe KdeFrameworksCreator do
       expect( error_hash.has_key? "missing_title" ).to be_true
       expect( error_hash.has_key? "missing_summary" ).to be_true
       expect( error_hash.has_key? "missing_introduction" ).to be_true
-      expect( error_hash.has_key? "missing_link_homepage" ).to be_true
+      expect( error_hash.has_key? "missing_link_home_page" ).to be_true
     end
     
     it "generates error for missing summary" do
@@ -185,7 +185,7 @@ describe KdeFrameworksCreator do
         end
       end
       
-      c.parse_checkout checkout_path, :ignore_errors => [ "link_homepage" ]
+      c.parse_checkout checkout_path, :ignore_errors => [ "link_home_page" ]
       
       f = c.framework("kservice")
       

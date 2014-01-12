@@ -92,6 +92,7 @@ class Creator
     m = Hash.new
     m["$schema"] = Manifest.generic_schema_id
     m["name"] = @name
+    m["display_name"] = @name.capitalize
     m["summary"] = ""
     m["urls"] = { "homepage" => "", "vcs" => "" }
     m["licenses"] = [ "" ]

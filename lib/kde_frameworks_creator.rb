@@ -27,6 +27,8 @@ class KdeFrameworksCreator
     @errors = []
     Dir.entries( dir_name ).each do |entry|
       next if entry =~ /^\./
+      next if entry == "kapidox"
+      next if entry == "kde4support"
       
       @frameworks[entry] = {}
       parse_readme File.join(dir_name,entry), options
@@ -102,7 +104,7 @@ class KdeFrameworksCreator
     end
     
     required_fields = []
-    [ "title", "summary", "introduction", "link_homepage" ].each do |field|
+    [ "title", "summary", "introduction", "link_home_page" ].each do |field|
       if !options[:ignore_errors] || !options[:ignore_errors].include?(field)
         required_fields.push field
       end
@@ -162,7 +164,10 @@ class KdeFrameworksCreator
     manifest["summary"] = framework["summary"]
     manifest["description"] = framework["introduction"]
     manifest["urls"]["vcs"] = framework["link_git_repository"]
-    manifest["urls"]["homepage"] = framework["link_homepage"]
+    manifest["urls"]["homepage"] = framework["link_home_page"]
     manifest["urls"]["mailing_list"] = framework["link_mailing_list"]
+    manifest["licenses"] = [ "LGPLv2.1+" ]
+    manifest["authors"] = [ "The KDE Community" ]
+    manifest["group"] = "kde_frameworks"
   end
 end

@@ -207,7 +207,7 @@ actual domain."
   def create_kde_frameworks checkout_dir, output_dir
     k = KdeFrameworksCreator.new
     if options["ignore-errors-homepage"]
-      k.parse_checkout checkout_dir, :ignore_errors => [ "link_homepage" ]
+      k.parse_checkout checkout_dir, :ignore_errors => [ "link_home_page" ]
     else
       k.parse_checkout checkout_dir
     end
