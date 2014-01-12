@@ -53,6 +53,9 @@
         "type": "string"
       },
       "minItems": 1
+    },
+    "group": {
+      "type": "string"
     }
   },
   "required": [ "$schema", "name", "release_date", "version", "summary",

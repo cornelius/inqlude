@@ -69,6 +69,14 @@ describe ManifestHandler do
 
   end
   
+  context "#group" do
+    it "returns all libraries of a group" do
+      libraries = mh.group("kde")
+      expect( libraries.count ).to eq 2
+      expect( libraries.first.manifests.last["name"] ).to eq "awesomelib"
+    end
+  end
+  
   context "#library" do
     
     it "returns one library" do

@@ -60,12 +60,12 @@ describe Creator do
       elsif manifest["schema_type"] == "proprietary-release"
         manifest.keys.count.should == 15
       else
-        manifest.keys.count.should == 16
+        manifest.keys.count.should == 17
       end
     end
 
     m = JSON File.read(manifest_filename)
-    m.keys.count.should == 14
+    m.keys.count.should == 15
   end
 
   it "creates new manifest" do

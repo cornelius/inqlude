@@ -15,5 +15,6 @@
   "platforms": [ "Linux" ],
   "packages": {
     "source": "ftp://example.org/download/bleedingedge-latest.tar.gz"
-  }
+  },
+  "group": "kde"
 }

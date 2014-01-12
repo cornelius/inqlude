@@ -47,7 +47,7 @@ class Verifier
     @allowed_keys = [ "$schema", "name", "version", "release_date",
       "summary", "urls", "licenses", "description", "authors", "maturity",
       "platforms", "packages", "keywords", "dependencies", "filename",
-      "libraryname", "display_name", "schema_type", "schema_version" ]
+      "libraryname", "display_name", "schema_type", "schema_version", "group" ]
   end
 
   def verify manifest

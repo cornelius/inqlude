@@ -52,6 +52,13 @@ class ManifestHandler
     end
   end
   
+  def group name
+    return @libraries.select do |l|
+      manifest = l.manifests.last
+      manifest["group"] == name
+    end
+  end
+  
   def library name
     @libraries.each do |library|
       if library.name == name
