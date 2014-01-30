@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Cornelius Schumacher']
   s.email       = ['schumacher@kde.org']
-  s.homepage    = "https://github.com/cornelius/inqlude"
+  s.homepage    = "http://inqlude.org"
   s.summary     = "Command line tool for handling Qt based libraries"
   s.description = "Inqlude is the command line interface for accessing the independent Qt library archive."
 
