@@ -47,7 +47,7 @@ class Creator
     m["release_date"] = release_date
     
     File.open( filename, "w" ) do |file|
-      file.puts JSON.pretty_generate(m)
+      file.puts Manifest.to_json(m)
     end
   end
 
@@ -84,7 +84,7 @@ class Creator
     filename += ".manifest"
 
     File.open( filename, "w" ) do |file|
-      file.puts JSON.pretty_generate(manifest)
+      file.puts Manifest.to_json(manifest)
     end
   end
   

@@ -23,6 +23,15 @@ class Manifest
     manifest
   end
   
+  def self.to_json manifest
+    m = manifest.clone
+    m.delete "filename"
+    m.delete "libraryname"
+    m.delete "schema_type"
+    m.delete "schema_version"
+    JSON.pretty_generate m
+  end
+  
   def self.parse_schema_id schema_id
     schema_id =~ /^http:\/\/inqlude\.org\/schema\/(.*)-manifest-v(.*)\#$/
     type = $1

@@ -65,7 +65,7 @@ describe Creator do
     end
 
     m = JSON File.read(manifest_filename)
-    m.keys.count.should == 15
+    m.keys.count.should == 13
   end
 
   it "creates new manifest" do

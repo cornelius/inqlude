@@ -8,11 +8,18 @@
     "homepage": "http://example.com",
     "download": "http://example.com/download"
   },
-  "licenses": ["LGPLv2.1+", "Commercial"],
+  "licenses": [
+    "LGPLv2.1+",
+    "Commercial"
+  ],
   "description": "This is an awesome library.",
-  "authors": ["Cornelius Schumacher <schumacher@kde.org>"],
+  "authors": [
+    "Cornelius Schumacher <schumacher@kde.org>"
+  ],
   "maturity": "stable",
-  "platforms": [ "Linux" ],
+  "platforms": [
+    "Linux"
+  ],
   "packages": {
     "source": "ftp://example.com/download/awesomelib-0.2.0.tar.gz"
   },

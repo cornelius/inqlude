@@ -55,4 +55,9 @@ describe Manifest do
     expect(manifest["schema_version"]).to eq 1
   end
 
+  it "writes JSON" do
+    filename = File.join settings.manifest_path, awesomelib_manifest_file
+    manifest = Manifest.parse_file filename
+    expect( Manifest.to_json( manifest ) ).to eq File.read( filename )
+  end
 end
