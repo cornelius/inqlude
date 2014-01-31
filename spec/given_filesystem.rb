@@ -40,8 +40,15 @@ module HasGivenFilesystem
     path
   end
   
-  def given_file file_name = nil, options = {}
+  def given_file file_name, options = {}
+    if !options[:from]
+      options[:from] = file_name
+    end
     @given_filesystem.file file_name, options
+  end
+  
+  def given_dummy_file file_name = nil
+    @given_filesystem.file file_name
   end
 end
 

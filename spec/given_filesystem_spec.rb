@@ -6,54 +6,63 @@ describe GivenFilesystem do
 
   context "using the module" do
     given_filesystem
-    
-    it "creates unnamed directory" do
-      path = given_directory
-      expect( File.exists? path ).to be_true
-      expect( File.directory? path ).to be_true
-    end
-    
-    it "creates directory" do
-      path = given_directory "hello"
-      expect( path ).to match /\/hello$/      
-    end
-    
-    it "creates nested directory" do
-      path = nil
-      given_directory "hello" do
-        path = given_directory "world"
+
+    describe "#given_directory" do
+      it "creates unnamed directory" do
+        path = given_directory
+        expect( File.exists? path ).to be_true
+        expect( File.directory? path ).to be_true
       end
-      expect( path ).to match /\/hello\/world$/
-    end
-    
-    it "creates unnamed file" do
-      path = given_file
-      expect( File.exists? path ).to be_true
-      expect( File.directory? path ).to be_false
-    end
-    
-    it "creates file" do
-      path = given_file "welcome"
-      expect( path ).to match /\/welcome$/
-      expect( File.exists? path ).to be_true
-      expect( File.directory? path ).to be_false
+      
+      it "creates directory" do
+        path = given_directory "hello"
+        expect( path ).to match /\/hello$/      
+      end
+      
+      it "creates nested directory" do
+        path = nil
+        given_directory "hello" do
+          path = given_directory "world"
+        end
+        expect( path ).to match /\/hello\/world$/
+      end
     end
 
-    it "creates file with content" do
-      path = given_file "welcome", :from => "testcontent"
-      expect( path ).to match /\/welcome$/
-      expect( File.read( path ) ).to eq "This is my test content.\n"
-    end
-    
-    it "creates file in directory" do
-      path = nil
-      given_directory "hello" do
-        path = given_file "world", :from => "testcontent"
+    describe "#given_file" do
+      it "creates unnamed dummy file" do
+        path = given_dummy_file
+        expect( File.exists? path ).to be_true
+        expect( File.directory? path ).to be_false
       end
-      expect( File.exists? path ).to be_true
-      expect( File.read( path ) ).to eq "This is my test content.\n"
-    end
+      
+      it "creates named dummy file" do
+        path = given_dummy_file "welcome"
+        expect( path ).to match /\/welcome$/
+        expect( File.exists? path ).to be_true
+        expect( File.directory? path ).to be_false
+      end
 
+      it "creates file with content" do
+        path = given_file "testcontent"
+        expect( path ).to match /\/testcontent$/
+        expect( File.read( path ) ).to eq "This is my test content.\n"
+      end
+      
+      it "creates file with content and given filename" do
+        path = given_file "welcome", :from => "testcontent"
+        expect( path ).to match /\/welcome$/
+        expect( File.read( path ) ).to eq "This is my test content.\n"
+      end
+      
+      it "creates file in directory" do
+        path = nil
+        given_directory "hello" do
+          path = given_file "world", :from => "testcontent"
+        end
+        expect( File.exists? path ).to be_true
+        expect( File.read( path ) ).to eq "This is my test content.\n"
+      end
+    end
   end
   
   context "creating directory tree" do
