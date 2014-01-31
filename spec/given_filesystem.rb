@@ -30,6 +30,7 @@ module HasGivenFilesystem
   end
   
   def given_directory directory_name = nil
+    check_initialization
     if block_given?
       path = @given_filesystem.directory directory_name do
         yield
@@ -41,6 +42,7 @@ module HasGivenFilesystem
   end
   
   def given_file file_name, options = {}
+    check_initialization
     if !options[:from]
       options[:from] = file_name
     end
@@ -48,7 +50,16 @@ module HasGivenFilesystem
   end
   
   def given_dummy_file file_name = nil
+    check_initialization
     @given_filesystem.file file_name
+  end
+  
+  private
+  
+  def check_initialization
+    if !@given_filesystem
+      raise "Call given_filesystem before calling other methods"
+    end
   end
 end
 

@@ -4,6 +4,20 @@ describe GivenFilesystem do
 
   include HasGivenFilesystem
 
+  context "not initialized" do
+    describe "#given_directory" do
+      it "raises error" do
+        expect{ given_directory }.to raise_error /given_filesystem/
+      end
+    end
+    
+    describe "#given_file" do
+      it "raises error" do
+        expect{ given_directory }.to raise_error /given_filesystem/
+      end
+    end
+  end
+  
   context "using the module" do
     given_filesystem
 
