@@ -38,16 +38,16 @@ describe KdeFrameworksCreator do
       before(:each) do
         @checkout_path = given_directory do
           given_directory "karchive" do
-            given_file "README.md"
-            given_file "AUTHORS"
+            given_dummy_file "README.md"
+            given_dummy_file "AUTHORS"
           end
           given_directory "threadweaver" do
-            given_file "README.md"
-            given_file "AUTHORS"
+            given_dummy_file "README.md"
+            given_dummy_file "AUTHORS"
           end
           given_directory "kconfig" do
-            given_file "README.md"
-            given_file "AUTHORS"
+            given_dummy_file "README.md"
+            given_dummy_file "AUTHORS"
           end
         end
       end
@@ -119,7 +119,7 @@ describe KdeFrameworksCreator do
 
       checkout_path = given_directory do
         given_directory "ki18n" do
-          given_file "README.md"
+          given_dummy_file "README.md"
         end
       end
       
@@ -136,7 +136,7 @@ describe KdeFrameworksCreator do
 
       checkout_path = given_directory do
         given_directory "ki18n" do
-          given_file "README.md"
+          given_dummy_file "README.md"
         end
       end
       
