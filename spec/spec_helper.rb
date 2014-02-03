@@ -3,8 +3,17 @@ require File.expand_path('../given_filesystem', __FILE__)
 
 def create_manifest name, version
   m = Hash.new
+  m["schema_type"] = "release"
   m["name"] = name
   m["version"] = version
+  m["description"] = "#{name} is a nice library."
+  m
+end
+
+def create_generic_manifest name
+  m = Hash.new
+  m["schema_type"] = "generic"
+  m["name"] = name
   m["description"] = "#{name} is a nice library."
   m
 end

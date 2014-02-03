@@ -1,5 +1,7 @@
 require File.expand_path('../spec_helper', __FILE__)
 
+include HasGivenFilesystem
+
 describe ManifestHandler do
 
   let(:settings) do
@@ -84,6 +86,32 @@ describe ManifestHandler do
       expect( library.name ).to eq "awesomelib"
     end
     
+  end
+  
+  context "library with generic and release manifest" do
+    given_filesystem
+
+    before(:each) do
+      @manifest_path = given_directory do
+        given_directory "karchive" do
+          given_file "karchive.manifest", :from => "karchive-generic.manifest"
+          given_file "karchive.2014-02-01.manifest", :from => "karchive-release.manifest"
+        end
+      end
+    end
+    
+    it "reads generic manifest" do
+      s = Settings.new
+      s.manifest_path = @manifest_path
+      s.offline = true
+      handler = ManifestHandler.new s
+      handler.read_remote
+      
+      expect( handler.library("karchive").manifests.count ).to eq 2
+      generic_manifest = handler.library("karchive").generic_manifest
+      expect( generic_manifest["name"] ).to eq "karchive"
+      expect( generic_manifest["schema_type"] ).to eq "generic"
+    end
   end
   
 end
