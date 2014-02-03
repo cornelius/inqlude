@@ -34,7 +34,7 @@ describe ManifestHandler do
     mh.manifest("proprietarylib")["schema_type"].should == "proprietary-release"
   end
   
-  context "#libraries" do
+  describe "#libraries" do
 
     it "returns all libraries" do
       expect( mh.libraries.count ).to eq 5
@@ -69,7 +69,7 @@ describe ManifestHandler do
 
   end
   
-  context "#group" do
+  describe "#group" do
     it "returns all libraries of a group" do
       libraries = mh.group("kde-frameworks")
       expect( libraries.count ).to eq 2
@@ -77,7 +77,7 @@ describe ManifestHandler do
     end
   end
   
-  context "#library" do
+  describe "#library" do
     
     it "returns one library" do
       library = mh.library "awesomelib"
