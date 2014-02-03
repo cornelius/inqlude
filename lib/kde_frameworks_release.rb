@@ -16,14 +16,21 @@
 
 class KdeFrameworksRelease
   
-  def create_release_manifest generic_manifest, date, version
+  attr_reader :generic_manifests
+  
+  def initialize handler
+    @handler = handler
+  end
+  
+  def self.create_release_manifest generic_manifest, release_date, version
     m = generic_manifest
     name = m["name"]
     download_url = "ftp://ftp.kde.org/pub/kde/stable/#{name}/"
     m["$schema"] = Manifest.release_schema_id
+    m["schema_type"] = "release"
     m["urls"]["download"] = download_url
     m["maturity"] = "alpha"
-    m["release_date"] = date
+    m["release_date"] = release_date
     m["version"] = version
     m["packages"] = {
       "source" => "#{download_url}#{name}-#{version}.tar.bz2"
@@ -31,4 +38,24 @@ class KdeFrameworksRelease
     m
   end
 
+  def read_generic_manifests
+    @generic_manifests = Array.new
+    @handler.read_remote
+    @handler.group("kde-frameworks").each do |library|
+      @generic_manifests.push library.generic_manifest
+    end
+    @generic_manifests
+  end
+
+  def write_release_manifests version, release_date
+    @generic_manifests.each do |generic_manifest|
+      release_manifest = KdeFrameworksRelease.create_release_manifest(
+        generic_manifest, version, release_date )
+      path = @handler.manifest_path( release_manifest )
+      File.open( path, "w" ) do |file|
+        file.write Manifest.to_json( release_manifest )
+      end
+    end    
+  end
+  
 end

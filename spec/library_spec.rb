@@ -7,7 +7,7 @@ describe Library do
 
     manifests = Array.new
     versions.each do |version|
-      manifests.push create_manifest "mylib", version
+      manifests.push create_manifest "mylib", "2014-02-03", version
     end
 
     library = Library.new
@@ -19,7 +19,7 @@ describe Library do
   it "returns generic manifest" do
     manifests = Array.new
     manifests.push create_generic_manifest "mylib"
-    manifests.push create_manifest "mylib", "1.0"
+    manifests.push create_manifest "mylib", "1.0", "2014-02-03"
     
     library = Library.new
     library.manifests = manifests

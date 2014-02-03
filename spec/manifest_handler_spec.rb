@@ -35,6 +35,24 @@ describe ManifestHandler do
     mh.manifest("newlib")["schema_type"].should == "generic"
     mh.manifest("proprietarylib")["schema_type"].should == "proprietary-release"
   end
+
+  context "default manifest path" do
+    before(:each) do
+      @handler = ManifestHandler.new Settings.new
+    end
+
+    it "returns generic manifest path" do
+      manifest = create_generic_manifest( "mylib" )
+      expect( @handler.manifest_path( manifest ) ).to eq(
+        File.expand_path( "~/.inqlude/manifests/mylib/mylib.manifest" ) )
+    end
+
+    it "returns release manifest path" do
+      manifest = create_manifest( "mylib", "2014-02-01", "1.0" )
+      expect( @handler.manifest_path( manifest ) ).to eq(
+        File.expand_path( "~/.inqlude/manifests/mylib/mylib.2014-02-01.manifest" ) )
+    end
+  end
   
   describe "#libraries" do
 

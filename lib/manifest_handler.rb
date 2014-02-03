@@ -25,6 +25,16 @@ class ManifestHandler
     @manifests = Array.new
   end
 
+  def manifest_path manifest
+    if manifest["schema_type"] == "release"
+      return File.join( @settings.manifest_path, manifest["name"],
+        "#{manifest["name"]}.#{manifest["release_date"]}.manifest" )
+    else
+      return File.join( @settings.manifest_path, manifest["name"],
+        "#{manifest["name"]}.manifest" )
+    end
+  end
+
   def libraries maturity = nil
     if !maturity
       return @libraries

@@ -1,11 +1,12 @@
 require File.expand_path('../../lib/inqlude', __FILE__)
 require File.expand_path('../given_filesystem', __FILE__)
 
-def create_manifest name, version
+def create_manifest name, release_date, version
   m = Hash.new
   m["schema_type"] = "release"
   m["name"] = name
   m["version"] = version
+  m["release_date" ] = release_date
   m["description"] = "#{name} is a nice library."
   m
 end
