@@ -40,7 +40,7 @@ class ManifestHandler
       return @libraries
     else
       return @libraries.select do |l|
-        manifest = l.manifests.last
+        manifest = l.latest_manifest
         manifest["maturity"] == maturity.to_s &&
             manifest["licenses"] != [ "Commercial" ]
       end
@@ -49,7 +49,7 @@ class ManifestHandler
 
   def unreleased_libraries
     return @libraries.select do |l|
-      manifest = l.manifests.last
+      manifest = l.latest_manifest
       manifest["schema_type"] == "generic" &&
           manifest["licenses"] != [ "Commercial" ]
     end
@@ -57,14 +57,14 @@ class ManifestHandler
   
   def commercial_libraries
     return @libraries.select do |l|
-      manifest = l.manifests.last
+      manifest = l.latest_manifest
       manifest["licenses"].include? "Commercial"
     end
   end
   
   def group name
     return @libraries.select do |l|
-      manifest = l.manifests.last
+      manifest = l.latest_manifest
       manifest["group"] == name
     end
   end
@@ -82,7 +82,7 @@ class ManifestHandler
     read_remote
     @libraries.each do |library|
       if library.name == name
-        return library.manifests.last
+        return library.latest_manifest
       end
     end
     raise "Unable to find manifest '#{name}'"

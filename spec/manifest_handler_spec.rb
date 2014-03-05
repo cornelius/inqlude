@@ -116,19 +116,31 @@ describe ManifestHandler do
           given_file "karchive.2014-02-01.manifest", :from => "karchive-release.manifest"
         end
       end
-    end
-    
-    it "reads generic manifest" do
+      
       s = Settings.new
       s.manifest_path = @manifest_path
       s.offline = true
-      handler = ManifestHandler.new s
-      handler.read_remote
-      
-      expect( handler.library("karchive").manifests.count ).to eq 2
-      generic_manifest = handler.library("karchive").generic_manifest
+      @manifest_handler = ManifestHandler.new s
+      @manifest_handler.read_remote
+    end
+    
+    it "reads generic manifest" do
+      expect( @manifest_handler.library("karchive").manifests.count ).to eq 2
+      generic_manifest = @manifest_handler.library("karchive").generic_manifest
       expect( generic_manifest["name"] ).to eq "karchive"
       expect( generic_manifest["schema_type"] ).to eq "generic"
+    end
+    
+    it "lists development versions" do
+      libraries = @manifest_handler.libraries :alpha
+      expect( libraries.count ).to eq 1
+      expect( libraries.first.latest_manifest["name"] ).to eq "karchive"
+      expect( libraries.first.latest_manifest["version"] ).to eq "4.9.90"
+    end
+    
+    it "lists unreleased libraries" do
+      libraries = @manifest_handler.unreleased_libraries
+      expect( libraries.count ).to eq 0
     end
   end
   

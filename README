@@ -1,5 +1,7 @@
 # Inqlude - the Qt library archive
 
+## Overview
+
 Inqlude is a tool to handle Qt based libraries. It provides developers using Qt
 with an easy way to find, install, and use libraries, in particular 3rd party
 libraries. A public version of the library runs at http://inqlude.org.
@@ -22,7 +24,39 @@ the native tools.
 There also is an option to generate an HTML overview of all available libraries.
 This can be hosted or used locally.
 
+## KDE Frameworks
+
+The KDE Frameworks provide more than fifty libraries, which can be used to
+write Qt application. Inqlude has some special tooling to deal with the data
+from KDE Frameworks
+
+To checkout all frameworks from source, you can use
+
+```bash
+kde-checkout-list.pl --component=frameworks --clone
+```
+
+This creates a `frameworks` directory with a checkout of all git repositories
+part of [KDE Frameworks](https://projects.kde.org/projects/frameworks).
+
+You can update the generic meta data of the frameworks in Inqlude with
+
+```bash
+inqlude create_kde_frameworks <frameworks-checkout-dir> <inqlude-data-dir>
+```
+
+To create release manifests for a KDE Frameworks release runs
+
+```bash
+inqlude release_kde_frameworks <release_date> <version>
+```
+
+## License
+
 Inqlude is licensed under the GPL.
 
+## Contact
+
 If you have questions or comments, please contact Cornelius Schumacher
-<schumacher@kde.org>.
+<schumacher@kde.org> or write to the
+[Inqlude mailing list](mailto:inqlude@kde.org).

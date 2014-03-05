@@ -222,6 +222,15 @@ actual domain."
     end
   end
   
+  desc "release_kde_frameworks <release_date> <version>",
+    "Create release manifests for KDE frameworks release"
+  def release_kde_frameworks release_date, version
+    handler = ManifestHandler.new @@settings
+    k = KdeFrameworksRelease.new handler
+    k.read_generic_manifests
+    k.write_release_manifests release_date, version
+  end
+  
   desc "get_involved", "Information about how to get involved"
   def get_involved
     Upstream.print_info

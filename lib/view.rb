@@ -66,7 +66,7 @@ class View
 
     @manifest_handler.libraries.each do |library|
       @library = library
-      @manifest = library.manifests.last
+      @manifest = library.latest_manifest
       file_name = "libraries/" + library.name
       render_template "library", output_dir, file_name
     end
@@ -249,11 +249,7 @@ class View
   end
 
   def old_versions
-    versions = Array.new
-    count = @library.manifests.count
-    if count > 1
-      versions = @library.manifests[0..count-2].map {|m| m["version"] }
-    end
+    versions = @library.versions.reject{ |v| v == @manifest["version"] }
     versions.reverse
   end
 
