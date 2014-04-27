@@ -29,7 +29,7 @@ class KdeFrameworksRelease
     m["$schema"] = Manifest.release_schema_id
     m["schema_type"] = "release"
     m["urls"]["download"] = download_url
-    m["maturity"] = "alpha"
+    m["maturity"] = "beta"
     m["release_date"] = release_date
     m["version"] = version
     m["packages"] = {
