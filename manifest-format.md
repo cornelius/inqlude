@@ -45,7 +45,7 @@ is a subset of "release".
 Each schema has an identifier. The current identifier for the release schema is
 "http://inqlude.org/schema/release-manifest-v1#". It includes the version
 number. The other identifiers are the same, but instead of "release" they use
-the corresponding sub string indetifying the flavor.
+the corresponding sub string identifying the flavor.
 
 The schema and its versioning is used to make expectations of tools and
 processing explicit and adapt to schema changes.
