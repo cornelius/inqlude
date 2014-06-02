@@ -20,7 +20,7 @@
     "Linux"
   ],
   "group": "kde-frameworks",
-  "maturity": "alpha",
+  "maturity": "beta",
   "release_date": "2014-02-01",
   "version": "4.9.90",
   "packages": {

@@ -132,7 +132,7 @@ describe ManifestHandler do
     end
     
     it "lists development versions" do
-      libraries = @manifest_handler.libraries :alpha
+      libraries = @manifest_handler.libraries :beta
       expect( libraries.count ).to eq 1
       expect( libraries.first.latest_manifest["name"] ).to eq "karchive"
       expect( libraries.first.latest_manifest["version"] ).to eq "4.9.90"
