@@ -2,9 +2,9 @@ require File.expand_path('../spec_helper', __FILE__)
 
 describe Creator do
 
-  include HasGivenFilesystem
+  include GivenFilesystemSpecHelpers
   
-  given_filesystem
+  use_given_filesystem
 
   let(:settings) do
     s = Settings.new

@@ -58,9 +58,9 @@ describe View do
   
   context "generic manifest and one release" do
     
-    include HasGivenFilesystem
+    include GivenFilesystemSpecHelpers
     
-    given_filesystem
+    use_given_filesystem
 
     before(:each) do
       @manifest_dir = given_directory do
@@ -91,9 +91,9 @@ describe View do
 
   context "generic manifest and two releases" do
     
-    include HasGivenFilesystem
+    include GivenFilesystemSpecHelpers
     
-    given_filesystem
+    use_given_filesystem
 
     before(:each) do
       @manifest_dir = given_directory do

@@ -1,6 +1,6 @@
 require File.expand_path('../spec_helper', __FILE__)
 
-include HasGivenFilesystem
+include GivenFilesystemSpecHelpers
 
 describe ManifestHandler do
 
@@ -107,7 +107,7 @@ describe ManifestHandler do
   end
   
   context "library with generic and release manifest" do
-    given_filesystem
+    use_given_filesystem
 
     before(:each) do
       @manifest_path = given_directory do

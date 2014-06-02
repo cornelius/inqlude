@@ -2,9 +2,9 @@ require File.expand_path('../spec_helper', __FILE__)
 
 describe KdeFrameworksRelease do
   
-  include HasGivenFilesystem
+  include GivenFilesystemSpecHelpers
 
-  given_filesystem
+  use_given_filesystem
   
   context "given KDE generic manifests" do
     before(:each) do

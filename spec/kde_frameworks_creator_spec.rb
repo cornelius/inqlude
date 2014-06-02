@@ -2,7 +2,7 @@ require File.expand_path('../spec_helper', __FILE__)
 
 describe KdeFrameworksCreator do
   
-  include HasGivenFilesystem
+  include GivenFilesystemSpecHelpers
 
   describe "#framework" do
     it "raises error on invalid name" do
@@ -32,7 +32,7 @@ describe KdeFrameworksCreator do
 
   context "parse git checkout" do
     
-    given_filesystem
+    use_given_filesystem
 
     context "multi-directory checkout" do
       before(:each) do
