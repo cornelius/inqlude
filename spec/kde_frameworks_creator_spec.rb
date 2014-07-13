@@ -70,11 +70,11 @@ describe KdeFrameworksCreator do
         c.create_manifests output_dir
                 
         expect( File.exists? File.join(output_dir,"karchive",
-          "karchive.manifest") ).to be_true
+          "karchive.manifest") ).to be true
         expect( File.exists? File.join(output_dir,"threadweaver",
-          "threadweaver.manifest") ).to be_true
+          "threadweaver.manifest") ).to be true
         expect( File.exists? File.join(output_dir,"kconfig",
-          "kconfig.manifest") ).to be_true
+          "kconfig.manifest") ).to be true
       end
     end
 
@@ -151,10 +151,10 @@ describe KdeFrameworksCreator do
         error_hash[error[:issue]] = error
       end
       
-      expect( error_hash.has_key? "missing_title" ).to be_true
-      expect( error_hash.has_key? "missing_summary" ).to be_true
-      expect( error_hash.has_key? "missing_introduction" ).to be_true
-      expect( error_hash.has_key? "missing_link_home_page" ).to be_true
+      expect( error_hash.has_key? "missing_title" ).to be true
+      expect( error_hash.has_key? "missing_summary" ).to be true
+      expect( error_hash.has_key? "missing_introduction" ).to be true
+      expect( error_hash.has_key? "missing_link_home_page" ).to be true
     end
     
     it "generates error for missing summary" do
@@ -171,7 +171,7 @@ describe KdeFrameworksCreator do
       f = c.framework("kservice")
       
       expect( f["title"] ).to eq "KService"
-      expect( f["summary"] ).to be_nil
+      expect( f["summary"] ).to be nil
       
       expect( c.errors.count ).to eq 3
     end
@@ -190,7 +190,7 @@ describe KdeFrameworksCreator do
       f = c.framework("kservice")
       
       expect( f["title"] ).to eq "KService"
-      expect( f["summary"] ).to be_nil
+      expect( f["summary"] ).to be nil
       
       expect( c.errors.count ).to eq 2
     end
@@ -227,7 +227,7 @@ describe KdeFrameworksCreator do
         c.create_manifests output_dir
                 
         expect( File.exists? File.join(output_dir,"karchive",
-          "karchive.manifest") ).to be_true
+          "karchive.manifest") ).to be true
         
         manifest = Manifest.parse_file File.join(output_dir,"karchive",
           "karchive.manifest")
@@ -251,12 +251,12 @@ describe KdeFrameworksCreator do
         c.create_manifests output_dir
                 
         expect( File.exists? File.join(output_dir,"karchive",
-          "karchive.manifest") ).to be_true
+          "karchive.manifest") ).to be true
 
         c.create_manifests output_dir
                 
         expect( File.exists? File.join(output_dir,"karchive",
-          "karchive.manifest") ).to be_true
+          "karchive.manifest") ).to be true
       end
     end
   end

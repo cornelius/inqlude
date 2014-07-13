@@ -122,11 +122,11 @@ class RpmManifestizer
   end
 
   def is_library? rpm_name
-    rpm_name =~ /^lib/
+    !!(rpm_name =~ /^lib/)
   end
 
   def is_32bit? rpm_name
-    rpm_name =~ /\-32bit/
+    !!(rpm_name =~ /\-32bit/)
   end
 
   def cut_off_number_suffix name

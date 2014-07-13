@@ -33,39 +33,39 @@ describe Creator do
     
     c = Creator.new settings, "awesomelib"
 
-    File.exists?(manifest_filename).should be_false
+    expect( File.exists?(manifest_filename) ).to be false
 
     c.update "1.0", "2013-10-01"
 
-    File.exists?(manifest_filename).should be_true
+    expect( File.exists?(manifest_filename) ).to be true
 
     mh = ManifestHandler.new settings
     mh.read_remote
 
-    mh.libraries.count.should == 1
+    expect(mh.libraries.count).to eq 1
     m = mh.manifest "awesomelib"
-    m["name"].should == "awesomelib"
-    m["version"].should == "1.0"
-    m["release_date"].should == "2013-10-01"
-    m["summary"].should == "Awesome library"
+    expect(m["name"]).to eq "awesomelib"
+    expect(m["version"]).to eq "1.0"
+    expect(m["release_date"]).to eq "2013-10-01"
+    expect(m["summary"]).to eq "Awesome library"
 
-    mh.manifests.count.should == 2
+    expect(mh.manifests.count).to eq 2
     mh.manifests.each do |manifest|
       if manifest["schema_type"] == "generic"
         if manifest["name"] == "commercial"
-          manifest.keys.count.should == 13
+          expect(manifest.keys.count).to eq 13
         else
-          manifest.keys.count.should == 12
+          expect(manifest.keys.count).to eq 12
         end
       elsif manifest["schema_type"] == "proprietary-release"
-        manifest.keys.count.should == 15
+        expect(manifest.keys.count).to eq 15
       else
-        manifest.keys.count.should == 17
+        expect(manifest.keys.count).to eq 17
       end
     end
 
     m = JSON File.read(manifest_filename)
-    m.keys.count.should == 13
+    expect(m.keys.count).to eq 13
   end
 
   it "creates new manifest" do
@@ -76,27 +76,27 @@ describe Creator do
                                    "newawesomelib.2013-09-01.manifest" )
 
     c = Creator.new settings, "newawesomelib"
-    File.exists?(manifest_filename).should be_false
+    expect(File.exists?(manifest_filename)).to be false
     
     c.create "edge", "2013-09-01"
     
-    File.exists?(manifest_filename).should be_true
+    expect(File.exists?(manifest_filename)).to be true
 
     mh = ManifestHandler.new settings
     mh.read_remote
 
-    mh.libraries.count.should == 1
+    expect(mh.libraries.count).to eq 1
     m = mh.manifest "newawesomelib"
-    m["name"].should == "newawesomelib"
-    m["version"].should == "edge"
-    m["release_date"].should == "2013-09-01"
+    expect(m["name"]).to eq "newawesomelib"
+    expect(m["version"]).to eq "edge"
+    expect(m["release_date"]).to eq "2013-09-01"
     
     v = Verifier.new settings
     result = v.verify m
     if !result.valid?
       result.print_result
     end
-    expect(result.valid?).to be_true
+    expect(result.valid?).to be true
   end
 
   it "creates new generic manifest" do
@@ -107,18 +107,18 @@ describe Creator do
                                    "newawesomelib.manifest" )
 
     c = Creator.new settings, "newawesomelib"
-    File.exists?(manifest_filename).should be_false
+    expect(File.exists?(manifest_filename)).to be false
     
     c.create_generic
     
-    File.exists?(manifest_filename).should be_true
+    expect(File.exists?(manifest_filename)).to be true
 
     v = Verifier.new settings
     result = v.verify_file manifest_filename
     if !result.valid?
       result.print_result
     end
-    expect(result.valid?).to be_true
+    expect(result.valid?).to be true
   end
   
   describe "#create_dir" do
@@ -132,9 +132,9 @@ describe Creator do
       c = Creator.new( @settings, "one" )
       c.create_dir()
       expect( File.exists? File.join( @settings.manifest_path, "one" ) )
-        .to be_true
+        .to be true
       expect( File.directory? File.join( @settings.manifest_path, "one" ) )
-        .to be_true
+        .to be true
     end
     
     it "uses existing dir" do
@@ -142,9 +142,9 @@ describe Creator do
       c.create_dir()
       c.create_dir()
       expect( File.exists? File.join( @settings.manifest_path, "one" ) )
-        .to be_true
+        .to be true
       expect( File.directory? File.join( @settings.manifest_path, "one" ) )
-        .to be_true
+        .to be true
     end
   end
   

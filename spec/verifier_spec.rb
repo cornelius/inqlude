@@ -6,8 +6,8 @@ describe Verifier do
   
   it "defines result class" do
     r = Verifier::Result.new
-    r.valid?.should be_false
-    r.errors.class.should == Array
+    expect(r.valid?).to be false
+    expect(r.errors.class).to be Array
   end
   
   it "verifies read manifests" do
@@ -15,15 +15,15 @@ describe Verifier do
     handler.read_remote
 
     verifier = Verifier.new settings
-    verifier.verify( handler.manifest("awesomelib") ).class.should == Verifier::Result
-    verifier.verify( handler.manifest("awesomelib") ).valid?.should be_true
+    expect(verifier.verify( handler.manifest("awesomelib") ).class).to be Verifier::Result
+    expect(verifier.verify( handler.manifest("awesomelib") ).valid?).to be true
   end
 
   it "detects incomplete manifest" do
     verifier = Verifier.new settings
 
     manifest = Hash.new
-    verifier.verify( manifest ).valid?.should be_false
+    expect(verifier.verify( manifest ).valid?).to be false
   end
       
   it "detects invalid entries" do
@@ -32,11 +32,11 @@ describe Verifier do
     verifier = Verifier.new settings
 
     manifest = handler.manifest("awesomelib")
-    verifier.verify(manifest).valid?.should be_true
+    expect(verifier.verify(manifest).valid?).to be true
 
     manifest["invalidentry"] = "something"
-    verifier.verify(manifest).valid?.should be_false
-    verifier.verify(manifest).errors.count.should == 1
+    expect(verifier.verify(manifest).valid?).to be false
+    expect(verifier.verify(manifest).errors.count).to eq 1
   end
 
   it "detects name mismatch" do
@@ -45,10 +45,10 @@ describe Verifier do
     verifier = Verifier.new settings
 
     manifest = handler.manifest("awesomelib")
-    verifier.verify(manifest).valid?.should be_true
+    expect(verifier.verify(manifest).valid?).to be true
     
     manifest["filename"] = "wrongname"
-    verifier.verify(manifest).valid?.should be_false
+    expect(verifier.verify(manifest).valid?).to be false
   end
 
   it "verifies release manifest file" do
@@ -56,7 +56,7 @@ describe Verifier do
     
     verifier = Verifier.new settings
 
-    expect( verifier.verify_file( filename ).valid? ).to be_true
+    expect( verifier.verify_file( filename ).valid? ).to be true
   end
 
   it "verifies generic manifest file" do
@@ -65,7 +65,7 @@ describe Verifier do
     verifier = Verifier.new settings
 
     verification_result = verifier.verify_file( filename )
-    expect( verification_result.valid? ).to be_true
+    expect( verification_result.valid? ).to be true
   end
   
   it "verifies proprietary release manifest file" do
@@ -74,7 +74,7 @@ describe Verifier do
     verifier = Verifier.new settings
 
     verification_result = verifier.verify_file( filename )
-    expect( verification_result.valid? ).to be_true
+    expect( verification_result.valid? ).to be true
   end
   
   it "verifies schema" do
@@ -91,9 +91,9 @@ describe Verifier do
     
     errors = verifier.verify(manifest).errors
 
-    expect( errors.class ).to be_equal Array    
-    errors[0].should =~ /^Schema validation error/
-    errors.count.should == 8
+    expect( errors.class ).to be Array
+    expect(errors[0]).to match /^Schema validation error/
+    expect(errors.count).to eq 8
   end
   
 end

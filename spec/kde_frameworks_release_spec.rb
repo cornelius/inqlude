@@ -43,11 +43,11 @@ describe KdeFrameworksRelease do
       
       manifest_path = File.join( @manifest_dir,
                                  "karchive/karchive.2014-02-01.manifest" )
-      expect( File.exists? manifest_path ).to be_true
+      expect( File.exists? manifest_path ).to be true
 
       manifest_path = File.join( @manifest_dir,
                                  "kservice/kservice.2014-02-01.manifest" )
-      expect( File.exists? manifest_path ).to be_true
+      expect( File.exists? manifest_path ).to be true
       
       manifest = Manifest.parse_file( manifest_path )
       expect( manifest["name"] ).to eq "kservice"

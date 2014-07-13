@@ -14,7 +14,7 @@ describe Library do
     library = Library.new
     library.manifests = manifests
 
-    library.versions.should == versions
+    expect(library.versions).to eq versions
   end
   
   it "returns generic manifest" do
@@ -65,7 +65,7 @@ describe Library do
     library.manifests = manifests
     
     expect( library.latest_manifest["schema_type"] ).to eq "generic"
-    expect( library.latest_manifest["version"] ).to be_nil
+    expect( library.latest_manifest["version"] ).to be nil
   end
 
 end

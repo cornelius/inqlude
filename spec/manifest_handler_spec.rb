@@ -18,22 +18,22 @@ describe ManifestHandler do
   end
   
   it "reads manifests" do
-    mh.manifests.count.should == 5
-    mh.libraries.count.should == 5
+    expect(mh.manifests.count).to eq 5
+    expect(mh.libraries.count).to eq 5
     mh.read_remote
-    mh.manifests.count.should == 5
-    mh.libraries.count.should == 5
+    expect(mh.manifests.count).to eq 5
+    expect(mh.libraries.count).to eq 5
   end
 
   it "provides access to manifests" do
-    mh.manifest("awesomelib").class.should == Hash
+    expect(mh.manifest("awesomelib").class).to be Hash
     expect { mh.manifest("nonexisting") }.to raise_error
   end
 
   it "reads schema type" do
-    mh.manifest("awesomelib")["schema_type"].should == "release"
-    mh.manifest("newlib")["schema_type"].should == "generic"
-    mh.manifest("proprietarylib")["schema_type"].should == "proprietary-release"
+    expect(mh.manifest("awesomelib")["schema_type"]).to eq "release"
+    expect(mh.manifest("newlib")["schema_type"]).to eq "generic"
+    expect(mh.manifest("proprietarylib")["schema_type"]).to eq "proprietary-release"
   end
 
   context "default manifest path" do
