@@ -66,7 +66,7 @@ describe View do
       @manifest_dir = given_directory do
         given_directory("karchive") do
           given_file("karchive.manifest", :from => "karchive-generic.manifest")
-          given_file("karchive.2014-02-01.manifest", :from => "karchive-release.manifest")
+          given_file("karchive.2014-02-01.manifest", :from => "karchive-release-beta.manifest")
         end
       end
       
@@ -99,7 +99,7 @@ describe View do
       @manifest_dir = given_directory do
         given_directory("karchive") do
           given_file("karchive.manifest", :from => "karchive-generic.manifest")
-          given_file("karchive.2014-02-01.manifest", :from => "karchive-release.manifest")
+          given_file("karchive.2014-02-01.manifest", :from => "karchive-release-beta.manifest")
           given_file("karchive.2014-03-04.manifest", :from => "karchive-release2.manifest")
         end
       end

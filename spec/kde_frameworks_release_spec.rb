@@ -60,8 +60,8 @@ describe KdeFrameworksRelease do
   it "creates release manifest from generic manifest" do
     generic_manifest = Manifest.parse_file(
       given_file("karchive-generic.manifest") )
-    date = "2014-02-01"
-    version = "4.9.90"
+    date = "2014-07-07"
+    version = "5.0.0"
     release_manifest = KdeFrameworksRelease.create_release_manifest(
       generic_manifest, date, version)
     expected_json = File.read( given_file("karchive-release.manifest") )

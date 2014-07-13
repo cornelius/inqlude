@@ -25,7 +25,7 @@ class KdeFrameworksRelease
   def self.create_release_manifest generic_manifest, release_date, version
     m = generic_manifest
     name = m["name"]
-    download_url = "http://download.kde.org/unstable/frameworks/#{version}/"
+    download_url = "http://download.kde.org/stable/frameworks/#{version}/"
     m["$schema"] = Manifest.release_schema_id
     m["schema_type"] = "release"
     m["urls"]["download"] = download_url
