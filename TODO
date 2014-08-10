@@ -1,7 +1,12 @@
-# 0.8 (Alpha) (first announcement, ready for early adopters)
+# 0.7 (Alpha) (first announcement, ready for early adopters)
 
-* Add display name  High Priority #12
 * Use kde git URL
+
+* Release it
+
+
+# 0.8 (Alpha) (second announcement, ready for contributors)
+
 * Create ROADMAP.md
 * Define milestones on GitHub and reference issues
 * Move all issues from this file to GitHub
@@ -13,18 +18,22 @@
 # 0.9 (Beta) (ready for contributors of meta data, schema stable)
 
 * Replace manifest hash by Manifest object
+
+* Add display name  High Priority #12
 * Check platform attribute for valid entries  High Priority #18
 * Check maturity for valid values  High Priority #16
+* Link to license text  Medium Priority #14
+* Add a comment field for authors  Medium Priority #15
+* Add attribute for screenshots  Medium Priority #10
+* Add bugtracker URL  Low Priority #7
+
 * Define maturity scale
 * State policy for inclusion of libraries (at least one stable release, no qt3,
   open source, provides a Qt API, published API docs)
 * Handle binding consistently (suffix -qt, common description, maybe special
   tags in meta data for bound library)
+
 * Show Qt5 compability  High Priority #20
-* Link to license text  Medium Priority #14
-* Add a comment field for authors  Medium Priority #15
-* Add attribute for screenshots  Medium Priority #10
-* Add bugtracker URL  Low Priority #7
 * Check links  Medium Priority #11
 * Add command for showing library details  High Priority #1
 
@@ -42,7 +51,6 @@
 
 * Update manifest data to have complete package data
 * Check existence of packages
-
 * Link to Open Build Service  Low Priority #9
 
 * Release it
@@ -65,5 +73,3 @@
 
 * Create more friendly progress display for cache creation  Low Priority #3
 * Add some quality indication  Low Priority #17
-
-* Release it
