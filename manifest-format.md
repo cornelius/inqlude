@@ -146,8 +146,8 @@ strings for the most often used licenses:
 Full description of the library
 
 The description is a text describing the library. It can be of arbitrary length.
-No special formatting is supported other than using newlines to start a new
-paragraph.
+The text is formatted using
+[Markdown](http://daringfireball.net/projects/markdown/syntax).
 
 *description is a mandatory attribute*
 
