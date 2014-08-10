@@ -35,6 +35,8 @@
 * Check links  Medium Priority #11
 * Add command for showing library details  High Priority #1
 
+* Turn alpha ribbon into beta ribbon on web site
+
 * Release it
 
 
@@ -50,6 +52,8 @@
 * Update manifest data to have complete package data
 * Check existence of packages
 * Link to Open Build Service  Low Priority #9
+
+* Remove beta ribbon on web site
 
 * Release it
 
