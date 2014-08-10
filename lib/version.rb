@@ -1,5 +1,5 @@
 module Inqlude
 
-  VERSION = "0.0.8"
+  VERSION = "0.7.0"
 
 end
