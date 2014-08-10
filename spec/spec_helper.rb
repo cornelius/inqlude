@@ -2,6 +2,10 @@ require 'given_filesystem/spec_helpers'
 
 require File.expand_path('../../lib/inqlude', __FILE__)
 
+def test_data_path file_name
+  File.expand_path(File.join('../data/', file_name), __FILE__)
+end
+
 def create_manifest name, release_date, version
   m = Hash.new
   m["schema_type"] = "release"

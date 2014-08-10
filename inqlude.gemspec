@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency "json", ">=1.5.1"
   s.add_dependency "haml", ">=3.1.1"
   s.add_dependency "json-schema", ">= 2.1.3"
+  s.add_dependency "kramdown"
 
   s.add_development_dependency "test-unit", "1.2.3"
   s.files        = `git ls-files`.split("\n")

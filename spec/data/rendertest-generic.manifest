@@ -1,0 +1,20 @@
+{
+  "$schema": "http://inqlude.org/schema/generic-manifest-v1#",
+  "name": "rendertest",
+  "display_name": "RenderTest",
+  "summary": "Test manifest for testing rendering",
+  "urls": {
+    "homepage": "https://example.org",
+    "vcs": "https://example.org/git"
+  },
+  "licenses": [
+    "LGPLv2.1+"
+  ],
+  "description": "This description tests rendering. It tests rendering markdown to HTML.\n\nThis includes:\n\n- Paragraphs\n- Lists\n",
+  "authors": [
+    "Slartibartfass"
+  ],
+  "platforms": [
+    "Linux"
+  ]
+}

@@ -123,4 +123,23 @@ describe View do
     
   end
 
+  it "renders description as markdown" do
+    v = View.new double
+    v.manifest = Manifest.parse_file(test_data_path("rendertest-generic.manifest"))
+    rendered = v.render_description
+
+    expected = <<EOT
+<p>This description tests rendering. It tests rendering markdown to HTML.</p>
+
+<p>This includes:</p>
+
+<ul>
+  <li>Paragraphs</li>
+  <li>Lists</li>
+</ul>
+EOT
+
+    expect(rendered).to eq expected
+  end
+
 end

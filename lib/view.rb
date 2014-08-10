@@ -253,6 +253,11 @@ class View
     versions.reverse
   end
 
+  def render_description
+    doc = Kramdown::Document.new(@manifest["description"])
+    doc.to_html
+  end
+
   private
   
   def assert_dir name
