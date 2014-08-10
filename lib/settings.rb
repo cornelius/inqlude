@@ -16,11 +16,17 @@
 
 class Settings
 
+  include XDG::BaseDir::Mixin
+
+  def subdirectory
+    "inqlude"
+  end
+
   attr_accessor :offline, :manifest_path
 
   def initialize
     @offline = false
-    @manifest_path = local_path "manifests"
+    @manifest_path = File.join(xdg_data_path.to_s, "manifests")
   end
 
   def data_path
@@ -28,24 +34,29 @@ class Settings
   end
   
   def cache_dir
-    local_dir "cache"
+    make_dir(File.join(xdg_cache_path.to_s))
+  end
+
+  def manifest_dir
+    make_dir(@manifest_path)
   end
 
   def version
     Inqlude::VERSION
   end
 
-  private
-
-  def local_path dirname
-    home = ENV["HOME"] + "/.inqlude/"
-    Dir::mkdir home unless File.exists? home
-    home + dirname
+  def xdg_data_path
+    data.home
   end
 
-  def local_dir dirname
-    path = local_path dirname
-    Dir::mkdir path unless File.exists? path
+  def xdg_cache_path
+    cache.home
+  end
+
+  private
+
+  def make_dir path
+    FileUtils.mkdir_p(path)
     path
   end
 

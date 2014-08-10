@@ -44,13 +44,13 @@ describe ManifestHandler do
     it "returns generic manifest path" do
       manifest = create_generic_manifest( "mylib" )
       expect( @handler.manifest_path( manifest ) ).to eq(
-        File.expand_path( "~/.inqlude/manifests/mylib/mylib.manifest" ) )
+        File.expand_path( "~/.local/share/inqlude/manifests/mylib/mylib.manifest" ) )
     end
 
     it "returns release manifest path" do
       manifest = create_manifest( "mylib", "2014-02-01", "1.0" )
       expect( @handler.manifest_path( manifest ) ).to eq(
-        File.expand_path( "~/.inqlude/manifests/mylib/mylib.2014-02-01.manifest" ) )
+        File.expand_path( "~/.local/share/inqlude/manifests/mylib/mylib.2014-02-01.manifest" ) )
     end
   end
   

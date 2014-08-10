@@ -1,6 +1,5 @@
 # 0.8 (Alpha) (first announcement, ready for early adopters)
 
-* Use $XDG_DATA_HOME to store data  High Priority #21
 * Add display name  High Priority #12
 * Use kde git URL
 * Create ROADMAP.md
