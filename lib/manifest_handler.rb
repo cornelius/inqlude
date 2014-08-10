@@ -113,14 +113,15 @@ class ManifestHandler
   end
 
   def fetch_remote
-    if !File.exists? @settings.manifest_path + "/.git"
-      if File.exists? @settings.manifest_path
-        system "rm -r #{@settings.manifest_path}"
+    if File.exists? @settings.manifest_path
+      if !File.exists? @settings.manifest_path + "/.git"
+        raise "Can't fetch data into '#{@settings.manifest_path}' because it's not a git repository."
+      else
+        system "cd #{@settings.manifest_path}; git pull >/dev/null"
       end
-      system "git clone https://github.com/cornelius/inqlude-data.git " +
-        "#{@settings.manifest_path}"
     else
-      system "cd #{@settings.manifest_path}; git pull >/dev/null"
+      system "git clone git://anongit.kde.org/websites/inqlude-data " +
+        "#{@settings.manifest_path}"
     end
   end
 
