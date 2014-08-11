@@ -37,26 +37,38 @@ describe Manifest do
   it "parses release manifest" do
     filename = File.join settings.manifest_path, awesomelib_manifest_file
     manifest = Manifest.parse_file filename
-    expect(manifest["name"]).to eq "awesomelib"
-    expect(manifest["version"]).to eq "0.2.0"
-    expect(manifest["filename"]).to eq "awesomelib.2013-09-08.manifest"
-    expect(manifest["libraryname"]).to eq "awesomelib"
-    expect(manifest["schema_type"]).to eq "release"
-    expect(manifest["schema_version"]).to eq 1
+    expect(manifest).to be_a Manifest
+    expect(manifest.name).to eq "awesomelib"
+    expect(manifest.version).to eq "0.2.0"
+
+    expect(manifest.filename).to eq "awesomelib.2013-09-08.manifest"
+    expect(manifest.libraryname).to eq "awesomelib"
+
+    expect(manifest.schema_type).to eq "release"
+    expect(manifest.schema_version).to eq 1
   end
 
   it "parses generic manifest" do
     filename = File.join settings.manifest_path, newlib_manifest_file
     manifest = Manifest.parse_file filename
-    expect(manifest["name"]).to eq "newlib"
-    expect(manifest.has_key? "version").to eq false
-    expect(manifest["filename"]).to eq "newlib.manifest"
-    expect(manifest["schema_type"]).to eq "generic"
-    expect(manifest["schema_version"]).to eq 1
+    expect(manifest).to be_a Manifest
+    expect(manifest.name).to eq "newlib"
+    expect(manifest.version).to eq nil
+
+    expect(manifest.filename).to eq "newlib.manifest"
+
+    expect(manifest.schema_type).to eq "generic"
+    expect(manifest.schema_version).to eq 1
   end
 
-  it "writes JSON" do
+  it "writes JSON for release manifest" do
     filename = File.join settings.manifest_path, awesomelib_manifest_file
+    manifest = Manifest.parse_file filename
+    expect( Manifest.to_json( manifest ) ).to eq File.read( filename )
+  end
+
+  it "writes JSON for generic manifest" do
+    filename = File.join settings.manifest_path, newlib_manifest_file
     manifest = Manifest.parse_file filename
     expect( Manifest.to_json( manifest ) ).to eq File.read( filename )
   end
@@ -91,6 +103,8 @@ describe Manifest do
     expect(m.urls.description_source).to eq "http://wikipedia.de/juhu"
     m.urls.announcement = "http://cnn.com/headline"
     expect(m.urls.announcement).to eq "http://cnn.com/headline"
+    m.urls.mailing_list = "mailto:list@example.com"
+    expect(m.urls.mailing_list).to eq "mailto:list@example.com"
 
     m.licenses = ["GPLv2", "LGPLv2"]
     expect(m.licenses).to eq ["GPLv2", "LGPLv2"]
@@ -110,6 +124,9 @@ describe Manifest do
 
     m.packages.source = "http://download.example.com/file"
     expect(m.packages.source).to eq "http://download.example.com/file"
+
+    m.group = "kde-frameworks"
+    expect(m.group).to eq "kde-frameworks"
   end
 
   it "constructs object from schema id" do

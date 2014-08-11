@@ -160,14 +160,14 @@ class KdeFrameworksCreator
   end
   
   def fill_in_data framework, manifest
-    manifest["display_name"] = framework["title"]
-    manifest["summary"] = framework["summary"]
-    manifest["description"] = framework["introduction"]
-    manifest["urls"]["vcs"] = framework["link_git_repository"]
-    manifest["urls"]["homepage"] = framework["link_home_page"]
-    manifest["urls"]["mailing_list"] = framework["link_mailing_list"]
-    manifest["licenses"] = [ "LGPLv2.1+" ]
-    manifest["authors"] = [ "The KDE Community" ]
-    manifest["group"] = "kde-frameworks"
+    manifest.display_name = framework["title"]
+    manifest.summary = framework["summary"]
+    manifest.description = framework["introduction"]
+    manifest.urls.vcs = framework["link_git_repository"]
+    manifest.urls.homepage = framework["link_home_page"]
+    manifest.urls.mailing_list = framework["link_mailing_list"]
+    manifest.licenses = [ "LGPLv2.1+" ]
+    manifest.authors = [ "The KDE Community" ]
+    manifest.group = "kde-frameworks"
   end
 end

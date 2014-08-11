@@ -151,13 +151,13 @@ class View
   end
 
   def version_content
-    if @manifest["schema_type"] == "generic"
-      raise "Can't get version for generic manifest '#{@manifest["name"]}'"
+    if @manifest.schema_type == "generic"
+      raise "Can't get version for generic manifest '#{@manifest.name}'"
     end
-    out = @manifest["version"]
-    out += " (#{@manifest["maturity"]})"
+    out = @manifest.version
+    out += " (#{@manifest.maturity})"
     out += "<span class='release-date'>"
-    out += "released on #{@manifest["release_date"]}"
+    out += "released on #{@manifest.release_date}"
     out += "</span>"
     if !old_versions.empty?
       out += "<span class='old-versions'>"
@@ -243,18 +243,18 @@ class View
   
   def editor_url
     url = "https://github.com/cornelius/inqlude-data/blob/master/"
-    url += @manifest["name"]
-    url += "/#{@manifest["name"]}.#{@manifest["release_date"]}.manifest"
+    url += @manifest.name
+    url += "/#{@manifest.name}.#{@manifest.release_date}.manifest"
     url
   end
 
   def old_versions
-    versions = @library.versions.reject{ |v| v == @manifest["version"] }
+    versions = @library.versions.reject{ |v| v == @manifest.version }
     versions.reverse
   end
 
   def render_description
-    doc = Kramdown::Document.new(@manifest["description"])
+    doc = Kramdown::Document.new(@manifest.description)
     doc.to_html
   end
 

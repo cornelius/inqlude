@@ -25,8 +25,8 @@ describe Library do
     library = Library.new
     library.manifests = manifests
     
-    expect( library.generic_manifest["name"] ).to eq "mylib"
-    expect( library.generic_manifest["schema_type"] ).to eq "generic"
+    expect( library.generic_manifest.name ).to eq "mylib"
+    expect( library.generic_manifest.schema_type ).to eq "generic"
   end
   
   it "returns relase manifests" do
@@ -40,7 +40,7 @@ describe Library do
     
     expect( library.release_manifests.count ).to eq 2
     library.release_manifests.each do |release_manifest|
-      expect( release_manifest["schema_type"] ).to eq "release"
+      expect( release_manifest.schema_type ).to eq "release"
     end
   end
   
@@ -53,8 +53,8 @@ describe Library do
     library = Library.new
     library.manifests = manifests
     
-    expect( library.latest_manifest["schema_type"] ).to eq "release"
-    expect( library.latest_manifest["version"] ).to eq "1.1"
+    expect( library.latest_manifest.schema_type ).to eq "release"
+    expect( library.latest_manifest.version ).to eq "1.1"
   end
 
   it "returns latest manifest from generic manifest" do
@@ -64,8 +64,8 @@ describe Library do
     library = Library.new
     library.manifests = manifests
     
-    expect( library.latest_manifest["schema_type"] ).to eq "generic"
-    expect( library.latest_manifest["version"] ).to be nil
+    expect( library.latest_manifest.schema_type ).to eq "generic"
+    expect( library.latest_manifest.version ).to be nil
   end
 
 end

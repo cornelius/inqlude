@@ -41,10 +41,8 @@ class Creator
     mh.read_remote
 
     m = mh.manifest @name
-    m.delete "filename"
-    m.delete "libraryname"
-    m["version"] = version
-    m["release_date"] = release_date
+    m.version = version
+    m.release_date = release_date
     
     File.open( filename, "w" ) do |file|
       file.puts Manifest.to_json(m)
@@ -56,30 +54,23 @@ class Creator
   end
 
   def create_manifest version, release_date
-    m = Hash.new
-    m["$schema"] = Manifest.release_schema_id
-    m["name"] = @name
-    m["version"] = version
-    m["release_date"] = release_date
-    m["summary"] = ""
-    m["urls"] = { "homepage" => "", "vcs" => "", "download" => "" }
-    m["licenses"] = [ "" ]
-    m["description"] = ""
+    m = ManifestRelease.new
+    m.name = @name
+    m.version = version
+    m.release_date = release_date
     if version == "edge"
-      m["maturity"] = "edge"
+      m.maturity = "edge"
     else
-      m["maturity"] = "stable"
+      m.maturity = "stable"
     end
-    m["authors"] = [ "" ]
-    m["platforms"] = [ "Linux" ]
-    m["packages"] = { "source" => "" }
+    m.platforms = [ "Linux" ]
     m
   end
 
   def write_manifest manifest
     filename = File.join @settings.manifest_path, @name, @name
-    if manifest["release_date"]
-      filename += ".#{manifest["release_date"]}"
+    if manifest.release_date
+      filename += ".#{manifest.release_date}"
     end
     filename += ".manifest"
 
@@ -89,16 +80,10 @@ class Creator
   end
   
   def create_generic_manifest
-    m = Hash.new
-    m["$schema"] = Manifest.generic_schema_id
-    m["name"] = @name
-    m["display_name"] = @name.capitalize
-    m["summary"] = ""
-    m["urls"] = { "homepage" => "", "vcs" => "" }
-    m["licenses"] = [ "" ]
-    m["description"] = ""
-    m["authors"] = [ "" ]
-    m["platforms"] = [ "Linux" ]
+    m = ManifestGeneric.new
+    m.name = @name
+    m.display_name = @name.capitalize
+    m.platforms = [ "Linux" ]
     m
   end
 

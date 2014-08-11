@@ -31,8 +31,8 @@ describe KdeFrameworksRelease do
       k.read_generic_manifests
       
       expect( k.generic_manifests.count ).to eq 2
-      expect( k.generic_manifests[0]["name"] ).to eq "karchive"
-      expect( k.generic_manifests[1]["name"] ).to eq "kservice"
+      expect( k.generic_manifests[0].name ).to eq "karchive"
+      expect( k.generic_manifests[1].name ).to eq "kservice"
     end
     
     it "writes release manifests" do
@@ -50,10 +50,10 @@ describe KdeFrameworksRelease do
       expect( File.exists? manifest_path ).to be true
       
       manifest = Manifest.parse_file( manifest_path )
-      expect( manifest["name"] ).to eq "kservice"
-      expect( manifest["version"] ).to eq "4.9.90"
-      expect( manifest["release_date"] ).to eq "2014-02-01"
-      expect( manifest["schema_type"] ).to eq "release"
+      expect( manifest.name ).to eq "kservice"
+      expect( manifest.version ).to eq "4.9.90"
+      expect( manifest.release_date ).to eq "2014-02-01"
+      expect( manifest.schema_type ).to eq "release"
     end
   end
 

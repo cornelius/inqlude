@@ -4,12 +4,12 @@ class Library
   attr_accessor :manifests
 
   def versions
-    versions = release_manifests.map { |m| m["version"] }
+    versions = release_manifests.map { |m| m.version }
   end
   
   def generic_manifest
     @manifests.each do |m|
-      if m["schema_type"] == "generic"
+      if m.schema_type == "generic"
         return m
       end
     end
@@ -17,9 +17,9 @@ class Library
   end
 
   def release_manifests
-    result = @manifests.reject { |m| m["schema_type"] == "generic" }
+    result = @manifests.reject { |m| m.schema_type == "generic" }
     result.sort! do |m1,m2|
-      m1["release_date"] <=> m2["release_date"]
+      m1.release_date <=> m2.release_date
     end
     result
   end

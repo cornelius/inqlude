@@ -43,63 +43,53 @@ class Verifier
   
   def initialize settings
     @settings = settings
-
-    @allowed_keys = [ "$schema", "name", "version", "release_date",
-      "summary", "urls", "licenses", "description", "authors", "maturity",
-      "platforms", "packages", "keywords", "dependencies", "filename",
-      "libraryname", "display_name", "schema_type", "schema_version", "group" ]
   end
 
   def verify manifest
     @result = Result.new
 
-    if !manifest["filename"]
+    if !manifest.filename
       @result.errors.push "Unable to determine filename"
       @result.name = "<unknown>"
     else
-      @result.name = manifest["filename"]
+      @result.name = manifest.filename
     end
-    if !manifest["libraryname"]
+    if !manifest.libraryname
       @result.errors.push "Unable to determine libraryname"
     end
-    if manifest["$schema"]
-      schema_type = manifest["schema_type"]
+    if manifest.schema_id
+      schema_type = manifest.schema_type
       if schema_type != "generic" && schema_type != "release" &&
          schema_type != "proprietary-release"
         @result.errors.push "Unknown schema type '#{schema_type}'"
       end
     else
-      @result.errors.push "Unable to find $schema attribute"
+      @result.errors.push "Unable to find schema id attribute"
     end
 
     if @result.errors.empty?
-      filename = manifest["filename"]
+      filename = manifest.filename
       expected_filename = ""
-      schema_type = manifest["schema_type"]
+      schema_type = manifest.schema_type
       if schema_type == "generic"
-        expected_filename = "#{manifest["libraryname"]}.manifest"
+        expected_filename = "#{manifest.libraryname}.manifest"
       elsif schema_type == "release" || schema_type == "proprietary-release"
-        expected_filename = "#{manifest["libraryname"]}.#{manifest["release_date"]}.manifest"
+        expected_filename = "#{manifest.libraryname}.#{manifest.release_date}.manifest"
       end
       
       if filename != expected_filename
         @result.errors.push "Expected file name: #{expected_filename}"
       end
 
-      if manifest["release_date"] == "1970-01-01"
-        @result.errors.push "Invalid release date: #{manifest["release_date"]}"
+      if manifest.release_date == "1970-01-01"
+        @result.errors.push "Invalid release date: #{manifest.release_date}"
       end
 
-      manifest.keys.each do |key|
-        if !@allowed_keys.include? key
-          @result.errors.push "Illegal entry: #{key}"
-        end
-      end
-
-      schema_name = "#{manifest["schema_type"]}-manifest-v#{manifest["schema_version"]}"
+      schema_name = "#{manifest.schema_type}-manifest-v#{manifest.schema_version}"
       schema_file = File.expand_path("../../schema/#{schema_name}", __FILE__)
 
-      errors = JSON::Validator.fully_validate(schema_file, manifest)
+      errors = JSON::Validator.fully_validate(schema_file,
+        Manifest.to_json(manifest))
       errors.each do |error|
         @result.errors.push "Schema validation error: #{error}"
       end

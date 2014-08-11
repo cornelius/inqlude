@@ -123,6 +123,7 @@ The following types are recognized:
 * "description_source": If the description text is taken from another source
   this URL points to the source.
 * "announcement": Link to release announcement
+* "mailing_list": Mailing list for discussing the library
 * "custom": Array of pairs of title and URL of custom links
 
 *the homepage is a mandatory url attribute*
@@ -214,3 +215,12 @@ entry.
 
 Each entry contains the package_name, repository, and source_rpm attributes.
 The repository contains an url and a name sub-attribute.
+
+### group
+
+Name of a group
+
+The group optionally specifies the name of a group of libraries the library
+described my the manifest belongs to.
+
+At the moment only the value "kde-frameworks" is used.

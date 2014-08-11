@@ -23,18 +23,24 @@ class KdeFrameworksRelease
   end
   
   def self.create_release_manifest generic_manifest, release_date, version
-    m = generic_manifest
-    name = m["name"]
+    m = ManifestRelease.new
+    m.name = generic_manifest.name
+    m.display_name = generic_manifest.display_name
+    m.summary = generic_manifest.summary
+    m.description = generic_manifest.description
+    m.authors = generic_manifest.authors
+    m.platforms = generic_manifest.platforms
+    m.group = generic_manifest.group
+    m.urls = generic_manifest.urls
+    m.licenses = generic_manifest.licenses
+
+    name = m.name
     download_url = "http://download.kde.org/stable/frameworks/#{version}/"
-    m["$schema"] = Manifest.release_schema_id
-    m["schema_type"] = "release"
-    m["urls"]["download"] = download_url
-    m["maturity"] = "stable"
-    m["release_date"] = release_date
-    m["version"] = version
-    m["packages"] = {
-      "source" => "#{download_url}#{name}-#{version}.tar.xz"
-    }
+    m.urls.download = download_url
+    m.maturity = "stable"
+    m.release_date = release_date
+    m.version = version
+    m.packages.source = "#{download_url}#{name}-#{version}.tar.xz"
     m
   end
 

@@ -26,12 +26,12 @@ class ManifestHandler
   end
 
   def manifest_path manifest
-    if manifest["schema_type"] == "release"
-      return File.join( @settings.manifest_path, manifest["name"],
-        "#{manifest["name"]}.#{manifest["release_date"]}.manifest" )
+    if manifest.schema_type == "release"
+      return File.join( @settings.manifest_path, manifest.name,
+        "#{manifest.name}.#{manifest.release_date}.manifest" )
     else
-      return File.join( @settings.manifest_path, manifest["name"],
-        "#{manifest["name"]}.manifest" )
+      return File.join( @settings.manifest_path, manifest.name,
+        "#{manifest.name}.manifest" )
     end
   end
 
@@ -41,8 +41,8 @@ class ManifestHandler
     else
       return @libraries.select do |l|
         manifest = l.latest_manifest
-        manifest["maturity"] == maturity.to_s &&
-            manifest["licenses"] != [ "Commercial" ]
+        manifest.maturity == maturity.to_s &&
+            manifest.licenses != [ "Commercial" ]
       end
     end
   end
@@ -50,22 +50,22 @@ class ManifestHandler
   def unreleased_libraries
     return @libraries.select do |l|
       manifest = l.latest_manifest
-      manifest["schema_type"] == "generic" &&
-          manifest["licenses"] != [ "Commercial" ]
+      manifest.schema_type == "generic" &&
+          manifest.licenses != [ "Commercial" ]
     end
   end
   
   def commercial_libraries
     return @libraries.select do |l|
       manifest = l.latest_manifest
-      manifest["licenses"].include? "Commercial"
+      manifest.licenses.include? "Commercial"
     end
   end
   
   def group name
     return @libraries.select do |l|
       manifest = l.latest_manifest
-      manifest["group"] == name
+      manifest.group == name
     end
   end
   

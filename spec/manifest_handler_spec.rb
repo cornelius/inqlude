@@ -26,14 +26,14 @@ describe ManifestHandler do
   end
 
   it "provides access to manifests" do
-    expect(mh.manifest("awesomelib").class).to be Hash
+    expect(mh.manifest("awesomelib")).to be_a Manifest
     expect { mh.manifest("nonexisting") }.to raise_error
   end
 
   it "reads schema type" do
-    expect(mh.manifest("awesomelib")["schema_type"]).to eq "release"
-    expect(mh.manifest("newlib")["schema_type"]).to eq "generic"
-    expect(mh.manifest("proprietarylib")["schema_type"]).to eq "proprietary-release"
+    expect(mh.manifest("awesomelib").schema_type).to eq "release"
+    expect(mh.manifest("newlib").schema_type).to eq "generic"
+    expect(mh.manifest("proprietarylib").schema_type).to eq "proprietary-release"
   end
 
   context "default manifest path" do
@@ -63,28 +63,28 @@ describe ManifestHandler do
     it "returns stable libraries" do
       libraries = mh.libraries :stable
       expect( libraries.count ).to eq 2
-      expect( libraries.first.manifests.last["name"] ).to eq "awesomelib"
-      expect( libraries.first.manifests.last["version"] ).to eq "0.2.0"
+      expect( libraries.first.manifests.last.name ).to eq "awesomelib"
+      expect( libraries.first.manifests.last.version ).to eq "0.2.0"
     end
     
     it "returns development versions" do
       libraries = mh.libraries :edge
       expect( libraries.count ).to eq 1
-      expect( libraries.first.manifests.last["name"] ).to eq "bleedingedge"
-      expect( libraries.first.manifests.last["version"] ).to eq "edge"
+      expect( libraries.first.manifests.last.name ).to eq "bleedingedge"
+      expect( libraries.first.manifests.last.version ).to eq "edge"
     end
     
     it "returns unreleased libraries" do
       libraries = mh.unreleased_libraries
       expect( libraries.count ).to eq 1
-      expect( libraries.first.manifests.last["name"] ).to eq "newlib"
+      expect( libraries.first.manifests.last.name ).to eq "newlib"
     end
     
     it "returns commercial libraries" do
       libraries = mh.commercial_libraries
       expect( libraries.count ).to eq 3
-      expect( libraries.first.manifests.last["name"] ).to eq "awesomelib"
-      expect( libraries[1].manifests.last["name"] ).to eq "commercial"
+      expect( libraries.first.manifests.last.name ).to eq "awesomelib"
+      expect( libraries[1].manifests.last.name ).to eq "commercial"
     end
 
   end
@@ -93,7 +93,7 @@ describe ManifestHandler do
     it "returns all libraries of a group" do
       libraries = mh.group("kde-frameworks")
       expect( libraries.count ).to eq 2
-      expect( libraries.first.manifests.last["name"] ).to eq "awesomelib"
+      expect( libraries.first.manifests.last.name ).to eq "awesomelib"
     end
   end
   
@@ -127,15 +127,15 @@ describe ManifestHandler do
     it "reads generic manifest" do
       expect( @manifest_handler.library("karchive").manifests.count ).to eq 2
       generic_manifest = @manifest_handler.library("karchive").generic_manifest
-      expect( generic_manifest["name"] ).to eq "karchive"
-      expect( generic_manifest["schema_type"] ).to eq "generic"
+      expect( generic_manifest.name ).to eq "karchive"
+      expect( generic_manifest.schema_type ).to eq "generic"
     end
     
     it "lists development versions" do
       libraries = @manifest_handler.libraries :beta
       expect( libraries.count ).to eq 1
-      expect( libraries.first.latest_manifest["name"] ).to eq "karchive"
-      expect( libraries.first.latest_manifest["version"] ).to eq "4.9.90"
+      expect( libraries.first.latest_manifest.name ).to eq "karchive"
+      expect( libraries.first.latest_manifest.version ).to eq "4.9.90"
     end
     
     it "lists unreleased libraries" do

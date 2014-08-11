@@ -7,20 +7,18 @@ def test_data_path file_name
 end
 
 def create_manifest name, release_date, version
-  m = Hash.new
-  m["schema_type"] = "release"
-  m["name"] = name
-  m["version"] = version
-  m["release_date" ] = release_date
-  m["description"] = "#{name} is a nice library."
+  m = ManifestRelease.new
+  m.name = name
+  m.version = version
+  m.release_date = release_date
+  m.description = "#{name} is a nice library."
   m
 end
 
 def create_generic_manifest name
-  m = Hash.new
-  m["schema_type"] = "generic"
-  m["name"] = name
-  m["description"] = "#{name} is a nice library."
+  m = ManifestGeneric.new
+  m.name = name
+  m.description = "#{name} is a nice library."
   m
 end
 

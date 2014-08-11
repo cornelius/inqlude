@@ -22,7 +22,7 @@ describe Verifier do
   it "detects incomplete manifest" do
     verifier = Verifier.new settings
 
-    manifest = Hash.new
+    manifest = ManifestRelease.new
     expect(verifier.verify( manifest ).valid?).to be false
   end
       
@@ -34,9 +34,8 @@ describe Verifier do
     manifest = handler.manifest("awesomelib")
     expect(verifier.verify(manifest).valid?).to be true
 
-    manifest["invalidentry"] = "something"
-    expect(verifier.verify(manifest).valid?).to be false
-    expect(verifier.verify(manifest).errors.count).to eq 1
+    expect{ manifest.invalidentry }.to raise_error
+    expect{ manifest["invalidentry"] }.to raise_error
   end
 
   it "detects name mismatch" do
@@ -47,7 +46,7 @@ describe Verifier do
     manifest = handler.manifest("awesomelib")
     expect(verifier.verify(manifest).valid?).to be true
     
-    manifest["filename"] = "wrongname"
+    manifest.filename = "wrongname"
     expect(verifier.verify(manifest).valid?).to be false
   end
 
@@ -78,14 +77,11 @@ describe Verifier do
   end
   
   it "verifies schema" do
-    manifest = Hash.new
-    manifest["name"] = "mylib"
-    manifest["release_date"] = "2013-02-28"
-    manifest["filename"] = "mylib.2013-02-28.manifest"
-    manifest["libraryname"] = "mylib"
-    manifest["$schema"] = "http://inqlude.org/schema/release-manifest-v1#"
-    manifest["schema_type"] = "release"
-    manifest["schema_version"] = 1
+    manifest = ManifestRelease.new
+    manifest.name = "mylib"
+    manifest.release_date = "2013-02-28"
+    manifest.filename = "mylib.2013-02-28.manifest"
+    manifest.libraryname = "mylib"
     
     verifier = Verifier.new settings
     
@@ -93,7 +89,7 @@ describe Verifier do
 
     expect( errors.class ).to be Array
     expect(errors[0]).to match /^Schema validation error/
-    expect(errors.count).to eq 8
+    expect(errors.count).to eq 9
   end
   
 end
