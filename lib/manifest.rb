@@ -53,7 +53,7 @@ class Manifest
     hash["urls"] = manifest.urls.to_hash
     hash["licenses"] = manifest.licenses
     hash["description"] = manifest.description
-    hash["authors"] = manifest.authors
+    hash["authors"] = manifest.authors if manifest.authors
     hash["maturity"] = manifest.maturity if manifest.maturity
     hash["platforms"] = manifest.platforms
     hash["packages"] = manifest.packages.to_hash if manifest.packages.source
@@ -70,16 +70,25 @@ class Manifest
   end
 
   class Packages
-    attr_accessor :source
+    attr_accessor :source, :openSUSE
 
     def to_hash
-      { "source" => source }
+      hash = { "source" => source }
+      hash["openSUSE"] = openSUSE if openSUSE
+      hash
     end
   end
 
   class Urls
     attr_accessor :homepage, :api_docs, :download, :tutorial, :vcs,
-      :description_source, :announcement, :mailing_list
+      :description_source, :announcement, :mailing_list, :contact
+    attr_accessor :custom
+
+    def keys
+      ["homepage", "api_docs", "download", "tutorial", "vcs",
+       "description_source", "announcement", "mailing_list", "contact",
+       "custom"]
+    end
 
     def to_hash
       h = Hash.new
@@ -91,6 +100,8 @@ class Manifest
       h["description_source"] = description_source if description_source
       h["announcement"] = announcement if announcement
       h["mailing_list"] = mailing_list if mailing_list
+      h["contact"] = contact if contact
+      h["custom"] = custom if custom
       h
     end
   end

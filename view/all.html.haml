@@ -15,10 +15,10 @@
       %td.first
         = link_to_manifest library.name
       %td.last
-        = library.latest_manifest["summary"]
+        = library.latest_manifest.summary
         %span{"class" => "library-short-meta-data"}
-          - if library.latest_manifest["schema_type"] == "generic"
+          - if library.latest_manifest.schema_type == "generic"
             (unreleased,
           - else
-            (#{library.latest_manifest["maturity"]},
-          #{library.latest_manifest["licenses"].join(", ")})
+            (#{library.latest_manifest.maturity},
+          #{library.latest_manifest.licenses.join(", ")})

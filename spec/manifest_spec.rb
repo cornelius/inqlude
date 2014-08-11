@@ -105,6 +105,11 @@ describe Manifest do
     expect(m.urls.announcement).to eq "http://cnn.com/headline"
     m.urls.mailing_list = "mailto:list@example.com"
     expect(m.urls.mailing_list).to eq "mailto:list@example.com"
+    m.urls.contact = "contact@example.com"
+    expect(m.urls.contact).to eq "contact@example.com"
+
+    m.urls.custom = { "special" => "pointer" }
+    expect(m.urls.custom["special"]).to eq "pointer"
 
     m.licenses = ["GPLv2", "LGPLv2"]
     expect(m.licenses).to eq ["GPLv2", "LGPLv2"]
@@ -124,6 +129,9 @@ describe Manifest do
 
     m.packages.source = "http://download.example.com/file"
     expect(m.packages.source).to eq "http://download.example.com/file"
+
+    m.packages.openSUSE = { "something" => "here" }
+    expect(m.packages.openSUSE).to eq( { "something" => "here" } )
 
     m.group = "kde-frameworks"
     expect(m.group).to eq "kde-frameworks"

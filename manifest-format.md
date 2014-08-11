@@ -124,6 +124,7 @@ The following types are recognized:
   this URL points to the source.
 * "announcement": Link to release announcement
 * "mailing_list": Mailing list for discussing the library
+* "contact": Contact information
 * "custom": Array of pairs of title and URL of custom links
 
 *the homepage is a mandatory url attribute*

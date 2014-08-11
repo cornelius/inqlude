@@ -5,7 +5,10 @@
   "summary": "Test manifest for testing rendering",
   "urls": {
     "homepage": "https://example.org",
-    "vcs": "https://example.org/git"
+    "vcs": "https://example.org/git",
+    "custom": {
+      "Special": "http://special.example.org"
+    }
   },
   "licenses": [
     "LGPLv2.1+"

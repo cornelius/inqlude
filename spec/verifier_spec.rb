@@ -89,7 +89,7 @@ describe Verifier do
 
     expect( errors.class ).to be Array
     expect(errors[0]).to match /^Schema validation error/
-    expect(errors.count).to eq 9
+    expect(errors.count).to eq 8
   end
   
 end

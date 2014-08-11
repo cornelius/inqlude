@@ -123,12 +123,16 @@ describe View do
     
   end
 
-  it "renders description as markdown" do
-    v = View.new double
-    v.manifest = Manifest.parse_file(test_data_path("rendertest-generic.manifest"))
-    rendered = v.render_description
+  context "rendertest" do
+    before(:each) do
+      @view = View.new double
+      @view.manifest = Manifest.parse_file(test_data_path("rendertest-generic.manifest"))
+    end
 
-    expected = <<EOT
+    it "renders description as markdown" do
+      rendered = @view.render_description
+
+      expected = <<EOT
 <p>This description tests rendering. It tests rendering markdown to HTML.</p>
 
 <p>This includes:</p>
@@ -139,7 +143,22 @@ describe View do
 </ul>
 EOT
 
-    expect(rendered).to eq expected
+      expect(rendered).to eq expected
+    end
+
+    it "generates link items" do
+      expected_html = "<li><a href=\"https://example.org/git\">Code</a></li>"
+      expect(@view.link_item("vcs", "Code")).to eq expected_html
+    end
+
+    it "generates custom URLs" do
+      expected_html = "<li><a href=\"http://special.example.org\">Special</a></li>"
+      expect(@view.custom_urls).to eq expected_html
+    end
+
+    it "returns if there are more URLs" do
+      expect(@view.more_urls?).to be true
+    end
   end
 
 end

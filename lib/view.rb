@@ -99,12 +99,8 @@ class View
     "<link href='#{@root}public/inqlude.css' rel='stylesheet' type='text/css' />"
   end
 
-  def m attr, subattr = nil
-    if subattr
-      @manifest[ attr ][ subattr ]
-    else
-      @manifest[ attr ]
-    end
+  def m
+    @manifest
   end
 
   def link_to_manifest name
@@ -123,7 +119,7 @@ class View
   end
 
   def list_attribute attribute
-    attr = m attribute
+    attr = @manifest.send(attribute)
     return "" if !attr || attr.size == 0
 
     # We assume attribute is plural formed by adding an 's'
@@ -179,10 +175,10 @@ class View
   end
 
   def link_item key, label
-    if m( "urls", key )
+    if m.urls.send(key)
       out = "<li><a href=\""
-      out += m( "urls", key )
-      out += "\">#{label}</a>"
+      out += m.urls.send(key)
+      out += "\">#{label}</a></li>"
       return out
     else
       return ""
@@ -191,7 +187,7 @@ class View
 
   def custom_urls
     out = ""
-    urls = m "urls", "custom"
+    urls = @manifest.urls.custom
     if urls && !urls.empty?
       urls.each do |text,url|
         out += "<li><a href=\"#{url}\">#{text}</a></li>"
@@ -231,9 +227,10 @@ class View
   end
 
   def more_urls?
-    if @manifest["urls"]
-      @manifest["urls"].each do |name,url|
-        if name != "homepage" && name != "screenshots" && name != "logo" && name != "description_source"
+    @manifest.urls.keys.each do |key|
+      if key != "homepage" && key != "screenshots" && key != "logo" &&
+         key != "description_source"
+        if @manifest.urls.send(key)
           return true
         end
       end

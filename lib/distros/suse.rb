@@ -46,7 +46,7 @@ class Suse
     installed = Array.new
     handler.manifests.each do |manifest|
       unknown += 1
-      package_section = manifest["packages"]
+      package_section = manifest.packages.openSUSE
       next unless package_section
       name_section = package_section[name]
       next unless name_section
@@ -84,7 +84,7 @@ class Suse
   end
 
   def get_package_name manifest
-    package_section = manifest["packages"]
+    package_section = manifest.packages.openSUSE
     if !package_section
       STDERR.puts "No packages section in metadata"
     else

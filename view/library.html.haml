@@ -1,15 +1,15 @@
 %h2
-  = m "name"
+  = m.name
 
 %p
-  = m "summary"
+  = m.summary
 
-- if m( "schema_type" ) == "release" || m( "schema_type" ) == "proprietary-release"
+- if m.schema_type == "release" || m.schema_type == "proprietary-release"
   = list_attribute_content "Version", version_content
 = list_attribute "licenses"
 = list_attribute "platforms"
 = list_attribute "authors"
-= list_attribute_content "Home page", link( m( "urls", "homepage" ) )
+= list_attribute_content "Home page", link( m.urls.homepage )
 
 = render_description
 
@@ -17,18 +17,17 @@
   %h3 Read more
   %ul
     = link_item "api_docs", "API documentation"
-    = link_item "readme", "README"
     = link_item "tutorial", "Tutorial"
     = link_item "download", "Download sources"
     = link_item "vcs", "Source code repository"
     = link_item "announcement", "Announcement"
     = custom_urls
 
-- if m("packages") && m( "packages", "source" )
+- if m.packages.source
   %h3 Packages
   %ul
     %li
-      = link_to "Source code", m( "packages", "source" )
+      = link_to "Source code", m.packages.source
 
 %p{:class => "edit-link"}
   = link_to "[Edit]", editor_url
@@ -43,8 +42,8 @@
   :javascript
     var disqus_shortname = 'inqlude';
 
-    var disqus_identifier = '#{m "name"}';
-    var disqus_url = 'http://inqlude.org/libraries/#{m "name"}.html';
+    var disqus_identifier = '#{m.name}';
+    var disqus_url = 'http://inqlude.org/libraries/#{m.name}.html';
 
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {

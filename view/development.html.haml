@@ -13,7 +13,7 @@
       %td.first
         = link_to_manifest library.name
       %td.last
-        = library.manifests.last["summary"]
+        = library.manifests.last.summary
 
 %h3 Alpha
 
@@ -23,7 +23,7 @@
       %td.first
         = link_to_manifest library.name
       %td.last
-        = library.manifests.last["summary"]
+        = library.manifests.last.summary
 
 %h3 Bleeding edge
 
@@ -33,4 +33,4 @@
       %td.first
         = link_to_manifest library.name
       %td.last
-        = library.manifests.last["summary"]
+        = library.manifests.last.summary
