@@ -60,4 +60,76 @@ describe Manifest do
     manifest = Manifest.parse_file filename
     expect( Manifest.to_json( manifest ) ).to eq File.read( filename )
   end
+
+  it "has accessors for all attributes" do
+    m = ManifestRelease.new
+
+    m.name = "Name"
+    expect(m.name).to eq "Name"
+
+    m.release_date = Date.parse("2014-08-11")
+    expect(m.release_date).to eq Date.parse("2014-08-11")
+    expect(m.release_date.to_s).to eq "2014-08-11"
+
+    m.version = "0.7.0"
+    expect(m.version).to eq "0.7.0"
+
+    m.summary = "One-line summary"
+    expect(m.summary).to eq "One-line summary"
+
+    m.urls.homepage = "http://example.com"
+    expect(m.urls.homepage).to eq "http://example.com"
+    m.urls.api_docs = "http://example.com/api"
+    expect(m.urls.api_docs).to eq "http://example.com/api"
+    m.urls.download = "http://example.com/download"
+    expect(m.urls.download).to eq "http://example.com/download"
+    m.urls.vcs = "https://example.com/git"
+    expect(m.urls.vcs).to eq "https://example.com/git"
+    m.urls.tutorial = "http://tutorial.example.com"
+    expect(m.urls.tutorial).to eq "http://tutorial.example.com"
+    m.urls.description_source = "http://wikipedia.de/juhu"
+    expect(m.urls.description_source).to eq "http://wikipedia.de/juhu"
+    m.urls.announcement = "http://cnn.com/headline"
+    expect(m.urls.announcement).to eq "http://cnn.com/headline"
+
+    m.licenses = ["GPLv2", "LGPLv2"]
+    expect(m.licenses).to eq ["GPLv2", "LGPLv2"]
+
+    m.description = "Multi-line description\nwith info."
+    expect(m.description).to eq "Multi-line description\nwith info."
+
+    m.authors = ["Clark Kent <ck@example.com>"]
+    expect(m.authors).to be_a Array
+    expect(m.authors).to eq ["Clark Kent <ck@example.com>"]
+
+    m.maturity = "stable"
+    expect(m.maturity).to eq "stable"
+
+    m.platforms = ["Linux", "Windows"]
+    expect(m.platforms).to eq ["Linux", "Windows"]
+
+    m.packages.source = "http://download.example.com/file"
+    expect(m.packages.source).to eq "http://download.example.com/file"
+  end
+
+  it "constructs object from schema id" do
+    m = Manifest.new(Manifest::release_schema_id)
+    expect(m.schema_type).to eq "release"
+    expect(m.schema_version).to eq 1
+  end
+
+  it "constructs generic schema" do
+    m = ManifestGeneric.new
+    expect(m.schema_type).to eq "generic"
+  end
+
+  it "constructs proprietary schema" do
+    m = ManifestProprietaryRelease.new
+    expect(m.schema_type).to eq "proprietary-release"
+  end
+
+  it "constructs release schema" do
+    m = ManifestRelease.new
+    expect(m.schema_type).to eq "release"
+  end
 end
