@@ -42,22 +42,22 @@ class Manifest
     manifest
   end
   
-  def self.to_json manifest
+  def to_json
     hash = Hash.new
-    hash["$schema"] = manifest.schema_id
-    hash["name"] = manifest.name
-    hash["display_name"] = manifest.display_name if manifest.display_name
-    hash["release_date"] = manifest.release_date if manifest.release_date
-    hash["version"] = manifest.version if manifest.version
-    hash["summary"] = manifest.summary
-    hash["urls"] = manifest.urls.to_hash
-    hash["licenses"] = manifest.licenses
-    hash["description"] = manifest.description
-    hash["authors"] = manifest.authors if manifest.authors
-    hash["maturity"] = manifest.maturity if manifest.maturity
-    hash["platforms"] = manifest.platforms
-    hash["packages"] = manifest.packages.to_hash if manifest.packages.source
-    hash["group"] = manifest.group if manifest.group
+    hash["$schema"] = schema_id
+    hash["name"] = name
+    hash["display_name"] = display_name if display_name
+    hash["release_date"] = release_date if release_date
+    hash["version"] = version if version
+    hash["summary"] = summary
+    hash["urls"] = urls.to_hash
+    hash["licenses"] = licenses
+    hash["description"] = description
+    hash["authors"] = authors if authors
+    hash["maturity"] = maturity if maturity
+    hash["platforms"] = platforms
+    hash["packages"] = packages.to_hash if packages.source
+    hash["group"] = group if group
     JSON.pretty_generate hash
   end
   

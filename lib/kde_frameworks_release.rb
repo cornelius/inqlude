@@ -59,7 +59,7 @@ class KdeFrameworksRelease
         generic_manifest, release_date, version )
       path = @handler.manifest_path( release_manifest )
       File.open( path, "w" ) do |file|
-        file.write Manifest.to_json( release_manifest )
+        file.write release_manifest.to_json
       end
     end    
   end

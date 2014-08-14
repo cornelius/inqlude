@@ -64,13 +64,13 @@ describe Manifest do
   it "writes JSON for release manifest" do
     filename = File.join settings.manifest_path, awesomelib_manifest_file
     manifest = Manifest.parse_file filename
-    expect( Manifest.to_json( manifest ) ).to eq File.read( filename )
+    expect( manifest.to_json ).to eq File.read( filename )
   end
 
   it "writes JSON for generic manifest" do
     filename = File.join settings.manifest_path, newlib_manifest_file
     manifest = Manifest.parse_file filename
-    expect( Manifest.to_json( manifest ) ).to eq File.read( filename )
+    expect( manifest.to_json ).to eq File.read( filename )
   end
 
   it "has accessors for all attributes" do

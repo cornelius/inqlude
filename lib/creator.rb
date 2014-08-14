@@ -45,7 +45,7 @@ class Creator
     m.release_date = release_date
     
     File.open( filename, "w" ) do |file|
-      file.puts Manifest.to_json(m)
+      file.puts m.to_json
     end
   end
 
@@ -75,7 +75,7 @@ class Creator
     filename += ".manifest"
 
     File.open( filename, "w" ) do |file|
-      file.puts Manifest.to_json(manifest)
+      file.puts manifest.to_json
     end
   end
   

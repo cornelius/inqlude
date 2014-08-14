@@ -66,7 +66,7 @@ describe KdeFrameworksRelease do
       generic_manifest, date, version)
     expected_json = File.read( given_file("karchive-release.manifest") )
     expected_json.chomp! # Remove newline added by File.read
-    expect( Manifest.to_json(release_manifest) ).to eq expected_json
+    expect( release_manifest.to_json ).to eq expected_json
   end
   
 end

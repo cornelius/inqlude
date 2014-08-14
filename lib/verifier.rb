@@ -88,8 +88,7 @@ class Verifier
       schema_name = "#{manifest.schema_type}-manifest-v#{manifest.schema_version}"
       schema_file = File.expand_path("../../schema/#{schema_name}", __FILE__)
 
-      errors = JSON::Validator.fully_validate(schema_file,
-        Manifest.to_json(manifest))
+      errors = JSON::Validator.fully_validate(schema_file, manifest.to_json)
       errors.each do |error|
         @result.errors.push "Schema validation error: #{error}"
       end
