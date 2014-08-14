@@ -5,14 +5,23 @@ describe Manifest do
   include_context "manifest_files"
   
   it "provides schema identifier" do
-    expect(Manifest.release_schema_id).to include("inqlude.org")
-    expect(Manifest.release_schema_id).to include("release")
+    expect(ManifestRelease.schema_id).to include("inqlude.org")
+    expect(ManifestRelease.schema_id).to include("release")
 
-    expect(Manifest.generic_schema_id).to include("inqlude.org")
-    expect(Manifest.generic_schema_id).to include("generic")
+    expect(ManifestGeneric.schema_id).to include("inqlude.org")
+    expect(ManifestGeneric.schema_id).to include("generic")
 
-    expect(Manifest.proprietary_release_schema_id).to include("inqlude.org")
-    expect(Manifest.proprietary_release_schema_id).to include("proprietary")
+    expect(ManifestProprietaryRelease.schema_id).to include("inqlude.org")
+    expect(ManifestProprietaryRelease.schema_id).to include("proprietary")
+  end
+
+  it "returns schema id" do
+    expect(ManifestGeneric.schema_id).to eq(
+      "http://inqlude.org/schema/generic-manifest-v1#")
+    expect(ManifestRelease.schema_id).to eq(
+      "http://inqlude.org/schema/release-manifest-v1#")
+    expect(ManifestProprietaryRelease.schema_id).to eq(
+      "http://inqlude.org/schema/proprietary-release-manifest-v1#")
   end
   
   it "parses schema version" do
@@ -133,22 +142,22 @@ describe Manifest do
   end
 
   it "constructs object from schema id" do
-    m = Manifest.new(Manifest::release_schema_id)
+    m = Manifest.new(ManifestRelease.schema_id)
     expect(m.schema_version).to eq 1
   end
 
   it "contructs generic manifest from schema id" do
-    expect(Manifest.for_schema_id(Manifest::generic_schema_id)).to(
+    expect(Manifest.for_schema_id(ManifestGeneric.schema_id)).to(
       be_a ManifestGeneric)
   end
 
   it "contructs release manifest from schema id" do
-    expect(Manifest.for_schema_id(Manifest::release_schema_id)).to(
+    expect(Manifest.for_schema_id(ManifestRelease.schema_id)).to(
       be_a ManifestRelease)
   end
 
   it "contructs proprietary release manifest from schema id" do
-    expect(Manifest.for_schema_id(Manifest::proprietary_release_schema_id)).to(
+    expect(Manifest.for_schema_id(ManifestProprietaryRelease.schema_id)).to(
       be_a ManifestProprietaryRelease)
   end
 

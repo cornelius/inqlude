@@ -1,23 +1,11 @@
 class Manifest
 
-  def self.generic_schema_id
-    "http://inqlude.org/schema/generic-manifest-v1#"
-  end
-
-  def self.release_schema_id
-    "http://inqlude.org/schema/release-manifest-v1#"
-  end
-
-  def self.proprietary_release_schema_id
-    "http://inqlude.org/schema/proprietary-release-manifest-v1#"
-  end
-
   def self.for_schema_id schema_id
-    if schema_id == generic_schema_id
+    if schema_id == ManifestGeneric.schema_id
       return ManifestGeneric.new
-    elsif schema_id == release_schema_id
+    elsif schema_id == ManifestRelease.schema_id
       return ManifestRelease.new
-    elsif schema_id == proprietary_release_schema_id
+    elsif schema_id == ManifestProprietaryRelease.schema_id
       return ManifestProprietaryRelease.new
     else
       raise VerificationError.new("Unknown schema id '#{schema_id}'")
@@ -156,8 +144,12 @@ class Manifest
 end
 
 class ManifestGeneric < Manifest
+  def self.schema_id
+    "http://inqlude.org/schema/generic-manifest-v1#"
+  end
+
   def initialize
-    super(Manifest.generic_schema_id)
+    super(ManifestGeneric.schema_id)
   end
 
   def expected_filename
@@ -178,8 +170,12 @@ class ManifestGeneric < Manifest
 end
 
 class ManifestRelease < Manifest
+  def self.schema_id
+    "http://inqlude.org/schema/release-manifest-v1#"
+  end
+
   def initialize
-    super(Manifest.release_schema_id)
+    super(ManifestRelease.schema_id)
   end
 
   def expected_filename
@@ -196,8 +192,12 @@ class ManifestRelease < Manifest
 end
 
 class ManifestProprietaryRelease < Manifest
+  def self.schema_id
+    "http://inqlude.org/schema/proprietary-release-manifest-v1#"
+  end
+
   def initialize
-    super(Manifest.proprietary_release_schema_id)
+    super(ManifestProprietaryRelease.schema_id)
   end
 
   def expected_filename
