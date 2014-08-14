@@ -15,22 +15,19 @@ describe Manifest do
     expect(Manifest.proprietary_release_schema_id).to include("proprietary")
   end
   
-  it "parses schema id" do
-    expect{Manifest.parse_schema_id("xxx")}.to raise_error StandardError
+  it "parses schema version" do
+    expect{Manifest.parse_schema_version("xxx")}.to raise_error StandardError
 
-    type, version = Manifest.parse_schema_id(
+    version = Manifest.parse_schema_version(
       "http://inqlude.org/schema/release-manifest-v1#" )
-    expect(type).to eq "release"
     expect(version).to eq 1
 
-    type, version = Manifest.parse_schema_id(
+    version = Manifest.parse_schema_version(
       "http://inqlude.org/schema/release-manifest-v2#" )
-    expect(type).to eq "release"
     expect(version).to eq 2
 
-    type, version = Manifest.parse_schema_id(
+    version = Manifest.parse_schema_version(
       "http://inqlude.org/schema/generic-manifest-v1#" )
-    expect(type).to eq "generic"
     expect(version).to eq 1
   end
   
@@ -137,7 +134,6 @@ describe Manifest do
 
   it "constructs object from schema id" do
     m = Manifest.new(Manifest::release_schema_id)
-    expect(m.schema_type).to eq "release"
     expect(m.schema_version).to eq 1
   end
 
@@ -154,21 +150,6 @@ describe Manifest do
   it "contructs proprietary release manifest from schema id" do
     expect(Manifest.for_schema_id(Manifest::proprietary_release_schema_id)).to(
       be_a ManifestProprietaryRelease)
-  end
-
-  it "constructs generic schema" do
-    m = ManifestGeneric.new
-    expect(m.schema_type).to eq "generic"
-  end
-
-  it "constructs proprietary schema" do
-    m = ManifestProprietaryRelease.new
-    expect(m.schema_type).to eq "proprietary-release"
-  end
-
-  it "constructs release schema" do
-    m = ManifestRelease.new
-    expect(m.schema_type).to eq "release"
   end
 
   describe ".is_released?" do

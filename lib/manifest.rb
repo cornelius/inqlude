@@ -73,12 +73,12 @@ class Manifest
     JSON.pretty_generate hash
   end
   
-  def self.parse_schema_id schema_id
+  def self.parse_schema_version schema_id
     schema_id =~ /^http:\/\/inqlude\.org\/schema\/(.*)-manifest-v(.*)\#$/
     type = $1
     version = $2.to_i
     raise "Unable to parse schema id '{schema_id}'" if !type || !version
-    return type, version
+    return version
   end
 
   class Packages
@@ -124,20 +124,29 @@ class Manifest
   attr_accessor :urls, :packages
   attr_accessor :licenses, :authors, :platforms
 
-  attr_reader :schema_type, :schema_version
+  attr_reader :schema_version
   attr_reader :schema_id
 
   attr_accessor :filename, :libraryname
 
   def initialize(schema_id)
     @schema_id = schema_id
-    @schema_type, @schema_version = Manifest.parse_schema_id(schema_id)
+    @schema_version = Manifest.parse_schema_version(schema_id)
     @packages = Packages.new
     @urls = Urls.new
     @licenses = Array.new
   end
 
   def schema_name
+    regexp = /Manifest([A-Z][a-z]*)([A-Z][a-z]*)?/
+    match = regexp.match(self.class.to_s)
+    if !match
+      raise "Class '#{self.class} is not a Manifest sub class"
+    end
+    schema_type = match[1].downcase
+    if match[2]
+      schema_type += "-" + match[2].downcase
+    end
     "#{schema_type}-manifest-v#{schema_version}"
   end
 
