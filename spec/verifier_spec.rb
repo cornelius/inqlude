@@ -6,7 +6,7 @@ describe Verifier do
   
   it "defines result class" do
     r = Verifier::Result.new
-    expect(r.valid?).to be false
+    expect(r.valid?).to be true
     expect(r.errors.class).to be Array
   end
   

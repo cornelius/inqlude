@@ -17,7 +17,7 @@
 class Verifier
 
   class Result
-    attr_accessor :valid, :errors, :name
+    attr_accessor :errors, :name
     
     def initialize
       @valid = false
@@ -25,7 +25,7 @@ class Verifier
     end
     
     def valid?
-      @valid
+      @errors.empty?
     end
 
     def print_result
@@ -78,14 +78,8 @@ class Verifier
         @result.errors.push "Schema validation error: #{error}"
       end
     end
-    
-    if @result.errors.empty?
-      @result.valid = true
-      return @result
-    else
-      @result.valid = false
-      return @result
-    end
+
+    @result
   end
 
   def verify_file filename
@@ -93,8 +87,8 @@ class Verifier
       manifest = Manifest.parse_file filename
     rescue VerificationError => e
       @result = Result.new
+      @result.name = filename
       @result.errors.push e
-      @result.valid = false
       return @result
     end
 
