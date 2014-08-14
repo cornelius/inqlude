@@ -57,27 +57,12 @@ class Verifier
     if !manifest.libraryname
       @result.errors.push "Unable to determine libraryname"
     end
-    if manifest.schema_id
-      schema_type = manifest.schema_type
-      if schema_type != "generic" && schema_type != "release" &&
-         schema_type != "proprietary-release"
-        @result.errors.push "Unknown schema type '#{schema_type}'"
-      end
-    else
-      @result.errors.push "Unable to find schema id attribute"
-    end
 
     if @result.errors.empty?
       filename = manifest.filename
       expected_filename = ""
-      schema_type = manifest.schema_type
-      if schema_type == "generic"
-        expected_filename = "#{manifest.libraryname}.manifest"
-      elsif schema_type == "release" || schema_type == "proprietary-release"
-        expected_filename = "#{manifest.libraryname}.#{manifest.release_date}.manifest"
-      end
       
-      if filename != expected_filename
+      if filename != manifest.expected_filename
         @result.errors.push "Expected file name: #{expected_filename}"
       end
 
@@ -85,7 +70,7 @@ class Verifier
         @result.errors.push "Invalid release date: #{manifest.release_date}"
       end
 
-      schema_name = "#{manifest.schema_type}-manifest-v#{manifest.schema_version}"
+      schema_name = manifest.schema_name
       schema_file = File.expand_path("../../schema/#{schema_name}", __FILE__)
 
       errors = JSON::Validator.fully_validate(schema_file, manifest.to_json)
@@ -104,7 +89,15 @@ class Verifier
   end
 
   def verify_file filename
-    manifest = Manifest.parse_file filename
+    begin
+      manifest = Manifest.parse_file filename
+    rescue VerificationError => e
+      @result = Result.new
+      @result.errors.push e
+      @result.valid = false
+      return @result
+    end
+
     verify manifest
   end
 

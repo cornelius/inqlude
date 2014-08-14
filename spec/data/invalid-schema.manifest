@@ -1,0 +1,4 @@
+{
+  "$schema": "http://inqlude.org/schema/invalid-manifest-v1#",
+  "name": "invalid-schema"
+}

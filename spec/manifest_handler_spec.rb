@@ -31,9 +31,9 @@ describe ManifestHandler do
   end
 
   it "reads schema type" do
-    expect(mh.manifest("awesomelib").schema_type).to eq "release"
-    expect(mh.manifest("newlib").schema_type).to eq "generic"
-    expect(mh.manifest("proprietarylib").schema_type).to eq "proprietary-release"
+    expect(mh.manifest("awesomelib").class).to be ManifestRelease
+    expect(mh.manifest("newlib").class).to be ManifestGeneric
+    expect(mh.manifest("proprietarylib").class).to be ManifestProprietaryRelease
   end
 
   context "default manifest path" do
@@ -128,7 +128,7 @@ describe ManifestHandler do
       expect( @manifest_handler.library("karchive").manifests.count ).to eq 2
       generic_manifest = @manifest_handler.library("karchive").generic_manifest
       expect( generic_manifest.name ).to eq "karchive"
-      expect( generic_manifest.schema_type ).to eq "generic"
+      expect( generic_manifest.class ).to be ManifestGeneric
     end
     
     it "lists development versions" do

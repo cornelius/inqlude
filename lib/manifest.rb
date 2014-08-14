@@ -20,7 +20,7 @@ class Manifest
     elsif schema_id == proprietary_release_schema_id
       return ManifestProprietaryRelease.new
     else
-      raise "Unknown schema id '#{schema_id}'"
+      raise VerificationError.new("Unknown schema id '#{schema_id}'")
     end
   end
 
@@ -134,19 +134,37 @@ class Manifest
     @schema_type, @schema_version = Manifest.parse_schema_id(schema_id)
     @packages = Packages.new
     @urls = Urls.new
+    @licenses = Array.new
   end
 
+  def schema_name
+    "#{schema_type}-manifest-v#{schema_version}"
+  end
+
+  def path
+    File.join( name, expected_filename )
+  end
 end
 
 class ManifestGeneric < Manifest
   def initialize
     super(Manifest.generic_schema_id)
   end
-end
 
-class ManifestProprietaryRelease < Manifest
-  def initialize
-    super(Manifest.proprietary_release_schema_id)
+  def expected_filename
+    "#{name}.manifest"
+  end
+
+  def is_released?
+    if licenses == ["Commercial"]
+      return true
+    else
+      return false
+    end
+  end
+
+  def has_version?
+    false
   end
 end
 
@@ -154,4 +172,35 @@ class ManifestRelease < Manifest
   def initialize
     super(Manifest.release_schema_id)
   end
+
+  def expected_filename
+    "#{name}.#{release_date}.manifest"
+  end
+
+  def is_released?
+    return true
+  end
+
+  def has_version?
+    true
+  end
 end
+
+class ManifestProprietaryRelease < Manifest
+  def initialize
+    super(Manifest.proprietary_release_schema_id)
+  end
+
+  def expected_filename
+    "#{name}.#{release_date}.manifest"
+  end
+
+  def is_released?
+    return true
+  end
+
+  def has_version?
+    true
+  end
+end
+

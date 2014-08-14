@@ -17,7 +17,7 @@
       %td.last
         = library.latest_manifest.summary
         %span{"class" => "library-short-meta-data"}
-          - if library.latest_manifest.schema_type == "generic"
+          - if !library.latest_manifest.is_released?
             (unreleased,
           - else
             (#{library.latest_manifest.maturity},

@@ -37,27 +37,25 @@ describe Manifest do
   it "parses release manifest" do
     filename = File.join settings.manifest_path, awesomelib_manifest_file
     manifest = Manifest.parse_file filename
-    expect(manifest).to be_a ManifestRelease
+    expect(manifest.class).to be ManifestRelease
     expect(manifest.name).to eq "awesomelib"
     expect(manifest.version).to eq "0.2.0"
 
     expect(manifest.filename).to eq "awesomelib.2013-09-08.manifest"
     expect(manifest.libraryname).to eq "awesomelib"
 
-    expect(manifest.schema_type).to eq "release"
     expect(manifest.schema_version).to eq 1
   end
 
   it "parses generic manifest" do
     filename = File.join settings.manifest_path, newlib_manifest_file
     manifest = Manifest.parse_file filename
-    expect(manifest).to be_a ManifestGeneric
+    expect(manifest.class).to be ManifestGeneric
     expect(manifest.name).to eq "newlib"
     expect(manifest.version).to eq nil
 
     expect(manifest.filename).to eq "newlib.manifest"
 
-    expect(manifest.schema_type).to eq "generic"
     expect(manifest.schema_version).to eq 1
   end
 
@@ -171,5 +169,99 @@ describe Manifest do
   it "constructs release schema" do
     m = ManifestRelease.new
     expect(m.schema_type).to eq "release"
+  end
+
+  describe ".is_released?" do
+    it "returns release state for generic manifest without commercial license" do
+      expect(ManifestGeneric.new.is_released?).to be false
+    end
+
+    it "returns release state for generic manifest with only commercial license" do
+      manifest = ManifestGeneric.new
+      manifest.licenses << "Commercial"
+      expect(manifest.is_released?).to be true
+    end
+
+    it "returns release state for generic manifest with additional commercial license" do
+      manifest = ManifestGeneric.new
+      manifest.licenses << "Commercial" << "GPLv2"
+      expect(manifest.is_released?).to be false
+    end
+
+    it "returns release state for release manifest" do
+      expect(ManifestRelease.new.is_released?).to be true
+    end
+
+    it "returns release state for proprietary release manifest" do
+      expect(ManifestProprietaryRelease.new.is_released?).to be true
+    end
+  end
+
+  describe ".path" do
+    it "returns generic manifest path" do
+      manifest = create_generic_manifest( "mylib" )
+      expect( manifest.path ).to eq( "mylib/mylib.manifest" )
+    end
+
+    it "returns release manifest path" do
+      manifest = create_manifest( "mylib", "2014-02-01", "1.0" )
+      expect( manifest.path ).to eq( "mylib/mylib.2014-02-01.manifest" )
+    end
+  end
+
+  describe ".expected_filename" do
+    it "returns expected filename for generic manifest" do
+      m = ManifestGeneric.new
+      m.name = "xyz"
+
+      expect(m.expected_filename).to eq "xyz.manifest"
+    end
+
+    it "returns expected filename for release manifest" do
+      m = ManifestRelease.new
+      m.name = "xyz"
+      m.release_date = "2014-08-14"
+
+      expect(m.expected_filename).to eq "xyz.2014-08-14.manifest"
+    end
+
+    it "returns expected filename for proprietary release manifest" do
+      m = ManifestProprietaryRelease.new
+      m.name = "xyz"
+      m.release_date = "2014-08-14"
+
+      expect(m.expected_filename).to eq "xyz.2014-08-14.manifest"
+    end
+  end
+
+  describe ".schema_name" do
+    it "returns expected schema name for generic manifest" do
+      m = ManifestGeneric.new
+      expect(m.schema_name).to eq "generic-manifest-v1"
+    end
+
+    it "returns expected schema name for release manifest" do
+      m = ManifestRelease.new
+      expect(m.schema_name).to eq "release-manifest-v1"
+    end
+
+    it "returns expected schema name for proprietary release manifest" do
+      m = ManifestProprietaryRelease.new
+      expect(m.schema_name).to eq "proprietary-release-manifest-v1"
+    end
+  end
+
+  describe ".has_version?" do
+    it "returns if generic manifest has version" do
+      expect(ManifestGeneric.new.has_version?).to be false
+    end
+
+    it "returns if release manifest has version" do
+      expect(ManifestGeneric.new.has_version?).to be false
+    end
+
+    it "returns if proprietary release manifest has version" do
+      expect(ManifestGeneric.new.has_version?).to be false
+    end
   end
 end

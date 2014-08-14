@@ -9,7 +9,7 @@ class Library
   
   def generic_manifest
     @manifests.each do |m|
-      if m.schema_type == "generic"
+      if m.is_a?(ManifestGeneric)
         return m
       end
     end
@@ -17,7 +17,7 @@ class Library
   end
 
   def release_manifests
-    result = @manifests.reject { |m| m.schema_type == "generic" }
+    result = @manifests.reject { |m| m.is_a?(ManifestGeneric) }
     result.sort! do |m1,m2|
       m1.release_date <=> m2.release_date
     end

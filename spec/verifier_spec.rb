@@ -75,6 +75,15 @@ describe Verifier do
     verification_result = verifier.verify_file( filename )
     expect( verification_result.valid? ).to be true
   end
+
+  it "verifies invalid schema id" do
+    filename = test_data_path("invalid-schema.manifest")
+
+    verifier = Verifier.new settings
+
+    verification_result = verifier.verify_file( filename )
+    expect( verification_result.valid? ).to be false
+  end
   
   it "verifies schema" do
     manifest = ManifestRelease.new

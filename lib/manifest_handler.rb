@@ -26,13 +26,7 @@ class ManifestHandler
   end
 
   def manifest_path manifest
-    if manifest.schema_type == "release"
-      return File.join( @settings.manifest_path, manifest.name,
-        "#{manifest.name}.#{manifest.release_date}.manifest" )
-    else
-      return File.join( @settings.manifest_path, manifest.name,
-        "#{manifest.name}.manifest" )
-    end
+    File.join(@settings.manifest_path, manifest.path)
   end
 
   def libraries maturity = nil
@@ -49,9 +43,7 @@ class ManifestHandler
 
   def unreleased_libraries
     return @libraries.select do |l|
-      manifest = l.latest_manifest
-      manifest.schema_type == "generic" &&
-          manifest.licenses != [ "Commercial" ]
+      !l.latest_manifest.is_released?
     end
   end
   

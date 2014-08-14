@@ -147,7 +147,7 @@ class View
   end
 
   def version_content
-    if @manifest.schema_type == "generic"
+    if @manifest.class == ManifestGeneric
       raise "Can't get version for generic manifest '#{@manifest.name}'"
     end
     out = @manifest.version

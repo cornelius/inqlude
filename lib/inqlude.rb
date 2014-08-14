@@ -8,6 +8,7 @@ require "json-schema"
 require "kramdown"
 require "xdg"
 
+require_relative("exceptions")
 require File.expand_path('../version', __FILE__)
 require File.expand_path('../cli', __FILE__)
 require File.expand_path('../manifest_handler', __FILE__)

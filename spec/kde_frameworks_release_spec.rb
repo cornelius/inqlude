@@ -50,10 +50,10 @@ describe KdeFrameworksRelease do
       expect( File.exists? manifest_path ).to be true
       
       manifest = Manifest.parse_file( manifest_path )
+      expect(manifest.class).to be ManifestRelease
       expect( manifest.name ).to eq "kservice"
       expect( manifest.version ).to eq "4.9.90"
       expect( manifest.release_date ).to eq "2014-02-01"
-      expect( manifest.schema_type ).to eq "release"
     end
   end
 
