@@ -37,7 +37,7 @@ describe Manifest do
   it "parses release manifest" do
     filename = File.join settings.manifest_path, awesomelib_manifest_file
     manifest = Manifest.parse_file filename
-    expect(manifest).to be_a Manifest
+    expect(manifest).to be_a ManifestRelease
     expect(manifest.name).to eq "awesomelib"
     expect(manifest.version).to eq "0.2.0"
 
@@ -51,7 +51,7 @@ describe Manifest do
   it "parses generic manifest" do
     filename = File.join settings.manifest_path, newlib_manifest_file
     manifest = Manifest.parse_file filename
-    expect(manifest).to be_a Manifest
+    expect(manifest).to be_a ManifestGeneric
     expect(manifest.name).to eq "newlib"
     expect(manifest.version).to eq nil
 
@@ -141,6 +141,21 @@ describe Manifest do
     m = Manifest.new(Manifest::release_schema_id)
     expect(m.schema_type).to eq "release"
     expect(m.schema_version).to eq 1
+  end
+
+  it "contructs generic manifest from schema id" do
+    expect(Manifest.for_schema_id(Manifest::generic_schema_id)).to(
+      be_a ManifestGeneric)
+  end
+
+  it "contructs release manifest from schema id" do
+    expect(Manifest.for_schema_id(Manifest::release_schema_id)).to(
+      be_a ManifestRelease)
+  end
+
+  it "contructs proprietary release manifest from schema id" do
+    expect(Manifest.for_schema_id(Manifest::proprietary_release_schema_id)).to(
+      be_a ManifestProprietaryRelease)
   end
 
   it "constructs generic schema" do

@@ -12,9 +12,21 @@ class Manifest
     "http://inqlude.org/schema/proprietary-release-manifest-v1#"
   end
 
+  def self.for_schema_id schema_id
+    if schema_id == generic_schema_id
+      return ManifestGeneric.new
+    elsif schema_id == release_schema_id
+      return ManifestRelease.new
+    elsif schema_id == proprietary_release_schema_id
+      return ManifestProprietaryRelease.new
+    else
+      raise "Unknown schema id '#{schema_id}'"
+    end
+  end
+
   def self.parse_file path
     json = JSON File.read path
-    manifest = Manifest.new(json["$schema"])
+    manifest = Manifest.for_schema_id(json["$schema"])
     manifest.filename = File.basename path
     manifest.filename =~ /^(.*?)\./
     manifest.libraryname = $1
