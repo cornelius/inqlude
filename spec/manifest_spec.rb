@@ -146,6 +146,13 @@ describe Manifest do
     expect(m.schema_version).to eq 1
   end
 
+  it "returns descendants" do
+    expect(Manifest.descendants).to be_a(Array)
+    expect(Manifest.descendants.count).to be >= 3
+    expect(Manifest.descendants).to include ManifestGeneric
+    expect(Manifest.descendants).to include ManifestRelease
+  end
+
   it "contructs generic manifest from schema id" do
     expect(Manifest.for_schema_id(ManifestGeneric.schema_id)).to(
       be_a ManifestGeneric)

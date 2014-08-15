@@ -1,15 +1,16 @@
 class Manifest
 
+  def self.descendants
+    ObjectSpace.each_object(::Class).select { |klass| klass < self }
+  end
+
   def self.for_schema_id schema_id
-    if schema_id == ManifestGeneric.schema_id
-      return ManifestGeneric.new
-    elsif schema_id == ManifestRelease.schema_id
-      return ManifestRelease.new
-    elsif schema_id == ManifestProprietaryRelease.schema_id
-      return ManifestProprietaryRelease.new
-    else
-      raise VerificationError.new("Unknown schema id '#{schema_id}'")
+    descendants.each do |manifest_class|
+      if schema_id == manifest_class.schema_id
+        return manifest_class.new
+      end
     end
+    raise VerificationError.new("Unknown schema id '#{schema_id}'")
   end
 
   def self.parse_file path
