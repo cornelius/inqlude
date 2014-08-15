@@ -227,9 +227,9 @@ class View
   end
 
   def more_urls?
-    @manifest.urls.keys.each do |key|
-      if key != "homepage" && key != "screenshots" && key != "logo" &&
-         key != "description_source"
+    @manifest.urls.class.all_keys.each do |key, type|
+      if key != :homepage && key != :screenshots && key != :logo &&
+         key != :description_source
         if @manifest.urls.send(key)
           return true
         end

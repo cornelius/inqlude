@@ -175,13 +175,13 @@ describe Manifest do
 
     it "returns release state for generic manifest with only commercial license" do
       manifest = ManifestGeneric.new
-      manifest.licenses << "Commercial"
+      manifest.licenses = ["Commercial"]
       expect(manifest.is_released?).to be true
     end
 
     it "returns release state for generic manifest with additional commercial license" do
       manifest = ManifestGeneric.new
-      manifest.licenses << "Commercial" << "GPLv2"
+      manifest.licenses = ["Commercial", "GPLv2"]
       expect(manifest.is_released?).to be false
     end
 
@@ -259,6 +259,43 @@ describe Manifest do
 
     it "returns if proprietary release manifest has version" do
       expect(ManifestGeneric.new.has_version?).to be false
+    end
+  end
+
+  describe ".create_release_manifest" do
+    it "copies all data" do
+      generic = ManifestGeneric.new
+      generic.name = "MyLib"
+      generic.summary = "My Lib"
+      generic.urls.homepage = "http://example.com"
+      generic.urls.download = "http://example.com/download"
+      generic.licenses = ["LGPLv2.1+", "Commercial"]
+      generic.description = "My Library"
+      generic.authors = "Cornelius Schumacher <schumacher@kde.org>"
+      generic.maturity = "stable"
+      generic.platforms = ["Linux"]
+      generic.packages.source = "ftp://example.com"
+      generic.group = "magic"
+
+      release = generic.create_release_manifest("2014-08-17", "1.0")
+
+      expect(release.name).to eq "MyLib"
+      expect(release.summary).to eq "My Lib"
+      expect(release.urls.homepage).to eq "http://example.com"
+      expect(release.urls.download).to eq "http://example.com/download"
+      expect(release.licenses).to eq ["LGPLv2.1+", "Commercial"]
+      expect(release.description).to eq "My Library"
+      expect(release.authors).to eq "Cornelius Schumacher <schumacher@kde.org>"
+      expect(release.maturity).to eq "stable"
+      expect(release.platforms).to eq ["Linux"]
+      expect(release.packages.source).to eq "ftp://example.com"
+      expect(release.group).to eq "magic"
+
+      expect(release.release_date).to eq "2014-08-17"
+      expect(release.version).to eq "1.0"
+    end
+
+    it "sets release_date and version" do
     end
   end
 end

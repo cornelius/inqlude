@@ -1,4 +1,4 @@
-class Manifest
+class Manifest < JsonObject
 
   def self.descendants
     ObjectSpace.each_object(::Class).select { |klass| klass < self }
@@ -20,46 +20,7 @@ class Manifest
     manifest.filename =~ /^(.*?)\./
     manifest.libraryname = $1
 
-    manifest.name = json["name"]
-    manifest.display_name = json["display_name"]
-    manifest.release_date = json["release_date"]
-    manifest.version = json["version"]
-    manifest.summary = json["summary"]
-    json["urls"].each do |key,value|
-      manifest.urls.send(key + "=",value)
-    end
-    manifest.licenses = json["licenses"]
-    manifest.description = json["description"]
-    manifest.authors = json["authors"]
-    manifest.maturity = json["maturity"]
-    manifest.platforms = json["platforms"]
-    if json["packages"]
-      json["packages"].each do |key,value|
-        manifest.packages.send(key + "=", value)
-      end
-    end
-    manifest.group = json["group"]
-
-    manifest
-  end
-  
-  def to_json
-    hash = Hash.new
-    hash["$schema"] = schema_id
-    hash["name"] = name
-    hash["display_name"] = display_name if display_name
-    hash["release_date"] = release_date if release_date
-    hash["version"] = version if version
-    hash["summary"] = summary
-    hash["urls"] = urls.to_hash
-    hash["licenses"] = licenses
-    hash["description"] = description
-    hash["authors"] = authors if authors
-    hash["maturity"] = maturity if maturity
-    hash["platforms"] = platforms
-    hash["packages"] = packages.to_hash if packages.source
-    hash["group"] = group if group
-    JSON.pretty_generate hash
+    manifest.from_hash(json)
   end
   
   def self.parse_schema_version schema_id
@@ -70,60 +31,42 @@ class Manifest
     return version
   end
 
-  class Packages
-    attr_accessor :source, :openSUSE
-
-    def to_hash
-      hash = { "source" => source }
-      hash["openSUSE"] = openSUSE if openSUSE
-      hash
-    end
+  attribute :name
+  attribute :display_name
+  attribute :release_date
+  attribute :version
+  attribute :summary
+  attribute :urls do
+    attribute :homepage
+    attribute :api_docs
+    attribute :download
+    attribute :tutorial
+    attribute :vcs
+    attribute :description_source
+    attribute :announcement
+    attribute :mailing_list
+    attribute :contact
+    attribute :custom
   end
-
-  class Urls
-    attr_accessor :homepage, :api_docs, :download, :tutorial, :vcs,
-      :description_source, :announcement, :mailing_list, :contact
-    attr_accessor :custom
-
-    def keys
-      ["homepage", "api_docs", "download", "tutorial", "vcs",
-       "description_source", "announcement", "mailing_list", "contact",
-       "custom"]
-    end
-
-    def to_hash
-      h = Hash.new
-      h["homepage"] = homepage if homepage
-      h["api_docs"] = api_docs if api_docs
-      h["download"] = download if download
-      h["tutorial"] = tutorial if tutorial
-      h["vcs"] = vcs if vcs
-      h["description_source"] = description_source if description_source
-      h["announcement"] = announcement if announcement
-      h["mailing_list"] = mailing_list if mailing_list
-      h["contact"] = contact if contact
-      h["custom"] = custom if custom
-      h
-    end
+  attribute :licenses
+  attribute :description
+  attribute :authors
+  attribute :maturity
+  attribute :platforms
+  attribute :packages do
+    attribute :source
+    attribute :openSUSE
   end
-
-  attr_accessor :name, :version, :summary, :description, :maturity, :group,
-    :display_name
-  attr_accessor :release_date
-  attr_accessor :urls, :packages
-  attr_accessor :licenses, :authors, :platforms
+  attribute :group
 
   attr_reader :schema_version
-  attr_reader :schema_id
 
   attr_accessor :filename, :libraryname
 
   def initialize(schema_id)
     @schema_id = schema_id
     @schema_version = Manifest.parse_schema_version(schema_id)
-    @packages = Packages.new
-    @urls = Urls.new
-    @licenses = Array.new
+    super()
   end
 
   def schema_name
@@ -158,6 +101,9 @@ class ManifestGeneric < Manifest
   end
 
   def is_released?
+    # Purely commercial libraries often don't have release information publicly
+    # available, so we treat them as released, even, if the manifest only has
+    # generic data.
     if licenses == ["Commercial"]
       return true
     else
@@ -167,6 +113,20 @@ class ManifestGeneric < Manifest
 
   def has_version?
     false
+  end
+
+  def create_release_manifest(release_date, version)
+    m = ManifestRelease.new
+    ManifestGeneric.all_keys.each do |key, type|
+      value = send("#{key}")
+      if value
+        m.send("#{key}=", value)
+      end
+    end
+
+    m.release_date = release_date
+    m.version = version
+    m
   end
 end
 

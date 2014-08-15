@@ -36,7 +36,7 @@ class ManifestHandler
       return @libraries.select do |l|
         manifest = l.latest_manifest
         manifest.maturity == maturity.to_s &&
-            manifest.licenses != [ "Commercial" ]
+          manifest.licenses != [ "Commercial" ]
       end
     end
   end
