@@ -120,6 +120,18 @@ describe View do
       expect(v.version_content).to include "4.97.0"
       expect(v.version_content).to include( "older versions" )
     end
+
+    it "creates inqlude-all.json" do
+      v = View.new @manifest_handler
+      dir = given_directory
+
+      v.create_inqlude_all(dir)
+
+      all_path = File.join(dir, "inqlude-all.json")
+      expect(File.exists?(all_path)).to be true
+      expected_all_content = File.read(test_data_path("inqlude-all-karchive.json"))
+      expect(File.read(all_path)).to eq expected_all_content
+    end
     
   end
 

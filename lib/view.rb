@@ -70,6 +70,14 @@ class View
       file_name = "libraries/" + library.name
       render_template "library", output_dir, file_name
     end
+
+    create_inqlude_all(output_dir)
+  end
+
+  def create_inqlude_all(output_dir)
+    File.open(File.join(output_dir, "inqlude-all.json"), "w") do |f|
+      f.write(@manifest_handler.generate_inqlude_all)
+    end
   end
 
   def render_template name, output_dir, file_name = nil

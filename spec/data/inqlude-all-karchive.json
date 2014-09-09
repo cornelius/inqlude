@@ -1,0 +1,31 @@
+[
+  {
+    "$schema": "http://inqlude.org/schema/release-manifest-v1#",
+    "name": "karchive",
+    "display_name": "KArchive",
+    "release_date": "2014-03-04",
+    "version": "4.97.0",
+    "summary": "Reading, creating, and manipulating file archives",
+    "urls": {
+      "homepage": "https://projects.kde.org/projects/frameworks/karchive",
+      "download": "ftp://ftp.kde.org/pub/kde/stable/karchive/",
+      "vcs": "https://projects.kde.org/projects/frameworks/karchive/repository",
+      "mailing_list": "https://mail.kde.org/mailman/listinfo/kde-frameworks-devel"
+    },
+    "licenses": [
+      "LGPLv2.1+"
+    ],
+    "description": "KArchive provides classes for easy reading, creation and manipulation of\n\"archive\" formats like ZIP and TAR.\n\nIf also provides transparent compression and decompression of data, like the\nGZip format, via a subclass of QIODevice.",
+    "authors": [
+      "The KDE Community"
+    ],
+    "maturity": "alpha",
+    "platforms": [
+      "Linux"
+    ],
+    "packages": {
+      "source": "ftp://ftp.kde.org/pub/kde/stable/karchive/karchive-4.97.0.tar.bz2"
+    },
+    "group": "kde-frameworks"
+  }
+]
