@@ -263,6 +263,19 @@ actual domain."
     end
   end
 
+  desc "download", "Download source code archive"
+  def download(name)
+    handler = ManifestHandler.new(@@settings)
+    handler.read_remote
+    manifest = handler.manifest(name)
+    if !manifest
+      STDERR.outs "Manifest for '#{name}' not found"
+      exit 1
+    else
+      Downloader.new(handler, STDOUT).download(name, Dir.pwd)
+    end
+  end
+
   private
   
   def process_global_options options
