@@ -1,21 +1,16 @@
-# 0.7 (Alpha) (first announcement, ready for early adopters)
-
-* Release it
-
-
 # 0.8 (Alpha) (second announcement, ready for contributors)
 
+* Review fetch_remote implementation (ManifestHandler#manifest)
 * Create ROADMAP.md
 * Define milestones on GitHub and reference issues
 * Move all issues from this file to GitHub
 * Add Upstream.get_involved for all issues where possible
+* Document inqlude-all.json
 
 * Release it
 
 
 # 0.9 (Beta) (ready for contributors of meta data, schema stable)
-
-* Replace manifest hash by Manifest object
 
 * Add display name  High Priority #12
 * Check platform attribute for valid entries  High Priority #18
@@ -36,6 +31,8 @@
 * Add command for showing library details  High Priority #1
 
 * Turn alpha ribbon into beta ribbon on web site
+
+* Commit hook on server to verify the manifests
 
 * Release it
 
@@ -67,6 +64,16 @@
 * Get manifests from build service
 * List libraries with available packages
 * Properly identify repository (use vendor?)
+* Dependencies to other libraries
+   * Get from list_dependencies in kde build meta data
+* Qt version information
+   * minimum_qt_version = [ 4.2.1, 5.1.0 ]
+   or
+   * split manifests between Qt 4 and Qt 5 (directory with Qt version suffix)
+* Check installation experience on Mac
+* Check installation experience on Windows
+* User client without dependencies on git and Ruby
+* Integration tests for download/list/etc. functionality
 
 * Release it
 
