@@ -117,4 +117,11 @@ class ManifestHandler
     end
   end
 
+  def generate_inqlude_all
+    all = []
+    libraries.each do |l|
+      all.push(l.latest_manifest.to_hash)
+    end
+    JSON.pretty_generate(all)
+  end
 end

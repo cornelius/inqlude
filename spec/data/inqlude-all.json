@@ -1,0 +1,120 @@
+[
+  {
+    "$schema": "http://inqlude.org/schema/release-manifest-v1#",
+    "name": "awesomelib",
+    "release_date": "2013-09-08",
+    "version": "0.2.0",
+    "summary": "Awesome library",
+    "urls": {
+      "homepage": "http://example.com",
+      "download": "http://example.com/download"
+    },
+    "licenses": [
+      "LGPLv2.1+",
+      "Commercial"
+    ],
+    "description": "This is an awesome library.",
+    "authors": [
+      "Cornelius Schumacher <schumacher@kde.org>"
+    ],
+    "maturity": "stable",
+    "platforms": [
+      "Linux"
+    ],
+    "packages": {
+      "source": "ftp://example.com/download/awesomelib-0.2.0.tar.gz"
+    },
+    "group": "kde-frameworks"
+  },
+  {
+    "$schema": "http://inqlude.org/schema/release-manifest-v1#",
+    "name": "bleedingedge",
+    "release_date": "2012-01-01",
+    "version": "edge",
+    "summary": "Bleeding edge version of a library",
+    "urls": {
+      "homepage": "http://example.org",
+      "download": "http://example.org/download"
+    },
+    "licenses": [
+      "GPLv3"
+    ],
+    "description": "This is an awesome library. It's bleeding edge.",
+    "authors": [
+      "Cornelius Schumacher <schumacher@kde.org>"
+    ],
+    "maturity": "edge",
+    "platforms": [
+      "Linux"
+    ],
+    "packages": {
+      "source": "ftp://example.org/download/bleedingedge-latest.tar.gz"
+    },
+    "group": "kde-frameworks"
+  },
+  {
+    "$schema": "http://inqlude.org/schema/generic-manifest-v1#",
+    "name": "commercial",
+    "summary": "Commercial library",
+    "urls": {
+      "homepage": "http://commercial.example.org"
+    },
+    "licenses": [
+      "Commercial"
+    ],
+    "description": "Library only available under commercial license.",
+    "authors": [
+      "John Doe <doe@example.org>"
+    ],
+    "maturity": "stable",
+    "platforms": [
+      "Linux",
+      "Windows"
+    ]
+  },
+  {
+    "$schema": "http://inqlude.org/schema/generic-manifest-v1#",
+    "name": "newlib",
+    "summary": "A new lib under heavy development",
+    "urls": {
+      "homepage": "http://new.example.org",
+      "download": "http://new.example.org/download"
+    },
+    "licenses": [
+      "GPLv3"
+    ],
+    "description": "This is an awesome library. It's new.",
+    "authors": [
+      "Cornelius Schumacher <schumacher@kde.org>"
+    ],
+    "platforms": [
+      "Linux",
+      "Windows"
+    ]
+  },
+  {
+    "$schema": "http://inqlude.org/schema/proprietary-release-manifest-v1#",
+    "name": "proprietarylib",
+    "release_date": "2013-12-22",
+    "version": "1.2.1",
+    "summary": "Awesome proprietary library",
+    "urls": {
+      "homepage": "http://xyz.example.com",
+      "download": "http://xyz.example.com/download"
+    },
+    "licenses": [
+      "LGPLv2.1+",
+      "Commercial"
+    ],
+    "description": "This is an awesome proprietarylibrary.",
+    "authors": [
+      "Cool Company"
+    ],
+    "maturity": "stable",
+    "platforms": [
+      "Linux",
+      "Windows",
+      "OS X"
+    ]
+  }
+]
