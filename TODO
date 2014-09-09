@@ -1,6 +1,8 @@
 # 0.8 (Alpha) (second announcement, ready for contributors)
 
 * Review fetch_remote implementation (ManifestHandler#manifest)
+* inqlude download <libname> - Download latest tarball to current directory
+
 * Create ROADMAP.md
 * Define milestones on GitHub and reference issues
 * Move all issues from this file to GitHub
@@ -74,6 +76,7 @@
 * Check installation experience on Windows
 * User client without dependencies on git and Ruby
 * Integration tests for download/list/etc. functionality
+* Define way to manage local downloads
 
 * Release it
 
