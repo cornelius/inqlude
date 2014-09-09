@@ -86,7 +86,10 @@ actual domain."
       @@settings.manifest_path = options[:manifest_dir]
     end
     
-    view = View.new ManifestHandler.new @@settings
+    manifest_handler = ManifestHandler.new(@@settings)
+    manifest_handler.read_remote
+
+    view = View.new(manifest_handler)
     view.enable_disqus = options[:enable_disqus]
     view.enable_search = !options[:disable_search]
     view.create options[:output_dir]

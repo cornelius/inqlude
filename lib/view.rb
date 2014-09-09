@@ -36,6 +36,9 @@ class View
     assert_dir "#{output_dir}/schema"
     system "cp #{schema_dir}/* #{output_dir}/schema"
 
+    create_inqlude_all(output_dir)
+
+
     @root = ""
 
     render_template "index", output_dir
@@ -70,8 +73,6 @@ class View
       file_name = "libraries/" + library.name
       render_template "library", output_dir, file_name
     end
-
-    create_inqlude_all(output_dir)
   end
 
   def create_inqlude_all(output_dir)
@@ -205,9 +206,6 @@ class View
   end
   
   def libraries maturity = nil
-    if @manifest_handler.libraries(maturity).empty?
-      @manifest_handler.read_remote
-    end
     @manifest_handler.libraries(maturity)
   end
   

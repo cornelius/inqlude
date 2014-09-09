@@ -71,7 +71,6 @@ class ManifestHandler
   end
   
   def manifest name
-    read_remote
     @libraries.each do |library|
       if library.name == name
         return library.latest_manifest
