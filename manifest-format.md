@@ -109,6 +109,10 @@ All URLs are represented as a key specifying the type of the URL and the
 actual URL itself. Arbitrary types can be defined. Some types are used for
 specific purposes and get special treatment.
 
+All these URLs are meant to be consumed by humans, so they should work and make
+sense when shown in a web browser. Other than that they don't have very strict
+requirements. They are not necessarily meant to be read programmatically.
+
 The following types are recognized:
 
 * "homepage": Home page of the library. This is the main URL used as entry point
