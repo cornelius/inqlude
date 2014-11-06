@@ -60,13 +60,17 @@ describe KdeFrameworksRelease do
   it "creates release manifest from generic manifest" do
     generic_manifest = Manifest.parse_file(
       given_file("karchive-generic.manifest") )
-    date = "2014-07-07"
-    version = "5.0.0"
+    date = "2014-11-06"
+    version = "5.4.0"
     release_manifest = KdeFrameworksRelease.create_release_manifest(
       generic_manifest, date, version)
-    expected_json = File.read( given_file("karchive-release.manifest") )
+    expected_json = File.read( given_file("karchive-release-5.4.manifest") )
     expected_json.chomp! # Remove newline added by File.read
     expect( release_manifest.to_json ).to eq expected_json
+  end
+
+  it "strips patch release" do
+    expect(KdeFrameworksRelease.strip_patch_release("5.4.0")).to eq "5.4"
   end
   
 end

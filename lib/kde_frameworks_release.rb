@@ -22,10 +22,17 @@ class KdeFrameworksRelease
     @handler = handler
   end
   
+  def self.strip_patch_release(version)
+    version =~ /^(\d+\.\d+)\./
+    $1
+  end
+
   def self.create_release_manifest generic_manifest, release_date, version
     m = generic_manifest.create_release_manifest(release_date, version)
 
-    download_url = "http://download.kde.org/stable/frameworks/#{version}/"
+    version_dir = strip_patch_release(version)
+
+    download_url = "http://download.kde.org/stable/frameworks/#{version_dir}/"
     m.urls.download = download_url
     m.maturity = "stable"
     m.packages.source = "#{download_url}#{m.name}-#{version}.tar.xz"
