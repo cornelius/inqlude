@@ -11,8 +11,17 @@
   the libraries you need with just a few commands, without having to know
   URLs, or how libraries are packages.
 %p
-  First you need to get the command line client. It's available as a Ruby
-  gem, so when you have rubygems installed you can simply do a
+  First you need to get the command line client.
+  It's a Qt 5 application. If your distribution doesn't have a package for
+  inqlude-client, you can download its sources from
+  = link_to( "download.kde.org", "http://download.kde.org/devel/helpers/")
+  or using
+  .code
+    git clone git://anongit.kde.org/inqlude-client
+%p
+  There is a second command line client, written in Ruby. It can also
+  download libraries, but it is mostly aimed at maintaining the inqlude data.
+  It's available as a Ruby gem, so when you have rubygems installed you can simply do a
   .code
     sudo gem install inqlude
   (For instructions how to get rubygems, see
