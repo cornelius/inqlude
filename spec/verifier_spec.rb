@@ -47,7 +47,11 @@ describe Verifier do
     expect(verifier.verify(manifest).valid?).to be true
     
     manifest.filename = "wrongname"
-    expect(verifier.verify(manifest).valid?).to be false
+
+    result = verifier.verify(manifest)
+
+    expect(result.valid?).to be false
+    expect(result.errors.first).to eq "Expected file name: awesomelib.2013-09-08.manifest"
   end
 
   it "verifies release manifest file" do

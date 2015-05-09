@@ -60,10 +60,9 @@ class Verifier
 
     if @result.errors.empty?
       filename = manifest.filename
-      expected_filename = ""
       
       if filename != manifest.expected_filename
-        @result.errors.push "Expected file name: #{expected_filename}"
+        @result.errors.push "Expected file name: #{manifest.expected_filename}"
       end
 
       if manifest.release_date == "1970-01-01"

@@ -113,6 +113,8 @@ actual domain."
       exit 1
     end
     
+    errors = []
+
     if filename
       result = v.verify_file filename
       result.print_result
@@ -120,7 +122,6 @@ actual domain."
       handler = ManifestHandler.new @@settings
       handler.read_remote
       count_ok = 0
-      count_error = 0
       handler.libraries.each do |library|
         library.manifests.each do |manifest|
           result = v.verify manifest
@@ -128,12 +129,23 @@ actual domain."
           if result.valid?
             count_ok += 1
           else
-            count_error += 1
+            errors.push result
           end
         end
       end
+      puts
       puts "#{handler.manifests.count} manifests checked. #{count_ok} ok, " +
-        "#{count_error} with error."
+        "#{errors.count} with error."
+      if !errors.empty?
+        puts
+        puts "Errors:"
+        errors.each do |error|
+          puts "  #{error.name}"
+          error.errors.each do |e|
+            puts "    #{e}"
+          end
+        end
+      end
     end
   end
 
