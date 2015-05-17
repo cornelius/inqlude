@@ -144,7 +144,7 @@ describe KdeFrameworksCreator do
       
       f = c.framework("ki18n")
       
-      expect( c.errors.count ).to eq 4
+      expect( c.errors.count ).to eq 3
       
       error_hash = {}
       c.errors.each do |error|
@@ -154,7 +154,6 @@ describe KdeFrameworksCreator do
       expect( error_hash.has_key? "missing_title" ).to be true
       expect( error_hash.has_key? "missing_summary" ).to be true
       expect( error_hash.has_key? "missing_introduction" ).to be true
-      expect( error_hash.has_key? "missing_link_home_page" ).to be true
     end
     
     it "generates error for missing summary" do
@@ -173,7 +172,7 @@ describe KdeFrameworksCreator do
       expect( f["title"] ).to eq "KService"
       expect( f["summary"] ).to be nil
       
-      expect( c.errors.count ).to eq 3
+      expect( c.errors.count ).to eq 2
     end
       
     it "optionally doesn't generate error for missing summary" do

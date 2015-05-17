@@ -52,6 +52,10 @@ class KdeFrameworksCreator
     name = extract_name( path )
     framework = @frameworks[name] || {}
 
+    framework["link_home_page"] = "https://projects.kde.org/projects/frameworks/#{name}"
+    framework["link_mailing_list"] = "https://mail.kde.org/mailman/listinfo/kde-frameworks-devel"
+    framework["link_git_repository"] = "https://projects.kde.org/projects/frameworks/#{name}/repository"
+
     state = nil
     File.open(File.join(path,"README.md")).each_line do |line|
       if line =~ /^# (.*)/
