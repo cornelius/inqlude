@@ -56,6 +56,8 @@ class Manifest < JsonObject
   attribute :packages do
     attribute :source
     attribute :openSUSE
+    attribute :windows
+    attribute :ubuntu
   end
   attribute :group
 
