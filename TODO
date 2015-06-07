@@ -8,9 +8,6 @@
 * Split cli #23
 * Sort out client naming
 
-* Use SPDX license identifiers (http://spdx.org/licenses/)
-* Link to license text  Medium Priority #14
-
 * Point KDE Frameworks homepages to http://api.kde.org
 
 * Release it
@@ -25,6 +22,8 @@
 * Add attribute for screenshots  Medium Priority #10
 * Add bugtracker URL  Low Priority #7
 * Add vcs:git:clone_url
+* Use SPDX license identifiers (http://spdx.org/licenses/)
+* Link to license text  Medium Priority #14
 
 * Define maturity scale
 * State policy for inclusion of libraries (at least one stable release, no qt3,
@@ -90,5 +89,4 @@
 
 # Later
 
-* Create more friendly progress display for cache creation  Low Priority #3
 * Add some quality indication  Low Priority #17
