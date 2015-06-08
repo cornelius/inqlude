@@ -20,6 +20,7 @@ class Cli < Thor
 
   class_option :version, :type => :boolean, :desc => "Show version"
   class_option :offline, :type => :boolean, :desc => "Work offline"
+  class_option :manifest_dir, :type => :string, :desc => "Manifest directory"
 
   def self.settings= s
     @@settings = s
@@ -292,6 +293,9 @@ actual domain."
   
   def process_global_options options
     @@settings.offline = options[:offline]
+    if options[:manifest_dir]
+      @@settings.manifest_path = options[:manifest_dir]
+    end
   end
 
 end
