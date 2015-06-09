@@ -4,7 +4,14 @@
 * Define milestones on GitHub and reference issues
 * Move all issues from this file to GitHub
 * Add Upstream.get_involved for all issues where possible
-* Document inqlude-all.json
+
+* Split cli #23
+* Sort out client naming
+
+* Use SPDX license identifiers (http://spdx.org/licenses/)
+* Link to license text  Medium Priority #14
+
+* Point KDE Frameworks homepages to http://api.kde.org
 
 * Release it
 
@@ -14,10 +21,10 @@
 * Add display name  High Priority #12
 * Check platform attribute for valid entries  High Priority #18
 * Check maturity for valid values  High Priority #16
-* Link to license text  Medium Priority #14
 * Add a comment field for authors  Medium Priority #15
 * Add attribute for screenshots  Medium Priority #10
 * Add bugtracker URL  Low Priority #7
+* Add vcs:git:clone_url
 
 * Define maturity scale
 * State policy for inclusion of libraries (at least one stable release, no qt3,
@@ -26,6 +33,9 @@
   tags in meta data for bound library)
 
 * Show Qt5 compability  High Priority #20
+
+* Define how to handle dependencies between libraries on inqlude.org
+
 * Check links  Medium Priority #11
 * Add command for showing library details  High Priority #1
 
