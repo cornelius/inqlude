@@ -1,10 +1,9 @@
 require 'given_filesystem/spec_helpers'
-require 'cli_tester'
 
-require File.expand_path('../../lib/inqlude', __FILE__)
+require_relative "../../lib/inqlude"
 
 def test_data_path file_name
-  File.expand_path(File.join('../data/', file_name), __FILE__)
+  File.expand_path(File.join('../../data/', file_name), __FILE__)
 end
 
 def create_manifest name, release_date, version
