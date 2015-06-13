@@ -1,20 +1,6 @@
 require_relative "spec_helper"
 
-class CommandResult
-  attr_accessor :stdout, :stderr, :exit_code
-end
-
-def run_command(args: "")
-  cmd = "bin/inqlude"
-  if args
-    cmd += " " + args
-  end
-  result = CommandResult.new
-  result.stdout = `#{cmd}`
-  result.stderr = ""
-  result.exit_code = 0
-  result
-end
+include CliTester
 
 describe "Command line interface" do
   include GivenFilesystemSpecHelpers
@@ -38,7 +24,8 @@ describe "Command line interface" do
         given_directory_from_data("newlib")
       end
 
-      result = run_command(args: "list --remote --offline --manifest_dir=#{dir}")
+      result = run_command(args: ["list", "--remote", "--offline",
+        "--manifest_dir=#{dir}"])
       expect(result.exit_code).to eq(0)
       expect(result.stdout).to eq("awesomelib (0.2.0)\n")
       expect(result.stderr.empty?).to be(true)

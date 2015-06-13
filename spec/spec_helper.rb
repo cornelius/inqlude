@@ -1,4 +1,5 @@
 require 'given_filesystem/spec_helpers'
+require 'cli_tester'
 
 require File.expand_path('../../lib/inqlude', __FILE__)
 
