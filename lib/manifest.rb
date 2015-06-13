@@ -27,8 +27,10 @@ class Manifest < JsonObject
     schema_id =~ /^http:\/\/inqlude\.org\/schema\/(.*)-manifest-v(.*)\#$/
     type = $1
     version = $2.to_i
-    raise "Unable to parse schema id '{schema_id}'" if !type || !version
-    return version
+    if !type || !version
+      raise InqludeError.new("Unable to parse schema id '{schema_id}'")
+    end
+    version
   end
 
   attribute :name

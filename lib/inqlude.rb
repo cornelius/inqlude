@@ -8,6 +8,9 @@ require "json-schema"
 require "kramdown"
 require "xdg"
 
+class InqludeError < StandardError
+end
+
 require_relative("json_object")
 require_relative("exceptions")
 require_relative("version")

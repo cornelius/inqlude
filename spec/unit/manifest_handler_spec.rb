@@ -27,7 +27,7 @@ describe ManifestHandler do
 
   it "provides access to manifests" do
     expect(mh.manifest("awesomelib")).to be_a Manifest
-    expect { mh.manifest("nonexisting") }.to raise_error
+    expect { mh.manifest("nonexisting") }.to raise_error(InqludeError)
   end
 
   it "reads schema type" do

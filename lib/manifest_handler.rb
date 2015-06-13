@@ -76,7 +76,7 @@ class ManifestHandler
         return library.latest_manifest
       end
     end
-    raise "Unable to find manifest '#{name}'"
+    raise InqludeError.new("Unable to find manifest '#{name}'")
   end
 
   def read_remote

@@ -157,7 +157,7 @@ class View
 
   def version_content
     if @manifest.class == ManifestGeneric
-      raise "Can't get version for generic manifest '#{@manifest.name}'"
+      raise InqludeError.new("Can't get version for generic manifest '#{@manifest.name}'")
     end
     out = @manifest.version
     out += " (#{@manifest.maturity})"

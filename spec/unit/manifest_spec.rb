@@ -25,7 +25,7 @@ describe Manifest do
   end
   
   it "parses schema version" do
-    expect{Manifest.parse_schema_version("xxx")}.to raise_error StandardError
+    expect{Manifest.parse_schema_version("xxx")}.to raise_error(InqludeError)
 
     version = Manifest.parse_schema_version(
       "http://inqlude.org/schema/release-manifest-v1#" )

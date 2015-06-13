@@ -34,8 +34,8 @@ describe Verifier do
     manifest = handler.manifest("awesomelib")
     expect(verifier.verify(manifest).valid?).to be true
 
-    expect{ manifest.invalidentry }.to raise_error
-    expect{ manifest["invalidentry"] }.to raise_error
+    expect{ manifest.invalidentry }.to raise_error(NoMethodError)
+    expect{ manifest["invalidentry"] }.to raise_error(NoMethodError)
   end
 
   it "detects name mismatch" do

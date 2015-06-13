@@ -24,7 +24,7 @@ describe View do
       v.library = mh.library "newlib"
       v.manifest = v.library.latest_manifest
       
-      expect{v.version_content}.to raise_error RuntimeError
+      expect{v.version_content}.to raise_error(InqludeError)
     end
 
     it "returns list of unreleased libraries" do

@@ -7,7 +7,7 @@ describe KdeFrameworksCreator do
   describe "#framework" do
     it "raises error on invalid name" do
       c = KdeFrameworksCreator.new
-      expect{c.framework("invalid-name")}.to raise_error
+      expect{c.framework("invalid-name")}.to raise_error(InqludeError)
     end
   end
   

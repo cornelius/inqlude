@@ -42,7 +42,7 @@ class KdeFrameworksCreator
   
   def framework name
     f = @frameworks[name]
-    raise "Unable to read '#{name}'" if !f
+    raise InqludeError.new("Unable to read '#{name}'") if !f
     f
   end
   
