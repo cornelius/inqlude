@@ -17,7 +17,7 @@ describe "Command line interface" do
 
       result = run_command(args: ["list", "--remote", "--offline",
         "--manifest_dir=#{dir}"])
-      expect(result).to exit_with_success("awesomelib (0.2.0)\n")
+      expect(result).to exit_with_success("awesomelib (0.2.0)\nnewlib ()\n")
     end
   end
 end
