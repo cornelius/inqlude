@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency "xdg"
 
   s.add_development_dependency "rspec", "~>3"
-  s.add_development_dependency "given_filesystem"
+  s.add_development_dependency "given_filesystem",  ">=0.1.2"
   s.add_development_dependency "cli_tester"
 
   s.files        = `git ls-files`.split("\n")
