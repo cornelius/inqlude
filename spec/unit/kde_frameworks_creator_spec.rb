@@ -111,7 +111,7 @@ describe KdeFrameworksCreator do
       expect(karchive["introduction"]).to eq "KArchive provides classes for easy reading, creation and manipulation of\n\"archive\" formats like ZIP and TAR.\n\nIf also provides transparent compression and decompression of data, like the\nGZip format, via a subclass of QIODevice."
       expect(karchive["link_mailing_list"]).to eq "https://mail.kde.org/mailman/listinfo/kde-frameworks-devel"
       expect(karchive["link_git_repository"]).to eq "https://projects.kde.org/projects/frameworks/karchive/repository"
-      expect(karchive["link_home_page"]).to eq "https://projects.kde.org/projects/frameworks/karchive"
+      expect(karchive["link_home_page"]).to eq "http://api.kde.org/frameworks-api/frameworks5-apidocs/karchive/html/index.html"
       expect(karchive["summary"]).to eq "Reading, creation, and manipulation of file archives"
     end
 
@@ -255,7 +255,7 @@ describe KdeFrameworksCreator do
         expect( manifest.name ).to eq "karchive"
         expect( manifest.display_name ).to eq "KArchive"
         expect( manifest.urls.vcs ).to eq "https://projects.kde.org/projects/frameworks/karchive/repository"
-        expect( manifest.urls.homepage ).to eq "https://projects.kde.org/projects/frameworks/karchive"
+        expect( manifest.urls.homepage ).to eq "http://api.kde.org/frameworks-api/frameworks5-apidocs/karchive/html/index.html"
         expect( manifest.description ).to eq "KArchive provides classes for easy reading, creation and manipulation of\n\"archive\" formats like ZIP and TAR.\n\nIf also provides transparent compression and decompression of data, like the\nGZip format, via a subclass of QIODevice."
         expect( manifest.urls.mailing_list ).to eq "https://mail.kde.org/mailman/listinfo/kde-frameworks-devel"
         expect( manifest.summary ).to eq "Reading, creation, and manipulation of file archives"
