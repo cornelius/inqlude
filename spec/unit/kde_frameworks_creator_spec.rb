@@ -38,14 +38,17 @@ describe KdeFrameworksCreator do
       before(:each) do
         @checkout_path = given_directory do
           given_directory "karchive" do
+            given_directory(".git")
             given_dummy_file "README.md"
             given_dummy_file "AUTHORS"
           end
           given_directory "threadweaver" do
+            given_directory(".git")
             given_dummy_file "README.md"
             given_dummy_file "AUTHORS"
           end
           given_directory "kconfig" do
+            given_directory(".git")
             given_dummy_file "README.md"
             given_dummy_file "AUTHORS"
           end
@@ -56,7 +59,7 @@ describe KdeFrameworksCreator do
         c = KdeFrameworksCreator.new
 
         c.parse_checkout @checkout_path
-        
+
         expect( c.frameworks.sort ).to eq ["karchive", "kconfig", "threadweaver"]
       end
 
@@ -78,10 +81,23 @@ describe KdeFrameworksCreator do
       end
     end
 
+    it "skips non checkout directories" do
+      c = KdeFrameworksCreator.new
+
+      checkout_path = given_directory do
+        given_directory("empty")
+      end
+
+      c.parse_checkout checkout_path
+
+      expect(c.frameworks.count).to eq 0
+    end
+
     it "parses README" do
       c = KdeFrameworksCreator.new
       
       framework_path = given_directory "karchive" do
+        given_directory(".git")
         given_file "README.md", :from => "karchive.readme"
       end
       
@@ -119,6 +135,7 @@ describe KdeFrameworksCreator do
 
       checkout_path = given_directory do
         given_directory "ki18n" do
+          given_directory(".git")
           given_dummy_file "README.md"
         end
       end
@@ -136,6 +153,7 @@ describe KdeFrameworksCreator do
 
       checkout_path = given_directory do
         given_directory "ki18n" do
+          given_directory(".git")
           given_dummy_file "README.md"
         end
       end
@@ -161,6 +179,7 @@ describe KdeFrameworksCreator do
 
       checkout_path = given_directory do
         given_directory "kservice" do
+          given_directory(".git")
           given_file "README.md", :from => "kservice.readme"
         end
       end
@@ -180,6 +199,7 @@ describe KdeFrameworksCreator do
 
       checkout_path = given_directory do
         given_directory "kservice" do
+          given_directory(".git")
           given_file "README.md", :from => "kservice.readme"
         end
       end
@@ -198,6 +218,7 @@ describe KdeFrameworksCreator do
       before(:each) do
         @checkout_path = given_directory do
           given_directory "karchive" do
+            given_directory(".git")
             given_file "README.md", :from => "karchive.readme"
             given_file "AUTHORS", :from => "karchive.authors"
           end

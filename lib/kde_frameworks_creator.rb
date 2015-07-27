@@ -29,6 +29,7 @@ class KdeFrameworksCreator
       next if entry =~ /^\./
       next if entry == "kapidox"
       next if entry == "kde4support"
+      next if !File.exist?(File.join(dir_name, entry, ".git"))
       
       @frameworks[entry] = {}
       parse_readme File.join(dir_name,entry), options
