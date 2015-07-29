@@ -115,6 +115,22 @@ describe KdeFrameworksCreator do
       expect(karchive["summary"]).to eq "Reading, creation, and manipulation of file archives"
     end
 
+    it "parses metainfo.yaml" do
+      c = KdeFrameworksCreator.new
+
+      framework_path = given_directory "karchive" do
+        given_file "metainfo.yaml", from: "karchive.metainfo.yaml"
+      end
+
+      c.parse_metainfo framework_path
+
+      expect(c.errors.empty?).to be(true)
+
+      karchive = c.framework("karchive")
+
+      expect(karchive["summary"]).to eq "File compression"
+    end
+
     it "parses AUTHORS" do
       c = KdeFrameworksCreator.new
       
@@ -136,6 +152,7 @@ describe KdeFrameworksCreator do
       checkout_path = given_directory do
         given_directory "ki18n" do
           given_directory(".git")
+          given_dummy_file "metainfo.yaml"
           given_dummy_file "README.md"
         end
       end
@@ -170,7 +187,6 @@ describe KdeFrameworksCreator do
       end
       
       expect( error_hash.has_key? "missing_title" ).to be true
-      expect( error_hash.has_key? "missing_summary" ).to be true
       expect( error_hash.has_key? "missing_introduction" ).to be true
     end
     
@@ -221,6 +237,7 @@ describe KdeFrameworksCreator do
             given_directory(".git")
             given_file "README.md", :from => "karchive.readme"
             given_file "AUTHORS", :from => "karchive.authors"
+            given_file "metainfo.yaml", from: "karchive.metainfo.yaml"
           end
         end
       end
@@ -232,6 +249,7 @@ describe KdeFrameworksCreator do
         
         karchive = c.framework("karchive")
         expect(karchive["title"]).to eq "KArchive"
+        expect(karchive["summary"]).to eq "File compression"
         expect(karchive["link_git_repository"]).to eq "https://projects.kde.org/projects/frameworks/karchive/repository"
         expect(karchive["authors"]).to eq [ "Mario Bensi <mbensi@ipsquad.net>",
           "David Faure <faure@kde.org>" ]
@@ -258,7 +276,7 @@ describe KdeFrameworksCreator do
         expect( manifest.urls.homepage ).to eq "http://api.kde.org/frameworks-api/frameworks5-apidocs/karchive/html/index.html"
         expect( manifest.description ).to eq "KArchive provides classes for easy reading, creation and manipulation of\n\"archive\" formats like ZIP and TAR.\n\nIf also provides transparent compression and decompression of data, like the\nGZip format, via a subclass of QIODevice."
         expect( manifest.urls.mailing_list ).to eq "https://mail.kde.org/mailman/listinfo/kde-frameworks-devel"
-        expect( manifest.summary ).to eq "Reading, creation, and manipulation of file archives"
+        expect( manifest.summary ).to eq "File compression"
       end
       
       it "overwrites existing manifests" do
