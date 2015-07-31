@@ -1,5 +1,17 @@
 # Change log of Inqlude
 
+## Version 0.7.2
+
+* `create_kde_frameworks` command:
+
+    * Read summary for KDE Frameworks from metainfo.yml
+    * Use API docs as home page for KDE Frameworks
+    * Only parse actual checkouts of KDE Frameworks
+
+* `release_kde_frameworks` command:
+
+    * Support `--offline` option for
+
 ## Version 0.7.1
 
 * `create_kde_frameworks` command:
