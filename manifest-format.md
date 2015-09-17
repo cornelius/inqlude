@@ -190,7 +190,7 @@ Supported values are:
 
 * "Linux"
 * "Windows"
-* "Mac"
+* "OS X"
 
 *there must be at least one platform*
 
