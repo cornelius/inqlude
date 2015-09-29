@@ -20,6 +20,8 @@ class KdeFrameworksCreator
   
   def initialize
     @frameworks = Hash.new
+    @warnings = []
+    @errors = []
   end
   
   def parse_checkout dir_name, options = {}
@@ -29,9 +31,11 @@ class KdeFrameworksCreator
       next if entry =~ /^\./
       next if entry == "kapidox"
       next if entry == "kde4support"
+      next if !File.exist?(File.join(dir_name, entry, ".git"))
       
       @frameworks[entry] = {}
       parse_readme File.join(dir_name,entry), options
+      parse_metainfo File.join(dir_name,entry)
       parse_authors File.join(dir_name,entry)
     end
   end
@@ -52,7 +56,7 @@ class KdeFrameworksCreator
     name = extract_name( path )
     framework = @frameworks[name] || {}
 
-    framework["link_home_page"] = "https://projects.kde.org/projects/frameworks/#{name}"
+    framework["link_home_page"] = "http://api.kde.org/frameworks-api/frameworks5-apidocs/#{name}/html/index.html"
     framework["link_mailing_list"] = "https://mail.kde.org/mailman/listinfo/kde-frameworks-devel"
     framework["link_git_repository"] = "https://projects.kde.org/projects/frameworks/#{name}/repository"
 
@@ -108,7 +112,7 @@ class KdeFrameworksCreator
     end
     
     required_fields = []
-    [ "title", "summary", "introduction", "link_home_page" ].each do |field|
+    [ "title", "introduction", "link_home_page" ].each do |field|
       if !options[:ignore_errors] || !options[:ignore_errors].include?(field)
         required_fields.push field
       end
@@ -123,6 +127,25 @@ class KdeFrameworksCreator
     @frameworks[name] = framework
   end
   
+  def parse_metainfo path
+    name = extract_name( path )
+
+    metainfo_path = File.join(path,"metainfo.yaml")
+    if ( !File.exists?( metainfo_path ) )
+      @errors.push( { :name => name, :issue => "missing_file",
+                       :details => "metainfo.yaml" } )
+      return
+    end
+
+    metainfo = YAML.load_file(metainfo_path)
+
+    framework = @frameworks[name] || {}
+
+    framework["summary"] = metainfo["description"]
+
+    @frameworks[name] = framework
+  end
+
   def parse_authors path
     name = extract_name( path )
 

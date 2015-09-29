@@ -241,6 +241,8 @@ actual domain."
   desc "release_kde_frameworks <release_date> <version>",
     "Create release manifests for KDE frameworks release"
   def release_kde_frameworks release_date, version
+    process_global_options options
+
     handler = ManifestHandler.new @@settings
     k = KdeFrameworksRelease.new handler
     k.read_generic_manifests
