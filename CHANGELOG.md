@@ -1,5 +1,11 @@
 # Change log of Inqlude
 
+## Version 0.7.3
+
+* Fix exit code when `inqlude verify` exits with errors
+* Fix checking for branches in `inqlude review` command
+* Settle on "OS X" as the canonical name
+
 ## Version 0.7.2
 
 * `create_kde_frameworks` command:
