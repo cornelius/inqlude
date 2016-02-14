@@ -22,7 +22,7 @@ class Manifest < JsonObject
 
     manifest.from_hash(json)
   end
-  
+
   def self.parse_schema_version schema_id
     schema_id =~ /^http:\/\/inqlude\.org\/schema\/(.*)-manifest-v(.*)\#$/
     type = $1
@@ -60,6 +60,7 @@ class Manifest < JsonObject
     attribute :openSUSE
     attribute :windows
     attribute :ubuntu
+    attribute :osx
   end
   attribute :group
 
@@ -177,4 +178,3 @@ class ManifestProprietaryRelease < Manifest
     true
   end
 end
-
