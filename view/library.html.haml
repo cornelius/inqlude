@@ -40,14 +40,15 @@
   #disqus_thread
 
   :javascript
-    var disqus_shortname = 'inqlude';
-
-    var disqus_identifier = '#{m.name}';
-    var disqus_url = 'http://inqlude.org/libraries/#{m.name}.html';
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
+    var disqus_config = function () {
+        this.page.url = 'http://inqlude.org/libraries/#{m.name}.html';
+        this.page.identifier = '#{m.name}';
+    };
     (function() {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        var d = document, s = d.createElement('script');
+
+        s.src = 'https://inqlude.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
     })();
