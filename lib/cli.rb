@@ -86,7 +86,7 @@ actual domain."
     if options[:manifest_dir]
       @@settings.manifest_path = options[:manifest_dir]
     end
-    
+
     manifest_handler = ManifestHandler.new(@@settings)
     manifest_handler.read_remote
 
@@ -113,7 +113,7 @@ actual domain."
       Upstream.get_involved "Implement --check-links option", 11
       exit 1
     end
-    
+
     errors = []
 
     if filename
@@ -146,6 +146,8 @@ actual domain."
             puts "    #{e}"
           end
         end
+
+        exit 1
       end
     end
   end
@@ -161,7 +163,7 @@ actual domain."
       exit 1
     end
   end
-  
+
   desc "system_scan", "Scan system for installed Qt libraries and create manifests"
   method_option :dry_run, :type => :boolean,
     :desc => "Dry run. Don't write files."
@@ -176,11 +178,11 @@ actual domain."
     if options[:recreate_source_cache]
       m.create_source_cache
     end
-    
+
     if options[:recreate_qt_source_cache]
       m.create_qt_source_cache
     end
-    
+
     m.process_all_rpms
   end
 
@@ -237,7 +239,7 @@ actual domain."
       end
     end
   end
-  
+
   desc "release_kde_frameworks <release_date> <version>",
     "Create release manifests for KDE frameworks release"
   def release_kde_frameworks release_date, version
@@ -248,7 +250,7 @@ actual domain."
     k.read_generic_manifests
     k.write_release_manifests release_date, version
   end
-  
+
   desc "get_involved", "Information about how to get involved"
   def get_involved
     Upstream.print_info
@@ -292,7 +294,7 @@ actual domain."
   end
 
   private
-  
+
   def process_global_options options
     @@settings.offline = options[:offline]
     if options[:manifest_dir]
