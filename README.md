@@ -9,7 +9,7 @@ libraries. A public version of the library runs at http://inqlude.org.
 Inqlude comes as a Ruby gem, which can easily be installed, and provides a
 command line interface to handle Qt libraries in a similar way as Ruby gems.
 There are commands to list available libraries and installed libraries, and
-more. 
+more.
 
 Libraries are described by manifest files, which are maintained in a separate
 git repository. Inqlude integrates with this git repository and uses it as the
@@ -36,6 +36,8 @@ To checkout all frameworks from source, you can use
 kde-checkout-list.pl --component=frameworks --clone
 ```
 
+from the
+[kde-dev-scripts repository](https://quickgit.kde.org/?p=kde-dev-scripts.git).
 This creates a `frameworks` directory with a checkout of all git repositories
 part of [KDE Frameworks](https://projects.kde.org/projects/frameworks).
 
