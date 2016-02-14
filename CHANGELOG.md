@@ -1,5 +1,10 @@
 # Change log of Inqlude
 
+## Version 0.7.4
+
+* Support links to OS X packages in manifests
+* Fix search and comments on created web page
+
 ## Version 0.7.3
 
 * Fix exit code when `inqlude verify` exits with errors
