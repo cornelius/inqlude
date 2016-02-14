@@ -108,11 +108,8 @@ h1 .subtitle {
   list-style-type: none;
 }
 
-#cse-search-form {
+.search {
   width: 250px;
-}
-#cse {
-  width: 90%;
 }
 
 .menu_items {
@@ -133,7 +130,7 @@ h1 .subtitle {
   padding: 10px;
   font-family: monospace;
   margin: 6px;
-}  
+}
 
 .release-date {
   font-size: 80%;

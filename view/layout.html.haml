@@ -3,9 +3,8 @@
   %meta{ :charset => 'utf-8' }
   = style_sheet
   - if enable_search
-    <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="http://www.google.com/cse/style/look/default.css" type="text/css" />
-    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://www.google.com/cse/style/look/default.css" type="text/css" />
 %body
   .ribbon
     = link_to "Alpha", "about"
@@ -35,7 +34,8 @@
             = link_to "About", "about"
         .search
           - if enable_search
-            #cse-search-form Loading...
+            %gcse:searchbox-only{ resultsUrl: "https://inqlude.org/search.html" }
+              Loading...
       %br{ :clear => "all" }
 
     .content
@@ -51,11 +51,13 @@
 
   - if enable_search
     :javascript
-      google.load('search', '1', {language : 'en'});
-      google.setOnLoadCallback(function() {
-        var customSearchControl = new google.search.CustomSearchControl('012526638842992167133:g7thmrlp2uw');
-        customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
-        var options = new google.search.DrawOptions();
-        options.enableSearchboxOnly("#{root}search.html");
-        customSearchControl.draw('cse-search-form', options);
-      }, true);
+      (function() {
+        var cx = '012526638842992167133:g7thmrlp2uw';
+        var gcse = document.createElement('script');
+        gcse.type = 'text/javascript';
+        gcse.async = true;
+        gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+            '//cse.google.com/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(gcse, s);
+      })();
