@@ -15,18 +15,18 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 class GitHubTool
-  
+
   def self.review repo
     puts "Reviewing repo '#{repo}'"
-    
+
     check_directory
-    if `git status` !~ /^# On branch master/
+    if `git status` !~ /On branch master/
       STDERR.puts "You need to be on the master branch"
       exit 1
     end
 
     user,branch = parse_repo repo
-    
+
     run "git checkout -b #{user}-#{branch} master"
     begin
       run "git pull git@github.com:#{user}/inqlude-data.git #{branch}"
@@ -42,18 +42,18 @@ class GitHubTool
     user,branch = parse_repo repo
 
     branchname = "#{user}-#{branch}"
-    
-    if `git status` !~ /^# On branch #{branchname}/
+
+    if `git status` !~ /On branch #{branchname}/
       STDERR.puts "You need to be on the #{branchname} branch"
       exit 1
     end
-    
+
     run "git checkout master"
     run "git merge #{branchname}"
     run "git push origin master"
     run "git branch -d #{branchname}"
   end
-  
+
   def self.check_directory
     current_dir = File.basename Dir.pwd
     if current_dir != "inqlude-data"
@@ -69,7 +69,7 @@ class GitHubTool
   def self.parse_repo repo
     user = repo.split(":")[0]
     branch = repo.split(":")[1]
-    
+
     if !user
       STDERR.puts "Unable to extract user from repo parameter"
       exit 1
@@ -78,15 +78,15 @@ class GitHubTool
       STDERR.puts "Unable to extract branch from repo parameter"
       exit 1
     end
-    
+
     return user,branch
   end
-  
+
   def self.run cmd
     puts "Running: #{cmd}"
     if !system cmd
       raise "Command failed"
     end
   end
-  
+
 end
