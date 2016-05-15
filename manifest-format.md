@@ -119,7 +119,7 @@ Attribute            | Description
 ---------------------|----------------
 `homepage`           | Home page of the library. This is the main URL used as entry point for looking up information about the library. All manifests should contain a homepage URL.
 `download`           | Download area where the source code of the library can be downloaded. This is not the download of the specific version of the library. This is described in the packages section.
-`vcs`                | URL of the source code repository where the library is developed.
+`vcs`                | URL of the source code repository where the library is developed. This should point to the home of the repo, not to a specific release.
 `tutorial`           | URL to tutorial-style documentation how to use the library.
 `api_docs`           | URL to reference documentation of the API of the library.
 `description_source` | If the description text is taken from another source this URL points to the source.
