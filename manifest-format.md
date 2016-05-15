@@ -115,21 +115,18 @@ requirements. They are not necessarily meant to be read programmatically.
 
 The following types are recognized:
 
-* "homepage": Home page of the library. This is the main URL used as entry point
-  for looking up information about the library. All manifests should contain
-  a homepage URL.
-* "download": Download area where the source code of the library can be
-  downloaded. This is not the download of the specific version of the library.
-  This is described in the packages section.
-* "vcs": URL of the source code repository where the library is developed.
-* "tutorial": URL to tutorial-style documentation how to use the library.
-* "api_docs": URL to reference documentation of the API of the library.
-* "description_source": If the description text is taken from another source
-  this URL points to the source.
-* "announcement": Link to release announcement
-* "mailing_list": Mailing list for discussing the library
-* "contact": Contact information
-* "custom": Array of pairs of title and URL of custom links
+Attribute            | Description
+---------------------|----------------
+`homepage`           | Home page of the library. This is the main URL used as entry point for looking up information about the library. All manifests should contain a homepage URL.
+`download`           | Download area where the source code of the library can be downloaded. This is not the download of the specific version of the library. This is described in the packages section.
+`vcs`                | URL of the source code repository where the library is developed.
+`tutorial`           | URL to tutorial-style documentation how to use the library.
+`api_docs`           | URL to reference documentation of the API of the library.
+`description_source` | If the description text is taken from another source this URL points to the source.
+`announcement`       | Link to release announcement
+`mailing_list`       | Mailing list for discussing the library
+`contact`            | Contact information
+`custom`             | Array of pairs of title and URL of custom links
 
 *the homepage is a mandatory url attribute*
 
