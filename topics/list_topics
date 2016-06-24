@@ -1,0 +1,11 @@
+#!/usr/bin/ruby
+
+require_relative "list_topics.rb"
+
+file = ARGV[0]
+if !file
+  STDERR.puts "Usage: list_topics.rb FILE"
+  exit 1
+end
+
+print_topics(read_topic_file(file))
