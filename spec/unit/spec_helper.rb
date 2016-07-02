@@ -23,10 +23,9 @@ def create_generic_manifest name
 end
 
 shared_context "manifest_files" do
-
   let(:settings) do
     s = Settings.new
-    s.manifest_path = File.expand_path('spec/data/')
+    s.manifest_path = File.expand_path('spec/data/manifests')
     s.offline = true
     s
   end
@@ -42,5 +41,4 @@ shared_context "manifest_files" do
   let(:proprietarylib_manifest_file) do
     "proprietarylib/proprietarylib.2013-12-22.manifest"
   end
-
 end

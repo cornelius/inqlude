@@ -1,11 +1,11 @@
 require File.expand_path('../spec_helper', __FILE__)
 
 describe KdeFrameworksRelease do
-  
+
   include GivenFilesystemSpecHelpers
 
   use_given_filesystem
-  
+
   context "given KDE generic manifests" do
     before(:each) do
       @manifest_dir = given_directory do
@@ -16,31 +16,31 @@ describe KdeFrameworksRelease do
           given_file("kservice.manifest", :from => "kservice-generic.manifest")
         end
         given_directory("newlib") do
-          given_file("newlib.manifest", :from => "newlib/newlib.manifest")
+          given_file("newlib.manifest", :from => "manifests/newlib/newlib.manifest")
         end
       end
-      
+
       s = Settings.new
       s.manifest_path = @manifest_dir
       s.offline = true
       @manifest_handler = ManifestHandler.new s
     end
-      
+
     it "reads generic manifests" do
       k = KdeFrameworksRelease.new @manifest_handler
       k.read_generic_manifests
-      
+
       expect( k.generic_manifests.count ).to eq 2
       expect( k.generic_manifests[0].name ).to eq "karchive"
       expect( k.generic_manifests[1].name ).to eq "kservice"
     end
-    
+
     it "writes release manifests" do
       k = KdeFrameworksRelease.new @manifest_handler
       k.read_generic_manifests
-      
+
       k.write_release_manifests( "2014-02-01", "4.9.90" )
-      
+
       manifest_path = File.join( @manifest_dir,
                                  "karchive/karchive.2014-02-01.manifest" )
       expect( File.exists? manifest_path ).to be true
@@ -48,7 +48,7 @@ describe KdeFrameworksRelease do
       manifest_path = File.join( @manifest_dir,
                                  "kservice/kservice.2014-02-01.manifest" )
       expect( File.exists? manifest_path ).to be true
-      
+
       manifest = Manifest.parse_file( manifest_path )
       expect(manifest.class).to be ManifestRelease
       expect( manifest.name ).to eq "kservice"
@@ -72,5 +72,5 @@ describe KdeFrameworksRelease do
   it "strips patch release" do
     expect(KdeFrameworksRelease.strip_patch_release("5.4.0")).to eq "5.4"
   end
-  
+
 end

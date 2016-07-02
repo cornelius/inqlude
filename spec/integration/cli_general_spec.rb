@@ -22,9 +22,7 @@ describe "Command line interface" do
     use_given_filesystem
 
     it "recognizes --offline option" do
-      dir = given_directory do
-        given_directory_from_data("awesomelib")
-      end
+      dir = given_directory_from_data("manifests")
 
       # This doesn't make much sense to a user, but that's what it is right now.
       # It will go away when we switched to GLI

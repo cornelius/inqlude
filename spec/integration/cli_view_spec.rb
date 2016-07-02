@@ -10,8 +10,8 @@ describe "Command line interface" do
   describe "view" do
     it "generates view" do
       dir = given_directory do
-        given_directory_from_data("awesomelib")
-        given_directory_from_data("newlib")
+        given_directory_from_data("awesomelib", from: "manifests/awesomelib")
+        given_directory_from_data("newlib", from: "manifests/newlib")
       end
 
       output_dir = given_directory

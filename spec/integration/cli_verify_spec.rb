@@ -10,7 +10,7 @@ describe "Command line interface" do
   describe "verify" do
     it "verifies single manifest" do
       dir = given_directory do
-        given_directory_from_data("awesomelib")
+        given_directory_from_data("awesomelib", from: "manifests/awesomelib")
       end
 
       result = run_command(args: ["verify",
@@ -20,8 +20,8 @@ describe "Command line interface" do
 
     it "verifies all manifests" do
       dir = given_directory do
-        given_directory_from_data("awesomelib")
-        given_directory_from_data("newlib")
+        given_directory_from_data("awesomelib", from: "manifests/awesomelib")
+        given_directory_from_data("newlib", from: "manifests/newlib")
       end
 
       result = run_command(args: ["verify", "--offline", "--manifest_dir=#{dir}"])
@@ -36,7 +36,7 @@ EOT
 
     it "verifies all manifests with syntax error" do
       dir = given_directory do
-        given_directory_from_data("awesomelib")
+        given_directory_from_data("awesomelib", from: "manifests/awesomelib")
         given_directory("newlib") do
           given_dummy_file("newlib.manifest")
         end
@@ -48,7 +48,7 @@ EOT
 
     it "verifies all manifests with schema error" do
       dir = given_directory do
-        given_directory_from_data("awesomelib")
+        given_directory_from_data("awesomelib", from: "manifests/awesomelib")
         given_directory_from_data("broken")
       end
 
