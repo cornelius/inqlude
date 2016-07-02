@@ -1,5 +1,7 @@
 # Inqlude - the Qt library archive
 
+[![Build Status](https://travis-ci.org/cornelius/inqlude.svg?branch=master)](https://travis-ci.org/cornelius/inqlude)
+
 ## Overview
 
 Inqlude is a tool to handle Qt based libraries. It provides developers using Qt
