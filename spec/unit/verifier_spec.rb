@@ -3,13 +3,80 @@ require File.expand_path('../spec_helper', __FILE__)
 describe Verifier do
 
   include_context "manifest_files"
-  
-  it "defines result class" do
-    r = Verifier::Result.new
-    expect(r.valid?).to be true
-    expect(r.errors.class).to be Array
+
+  describe Verifier::Result do
+    it "defines result class" do
+      expect(subject.valid?).to be true
+      expect(subject.errors.class).to be Array
+    end
+
+    context "no errors" do
+      before do
+        subject.name = "abc"
+      end
+
+      it "is valid" do
+        expect(subject.valid?).to be true
+      end
+
+      it "prints result" do
+        expected_output = <<EOT
+Verify manifest abc...ok
+EOT
+
+        expect {
+          subject.print_result
+        }.to output(expected_output).to_stdout
+      end
+    end
+
+    context "one error" do
+      before do
+        subject.name = "abc"
+        subject.errors.push("an error")
+      end
+
+      it "is invalid" do
+        expect(subject.valid?).to be false
+      end
+
+      it "prints result" do
+        expected_output = <<EOT
+Verify manifest abc...error
+  an error
+EOT
+
+        expect {
+          subject.print_result
+        }.to output(expected_output).to_stdout
+      end
+    end
+
+    context "multiple errors" do
+      before do
+        subject.name = "abc"
+        subject.errors.push("an error")
+        subject.errors.push("another error")
+      end
+
+      it "is invalid" do
+        expect(subject.valid?).to be false
+      end
+
+      it "prints result" do
+        expected_output = <<EOT
+Verify manifest abc...error
+  an error
+  another error
+EOT
+
+        expect {
+          subject.print_result
+        }.to output(expected_output).to_stdout
+      end
+    end
   end
-  
+
   it "verifies read manifests" do
     handler = ManifestHandler.new settings
     handler.read_remote
@@ -25,7 +92,7 @@ describe Verifier do
     manifest = ManifestRelease.new
     expect(verifier.verify( manifest ).valid?).to be false
   end
-      
+
   it "detects invalid entries" do
     handler = ManifestHandler.new settings
     handler.read_remote
@@ -45,7 +112,7 @@ describe Verifier do
 
     manifest = handler.manifest("awesomelib")
     expect(verifier.verify(manifest).valid?).to be true
-    
+
     manifest.filename = "wrongname"
 
     result = verifier.verify(manifest)
@@ -56,7 +123,7 @@ describe Verifier do
 
   it "verifies release manifest file" do
     filename = File.join settings.manifest_path, awesomelib_manifest_file
-    
+
     verifier = Verifier.new settings
 
     expect( verifier.verify_file( filename ).valid? ).to be true
@@ -64,16 +131,16 @@ describe Verifier do
 
   it "verifies generic manifest file" do
     filename = File.join settings.manifest_path, newlib_manifest_file
-    
+
     verifier = Verifier.new settings
 
     verification_result = verifier.verify_file( filename )
     expect( verification_result.valid? ).to be true
   end
-  
+
   it "verifies proprietary release manifest file" do
     filename = File.join settings.manifest_path, proprietarylib_manifest_file
-    
+
     verifier = Verifier.new settings
 
     verification_result = verifier.verify_file( filename )
@@ -88,21 +155,21 @@ describe Verifier do
     verification_result = verifier.verify_file( filename )
     expect( verification_result.valid? ).to be false
   end
-  
+
   it "verifies schema" do
     manifest = ManifestRelease.new
     manifest.name = "mylib"
     manifest.release_date = "2013-02-28"
     manifest.filename = "mylib.2013-02-28.manifest"
     manifest.libraryname = "mylib"
-    
+
     verifier = Verifier.new settings
-    
+
     errors = verifier.verify(manifest).errors
 
     expect( errors.class ).to be Array
     expect(errors[0]).to match /^Schema validation error/
     expect(errors.count).to eq 8
   end
-  
+
 end
