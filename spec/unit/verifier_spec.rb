@@ -104,5 +104,16 @@ describe Verifier do
     expect(errors[0]).to match /^Schema validation error/
     expect(errors.count).to eq 8
   end
+
+  it "verifies topics" do
+    filename = File.join settings.manifest_path, testlib_manifest_file
+
+    verifier = Verifier.new settings
+
+    expected_output = <<EOT
+Verify topics of testlib.manifest...ok
+EOT
+    expect { verifier.verify_topics(filename) }.to output(expected_output).to_stdout
+  end
   
 end

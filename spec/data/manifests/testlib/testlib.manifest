@@ -1,0 +1,24 @@
+{
+  "$schema": "http://inqlude.org/schema/generic-manifest-v1#",
+  "name": "testlib",
+  "summary": "A test library",
+  "topics": [
+    "Graphics",
+    "Printing"
+  ],
+  "urls": {
+    "homepage": "http://test.example.org",
+    "download": "http://test.example.org/download"
+  },
+  "licenses": [
+    "GPLv3"
+  ],
+  "description": "This is a test library. It's under test.",
+  "authors": [
+    "Nanduni Nimalsiri <nandunibw@gmail.com>"
+  ],
+  "platforms": [
+    "Linux",
+    "Windows"
+  ]
+}

@@ -18,11 +18,11 @@ describe ManifestHandler do
   end
 
   it "reads manifests" do
-    expect(mh.manifests.count).to eq 5
-    expect(mh.libraries.count).to eq 5
+    expect(mh.manifests.count).to eq 6
+    expect(mh.libraries.count).to eq 6
     mh.read_remote
-    expect(mh.manifests.count).to eq 5
-    expect(mh.libraries.count).to eq 5
+    expect(mh.manifests.count).to eq 6
+    expect(mh.libraries.count).to eq 6
   end
 
   it "provides access to manifests" do
@@ -57,7 +57,7 @@ describe ManifestHandler do
   describe "#libraries" do
 
     it "returns all libraries" do
-      expect( mh.libraries.count ).to eq 5
+      expect( mh.libraries.count ).to eq 6
     end
 
     it "returns stable libraries" do
@@ -76,7 +76,7 @@ describe ManifestHandler do
 
     it "returns unreleased libraries" do
       libraries = mh.unreleased_libraries
-      expect( libraries.count ).to eq 1
+      expect( libraries.count ).to eq 2
       expect( libraries.first.manifests.last.name ).to eq "newlib"
     end
 

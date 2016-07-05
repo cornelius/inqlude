@@ -94,4 +94,20 @@ class Verifier
     verify manifest
   end
 
+  def verify_topics filename
+    manifest = Manifest.parse_file filename
+
+    print "Verify topics of " + manifest.filename + "..."    
+    topics_list =  manifest.topics
+    if topics_list.nil?
+      puts "Warning: Specify the topics"        
+    else
+      if !topics_list.kind_of?(Array) 
+        puts "Error: Topics are not in an array"  
+      else
+        puts "ok"
+      end
+    end     
+  end
+
 end
