@@ -1,0 +1,20 @@
+{
+  "$schema": "http://inqlude.org/schema/generic-manifest-v1#",
+  "name": "miss-topics",  
+  "summary": "Missing topics",
+  "urls": {
+    "homepage": "http://missing-topics.org",
+    "download": "http://missing-topics.org/download"
+  },
+  "licenses": [
+    "GPLv3"
+  ],
+  "description": "This is a library with topics missing.",
+  "authors": [
+    "Cornelius Schumacher <schumacher@kde.org>"
+  ],
+  "platforms": [
+    "Linux",
+    "Windows"
+  ]
+}
