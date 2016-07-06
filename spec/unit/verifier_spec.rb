@@ -75,6 +75,52 @@ EOT
         }.to output(expected_output).to_stdout
       end
     end
+
+    context "one warning" do
+      before do
+        subject.name = "xyz"
+        subject.warnings.push("a warning")
+      end
+
+      it "has warning" do
+        expect(subject.has_warnings?).to be true
+      end
+
+      it "prints warning" do
+        expected_output = <<EOT
+Verify manifest xyz...ok
+  a warning
+EOT
+
+        expect {
+          subject.print_result
+        }.to output(expected_output).to_stdout
+      end
+    end
+
+    context "multiple warnings" do
+      before do
+        subject.name = "xyz"
+        subject.warnings.push("a warning")
+        subject.warnings.push("another warning")
+      end
+
+      it "has warning" do
+        expect(subject.has_warnings?).to be true
+      end
+
+      it "prints warning" do
+        expected_output = <<EOT
+Verify manifest xyz...ok
+  a warning
+  another warning
+EOT
+
+        expect {
+          subject.print_result
+        }.to output(expected_output).to_stdout
+      end
+    end
   end
 
   it "verifies read manifests" do
