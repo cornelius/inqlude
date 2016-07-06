@@ -16,6 +16,13 @@
     "summary": {
       "type": "string"
     },
+    "topics": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "minItems": 1
+    },
     "urls": {
       "type": "object",
       "properties": {

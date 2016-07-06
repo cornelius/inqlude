@@ -75,6 +75,24 @@ EOT
         }.to output(expected_output).to_stdout
       end
     end
+
+    context "missing topics" do
+      before do
+        subject.name = "xyz"
+        subject.warnings.push("Warning : missing topics")
+      end
+
+      it "verifies manifests with topics warning" do
+        expected_output = <<EOT
+Verify manifest xyz...ok
+  Warning : missing topics
+EOT
+
+        expect {
+          subject.print_result
+        }.to output(expected_output).to_stdout
+      end
+    end
   end
 
   it "verifies read manifests" do

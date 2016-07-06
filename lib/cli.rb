@@ -128,20 +128,31 @@ actual domain."
       handler = ManifestHandler.new @@settings
       handler.read_remote
       count_ok = 0
+      count_warning = 0
       handler.libraries.each do |library|
         library.manifests.each do |manifest|
           result = v.verify manifest
           result.print_result
-          if result.valid?
+          if result.valid? && result.safe?
             count_ok += 1
-          else
+          elsif !result.valid?
             errors.push result
+          end
+          if !result.safe?
+            count_warning +=1
           end
         end
       end
       puts
-      puts "#{handler.manifests.count} manifests checked. #{count_ok} ok, " +
-        "#{errors.count} with error."
+      if(count_warning == 1)
+        puts "#{handler.manifests.count} manifests checked. #{count_ok} ok, " +
+          "#{errors.count} with error, " +
+          "#{count_warning} warning."
+      else
+        puts "#{handler.manifests.count} manifests checked. #{count_ok} ok, " +
+          "#{errors.count} with error, " +
+          "#{count_warning} warnings."
+      end
       if !errors.empty?
         puts
         puts "Errors:"
