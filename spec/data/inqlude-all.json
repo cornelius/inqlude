@@ -5,6 +5,9 @@
     "release_date": "2013-09-08",
     "version": "0.2.0",
     "summary": "Awesome library",
+    "topics": [
+      "API"
+    ],
     "urls": {
       "homepage": "http://example.com",
       "download": "http://example.com/download"
@@ -76,6 +79,9 @@
     "$schema": "http://inqlude.org/schema/generic-manifest-v1#",
     "name": "newlib",
     "summary": "A new lib under heavy development",
+    "topics": [
+      "Bindings"
+    ],
     "urls": {
       "homepage": "http://new.example.org",
       "download": "http://new.example.org/download"

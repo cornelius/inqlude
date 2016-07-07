@@ -29,7 +29,7 @@ describe "Command line interface" do
 Verify manifest awesomelib.2013-09-08.manifest...ok
 Verify manifest newlib.manifest...ok
 
-2 manifests checked. 2 ok, 0 with error.
+2 manifests checked. 2 ok, 0 with error, 0 have warnings.
 EOT
       expect(result).to exit_with_success(expected_output)
     end
@@ -63,8 +63,9 @@ Verify manifest broken.manifest...error
   Schema validation error: The property '#/' did not contain a required property of 'licenses' in schema http://inqlude.org/schema/generic-manifest-v1#
   Schema validation error: The property '#/' did not contain a required property of 'description' in schema http://inqlude.org/schema/generic-manifest-v1#
   Schema validation error: The property '#/' did not contain a required property of 'platforms' in schema http://inqlude.org/schema/generic-manifest-v1#
+  Warning: missing `topics` attribute
 
-2 manifests checked. 1 ok, 1 with error.
+2 manifests checked. 1 ok, 1 with error, 1 has warning.
 
 Errors:
   broken.manifest
@@ -78,5 +79,41 @@ Errors:
 EOT
       expect(result).to exit_with_error(1,"",expected_output)
     end
+
+    it "verifies manifests with one warning" do
+      dir = given_directory do
+        given_directory_from_data("awesomelib", from: "manifests/awesomelib")
+        given_directory_from_data("miss-topics", from: "missing-topics/miss-topics")
+      end
+
+      result = run_command(args: ["verify", "--offline", "--manifest_dir=#{dir}"])
+      expected_output = <<EOT
+Verify manifest awesomelib.2013-09-08.manifest...ok
+Verify manifest miss-topics.manifest...ok
+  Warning: missing `topics` attribute
+
+2 manifests checked. 2 ok, 0 with error, 1 has warning.
+EOT
+      expect(result).to exit_with_success(expected_output)
+    end
+
+    it "verifies manifests with multiple warnings" do
+      dir = given_directory do
+        given_directory_from_data("miss-topics", from: "missing-topics/miss-topics")
+        given_directory_from_data("no-topics", from: "missing-topics/no-topics")
+      end
+
+      result = run_command(args: ["verify", "--offline", "--manifest_dir=#{dir}"])
+      expected_output = <<EOT
+Verify manifest miss-topics.manifest...ok
+  Warning: missing `topics` attribute
+Verify manifest no-topics.manifest...ok
+  Warning: missing `topics` attribute
+
+2 manifests checked. 2 ok, 0 with error, 2 have warnings.
+EOT
+      expect(result).to exit_with_success(expected_output)
+    end
+
   end
 end

@@ -17,15 +17,21 @@
 class Verifier
 
   class Result
-    attr_accessor :errors, :name
+    attr_accessor :errors, :warnings, :name
     
     def initialize
       @valid = false
+      @safe = false
       @errors = Array.new
+      @warnings = Array.new
     end
     
     def valid?
       @errors.empty?
+    end
+
+    def has_warnings?
+      @warnings.empty?
     end
 
     def print_result
@@ -36,6 +42,11 @@ class Verifier
         puts "error"
         @errors.each do |error|
           puts "  #{error}"
+        end
+      end
+      if !has_warnings?
+        @warnings.each do |warning|
+          puts "  #{warning}"
         end
       end
     end
@@ -75,6 +86,11 @@ class Verifier
       errors = JSON::Validator.fully_validate(schema_file, manifest.to_json)
       errors.each do |error|
         @result.errors.push "Schema validation error: #{error}"
+      end
+
+      topics =  manifest.topics
+      if topics.nil?
+        @result.warnings.push "Warning: missing `topics` attribute"
       end
     end
 
