@@ -1,0 +1,20 @@
+{
+  "$schema": "http://inqlude.org/schema/generic-manifest-v1#",
+  "name": "no-topics",
+  "summary": "No topics",
+  "urls": {
+    "homepage": "http://no-topics.org",
+    "download": "http://no-topics.org/download"
+  },
+  "licenses": [
+    "GPLv3"
+  ],
+  "description": "This is a library with no topics.",
+  "authors": [
+    "Cornelius Schumacher <schumacher@kde.org>"
+  ],
+  "platforms": [
+    "Linux",
+    "Windows"
+  ]
+}

@@ -38,6 +38,7 @@ class Manifest < JsonObject
   attribute :release_date
   attribute :version
   attribute :summary
+  attribute :topics
   attribute :urls do
     attribute :homepage
     attribute :api_docs
