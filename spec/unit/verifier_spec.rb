@@ -167,6 +167,22 @@ EOT
     expect(result.errors.first).to eq "Expected file name: awesomelib.2013-09-08.manifest"
   end
 
+  it "detects invalid topics" do
+    handler = ManifestHandler.new settings
+    handler.read_remote
+    verifier = Verifier.new settings
+
+    manifest = handler.manifest("awesomelib")
+    expect(verifier.verify(manifest).valid?).to be true
+
+    manifest.topics = ["Invalid"]
+
+    result = verifier.verify(manifest)
+
+    expect(result.valid?).to be false
+    expect(result.errors).to include "Invalid topics"
+  end
+
   it "verifies release manifest file" do
     filename = File.join settings.manifest_path, awesomelib_manifest_file
 
