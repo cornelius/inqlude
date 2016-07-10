@@ -91,6 +91,12 @@ class Verifier
       topics =  manifest.topics
       if topics.nil?
         @result.warnings.push "Warning: missing `topics` attribute"
+      else
+        valid_topics = ['API', 'Artwork', 'Bindings', 'Communication', 'Data', 'Desktop', 'Development', 'Graphics', 'Logging', 'Mobile', 'Multimedia', 'Printing', 'QML', 'Scripting', 'Security', 'Text', 'Web', 'Widgets']
+        invalid_topics = topics - valid_topics
+        if !invalid_topics.empty?
+          @result.errors.push ("Invalid topics " + "'#{invalid_topics.join("', '")}'" + ". Valid topics are " + "'#{valid_topics.join("', '")}'")
+        end
       end
     end
 
