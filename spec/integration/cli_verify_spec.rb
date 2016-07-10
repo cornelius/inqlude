@@ -115,5 +115,26 @@ EOT
       expect(result).to exit_with_success(expected_output)
     end
 
+    it "verifies all manifests with invalid topics error" do
+      dir = given_directory do
+        given_directory_from_data("awesomelib", from: "manifests/awesomelib")
+        given_directory_from_data("invalid-topics", from: "invalid-topics")
+      end
+
+      result = run_command(args: ["verify", "--offline", "--manifest_dir=#{dir}"])
+      expected_output = <<EOT
+Verify manifest awesomelib.2013-09-08.manifest...ok
+Verify manifest invalid-topics.manifest...error
+  Invalid topics
+
+2 manifests checked. 1 ok, 1 with error, 0 have warnings.
+
+Errors:
+  invalid-topics.manifest
+    Invalid topics
+EOT
+      expect(result).to exit_with_error(1,"",expected_output)
+    end
+
   end
 end

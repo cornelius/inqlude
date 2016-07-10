@@ -1,0 +1,23 @@
+{
+  "$schema": "http://inqlude.org/schema/generic-manifest-v1#",
+  "name": "invalid-topics",  
+  "summary": "Invalid topics",
+  "topics": [
+    "Invalid"
+  ],
+  "urls": {
+    "homepage": "http://invalid-topics.org",
+    "download": "http://invalid-topics.org/download"
+  },
+  "licenses": [
+    "GPLv3"
+  ],
+  "description": "This is a library with invalid topics.",
+  "authors": [
+    "Cornelius Schumacher <schumacher@kde.org>"
+  ],
+  "platforms": [
+    "Linux",
+    "Windows"
+  ]
+}
