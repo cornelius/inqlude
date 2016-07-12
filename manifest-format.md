@@ -12,7 +12,7 @@ path, but by default the inqlude command line tool assumes the path
 
 The manifest directory is under version control by git.
 
-Each library reprented in the Inqlude system has its own sub-directory in the
+Each library represented in the Inqlude system has its own sub-directory in the
 manifest directory. The name of the sub-directory is the name of the library.
 See there for more information about its specification and how it's used.
 
@@ -38,7 +38,7 @@ This is a reference to the schema which is used in the manifest file. The
 schema follows the [JSON Schema](http://json-schema.org) specification.
 
 The schema comes in three flavors: "generic", "release", and
-"proprietary-release". They differe in what fields are required, the meaning of
+"proprietary-release". They differ in what fields are required, the meaning of
 fields is the same in all. "generic" is a subset of "proprietary-release", which
 is a subset of "release".
 
@@ -74,12 +74,22 @@ other library and a "-qt" suffix. For example the Qt bindings to PackageKit
 are named "packagekit-qt" in Inqlude.
 
 It's used as internal handle by the tools and shows up where it
-needs to be processed by software, e.g. as an identifier as paramezer of the
+needs to be processed by software, e.g. as an identifier as parameter of the
 command line tool or as part of the URL on the web site. The name has to be
 identical with the value of the name attribute of the manifest files
 representing the different versions of the library.
 
 *name is a mandatory attribute*
+
+### display_name
+
+The real name of the library that is displayed in the website. 
+
+This holds the name in a way formatted for best human readability. This can contain
+characters which are upper-case, lower-case, alphanumeric, symbols and
+special signs.  
+
+*display_name is an optional attribute*
 
 ### release_date
 
@@ -100,6 +110,21 @@ One-line summary describing the library
 This is the main description of the library used in summary lists etc.
 
 *summary is a mandatory attribute*
+
+### topics
+
+Array of strings identifying the topics to which the library belongs.
+
+Topics are used to categorize libraries. Each library has at least one topic, 
+but can have more than one. 
+
+At the moment valid topics are:
+
+"API", "Artwork", "Bindings", "Communication", "Data", "Desktop", "Development", 
+"Graphics", "Logging", "Mobile", "Multimedia", "Printing", "QML", "Scripting", 
+"Security", "Text", "Web", "Widgets"
+
+*topics is an optional attribute, preferred to have at least one topic*
 
 ### urls
 
@@ -216,13 +241,13 @@ openSUSE binary packages. For each version of openSUSE there is a separate
 entry.
 
 Each entry contains the package_name, repository, and source_rpm attributes.
-The repository contains an url and a name sub-attribute.
+The repository contains a url and a name sub-attribute.
 
 ### group
 
 Name of a group
 
 The group optionally specifies the name of a group of libraries the library
-described my the manifest belongs to.
+described by the manifest belongs to.
 
 At the moment only the value "kde-frameworks" is used.
