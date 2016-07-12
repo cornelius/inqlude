@@ -1,5 +1,12 @@
 # Change log of Inqlude
 
+## Version 0.8.0
+
+* Add topic attribute to manifest specification and adapt validator to allow topic attribute as an optional parameter. The validator reports missing topics as a warning for each manifest which does not have a topic attribute, but not fail.
+As a result, libraries can be categorized under multiple topics. The validator reports an error for each manifest with invalid topics attribute. As a result, the list of topics is kept small and typographical errors are prevented.
+* Initialize distro only when needed. This should remove "distro not recognized" warnings in cases where the distro is not needed
+* Clarify documentation of `vcs` URL
+
 ## Version 0.7.4
 
 * Support links to OS X packages in manifests
