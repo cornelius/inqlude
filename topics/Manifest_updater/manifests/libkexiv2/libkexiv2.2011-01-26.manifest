@@ -1,0 +1,33 @@
+{
+  "$schema": "http://inqlude.org/schema/release-manifest-v1#",
+  "name": "libkexiv2",
+  "release_date": "2011-01-26",
+  "version": "4.6.0",
+  "summary": "Qt bindings for Exiv2, the library to manipulate picture meta data",
+  "urls": {
+    "homepage": "https://projects.kde.org/projects/kde/kdegraphics/libs/libkexiv2",
+    "api_docs": "http://api.kde.org/4.x-api/kdegraphics-apidocs/libs/libkexiv2/libkexiv2/html/index.html",
+    "vcs": "https://projects.kde.org/projects/kde/kdegraphics/libs/libkexiv2/repository",
+    "custom": {
+      "Exiv2": "http://www.exiv2.org/"
+    }
+  },
+  "licenses": ["GPLv2+"],
+  "description": "Libkexiv2 is a wrapper around Exiv2 library to manipulate pictures\nmetadata.\n",
+  "authors": [ "Gilles Caulier", "Marcel Wiesweg <marcel.wiesweg@gmx.de>" ],
+  "maturity": "stable",
+  "platforms": [ "Linux" ],
+  "packages": {
+    "source": "ftp://ftp.kde.org/pub/kde/stable/4.6.0/src/libkexiv2-4.6.0.tar.xz",
+    "openSUSE": {
+      "11.4": {
+        "package_name": "libkexiv2-9",
+        "repository": {
+          "url": "http://download.opensuse.org/distribution/11.4/repo/oss/",
+          "name": "openSUSE-11.4-Oss"
+        },
+        "source_rpm": "kdegraphics4-4.6.0-6.9.2.src.rpm"
+      }
+    }
+  }
+}

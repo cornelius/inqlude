@@ -1,0 +1,29 @@
+{
+  "$schema": "http://inqlude.org/schema/release-manifest-v1#",
+  "name": "packagekit-qt",
+  "release_date": "2011-05-04",
+  "version": "0.6.14",
+  "summary": "Qt bindings for PackageKit, the backend for managing software installation",
+  "urls": {
+    "homepage": "http://packagekit.org/",
+    "vcs": "http://gitorious.org/packagekit/packagekit/trees/master/lib/packagekit-qt"
+  },
+  "licenses": ["GPLv2+"],
+  "description": "PackageKit is a system designed to make installing and updating\nsoftware on your computer easier. The primary design goal is to unify\nall the software graphical tools used in different distributions, and provide a common backend. This library provides Qt bindings for PackageKit.\n",
+  "authors": [ "Adrien Bustany <madcat@mymadcat.com>" ],
+  "maturity": "stable",
+  "platforms": [ "Linux" ],
+  "packages": {
+    "source": "http://www.packagekit.org/releases/PackageKit-Qt-0.6.14.tar.xz",
+    "openSUSE": {
+      "11.4": {
+        "package_name": "libpackagekit-qt14",
+        "repository": {
+          "url": "http://download.opensuse.org/distribution/11.4/repo/oss/",
+          "name": "openSUSE-11.4-Oss"
+        },
+        "source_rpm": "PackageKit-0.6.14-0.2.1.src.rpm"
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "http://inqlude.org/schema/release-manifest-v1#",
+  "name": "kqoauth",
+  "release_date": "2013-09-08",
+  "version": "0.98",
+  "display_name": "kQOAuth",
+  "summary": "OAuth 1.0 authentication",
+  "urls": {
+    "homepage": "http://www.johanpaul.com/blog/kqoauth/",
+    "vcs": "https://github.com/kypeli/kQOAuth"
+  },
+  "licenses": [
+    "LGPLv2.1+"
+  ],
+  "description": "kQOAuth is a library written in C++ for Qt that implements the OAuth 1.0 authentication specification [RFC 5849](http://tools.ietf.org/html/rfc5849). kQOAuth main features: Easy integrated solution for retrieving user authentication and access token, no external dependency to QCA, convenient signals that can be used for easy OAuth authorization process handling, access to request objects that will wrap request signing and network access, but still gives possibility for detailed control of the authentication process for easier integration to existing application logic.",
+  "authors": [
+    "Johan Paul <johan.paul@gmail.com>"
+  ],
+  "maturity": "stable",
+  "platforms": [
+    "Linux"
+  ],
+  "packages": {
+    "source": "https://github.com/kypeli/kQOAuth/archive/0.98.tar.gz"
+  }
+}
