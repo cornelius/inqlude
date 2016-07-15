@@ -1,0 +1,37 @@
+{
+  "$schema": "http://inqlude.org/schema/release-manifest-v1#",
+  "name": "qtweetlib",
+  "release_date": "2010-10-13",
+  "version": "1306193028",
+  "summary": "Library to access Twitter",
+  "urls": {
+    "homepage": "https://github.com/minimoog/QTweetLib"
+  },
+  "licenses": [
+    "GPLv2"
+  ],
+  "description": "Library to access the Twitter API from Qt applications",
+  "authors": [
+    "Toni Jovanoski <minimoog77@gmail.com>"
+  ],
+  "maturity": "stable",
+  "platforms": [
+    "Linux"
+  ],
+  "packages": {
+    "source": "https://github.com/minimoog/QTweetLib/archive/1306193028.tar.gz",
+    "openSUSE": {
+      "11.4": {
+        "package_name": "libQTweetLib0_0",
+        "repository": {
+          "url": "http://download.opensuse.org/distribution/11.4/repo/oss/",
+          "name": "openSUSE-11.4-Oss"
+        },
+        "source_rpm": "qtweetlib-1306193028-4.1.src.rpm"
+      }
+    }
+  },
+  "topics": [
+    "Communication"
+  ]
+}

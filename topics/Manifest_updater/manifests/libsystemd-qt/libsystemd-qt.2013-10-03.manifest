@@ -1,0 +1,25 @@
+{
+  "$schema": "http://inqlude.org/schema/release-manifest-v1#",
+  "name": "libsystemd-qt",
+  "release_date": "2013-10-03",
+  "version": "208",
+  "summary": "Qt-only wrapper for the Systemd API",
+  "urls": {
+    "homepage": "https://github.com/andreascarpino/libsystemd-qt",
+    "vcs": "https://github.com/andreascarpino/libsystemd-qt"
+  },
+  "licenses": [
+    "LGPLv3"
+  ],
+  "description": "Qt-only wrapper for the Systemd API.",
+  "authors": [
+    "Andrea Scarpino <me@andreascarpino.it>"
+  ],
+  "maturity": "alpha",
+  "platforms": [
+    "Linux"
+  ],
+  "packages": {
+    "source": "https://github.com/andreascarpino/libsystemd-qt/archive/208.tar.gz"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "http://inqlude.org/schema/release-manifest-v1#",
+  "name": "qwt",
+  "release_date": "2010-04-11",
+  "version": "5.2.1",
+  "summary": "Widgets for Technical Applications",
+  "urls": {
+    "homepage": "http://qwt.sourceforge.net/",
+    "vcs": "http://qwt.svn.sourceforge.net/viewvc/qwt/",
+    "download": "http://sourceforge.net/projects/qwt/files/qwt/",
+    "api_docs": "http://qwt.sourceforge.net/index.html"
+  },
+  "licenses": [
+    "Qwt License 1.0"
+  ],
+  "description": "The Qwt library contains GUI Components and utility classes which are primarily useful for programs with a technical background. Beside a 2D plot widget it provides scales, sliders, dials, compasses, thermometers, wheels and knobs to control or display values, arrays, or ranges of type double.",
+  "authors": [
+    "Uwe Rathmann <rathmann@users.sourceforge.net>",
+    "Josef Wilgen ( <= Qwt 0.2 )"
+  ],
+  "maturity": "stable",
+  "platforms": [
+    "Linux"
+  ],
+  "packages": {
+    "source": "http://sourceforge.net/projects/qwt/files/qwt/5.2.1/qwt-5.2.1.tar.bz2/download",
+    "openSUSE": {
+      "11.4": {
+        "package_name": "libqwt5",
+        "repository": {
+          "url": "http://download.opensuse.org/distribution/11.4/repo/oss/",
+          "name": "openSUSE-11.4-Oss"
+        },
+        "source_rpm": "qwt-5.2.1-1.2.src.rpm"
+      }
+    }
+  },
+  "topics": [
+    "Widgets",
+    "Graphics"
+  ]
+}

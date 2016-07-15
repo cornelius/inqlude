@@ -1,0 +1,34 @@
+{
+  "$schema": "http://inqlude.org/schema/release-manifest-v1#",
+  "name": "libqxt",
+  "version": "0.6.2",
+  "release_date": "2011-11-24",
+  "summary": "Utility classes for Qt",
+  "urls": {
+    "homepage": "https://bitbucket.org/libqxt/libqxt/wiki/Home",
+    "vcs": "http://dev.libqxt.org/libqxt/src"
+  },
+  "licenses": [
+    "BSD-3-Clause"
+  ],
+  "description": "LibQxt is an extension library for Qt providing a suite of cross-platform utility classes to add functionality not readily available in the Qt toolikit.",
+  "maturity": "stable",
+  "authors": [
+    "Arvid Picciani <aep@libqxt.org>",
+    "Adam Higerd <ahigerd@libqxt.org>",
+    "J-P Nurmi <jpnurmi@libqxt.org>",
+    "Benjamin Zeller <zbenjamin@libqxt.org>"
+  ],
+  "platforms": [
+    "Linux",
+    "Windows",
+    "OS X"
+  ],
+  "packages": {
+    "source": "http://dev.libqxt.org/libqxt/get/v0.6.2.tar.gz"
+  },
+  "topics": [
+    "Development",
+    "Widgets"
+  ]
+}
