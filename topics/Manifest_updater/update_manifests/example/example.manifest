@@ -1,0 +1,24 @@
+{
+  "$schema": "http://inqlude.org/schema/generic-manifest-v1#",
+  "name": "example",
+  "summary": "An example library",
+  "urls": {
+    "homepage": "http://example.org",
+    "download": "http://example.org/download"
+  },
+  "licenses": [
+    "GPLv3"
+  ],
+  "description": "This is an example library",
+  "authors": [
+    "Nanduni Nimalsiri <nandunibw@gmail.com>"
+  ],
+  "platforms": [
+    "Linux",
+    "Windows"
+  ],
+  "topics": [
+    "API",
+    "QML"
+  ]
+}
