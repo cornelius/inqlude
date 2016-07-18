@@ -1,6 +1,9 @@
 language: ruby
 rvm:
-  - "2.1.9"
-  - "2.2.5"
-  - "2.3.1"
+- 2.1.9
+- 2.2.5
+- 2.3.1
 script: bundle exec rspec spec
+addons:
+  code_climate:
+    secure: x4ET3gWdfwTC66ExUDoYFdJ3AvCTbms7dokF7RaUrf7xnr3PInHnRgzZP7hICkEYW4t20JPjwiJUUdifk5XUcMSlQ5AAPKjFXP4wyQYPvpizI5FvRsX0a62/Fv1juXxs9hPFmXITqN861iT1rkqC383evyR9KxPDZMOi0VEOjAs=

@@ -1,3 +1,6 @@
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
 require 'given_filesystem/spec_helpers'
 
 require_relative "../../lib/inqlude"
