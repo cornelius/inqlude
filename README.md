@@ -4,6 +4,7 @@
 [![Build Status](https://travis-ci.org/cornelius/inqlude.svg?branch=master)](https://travis-ci.org/cornelius/inqlude)
 [![Dependency Status](https://dependencyci.com/github/cornelius/inqlude/badge)](https://dependencyci.com/github/cornelius/inqlude)
 [![Code Climate](https://codeclimate.com/github/cornelius/inqlude/badges/gpa.svg)](https://codeclimate.com/github/cornelius/inqlude)
+[![Test Coverage](https://codeclimate.com/github/cornelius/inqlude/badges/coverage.svg)](https://codeclimate.com/github/cornelius/inqlude/coverage)
 
 ## Overview
 
