@@ -173,4 +173,25 @@ EOT
     end
   end
 
+  context "templates" do
+
+    include GivenFilesystemSpecHelpers
+
+    use_given_filesystem
+
+    it "generates templates" do
+      s = Settings.new
+      mh = ManifestHandler.new s
+      mh.read_remote
+      v = View.new mh
+      v.templates = "one-column"
+
+      dir = given_directory
+
+      v.create(dir)
+      all_path = File.join(dir, "index.html")
+
+      expect(File.exists?(all_path)).to be true
+    end
+  end
 end
