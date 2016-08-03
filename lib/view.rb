@@ -16,7 +16,7 @@
 
 class View
 
-  attr_accessor :enable_disqus,:enable_search,:manifest,:library,:group_name
+  attr_accessor :enable_disqus,:enable_search,:manifest,:library,:group_name,:templates
   attr_reader :root
   
   def initialize handler
@@ -38,19 +38,16 @@ class View
 
     create_inqlude_all(output_dir)
 
-
     @root = ""
 
-    render_template "index", output_dir
-    render_template "development", output_dir
-    render_template "unreleased", output_dir
-    render_template "commercial", output_dir
-    render_template "all", output_dir
-    render_template "about", output_dir
-    render_template "get", output_dir
-    render_template "contribute", output_dir
-    render_template "search", output_dir
-    
+    Dir.glob("#{view_dir}*.html.haml") do |file|
+      fname = File.basename file
+      fname.slice! ".html.haml"
+
+      if !["layout","group","library"].include? fname
+        render_template fname, output_dir
+      end
+    end
 
     groups_path = "#{output_dir}/groups/"
     assert_dir groups_path
@@ -272,7 +269,7 @@ class View
   end
 
   def view_dir
-    File.expand_path( File.dirname( __FILE__ ) + "/../view/" ) + "/"
+    File.expand_path( File.dirname( __FILE__ ) + "/../view/#{templates}" ) + "/"
   end
 
   def schema_dir

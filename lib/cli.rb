@@ -21,6 +21,7 @@ class Cli < Thor
   class_option :version, :type => :boolean, :desc => "Show version"
   class_option :offline, :type => :boolean, :desc => "Work offline"
   class_option :manifest_dir, :type => :string, :desc => "Manifest directory"
+  class_option :templates, :type => :string, :desc => "Switch templates"
 
   def self.settings= s
     @@settings = s
@@ -85,6 +86,8 @@ class Cli < Thor
 actual domain."
   method_option :disable_search, :type => :boolean,
     :desc => "Disable Google based search."
+  method_option :templates, :type => :string, :aliases => "-t", :default => "one-column",
+    :desc => "Switch templates", :required => false
   def view
     process_global_options options
 
@@ -98,6 +101,7 @@ actual domain."
     view = View.new(manifest_handler)
     view.enable_disqus = options[:enable_disqus]
     view.enable_search = !options[:disable_search]
+    view.templates = options[:templates]
     view.create options[:output_dir]
   end
 
