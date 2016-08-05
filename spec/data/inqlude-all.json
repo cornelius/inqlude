@@ -2,6 +2,7 @@
   {
     "$schema": "http://inqlude.org/schema/release-manifest-v1#",
     "name": "awesomelib",
+    "display_name": "Awesomelib",
     "release_date": "2013-09-08",
     "version": "0.2.0",
     "summary": "Awesome library",
@@ -78,6 +79,7 @@
   {
     "$schema": "http://inqlude.org/schema/generic-manifest-v1#",
     "name": "newlib",
+    "display_name": "Newlib",
     "summary": "A new lib under heavy development",
     "topics": [
       "Bindings"
