@@ -63,6 +63,7 @@ Verify manifest broken.manifest...error
   Schema validation error: The property '#/' did not contain a required property of 'licenses' in schema http://inqlude.org/schema/generic-manifest-v1#
   Schema validation error: The property '#/' did not contain a required property of 'description' in schema http://inqlude.org/schema/generic-manifest-v1#
   Schema validation error: The property '#/' did not contain a required property of 'platforms' in schema http://inqlude.org/schema/generic-manifest-v1#
+  Warning: missing `display_name` attribute
   Warning: missing `topics` attribute
 
 2 manifests checked. 1 ok, 1 with error, 1 has warning.
@@ -108,6 +109,7 @@ EOT
 Verify manifest miss-topics.manifest...ok
   Warning: missing `topics` attribute
 Verify manifest no-topics.manifest...ok
+  Warning: missing `display_name` attribute
   Warning: missing `topics` attribute
 
 2 manifests checked. 2 ok, 0 with error, 2 have warnings.
