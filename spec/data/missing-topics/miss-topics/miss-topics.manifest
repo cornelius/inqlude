@@ -1,6 +1,7 @@
 {
   "$schema": "http://inqlude.org/schema/generic-manifest-v1#",
-  "name": "miss-topics",  
+  "name": "miss-topics",
+  "display_name": "Miss-topics",
   "summary": "Missing topics",
   "urls": {
     "homepage": "http://missing-topics.org",
