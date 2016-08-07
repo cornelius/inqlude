@@ -5,6 +5,9 @@ require 'given_filesystem/spec_helpers'
 
 require_relative "../../lib/inqlude"
 
+require "nokogiri"
+require "open-uri"
+
 def test_data_path file_name
   File.expand_path(File.join('../../data/', file_name), __FILE__)
 end
