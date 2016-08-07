@@ -88,6 +88,10 @@ class Verifier
         @result.errors.push "Schema validation error: #{error}"
       end
 
+      if manifest.display_name.nil?
+        @result.warnings.push "Warning: missing `display_name` attribute"
+      end
+
       topics =  manifest.topics
       if topics.nil?
         @result.warnings.push "Warning: missing `topics` attribute"

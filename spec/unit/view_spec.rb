@@ -179,19 +179,48 @@ EOT
 
     use_given_filesystem
 
-    it "generates templates" do
+    before(:each) do
       s = Settings.new
       mh = ManifestHandler.new s
       mh.read_remote
+
       v = View.new mh
       v.templates = "one-column"
 
       dir = given_directory
 
       v.create(dir)
-      all_path = File.join(dir, "index.html")
+      @path = File.join(dir, "index.html")
+    end
 
-      expect(File.exists?(all_path)).to be true
+    it "generates templates" do
+      expect(File.exists?(@path)).to be true
+    end
+
+    it "checks content" do
+      html_data = File.read(@path)
+
+      nokogiri_object = Nokogiri::HTML(html_data)
+      paragraphs_content = nokogiri_object.xpath("//p").to_s
+
+      expected_content =
+      '<p>
+        The goal of Inqlude is to provide a comprehensive listing of all
+        existing libraries for developers of Qt applications. If you are creating
+        applications using the <a href="http://qt-project.org">Qt toolkit</a>, and
+        are looking for libraries, components
+        or modules to use, Inqlude is the place where you find all information and
+        pointers to get started.
+      </p><p>
+        This is a young project, we are still collecting information, and are
+        building up the web site and the tools around it. If you would like to get
+        involved, read more about <a href="contribute.html">how to contribute</a>, or go
+        to the mailing list
+        <a href="https://mail.kde.org/mailman/listinfo/inqlude">inqlude.kde.org</a>
+        to directly talk to us. See you there.
+      </p>'
+
+      expect(paragraphs_content).to eq(expected_content)
     end
   end
 end
