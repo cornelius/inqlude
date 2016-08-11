@@ -53,6 +53,11 @@ class ManifestHandler
       manifest.licenses.include? "Commercial"
     end
   end
+
+  #To populate the `Latest releases` box for the moment
+  def latest_libraries
+    return [library("cutereport"), library("injeqt"), library("marble"), library("qdecimal"), library("qtilities")]
+  end
   
   def group name
     return @libraries.select do |l|
