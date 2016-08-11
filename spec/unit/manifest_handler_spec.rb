@@ -87,6 +87,12 @@ describe ManifestHandler do
       expect( libraries[1].manifests.last.name ).to eq "commercial"
     end
 
+    it "returns latest libraries" do
+      libraries = mh.latest_libraries
+      expect(libraries.first.manifests.last.name).to eq "proprietarylib" 
+      expect(libraries).not_to include "newlib"
+    end
+
   end
 
   describe "#group" do
