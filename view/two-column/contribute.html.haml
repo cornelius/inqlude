@@ -1,0 +1,58 @@
+%home
+  = link_to "Home", "index"
+
+.col-sm-12.inner-box
+  %h4 Contributing data about libraries
+
+  %hr
+
+  %p
+    To get a complete overview about all available Qt based libraries, we need
+    to collect data about these libraries. This includes descriptions,
+    instructions how to use them, as well as links to sources or installable
+    packages.
+  %p
+    The meta data used by Inqlude is collected in a git repository at
+    = link( "http://github.com/cornelius/inqlude-data" )
+    or
+    = link( "https://projects.kde.org/projects/websites/inqlude-data" ) + "."
+    It contains a manifest file in JSON format for each library, which has the
+    meta data in a structured machine-readable form. JSON is easy enough for
+    humans to read and edit as well. See the
+    = link_to "specification of the manifest format", "https://github.com/cornelius/inqlude/blob/master/manifest-format.md"
+    for documentation about what to put into the manifest.
+  %p
+    You can contribute meta data by providing patches to the inqlude-data
+    repository. Use the github mechanisms or just send patches by email.
+    Contributions are welcome.
+
+  %br
+
+  %h4 Contributing to the Inqlude tools
+
+  %hr
+
+  %p
+    The command line tool is developed in another git repository at
+    = link( "http://github.com/cornelius/inqlude" )
+    or
+    = link( "https://projects.kde.org/projects/websites/inqlude" ) + "."
+    It's still in a proof-of-concept state, so there is quite a bit work left.
+    Have a look at the
+    = link_to "list of open issues", "http://github.com/cornelius/inqlude/issues"
+    or read the source and come up with your own ideas what to improve.
+  %p
+    Especially welcome are contributions for adding support for native
+    package systems on the variety of Linux distributions and other systems
+    out there.
+    
+  %br
+
+  %h4 Mailing list
+
+  %hr
+
+  %p
+    If you want to discuss any aspects of Inqlude, get in contact with us, have
+    questions, or want to contribute in any other way, the best way is to use the
+    mailing list #{link_to "inqlude@kde.org", "https://mail.kde.org/mailman/listinfo/inqlude"}.
