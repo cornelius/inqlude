@@ -44,6 +44,15 @@ describe View do
       expect(v.commercial_libraries.count).to eq mh.commercial_libraries.count
       expect(v.commercial_libraries.first.name).to eq mh.commercial_libraries.first.name
     end
+
+    it "returns list of latest libraries" do
+      mh = ManifestHandler.new settings
+      mh.read_remote
+      v = View.new mh
+      
+      expect(v.latest_libraries.count).to eq mh.latest_libraries.count
+      expect(v.latest_libraries.first.name).to eq mh.latest_libraries.first.name
+    end
     
     it "returns group" do
       mh = ManifestHandler.new settings
@@ -53,6 +62,15 @@ describe View do
       
       expect(v.group.count).to eq mh.group("kde-frameworks").count
       expect(v.group.first.name).to eq mh.group("kde-frameworks").first.name
+    end
+
+    it "returns topic" do
+      mh = ManifestHandler.new settings
+      mh.read_remote
+      v = View.new mh
+
+      expect(v.topic("API").count).to eq 2
+      expect(v.topic("API").first.name).to eq 'awesomelib'
     end
   end
   
@@ -174,14 +192,14 @@ EOT
   end
 
   context "templates" do
+    include_context "manifest_files"
 
     include GivenFilesystemSpecHelpers
 
     use_given_filesystem
 
     before(:each) do
-      s = Settings.new
-      mh = ManifestHandler.new s
+      mh = ManifestHandler.new(settings)
       mh.read_remote
 
       v = View.new mh

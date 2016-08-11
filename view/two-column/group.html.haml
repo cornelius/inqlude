@@ -1,19 +1,45 @@
-%h2
+%home
+  = link_to "Home", "index"
+
+%h4
   = group_title
 
-%table
+%table.table-hover.col-sm-12
   - group.each do |library|
-    %tr
-      %td.first
-        = link_to_manifest library.name
-      %td.last
-        = library.latest_manifest.summary
-        %span{"class" => "library-short-meta-data"}
-          - if !library.latest_manifest.is_released?
-            (unreleased,
-          - else
-            (#{library.latest_manifest.maturity},
-          #{library.latest_manifest.licenses.join(", ")})
+    %tr 
+      %td.name
+        - if library.latest_manifest.display_name
+          = link_to_library(library.latest_manifest.name, library.latest_manifest.display_name)
+        - else
+          = link_to_library(library.latest_manifest.name, library.latest_manifest.name)
+      %td.summary
+        = library.manifests.last.summary      
+      %td.platforms
+        %link{:href => "http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css", :rel => "stylesheet"}
+        - if library.manifests.last.platforms.include? 'Linux'
+          %i.fa.fa-linux
+        - if library.manifests.last.platforms.include? 'OS X'
+          %i.fa.fa-apple
+        - if library.manifests.last.platforms.include? 'Windows'
+          %i.fa.fa-windows
+        - if library.manifests.last.platforms.include? 'Android'
+          %i.fa.fa-android
+        - if library.manifests.last.platforms.include? 'iOS'
+          %img{:src => "apple.ico", :height => "15%;"}
+      %td.topics
+        - if library.manifests.last.topics
+          - library.manifests.last.topics.each do |topic|
+            - if (topic != library.manifests.last.topics.last)
+              = topic + ", "
+            - else 
+              = topic                    
+      %td.licenses
+        - library.manifests.last.licenses.each do |license|
+          - if (license != library.manifests.last.licenses.last)
+            = license + ", "
+          - else 
+            = license
+%br
 
 %p
   #{group.count} libraries listed in group #{group_title}.

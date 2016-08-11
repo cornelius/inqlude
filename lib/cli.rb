@@ -90,18 +90,23 @@ actual domain."
   def view
     process_global_options options
 
+    output_dir = options[:output_dir]
+    
     if options[:manifest_dir]
       @@settings.manifest_path = options[:manifest_dir]
     end
 
     manifest_handler = ManifestHandler.new(@@settings)
+
+    puts "Creating web site in '#{output_dir}' from '#{manifest_handler.settings.manifest_path}'"
+
     manifest_handler.read_remote
 
     view = View.new(manifest_handler)
     view.enable_disqus = options[:enable_disqus]
     view.enable_search = !options[:disable_search]
     view.templates = options[:templates]
-    view.create options[:output_dir]
+    view.create output_dir
   end
 
   desc "show <library_name>", "Show library details"

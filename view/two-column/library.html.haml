@@ -1,5 +1,15 @@
-%h2
-  = m.name
+/ %link(rel="stylesheet" type="text/css" href="../public/inqlude.css")
+
+%home
+  = link_to "Home", "index"
+
+%h4
+  -if m.display_name
+    = m.display_name
+  -else
+    = m.name
+
+%hr
 
 %p
   = m.summary
@@ -9,12 +19,14 @@
 = list_attribute "licenses"
 = list_attribute "platforms"
 = list_attribute "authors"
-= list_attribute_content "Home page", link( m.urls.homepage )
 = list_attribute "topics"
+= list_attribute_content "Home page", link( m.urls.homepage )
 = render_description
 
+%br
+
 - if more_urls?
-  %h3 Read more
+  %h4 Read more
   %ul
     = link_item "api_docs", "API documentation"
     = link_item "tutorial", "Tutorial"
@@ -23,8 +35,10 @@
     = link_item "announcement", "Announcement"
     = custom_urls
 
+%br
+
 - if m.packages.source
-  %h3 Packages
+  %h4 Packages
   %ul
     %li
       = link_to "Source code", m.packages.source

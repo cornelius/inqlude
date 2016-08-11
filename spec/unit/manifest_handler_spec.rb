@@ -87,11 +87,25 @@ describe ManifestHandler do
       expect( libraries[1].manifests.last.name ).to eq "commercial"
     end
 
+    it "returns latest libraries" do
+      libraries = mh.latest_libraries
+      expect(libraries.first.manifests.last.name).to eq "proprietarylib" 
+      expect(libraries).not_to include "newlib"
+    end
+
   end
 
   describe "#group" do
     it "returns all libraries of a group" do
       libraries = mh.group("kde-frameworks")
+      expect( libraries.count ).to eq 2
+      expect( libraries.first.manifests.last.name ).to eq "awesomelib"
+    end
+  end
+
+  describe "#topic" do
+    it "returns all libraries of a topic" do
+      libraries = mh.topic("API")
       expect( libraries.count ).to eq 2
       expect( libraries.first.manifests.last.name ).to eq "awesomelib"
     end
@@ -145,7 +159,7 @@ describe ManifestHandler do
   end
 
   it "generates inqlude-all.json" do
-    expected_json = File.read(test_data_path("inqlude-all.json"))
+    expected_json = File.read(test_data_path("inqlude-all.json")).chomp
     expect(mh.generate_inqlude_all).to eq expected_json
   end
 end
