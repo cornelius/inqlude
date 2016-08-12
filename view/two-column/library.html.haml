@@ -1,54 +1,74 @@
-%h2
-  = m.name
+<link rel="stylesheet" type="text/css" href="../public/inqlude.css">
 
-%p
-  = m.summary
+%home
+  = link_to "Home", "index"
 
-- if m.has_version?
-  = list_attribute_content "Version", version_content
-= list_attribute "licenses"
-= list_attribute "platforms"
-= list_attribute "authors"
-= list_attribute_content "Home page", link( m.urls.homepage )
-= list_attribute "topics"
-= render_description
+.col-sm-12.inner-box
+  %h4
+    -if m.display_name
+      = m.display_name
+    -else 
+      = m.name
 
-- if more_urls?
-  %h3 Read more
-  %ul
-    = link_item "api_docs", "API documentation"
-    = link_item "tutorial", "Tutorial"
-    = link_item "download", "Download sources"
-    = link_item "vcs", "Source code repository"
-    = link_item "announcement", "Announcement"
-    = custom_urls
-
-- if m.packages.source
-  %h3 Packages
-  %ul
-    %li
-      = link_to "Source code", m.packages.source
-
-%p{:class => "edit-link"}
-  = link_to "[Edit]", editor_url
-
-%br{:clear => "all"}
-
-- if disqus_enabled?
   %hr
 
-  #disqus_thread
+  .col-sm-12.topics-bar
+    - if m.topics
+      - m.topics.each do |topic|
+        %p{:class => "labels"}
+          = topic
+  
+  %p
+    = m.summary
 
-  :javascript
-    var disqus_config = function () {
-        this.page.url = 'http://inqlude.org/libraries/#{m.name}.html';
-        this.page.identifier = '#{m.name}';
-    };
-    (function() {
-        var d = document, s = d.createElement('script');
+  - if m.has_version?
+    = list_attribute_content "Version", version_content
+  = list_attribute "licenses"
+  = list_attribute "platforms"
+  = list_attribute "authors"
+  = list_attribute_content "Home page", link( m.urls.homepage )
+  = render_description
 
-        s.src = 'https://inqlude.disqus.com/embed.js';
+  %br
 
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
+  - if more_urls?
+    %h4 Read more
+    %ul
+      = link_item "api_docs", "API documentation"
+      = link_item "tutorial", "Tutorial"
+      = link_item "download", "Download sources"
+      = link_item "vcs", "Source code repository"
+      = link_item "announcement", "Announcement"
+      = custom_urls
+
+  %br
+
+  - if m.packages.source
+    %h4 Packages
+    %ul
+      %li
+        = link_to "Source code", m.packages.source
+
+  %p{:class => "edit-link"}
+    = link_to "[Edit]", editor_url
+
+  %br{:clear => "all"}
+
+  - if disqus_enabled?
+    %hr
+
+    #disqus_thread
+
+    :javascript
+      var disqus_config = function () {
+          this.page.url = 'http://inqlude.org/libraries/#{m.name}.html';
+          this.page.identifier = '#{m.name}';
+      };
+      (function() {
+          var d = document, s = d.createElement('script');
+
+          s.src = 'https://inqlude.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+      })();

@@ -1,0 +1,20 @@
+%home
+  = link_to "Home", "index"
+
+.col-sm-12.inner-box
+  %h4 Search results
+
+  %hr
+
+  %gcse:searchresults-only
+    Loading...
+  :javascript
+    (function() {
+      var cx = '012526638842992167133:g7thmrlp2uw';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+    })();
