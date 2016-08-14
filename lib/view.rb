@@ -223,6 +223,10 @@ class View
   def group
     @manifest_handler.group(@group_name)
   end
+
+  def topic name
+    @manifest_handler.topic(name)
+  end
   
   def disqus_enabled?
     @enable_disqus

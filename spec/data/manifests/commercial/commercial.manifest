@@ -2,6 +2,9 @@
   "$schema": "http://inqlude.org/schema/generic-manifest-v1#",
   "name": "commercial",
   "summary": "Commercial library",
+  "topics": [
+    "Data"
+  ],
   "urls": {
     "homepage": "http://commercial.example.org"
   },

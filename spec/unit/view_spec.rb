@@ -54,6 +54,15 @@ describe View do
       expect(v.group.count).to eq mh.group("kde-frameworks").count
       expect(v.group.first.name).to eq mh.group("kde-frameworks").first.name
     end
+
+    it "returns topic" do
+      mh = ManifestHandler.new settings
+      mh.read_remote
+      v = View.new mh
+
+      expect(v.topic("API").count).to eq (mh.topic("API").count)
+      expect(v.topic("API").first.name).to eq (mh.topic("API").first.name)
+    end
   end
   
   context "generic manifest and one release" do
