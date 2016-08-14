@@ -145,7 +145,7 @@ describe ManifestHandler do
   end
 
   it "generates inqlude-all.json" do
-    expected_json = File.read(test_data_path("inqlude-all.json"))
+    expected_json = File.read(test_data_path("inqlude-all.json")).chomp
     expect(mh.generate_inqlude_all).to eq expected_json
   end
 end

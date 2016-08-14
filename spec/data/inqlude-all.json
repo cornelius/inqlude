@@ -11,7 +11,8 @@
     ],
     "urls": {
       "homepage": "http://example.com",
-      "download": "http://example.com/download"
+      "download": "http://example.com/download",
+      "vcs": "http://example.com/git"
     },
     "licenses": [
       "LGPLv2.1+",
