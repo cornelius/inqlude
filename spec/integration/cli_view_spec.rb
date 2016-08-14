@@ -55,16 +55,6 @@ describe "Command line interface" do
           "--output-dir=#{@output_dir}"])
       end
 
-      it "generates view" do
-        expect(File.exist?(File.join(@output_dir, "inqlude-all.json"))).to be(true)
-      end
-
-      it "checks format" do
-        data = File.read(File.join(@output_dir, 'inqlude-all.json'))
-
-        expect {JSON.parse(data)}.to_not raise_error
-      end
-
       it "checks number of manifests" do
         data = File.read(File.join(@output_dir, 'inqlude-all.json'))
         parsed_data = JSON.parse(data);
@@ -78,7 +68,7 @@ describe "Command line interface" do
         expect(handler.libraries.length).to eq parsed_data.length
       end
 
-      it "checks data" do
+      it "checks content" do
         data = File.read(File.join(@output_dir, 'inqlude-all.json'))
         parsed_data = JSON.parse(data);
         for element in parsed_data do
@@ -98,22 +88,22 @@ describe "Command line interface" do
 
         manifest = handler.library("awesomelib").latest_manifest
 
-        (expect manifest.display_name).to eq "Awesomelib"
-        (expect manifest.release_date).to eq "2013-09-08"
-        (expect manifest.version).to eq "0.2.0"
-        (expect manifest.summary).to eq "Awesome library"
-        (expect manifest.topics).to eq ["API"]
+        expect(manifest.display_name).to eq "Awesomelib"
+        expect(manifest.release_date).to eq "2013-09-08"
+        expect(manifest.version).to eq "0.2.0"
+        expect(manifest.summary).to eq "Awesome library"
+        expect(manifest.topics).to eq ["API"]
 
-        (expect manifest.urls.homepage).to eq "http://example.com"
-        (expect manifest.urls.download).to eq "http://example.com/download"
-        (expect manifest.urls.vcs).to eq "http://example.com/git"
+        expect(manifest.urls.homepage).to eq "http://example.com"
+        expect(manifest.urls.download).to eq "http://example.com/download"
+        expect(manifest.urls.vcs).to eq "http://example.com/git"
 
-        (expect manifest.licenses).to eq ["LGPLv2.1+", "Commercial"]
-        (expect manifest.description).to eq "This is an awesome library."
-        (expect manifest.authors).to eq ["Cornelius Schumacher <schumacher@kde.org>"]
-        (expect manifest.maturity).to eq "stable"
+        expect(manifest.licenses).to eq ["LGPLv2.1+", "Commercial"]
+        expect(manifest.description).to eq "This is an awesome library."
+        expect(manifest.authors).to eq ["Cornelius Schumacher <schumacher@kde.org>"]
+        expect(manifest.maturity).to eq "stable"
 
-        (expect manifest.packages.source).to eq "ftp://example.com/download/awesomelib-0.2.0.tar.gz"
+        expect(manifest.packages.source).to eq "ftp://example.com/download/awesomelib-0.2.0.tar.gz"
       end
     end
   end
