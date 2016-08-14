@@ -97,6 +97,14 @@ describe ManifestHandler do
     end
   end
 
+  describe "#topic" do
+    it "returns all libraries of a topic" do
+      libraries = mh.topic("API")
+      expect( libraries.count ).to eq 2
+      expect( libraries.first.manifests.last.name ).to eq "awesomelib"
+    end
+  end
+
   describe "#library" do
 
     it "returns one library" do
