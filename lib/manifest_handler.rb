@@ -79,6 +79,15 @@ class ManifestHandler
     raise InqludeError.new("Unable to find manifest '#{name}'")
   end
 
+  def topic name
+    return @libraries.select do |l|
+      manifest = l.latest_manifest
+      if manifest.topics
+        manifest.topics.include? name
+      end
+    end
+  end
+
   def read_remote
     @libraries.clear
     @manifests.clear

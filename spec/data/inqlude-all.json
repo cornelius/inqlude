@@ -37,6 +37,9 @@
     "release_date": "2012-01-01",
     "version": "edge",
     "summary": "Bleeding edge version of a library",
+    "topics": [
+      "API"
+    ],
     "urls": {
       "homepage": "http://example.org",
       "download": "http://example.org/download"
@@ -61,6 +64,9 @@
     "$schema": "http://inqlude.org/schema/generic-manifest-v1#",
     "name": "commercial",
     "summary": "Commercial library",
+    "topics": [
+      "Data"
+    ],
     "urls": {
       "homepage": "http://commercial.example.org"
     },
