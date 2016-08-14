@@ -174,14 +174,14 @@ EOT
   end
 
   context "templates" do
+    include_context "manifest_files"
 
     include GivenFilesystemSpecHelpers
 
     use_given_filesystem
 
     before(:each) do
-      s = Settings.new
-      mh = ManifestHandler.new s
+      mh = ManifestHandler.new(settings)
       mh.read_remote
 
       v = View.new mh
