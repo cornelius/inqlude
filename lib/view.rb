@@ -110,6 +110,10 @@ class View
     "<a href=\"#{@root}libraries/#{name}.html\">#{name}</a>"
   end
 
+  def link_to_library name, display_name
+    "<a href=\"#{@root}libraries/#{name}.html\">#{display_name}</a>"
+  end
+
   def link url
     "<a href=\"#{url}\" target=\"_blank\">#{url}</a>"
   end
@@ -119,6 +123,10 @@ class View
       url = "#{@root}#{url}.html"
     end
     "<a href=\"#{url}\">#{title}</a>"
+  end
+
+  def link_to_group name, display_name
+    "<a href=\"#{@root}groups/#{name}.html\">#{display_name}</a>"
   end
 
   def list_attribute attribute
@@ -211,6 +219,14 @@ class View
     @manifest_handler.commercial_libraries
   end
 
+  def latest_libraries
+    @manifest_handler.latest_libraries
+  end
+
+  def is_kde_latest?
+    @manifest_handler.is_kde_latest?
+  end
+
   def group_title
     if @group_name == "kde-frameworks"
       return "KDE Frameworks"
@@ -253,6 +269,22 @@ class View
   def render_description
     doc = Kramdown::Document.new(@manifest.description)
     doc.to_html
+  end
+
+  def kde_frameworks_release_date
+    @manifest_handler.group("kde-frameworks")[1].latest_manifest.release_date
+  end
+
+  def topics
+    ['API', 'Artwork', 'Bindings', 'Communication', 'Data', 'Desktop', 'Development', 'Graphics', 'Logging', 'Mobile', 'Multimedia', 'Printing', 'QML', 'Scripting', 'Security', 'Text', 'Web', 'Widgets']
+  end
+
+  def platforms
+    ['Android','iOS','Linux','OS x','Windows']
+  end
+
+  def licenses
+    ['Apache','BSD','Commercial','GPL','LGPL','MIT','Qwt']
   end
 
   private
