@@ -44,6 +44,15 @@ describe View do
       expect(v.commercial_libraries.count).to eq mh.commercial_libraries.count
       expect(v.commercial_libraries.first.name).to eq mh.commercial_libraries.first.name
     end
+
+    it "returns list of latest libraries" do
+      mh = ManifestHandler.new settings
+      mh.read_remote
+      v = View.new mh
+      
+      expect(v.latest_libraries.count).to eq mh.latest_libraries.count
+      expect(v.latest_libraries.first.name).to eq mh.latest_libraries.first.name
+    end
     
     it "returns group" do
       mh = ManifestHandler.new settings

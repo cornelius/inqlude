@@ -53,6 +53,30 @@ class ManifestHandler
       manifest.licenses.include? "Commercial"
     end
   end
+
+  def latest_libraries
+    recent_releases = Array.new
+
+    libraries.select do |library|
+      if library.latest_manifest.has_version? && library.latest_manifest.group != "kde-frameworks"
+        recent_releases.push library
+      end
+    end
+
+    recent_releases.sort! {|a,b| a.latest_manifest.release_date <=> b.latest_manifest.release_date}
+    recent_releases.reverse! 
+
+    return recent_releases[0 .. 4]
+  end
+
+  def is_kde_latest?
+    latest_libraries.select do |library|
+      if group("kde-frameworks")[1].latest_manifest.release_date > library.latest_manifest.release_date 
+        return true
+      end
+    end
+    return false
+  end
   
   def group name
     return @libraries.select do |l|
