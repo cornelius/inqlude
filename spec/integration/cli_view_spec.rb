@@ -25,6 +25,26 @@ describe "Command line interface" do
       expect(File.exist?(File.join(output_dir, "libraries", "newlib.html"))).to be(true)
     end
 
+    it "checks templates direstory" do
+      dir = given_directory do
+        given_directory_from_data("awesomelib", from: "manifests/awesomelib")
+        given_directory_from_data("newlib", from: "manifests/newlib")
+      end
+
+      output_dir = given_directory
+
+      result = run_command(args: ["view", "--offline", "--manifest_dir=#{dir}",
+        "--output-dir=#{output_dir}", "--templates=one-column"])
+      expect(result).to exit_with_success(/Creating web site/)
+
+      result = run_command(args: ["view", "--offline", "--manifest_dir=#{dir}",
+        "--output-dir=#{output_dir}", "--templates=unreal-template"])
+      expected_output = <<EOT
+Error: Templates directory doesn't exist
+EOT
+      expect(result).to exit_with_error(1, expected_output)
+    end
+
     it "generates templates" do
       dir = given_directory do
         given_directory_from_data("awesomelib", from: "manifests/awesomelib")
