@@ -75,6 +75,10 @@ class View
     end
   end
 
+  def template_directory_exists?
+    File.directory?(view_dir) ? true : false
+  end
+
   def render_template name, output_dir, file_name = nil
     layout = template "layout"
     layout_engine = Haml::Engine.new layout
