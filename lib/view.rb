@@ -27,6 +27,10 @@ class View
     assert_dir output_dir
 
     system "cp #{view_dir}/favicon.ico #{output_dir}"
+
+    if templates == "two-column"
+      system "cp #{view_dir}/ios.ico #{output_dir}"
+    end
     
     assert_dir "#{output_dir}/public"
     system "cp #{view_dir}/public/* #{output_dir}/public/"
@@ -67,16 +71,25 @@ class View
       file_name = "libraries/" + library.name
       render_template "library", output_dir, file_name
     end
+
+    if templates == 'two-column'
+      topics_path = "#{output_dir}/topics/"
+      assert_dir topics_path
+
+      @root = "../"
+
+      topics.each do |topic|
+        @topic = topic
+        file_name = "topics/" + topic
+        render_template "topic", output_dir, file_name
+      end
+    end
   end
 
   def create_inqlude_all(output_dir)
     File.open(File.join(output_dir, "inqlude-all.json"), "w") do |f|
       f.write(@manifest_handler.generate_inqlude_all)
     end
-  end
-
-  def template_directory_exists?
-    File.directory?(view_dir) ? true : false
   end
 
   def render_template name, output_dir, file_name = nil
@@ -110,8 +123,16 @@ class View
     @manifest
   end
 
+  def t
+    @topic
+  end
+
   def link_to_manifest name
     "<a href=\"#{@root}libraries/#{name}.html\">#{name}</a>"
+  end
+
+  def link_to_library name, display_name
+    "<a href=\"#{@root}libraries/#{name}.html\">#{display_name}</a>"
   end
 
   def link url
@@ -123,6 +144,14 @@ class View
       url = "#{@root}#{url}.html"
     end
     "<a href=\"#{url}\">#{title}</a>"
+  end
+
+  def link_to_group name, display_name
+    "<a href=\"#{@root}groups/#{name}.html\">#{display_name}</a>"
+  end
+
+  def link_to_topic name
+    "<a href=\"#{@root}topics/#{name}.html\">#{name}</a>"
   end
 
   def list_attribute attribute
@@ -215,6 +244,14 @@ class View
     @manifest_handler.commercial_libraries
   end
 
+  def latest_libraries
+    @manifest_handler.latest_libraries
+  end
+
+  def is_kde_latest?
+    @manifest_handler.is_kde_latest?
+  end
+
   def group_title
     if @group_name == "kde-frameworks"
       return "KDE Frameworks"
@@ -228,6 +265,10 @@ class View
 
   def topic name
     @manifest_handler.topic(name)
+  end
+
+  def no_of_libraries topic
+    @manifest_handler.no_of_libraries(topic)
   end
   
   def disqus_enabled?
@@ -261,6 +302,14 @@ class View
   def render_description
     doc = Kramdown::Document.new(@manifest.description)
     doc.to_html
+  end
+
+  def kde_frameworks_release_date
+    @manifest_handler.group("kde-frameworks")[1].latest_manifest.release_date
+  end
+
+  def topics
+    ['API', 'Artwork', 'Bindings', 'Communication', 'Data', 'Desktop', 'Development', 'Graphics', 'Logging', 'Mobile', 'Multimedia', 'Printing', 'QML', 'Scripting', 'Security', 'Text', 'Web', 'Widgets']
   end
 
   private
