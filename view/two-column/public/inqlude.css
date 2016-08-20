@@ -1,5 +1,4 @@
 body {
-  background-color: #eee;
   color: #111;
   margin: 0px;
   font-family: 'Droid Sans', arial, serif;
@@ -46,82 +45,175 @@ a:active {
 }
 
 h1 {
-  text-align: center;
   font-family: monospace;
   font-size: 200%;
   font-weight: normal;
-  margin-top: 0px;
   margin-bottom: 0px;
+  padding-top: 5px;
+  margin-left: 40px;
 }
 
 h1 .logo {
-  font-size: 200%;
+  font-size: 180%;
   font-weight: bold;
-  margin: 0px;
 }
 
 h1 .green {
   color: #80C342;
 }
 
-
-h1 .subtitle {
-  padding-left: 12px;
+h2 {
+  margin-top: -5px;
+  margin-left: 40px;
 }
 
-.container {
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 18px;
-  width: 940px;
-  background-color: #f8f8f8;
-  padding: 20px;
-  padding-top: 0px;
-  -webkit-box-shadow: 0px 6px 15px rgba(50, 50, 50, 0.6);
-  -moz-box-shadow:    0px 6px 15px rgba(50, 50, 50, 0.6);
-  box-shadow:         0px 6px 15px rgba(50, 50, 50, 0.6);
+h2 .subtitle {
+  font-weight: bold;  
+  font-size: 78%;
 }
 
-.header {
-  margin-left: -30px;
-  width: 980px;
-  background-color: #fafafa;
-  padding: 10px;
-  -webkit-box-shadow: 0px 6px 20px rgba(50, 50, 50, 0.5);
-  -moz-box-shadow:    0px 6px 20px rgba(50, 50, 50, 0.5);
-  box-shadow:         0px 6px 20px rgba(50, 50, 50, 0.5);
+h3, h4, h6 {
+  font-weight: bold;  
 }
 
-.logo {
-  float: left;
-  margin: 20px;
+.container-fluid.header {  
+  -webkit-box-shadow: 0px 6px 0px rgba(50, 50, 50, 0.5);
+  -moz-box-shadow:    0px 6px 0px rgba(50, 50, 50, 0.5);
+  box-shadow:         0px 3px 10px rgba(25, 25, 25, 0.3);
+  background-color: #eee;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
-.menu {
-  margin-right: 20px;
+.col-sm-8.left {
+  margin-top: 0px;
   padding: 0px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+}
+
+.col-sm-4.right {
   text-align: right;
+  padding-top: 45px;
+}
+
+.container-fluid.content {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.col-sm-3.side-bar {
+  padding: 0px;
+  padding-left: 15px;
+  padding-top: 25px;
+}
+
+.col-sm-12.description {
+  text-align: justify;
+  background-color: #eee;
+  margin-bottom: 25px;
+  padding: 15px;
+  padding-bottom: 10px;
+}
+
+.title {
+  background-color: #a4d477;
+  font-weight: bold;
+  padding: 0px;
+  padding-left: 5px;
+  width: 100%;
+}
+
+.col-sm-12.latest-releases {
+  background-color: #eee;
+  margin-bottom: 25px;
+  padding: 0px;
+}
+
+.col-sm-12.latest-releases-content {
+  padding-left: 35px;
+  padding-bottom: 10px;
+}
+
+.col-sm-12.topics {
+  background-color: #eee;
+  margin-bottom: 5px;
+  padding: 0px;
+}
+
+.col-sm-12.topics-content{
+  padding-top: 5px;
+  padding-left: 30px;
+}
+
+.col-sm-9.main-pane {  
+  padding-top: 25px;
+  padding-left: 25px;
+  padding-right: 15px;
+}
+
+.inner-pane.col-sm-12 {
+  text-align: justify;
+  padding: 30px;
+  padding-top: 0px;
+}
+
+date {
   float: right;
+  margin-left: 30px;
 }
 
-.menu ul {
+number {
+  font-size: 80%;
+}
+
+ul.titles-list {
+  list-style-type: circle;
+  padding-left: 25px;
+}
+
+ul.topics-list {
   list-style-type: none;
+  padding-left: 40px;
 }
 
-.search {
-  width: 250px;
+table.table-hover.col-sm-12 {
+  margin-bottom: 20px;
 }
 
-.menu_items {
-  color: white;
+table.table-hover.col-sm-12 tr:hover td {
+  background-color: #a4d477;
+  cursor: pointer;
 }
 
-.menu_items a {
-  color: white;
+tr:nth-child(even) {
+  background-color: #eee;
 }
 
-.content {
-  padding-top: 10px;
+td {
+  vertical-align: top;
+  padding: 5px;
+  padding-left: 6px;
+}
+
+td.name {
+  width: 15%;
+}
+
+td.summary {
+  width: 32%;
+}
+
+td.platforms {
+  width: 15%;
+}
+
+td.topics {
+  width: 19%;
+}
+
+td.licenses {
+  width: 19%;
 }
 
 .code {
@@ -146,15 +238,16 @@ h1 .subtitle {
   font-style: italic;
 }
 
-td {
-  vertical-align: top;
-  padding-left: 16px;
+home {
+  float: right;
+  font-style: italic;
 }
 
 .footer {
   float: right;
   font-size: 80%;
   font-style: italic;
+  padding-right: 30px;
 }
 
 .edit-link {
@@ -162,14 +255,15 @@ td {
   font-size: 80%;
 }
 
-.legal {
-  margin: 12px;
+.col-sm-12.legal {
   text-align: center;
-  font-size: 70%;
+  font-size: 90%;
+  margin-bottom: 15px;
 }
 
 .attribute {
   margin: 8px;
+  margin-left: 10%;
 }
 
 .attribute .label {
@@ -179,8 +273,15 @@ td {
   text-align: right;
   float: left;
   margin-right: 8px;
+  font-size: inherit;
+  font-weight: normal;
 }
 
 .attribute .value {
   display: inline;
+}
+
+i.fa {
+  font-size: 16px;
+  margin-left: 2px;
 }
