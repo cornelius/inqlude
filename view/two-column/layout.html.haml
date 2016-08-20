@@ -1,49 +1,93 @@
 !!!
 %head
   %meta{ :charset => 'utf-8' }
-  = style_sheet
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    = style_sheet
   - if enable_search
     <link href='https://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://www.google.com/cse/style/look/default.css" type="text/css" />
+  
 %body
-  .ribbon
-    = link_to "Alpha", "about"
+  .container-fluid.header
 
-  .container
-    .header
-      .logo
-        %h1
-          %span.logo><
-            \#in
-          %span.logo.green><
-            q
-          %span.logo><
-            lude
-        %h2
-          %span.subtitle
-            The Qt library archive
-      .menu
-        %ul
+    .col-sm-8.left
+      .ribbon
+        = link_to "Alpha", "about"    
+      %h1
+        %span.logo><
+          \#in
+        %span.logo.green><
+          q
+        %span.logo><
+          lude
+      %h2
+        %span.subtitle
+          The Qt library archive
+
+    .col-sm-4.right  
+      - if enable_search
+        %gcse:searchbox-only{ resultsUrl: "https://inqlude.org/search.html" }
+          Loading...
+    %br{ :clear => "all" }
+
+  .container-fluid.content
+    .col-sm-3.side-bar
+
+      .col-sm-12.description
+        %p
+          Inqlude provides a comprehensive listing of all existing libraries for developers of applications using the #{link_to "Qt toolkit", "http://qt-project.org"}. Inqlude is run by the community and open for contributions.       
+        %ul.titles-list
           %li
-            = link_to "Home", "index"
+            = link_to "About", "about"
           %li
             = link_to "How to get libraries", "get"
           %li
-            = link_to "How to contribute", "contribute"
-          %li
-            = link_to "About", "about"
-        .search
-          - if enable_search
-            %gcse:searchbox-only{ resultsUrl: "https://inqlude.org/search.html" }
-              Loading...
-      %br{ :clear => "all" }
+            = link_to "How to contribute", "contribute"          
+          
+      .col-sm-12.latest-releases
+        %p{:class => "title"}
+          Latest releases
+        .col-sm-12.latest-releases-content
+          %table
+            %tr
+              %td
+                - latest_libraries.each do |library|
+                  - if library.latest_manifest.display_name
+                    = link_to_library(library.latest_manifest.name, library.latest_manifest.display_name)
+                  - else
+                    = link_to_library(library.latest_manifest.name, library.latest_manifest.name)
+                  %date
+                    = '(' + library.latest_manifest.release_date + ')'
+                  %br
+                - if is_kde_latest?
+                  = link_to_group('kde-frameworks', 'KDE Frameworks')
+                  %date
+                    = '(' + kde_frameworks_release_date + ')'
 
-    .content
+      .col-sm-12.topics
+        %p{:class => "title"}
+          Topics
+        %ul.topics-list
+          %li
+            - topics.each do |topic|
+              = link_to_topic(topic) 
+              %number
+                = ' (' + no_of_libraries(topic).to_s + ')'
+              %br          
+
+    .col-sm-9.main-pane 
       = yank
 
-      %br{ :clear => "all" }
+    %br{ :clear => "all" }
 
-  .legal
+    %hr
+
+  %span.footer
+    Last updated on #{Date.today}
+
+  .col-sm-12.legal
     Inqlude is a
     = link_to "KDE project", "http://kde.org"
     = "|"

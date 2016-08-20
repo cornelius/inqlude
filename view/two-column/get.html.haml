@@ -1,0 +1,60 @@
+%home
+  = link_to "Home", "index"
+
+%h4
+  How to get libraries
+
+%hr
+
+%p
+  This page is about how to use Inqlude as a user, a developer using Qt
+  based libraries in her projects.
+%p
+  First you can just use the web site. Find the information about libraries
+  here, and get the libraries using the provided links. This works and is the
+  recommended way for now, but there is an experimental, but more convenient
+  way.
+%p
+  You can also use the command line client. This client makes it easy to get
+  the libraries you need with just a few commands, without having to know
+  URLs, or how libraries are packages.
+%p
+  First you need to get the command line client.
+  It's a Qt 5 application. If your distribution doesn't have a package for
+  inqlude-client, you can download its sources from
+  = link_to( "download.kde.org", "http://download.kde.org/devel/helpers/")
+  or using
+  .code
+    git clone git://anongit.kde.org/inqlude-client
+%p
+  There is a second command line client, written in Ruby. It can also
+  download libraries, but it is mostly aimed at maintaining the inqlude data.
+  It's available as a Ruby gem, so when you have rubygems installed you can simply do a
+  .code
+    sudo gem install inqlude
+  (For instructions how to get rubygems, see
+  = link_to( "rubygems.org", "http://rubygems.org" ) + ")."
+%p
+  Once you have the client, you can get help about the available commands
+  with
+  .code
+    inqlude
+  Get a list of available libraries with
+  .code
+    inqlude list -r
+
+  Install a library with
+  .code
+    inqlude install &lt;library_name&gt;
+
+  Get a list of installed libraries with
+  .code
+    inqlude list
+%p
+  The command line client uses your native package management system. In
+  case there is no meta data available for your system, the client falls
+  back to handling sources. Please consider helping to get your system
+  supported by contributing meta data or implementing a backend for your
+  system. See the
+  = link_to "instructions how to contribute", "contribute"
+  for more details.
