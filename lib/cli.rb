@@ -98,15 +98,24 @@ actual domain."
 
     manifest_handler = ManifestHandler.new(@@settings)
 
-    puts "Creating web site in '#{output_dir}' from '#{manifest_handler.settings.manifest_path}'"
-
     manifest_handler.read_remote
 
     view = View.new(manifest_handler)
-    view.enable_disqus = options[:enable_disqus]
-    view.enable_search = !options[:disable_search]
+    
     view.templates = options[:templates]
-    view.create output_dir
+
+    if !view.template_directory_exists?
+      STDERR.puts "Error: Templates directory doesn't exist"
+      exit 1
+    else
+      puts "Creating web site in '#{output_dir}' from '#{manifest_handler.settings.manifest_path}'"
+
+      view.enable_disqus = options[:enable_disqus]
+      view.enable_search = !options[:disable_search]
+
+      view.create output_dir
+    end
+
   end
 
   desc "show <library_name>", "Show library details"
