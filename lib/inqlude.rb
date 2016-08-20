@@ -7,6 +7,7 @@ require "date"
 require "json-schema"
 require "kramdown"
 require "xdg"
+require "net/http"
 
 class InqludeError < StandardError
 end

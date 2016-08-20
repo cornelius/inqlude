@@ -120,4 +120,54 @@ class Verifier
     verify manifest
   end
 
+  def check_links filename
+    puts 'Verify links...'
+    manifest = Manifest.parse_file filename
+
+    if manifest.urls.homepage
+      verify_link('homepage',manifest.urls.homepage)
+    end
+    if manifest.urls.api_docs
+      verify_link('api_docs',manifest.urls.api_docs)
+    end
+    if manifest.urls.download
+      verify_link('download',manifest.urls.download)
+    end
+    if manifest.urls.tutorial
+      verify_link('tutorial',manifest.urls.tutorial)
+    end
+    if manifest.urls.vcs
+      verify_link('vcs',manifest.urls.vcs)
+    end
+    if manifest.urls.description_source
+      verify_link('description_source',manifest.urls.description_source)
+    end
+    if manifest.urls.announcement
+      verify_link('announcement',manifest.urls.announcement)
+    end
+    if manifest.urls.mailing_list
+      verify_link('mailing_list',manifest.urls.mailing_list)
+    end
+    if manifest.urls.contact
+      verify_link('contact',manifest.urls.contact)
+    end
+    puts ""
+  end
+
+  def verify_link name, link
+    url = URI.parse(link)
+    req = Net::HTTP.new(url.host, url.port)
+
+    if link.include? "https"
+      req.use_ssl = true
+    end
+    res = req.request_head(url.path)
+
+    if res.code == "200"
+      puts name + " is ok"
+    else
+      puts name + ": " + link + " is invalid"
+    end
+  end
+
 end
