@@ -2,10 +2,10 @@
   = link_to "Home", "index"
 
 %h4
-  = group_title
+  = t
 
 %table.table-hover.col-sm-12
-  - group.each do |library|
+  - topic(t).each do |library|  
     %tr 
       %td.name
         - if library.latest_manifest.display_name
@@ -15,7 +15,6 @@
       %td.summary
         = library.manifests.last.summary      
       %td.platforms
-        %link{:href => "http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css", :rel => "stylesheet"}
         - if library.manifests.last.platforms.include? 'Linux'
           %i.fa.fa-linux
         - if library.manifests.last.platforms.include? 'OS X'
@@ -25,7 +24,7 @@
         - if library.manifests.last.platforms.include? 'Android'
           %i.fa.fa-android
         - if library.manifests.last.platforms.include? 'iOS'
-          %img{:src => "apple.ico", :height => "15%;"}
+          %img{:src => "../ios.ico", :height => "15%;"}
       %td.topics
         - if library.manifests.last.topics
           - library.manifests.last.topics.each do |topic|
@@ -39,8 +38,4 @@
             = license + ", "
           - else 
             = license
-%br
-
-%p
-  #{group.count} libraries listed in group #{group_title}.
-
+  
