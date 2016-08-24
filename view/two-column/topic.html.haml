@@ -1,7 +1,7 @@
 %home
   = link_to "Home", "index"
 
-%h4
+%h3
   = t
 
 %table.table-hover.col-sm-12
@@ -38,4 +38,10 @@
             = license + ", "
           - else 
             = license
+:javascript
+  $('table.table-hover.col-sm-12 tr').click( function() {
+    window.location = $(this).find('a').attr('href');
+  }).hover( function() {
+    $(this).toggleClass('hover');
+  });
   

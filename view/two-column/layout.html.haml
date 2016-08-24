@@ -17,14 +17,14 @@
         = link_to "Alpha", "about"    
       %h1
         %span.logo><
-          \#in
+          = link_to "#in", "index"
         %span.logo.green><
-          q
+          = link_to "q", "index"
         %span.logo><
-          lude
+          = link_to "lude", "index"
       %h2
-        %span.subtitle
-          The Qt library archive
+        %span.subtitle><
+          = link_to "The Qt library archive", "index"
 
     .col-sm-4.right  
       - if enable_search
@@ -33,60 +33,55 @@
     %br{ :clear => "all" }
 
   .container-fluid.content
+
     .col-sm-3.side-bar
+      %p{:class => "description"}
+        Inqlude provides a comprehensive listing of all existing libraries for developers of applications using the #{link_to "Qt toolkit", "http://qt-project.org"}. Inqlude is run by the community and open for contributions.       
+      %ul.titles-list
+        %li
+          = link_to "About", "about"
+        %li
+          = link_to "How to get libraries", "get"
+        %li
+          = link_to "How to contribute", "contribute"
 
-      .col-sm-12.description
-        %p
-          Inqlude provides a comprehensive listing of all existing libraries for developers of applications using the #{link_to "Qt toolkit", "http://qt-project.org"}. Inqlude is run by the community and open for contributions.       
-        %ul.titles-list
-          %li
-            = link_to "About", "about"
-          %li
-            = link_to "How to get libraries", "get"
-          %li
-            = link_to "How to contribute", "contribute"          
-          
-      .col-sm-12.latest-releases
-        %p{:class => "title"}
-          Latest releases
-        .col-sm-12.latest-releases-content
-          %table
-            %tr
-              %td
-                - latest_libraries.each do |library|
-                  - if library.latest_manifest.display_name
-                    = link_to_library(library.latest_manifest.name, library.latest_manifest.display_name)
-                  - else
-                    = link_to_library(library.latest_manifest.name, library.latest_manifest.name)
-                  %date
-                    = '(' + library.latest_manifest.release_date + ')'
-                  %br
-                - if is_kde_latest?
-                  = link_to_group('kde-frameworks', 'KDE Frameworks')
-                  %date
-                    = '(' + kde_frameworks_release_date + ')'
+      %p{:class => "title"} Latest releases
+      %hr
+      %ul.side-list
+        %li
+          - latest_libraries.each do |library|
+            - if library.latest_manifest.group == "kde-frameworks"
+              = link_to_group('kde-frameworks', 'KDE Frameworks')
+            -else
+              - if library.latest_manifest.display_name
+                = link_to_library(library.latest_manifest.name, library.latest_manifest.display_name)
+              - else
+                = link_to_library(library.latest_manifest.name, library.latest_manifest.name)
+            %date
+              = '(' + library.latest_manifest.release_date + ')'
+            %br
 
-      .col-sm-12.topics
-        %p{:class => "title"}
-          Topics
-        %ul.topics-list
-          %li
-            - topics.each do |topic|
-              = link_to_topic(topic) 
-              %number
-                = ' (' + no_of_libraries(topic).to_s + ')'
-              %br          
+      %p{:class => "title"} Topics
+      %hr
+      %ul.side-list
+        %li 
+          = link_to "All", "all"
+          %number
+            = ' (' + libraries.length.to_s + ')'
+        %li
+          - topics.each do |topic|
+            = link_to_topic(topic)
+            %number
+              = ' (' + no_of_libraries(topic).to_s + ')'
+            %br
 
     .col-sm-9.main-pane 
       = yank
 
     %br{ :clear => "all" }
 
-    %hr
-
-  %span.footer
-    Last updated on #{Date.today}
-
+  %hr
+  
   .col-sm-12.legal
     Inqlude is a
     = link_to "KDE project", "http://kde.org"

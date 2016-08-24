@@ -1,4 +1,4 @@
-%h4
+%h3
   Stable libraries
 
 %table.table-hover.col-sm-12
@@ -36,7 +36,7 @@
           - else 
             = license
 
-%h4
+%h3
   Developer releases
 
 %table.table-hover.col-sm-12
@@ -142,7 +142,7 @@
           - else 
             = license
 
-%h4
+%h3
   Unreleased libraries
 
 %table.table-hover.col-sm-12
@@ -179,6 +179,11 @@
             = license + ", "
           - else 
             = license
+
+%hr
+
+%span.footer
+  Last updated on #{Date.today}
 
 :javascript
   $('table.table-hover.col-sm-12 tr').click( function() {
