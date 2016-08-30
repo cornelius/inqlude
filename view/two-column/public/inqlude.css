@@ -2,6 +2,7 @@ body {
   color: #111;
   margin: 0px;
   font-family: 'Droid Sans', arial, serif;
+  font-size: 155%;
 }
 
 a:link {
@@ -46,11 +47,8 @@ a:active {
 
 h1 {
   font-family: monospace;
-  font-size: 200%;
-  font-weight: normal;
+  font-size: 180%;
   margin-bottom: 0px;
-  padding-top: 5px;
-  margin-left: 40px;
 }
 
 h1 .logo {
@@ -58,13 +56,8 @@ h1 .logo {
   font-weight: bold;
 }
 
-h1 .green {
-  color: #80C342;
-}
-
 h2 {
   margin-top: -5px;
-  margin-left: 40px;
 }
 
 h2 .subtitle {
@@ -72,14 +65,35 @@ h2 .subtitle {
   font-size: 78%;
 }
 
-h3, h4, h6 {
-  font-weight: bold;  
+.logo a {
+  color: #111;
+  text-decoration: none;
+}
+.logo.green a {
+  color: #80C342;
+  text-decoration: none;
+}
+.subtitle a {
+  color: #111;
+  text-decoration: none;
+}
+
+h3 {
+  font-weight: bold;
+  font-size: 140%;
+  margin-top: 0px;
+  padding-bottom: 15px;
+}
+
+h4 {
+  font-weight: bold;
+  font-size: 120%;
 }
 
 .container-fluid.header {  
   -webkit-box-shadow: 0px 6px 0px rgba(50, 50, 50, 0.5);
   -moz-box-shadow:    0px 6px 0px rgba(50, 50, 50, 0.5);
-  box-shadow:         0px 3px 10px rgba(25, 25, 25, 0.3);
+  box-shadow:         0px 2px 4px rgba(0,0,0,.2);
   background-color: #eee;
   padding-left: 0px;
   padding-right: 0px;
@@ -89,92 +103,57 @@ h3, h4, h6 {
   margin-top: 0px;
   padding: 0px;
   padding-bottom: 5px;
-  padding-left: 10px;
+  padding-left: 55px;
 }
 
 .col-sm-4.right {
+  float: right;
   text-align: right;
-  padding-top: 45px;
+  padding-top: 40px;
+  padding-right: 30px;
 }
 
 .container-fluid.content {
-  padding-right: 10px;
-  padding-left: 10px;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
 .col-sm-3.side-bar {
-  padding: 0px;
-  padding-left: 15px;
-  padding-top: 25px;
+  padding: 20px;
+  padding-top: 30px;
 }
 
-.col-sm-12.description {
+.description {
   text-align: justify;
-  background-color: #eee;
-  margin-bottom: 25px;
-  padding: 15px;
-  padding-bottom: 10px;
+}
+
+ul.titles-list {
+  list-style-type: circle;
+  padding-left: 15px;
 }
 
 .title {
-  background-color: #a4d477;
   font-weight: bold;
-  padding: 0px;
-  padding-left: 5px;
-  width: 100%;
+  margin-top: 30px;
 }
 
-.col-sm-12.latest-releases {
-  background-color: #eee;
-  margin-bottom: 25px;
-  padding: 0px;
-}
-
-.col-sm-12.latest-releases-content {
-  padding-left: 35px;
-  padding-bottom: 10px;
-}
-
-.col-sm-12.topics {
-  background-color: #eee;
-  margin-bottom: 5px;
-  padding: 0px;
-}
-
-.col-sm-12.topics-content{
-  padding-top: 5px;
-  padding-left: 30px;
-}
-
-.col-sm-9.main-pane {  
-  padding-top: 25px;
-  padding-left: 25px;
-  padding-right: 15px;
-}
-
-.inner-pane.col-sm-12 {
-  text-align: justify;
-  padding: 30px;
-  padding-top: 0px;
+ul.side-list {
+  list-style-type: none;
+  padding-left: 0px;
 }
 
 date {
   float: right;
-  margin-left: 30px;
 }
 
 number {
   font-size: 80%;
 }
 
-ul.titles-list {
-  list-style-type: circle;
-  padding-left: 25px;
-}
-
-ul.topics-list {
-  list-style-type: none;
-  padding-left: 40px;
+.col-sm-9.main-pane {
+  padding-top: 30px;
+  padding-left: 15px;
+  padding-right: 20px;
 }
 
 table.table-hover.col-sm-12 {
@@ -186,7 +165,7 @@ table.table-hover.col-sm-12 tr:hover td {
   cursor: pointer;
 }
 
-tr:nth-child(even) {
+tr:nth-child(odd) {
   background-color: #eee;
 }
 
@@ -234,10 +213,6 @@ td.licenses {
   font-size: 80%;
 }
 
-.library-short-meta-data {
-  font-style: italic;
-}
-
 home {
   float: right;
   font-style: italic;
@@ -247,7 +222,6 @@ home {
   float: right;
   font-size: 80%;
   font-style: italic;
-  padding-right: 30px;
 }
 
 .edit-link {
@@ -257,8 +231,8 @@ home {
 
 .col-sm-12.legal {
   text-align: center;
-  font-size: 90%;
-  margin-bottom: 15px;
+  font-size: 75%;
+  padding-bottom: 10px;
 }
 
 .attribute {
@@ -284,4 +258,8 @@ home {
 i.fa {
   font-size: 16px;
   margin-left: 2px;
+}
+
+hr {
+  margin-top: 0px;
 }

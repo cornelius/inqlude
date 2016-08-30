@@ -1,13 +1,11 @@
 %home
   = link_to "Home", "index"
 
-%h4
+%h3
   -if m.display_name
     = m.display_name
   -else
     = m.name
-
-%hr
 
 %p
   = m.summary

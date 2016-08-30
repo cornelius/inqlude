@@ -252,10 +252,6 @@ class View
     @manifest_handler.latest_libraries
   end
 
-  def is_kde_latest?
-    @manifest_handler.is_kde_latest?
-  end
-
   def group_title
     if @group_name == "kde-frameworks"
       return "KDE Frameworks"
@@ -306,10 +302,6 @@ class View
   def render_description
     doc = Kramdown::Document.new(@manifest.description)
     doc.to_html
-  end
-
-  def kde_frameworks_release_date
-    @manifest_handler.group("kde-frameworks")[1].latest_manifest.release_date
   end
 
   def topics
