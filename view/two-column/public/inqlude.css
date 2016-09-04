@@ -119,8 +119,7 @@ h4 {
 }
 
 .col-sm-3.side-bar {
-  padding: 20px;
-  padding-top: 30px;
+  padding: 30px;
 }
 
 .description {
@@ -151,9 +150,7 @@ number {
 }
 
 .col-sm-9.main-pane {
-  padding-top: 30px;
-  padding-left: 15px;
-  padding-right: 20px;
+  padding: 30px;
 }
 
 table.table-hover.col-sm-12 {
@@ -218,9 +215,8 @@ home {
   font-style: italic;
 }
 
-.footer {
+.footer-text {
   float: right;
-  font-size: 80%;
   font-style: italic;
 }
 
@@ -229,10 +225,11 @@ home {
   font-size: 80%;
 }
 
-.col-sm-12.legal {
+.col-sm-12.footer {
   text-align: center;
   font-size: 75%;
-  padding-bottom: 10px;
+  padding: 30px;
+  padding-top: 0px;
 }
 
 .attribute {
