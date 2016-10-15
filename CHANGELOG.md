@@ -1,5 +1,13 @@
 # Change log of Inqlude
 
+## Version 0.9.0
+
+* Put out progress when creating release manifests
+* Prototype for new layout of the website as alternative view template
+* Better error when view templates directory does not exist
+* Show topics in view
+* Add validation for display_name attribute
+
 ## Version 0.8.0
 
 * Add topic attribute to manifest specification and adapt validator to allow topic attribute as an optional parameter. The validator reports missing topics as a warning for each manifest which does not have a topic attribute, but not fail.
