@@ -7,6 +7,7 @@
 * Better error when view templates directory does not exist
 * Show topics in view
 * Add validation for display_name attribute
+* Gracefully fail in --version when Qt is not installed
 
 ## Version 0.8.0
 
