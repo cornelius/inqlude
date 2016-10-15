@@ -26,29 +26,10 @@ class Cli < Thor
     @@settings = s
   end
 
-  def self.distro
-    @@distro if @@distro
-
-    @@distro = Distro.detect
-    if !@@distro
-      STDERR.puts "Warning: unable to detect distro."
-    end
-  end
-
   desc "global", "Global options", :hide => true
   def global
     if options[:version]
-      puts "Inqlude: #{@@settings.version}"
-
-      qmake_out = `qmake -v`
-      qmake_out =~ /Qt version (.*) in/
-      puts "Qt: #{$1}"
-
-      if self.distro
-        puts "OS: #{self.distro.name} #{self.distro.version}"
-      else
-        puts "OS: unknown"
-      end
+      CliController.print_versions(Distro.detect)
     else
       Cli.help shell
     end
@@ -68,7 +49,7 @@ class Cli < Thor
         puts library.name + " (" + library.versions.join(", ") + ")"
       end
     else
-      manifests = self.distro.installed handler
+      manifests = Distro.detect.installed handler
       manifests.each do |manifest|
         puts manifest["name"]
       end
@@ -290,7 +271,7 @@ actual domain."
     if !manifest
       STDERR.puts "Manifest for '#{name}' not found"
     else
-      self.distro.uninstall manifest
+      Distro.detect.uninstall manifest
     end
   end
 
@@ -303,7 +284,7 @@ actual domain."
     if !manifest
       STDERR.puts "Manifest for '#{name}' not found"
     else
-      self.distro.install manifest, :dry_run => options[:dry_run]
+      Distro.detect.install manifest, :dry_run => options[:dry_run]
     end
   end
 
