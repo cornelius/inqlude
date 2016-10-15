@@ -40,23 +40,28 @@ class KdeFrameworksRelease
   end
 
   def read_generic_manifests
+    puts "Reading generic manifests from '#{@handler.settings.manifest_path}'..."
     @generic_manifests = Array.new
     @handler.read_remote
     @handler.group("kde-frameworks").each do |library|
       @generic_manifests.push library.generic_manifest
     end
+    puts "Read #{@generic_manifests.count} manifests."
     @generic_manifests
   end
 
   def write_release_manifests release_date, version
+    puts "Writing release manifests for version '#{version}'..."
     @generic_manifests.each do |generic_manifest|
       release_manifest = KdeFrameworksRelease.create_release_manifest(
         generic_manifest, release_date, version )
       path = @handler.manifest_path( release_manifest )
       File.open( path, "w" ) do |file|
+        puts "  #{path}"
         file.write release_manifest.to_json
       end
-    end    
+    end
+    puts "Written #{@generic_manifests.count} manifests."
   end
   
 end

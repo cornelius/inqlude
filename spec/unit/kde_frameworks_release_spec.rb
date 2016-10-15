@@ -26,7 +26,15 @@ describe KdeFrameworksRelease do
 
     it "reads generic manifests" do
       k = KdeFrameworksRelease.new @manifest_handler
-      k.read_generic_manifests
+
+      expected_output = <<EOT
+Reading generic manifests from '#{@manifest_dir}'...
+Read 2 manifests.
+EOT
+
+      expect {
+        k.read_generic_manifests
+      }.to output(expected_output).to_stdout
 
       expect(k.generic_manifests.count).to eq 2
       expect(k.generic_manifests[0].name).to eq "karchive"
@@ -37,7 +45,16 @@ describe KdeFrameworksRelease do
       k = KdeFrameworksRelease.new @manifest_handler
       k.read_generic_manifests
 
-      k.write_release_manifests("2014-02-01", "4.9.90")
+      expected_output = <<EOT
+Writing release manifests for version '4.9.90'...
+  #{@manifest_dir}/karchive/karchive.2014-02-01.manifest
+  #{@manifest_dir}/kservice/kservice.2014-02-01.manifest
+Written 2 manifests.
+EOT
+
+      expect {
+        k.write_release_manifests("2014-02-01", "4.9.90")
+      }.to output(expected_output).to_stdout
 
       manifest_path = File.join(@manifest_dir,"karchive/karchive.2014-02-01.manifest")
       expect(File.exists? manifest_path).to be true
