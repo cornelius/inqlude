@@ -12,6 +12,10 @@ def test_data_path file_name
   File.expand_path(File.join('../../data/', file_name), __FILE__)
 end
 
+def stubs_path(context)
+  File.expand_path(File.join('../../stubs/', context), __FILE__)
+end
+
 def create_manifest name, release_date, version
   m = ManifestRelease.new
   m.name = name
