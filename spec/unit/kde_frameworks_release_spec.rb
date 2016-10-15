@@ -43,7 +43,9 @@ EOT
 
     it "writes release manifests" do
       k = KdeFrameworksRelease.new @manifest_handler
-      k.read_generic_manifests
+      expect {
+        k.read_generic_manifests
+      }.to output.to_stdout
 
       expected_output = <<EOT
 Writing release manifests for version '4.9.90'...
