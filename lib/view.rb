@@ -106,8 +106,10 @@ class View
     output_path = ""
     if file_name
       output_path = "#{output_dir}/#{file_name}.html"
+      @file = file_name
     else
       output_path = "#{output_dir}/#{name}.html"
+      @file = name
     end
 
     File.open output_path, "w" do |file|
@@ -200,6 +202,22 @@ class View
       out += "(older versions: #{old_versions.join(", ")})"
       out += "</span>"
     end
+    out
+  end
+
+  def add_footer
+    if @file == "index"
+     text = 'Last updated on ' + Date.today.to_s
+    else
+     text = ""
+   end
+    out = "Inqlude is a "
+    out += link_to "KDE project", "http://kde.org"
+    out += "|"
+    out += link_to "Legal", "http://www.kde.org/community/whatiskde/impressum.php"
+    out += "<span class='footer-text'>"
+    out += text
+    out += "</span>"
     out
   end
   

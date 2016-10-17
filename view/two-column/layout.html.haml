@@ -11,7 +11,6 @@
   
 %body
   .container-fluid.header
-
     .col-sm-8.left
       .ribbon
         = link_to "Alpha", "about"    
@@ -25,70 +24,64 @@
       %h2
         %span.subtitle><
           = link_to "The Qt library archive", "index"
-
     .col-sm-4.right  
       - if enable_search
         %gcse:searchbox-only{ resultsUrl: "https://inqlude.org/search.html" }
           Loading...
     %br{ :clear => "all" }
 
-  .container-fluid.content
+  .col-sm-3.side-bar
+    %p{:class => "description"}
+      Inqlude provides a comprehensive listing of all existing libraries for developers of applications using the #{link_to "Qt toolkit", "http://qt-project.org"}. Inqlude is run by the community and open for contributions.       
+    %ul.titles-list
+      %li
+        = link_to "About", "about"
+      %li
+        = link_to "How to get libraries", "get"
+      %li
+        = link_to "How to contribute", "contribute"
 
-    .col-sm-3.side-bar
-      %p{:class => "description"}
-        Inqlude provides a comprehensive listing of all existing libraries for developers of applications using the #{link_to "Qt toolkit", "http://qt-project.org"}. Inqlude is run by the community and open for contributions.       
-      %ul.titles-list
-        %li
-          = link_to "About", "about"
-        %li
-          = link_to "How to get libraries", "get"
-        %li
-          = link_to "How to contribute", "contribute"
+    %p{:class => "title"} Latest releases
+    %hr
+    %ul.side-list
+      %li
+        - latest_libraries.each do |library|
+          - if library.latest_manifest.group == "kde-frameworks"
+            = link_to_group('kde-frameworks', 'KDE Frameworks')
+          -else
+            - if library.latest_manifest.display_name
+              = link_to_library(library.latest_manifest.name, library.latest_manifest.display_name)
+            - else
+              = link_to_library(library.latest_manifest.name, library.latest_manifest.name)
+          %date
+            = '(' + library.latest_manifest.release_date + ')'
+          %br
 
-      %p{:class => "title"} Latest releases
-      %hr
-      %ul.side-list
-        %li
-          - latest_libraries.each do |library|
-            - if library.latest_manifest.group == "kde-frameworks"
-              = link_to_group('kde-frameworks', 'KDE Frameworks')
-            -else
-              - if library.latest_manifest.display_name
-                = link_to_library(library.latest_manifest.name, library.latest_manifest.display_name)
-              - else
-                = link_to_library(library.latest_manifest.name, library.latest_manifest.name)
-            %date
-              = '(' + library.latest_manifest.release_date + ')'
-            %br
-
-      %p{:class => "title"} Topics
-      %hr
-      %ul.side-list
-        %li 
-          = link_to "All", "all"
+    %p{:class => "title"} Topics
+    %hr
+    %ul.side-list
+      %li
+        = link_to "All", "all"
+        %number
+          = ' (' + libraries.length.to_s + ')'
+      %li
+        - topics.each do |topic|
+          = link_to_topic(topic)
           %number
-            = ' (' + libraries.length.to_s + ')'
-        %li
-          - topics.each do |topic|
-            = link_to_topic(topic)
-            %number
-              = ' (' + no_of_libraries(topic).to_s + ')'
-            %br
+            = ' (' + no_of_libraries(topic).to_s + ')'
+          %br
 
-    .col-sm-9.main-pane 
-      = yank
+  .col-sm-9.main-pane
+    = yank
 
-    %br{ :clear => "all" }
+  %br{ :clear => "all" }
 
   %hr
   
-  .col-sm-12.legal
-    Inqlude is a
-    = link_to "KDE project", "http://kde.org"
-    = "|"
-    = link_to "Legal", "http://www.kde.org/community/whatiskde/impressum.php"
+  .col-sm-12.footer
+    = add_footer
 
-  - if enable_search
+    - if enable_search
     :javascript
       (function() {
         var cx = '012526638842992167133:g7thmrlp2uw';
