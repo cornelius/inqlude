@@ -1,5 +1,9 @@
 # Change log of Inqlude
 
+## Version 0.10.0
+
+* Add `linux` attribute for `packages` section for generic links to generic Linux binaries
+
 ## Version 0.9.0
 
 * Put out progress when creating release manifests
