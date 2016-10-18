@@ -62,6 +62,7 @@ class Manifest < JsonObject
     attribute :windows
     attribute :ubuntu
     attribute :osx
+    attribute :linux
   end
   attribute :group
 

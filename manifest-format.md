@@ -243,6 +243,22 @@ entry.
 Each entry contains the package_name, repository, and source_rpm attributes.
 The repository contains a url and a name sub-attribute.
 
+#### ubuntu
+
+Generic link to an Ubuntu binary package.
+
+#### linux
+
+Generic link to generic Linux binary package.
+
+#### windows
+
+Generic link to generic Windows binary package.
+
+#### osx
+
+Generic link to generic Mac OS binary package.
+
 ### group
 
 Name of a group
