@@ -149,8 +149,7 @@ describe View do
       expect(File.exists?(all_path)).to be true
       expected_all_content = File.read(test_data_path("inqlude-all-karchive.json"))
       expect(File.read(all_path)).to eq expected_all_content
-    end
-    
+    end   
   end
 
   context "rendertest" do
@@ -188,7 +187,7 @@ EOT
 
     it "returns if there are more URLs" do
       expect(@view.more_urls?).to be true
-    end
+    end    
   end
 
   context "templates" do
@@ -239,6 +238,37 @@ EOT
       </p>'
 
       expect(paragraphs_content).to eq(expected_content)
+    end
+  end
+
+  context "footer" do
+    include_context "manifest_files"
+
+    include GivenFilesystemSpecHelpers
+
+    use_given_filesystem
+
+    before(:each) do
+      mh = ManifestHandler.new(settings)
+      mh.read_remote
+      @v = View.new mh
+      @v.templates = "two-column"
+
+      @dir = given_directory
+    end
+
+    it "generates footer for home page" do
+      @v.render_template("index", @dir)
+      rendered = @v.add_footer
+      expected = 'Last updated on ' + Date.today.to_s
+      expect(rendered).to include expected
+    end
+
+    it "generates footer for sub pages" do  
+      @v.render_template("about", @dir)
+      rendered = @v.add_footer
+      expected = 'Last updated on ' + Date.today.to_s
+      expect(rendered).not_to include expected
     end
   end
 end
