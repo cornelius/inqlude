@@ -2,6 +2,9 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "codeclimate-test-reporter", group: :test, require: nil
-gem "travis", group: :test, require: nil
-gem "nokogiri"
+group :test do
+  gem "simplecov"
+  gem "codeclimate-test-reporter", "~> 1.0.0"
+  gem "travis"
+  gem "nokogiri"
+end
