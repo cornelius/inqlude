@@ -17,7 +17,7 @@
 class ManifestHandler
 
   attr_reader :manifests, :settings
-  
+
   def initialize settings
     @settings = settings
 
@@ -46,7 +46,7 @@ class ManifestHandler
       !l.latest_manifest.is_released?
     end
   end
-  
+
   def commercial_libraries
     return @libraries.select do |l|
       manifest = l.latest_manifest
@@ -81,7 +81,7 @@ class ManifestHandler
       manifest.group == name
     end
   end
-  
+
   def library name
     @libraries.each do |library|
       if library.name == name
@@ -90,7 +90,7 @@ class ManifestHandler
     end
     nil
   end
-  
+
   def manifest name
     @libraries.each do |library|
       if library.name == name
@@ -110,12 +110,12 @@ class ManifestHandler
   end
 
   def no_of_libraries topic
-    count =0;
+    count = 0
     @libraries.each do |l|
       topics = l.latest_manifest.topics
       if topics
         if l.latest_manifest.topics.include? topic
-          count = count + 1
+          count += 1
         end
       end
     end
@@ -125,7 +125,7 @@ class ManifestHandler
   def read_remote
     @libraries.clear
     @manifests.clear
-    
+
     if !@settings.offline
       fetch_remote
     end
