@@ -3,7 +3,6 @@ require File.expand_path('../spec_helper', __FILE__)
 include GivenFilesystemSpecHelpers
 
 describe ManifestHandler do
-
   let(:settings) do
     s = Settings.new
     s.manifest_path = File.expand_path('spec/data/manifests')
@@ -55,7 +54,6 @@ describe ManifestHandler do
   end
 
   describe "#libraries" do
-
     it "returns all libraries" do
       expect( mh.libraries.count ).to eq 5
     end
@@ -92,7 +90,6 @@ describe ManifestHandler do
       expect(libraries.first.manifests.last.name).to eq "proprietarylib"
       expect(libraries).not_to include "newlib"
     end
-
   end
 
   describe "#group" do
@@ -112,12 +109,10 @@ describe ManifestHandler do
   end
 
   describe "#library" do
-
     it "returns one library" do
       library = mh.library "awesomelib"
       expect( library.name ).to eq "awesomelib"
     end
-
   end
 
   context "library with generic and release manifest" do
