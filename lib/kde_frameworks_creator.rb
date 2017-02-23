@@ -17,13 +17,13 @@
 class KdeFrameworksCreator
 
   attr_reader :warnings, :errors
-  
+
   def initialize
     @frameworks = Hash.new
     @warnings = []
     @errors = []
   end
-  
+
   def parse_checkout dir_name, options = {}
     @warnings = []
     @errors = []
@@ -32,7 +32,7 @@ class KdeFrameworksCreator
       next if entry == "kapidox"
       next if entry == "kde4support"
       next if !File.exist?(File.join(dir_name, entry, ".git"))
-      
+
       @frameworks[entry] = {}
       parse_readme File.join(dir_name,entry), options
       parse_metainfo File.join(dir_name,entry)
@@ -43,16 +43,16 @@ class KdeFrameworksCreator
   def frameworks
     @frameworks.keys
   end
-  
+
   def framework name
     f = @frameworks[name]
     raise InqludeError.new("Unable to read '#{name}'") if !f
     f
   end
-  
+
   def parse_readme path, options = {}
     @errors = [] if !@errors
-    
+
     name = extract_name( path )
     framework = @frameworks[name] || {}
 
@@ -67,7 +67,7 @@ class KdeFrameworksCreator
         state = :parse_summary
         next
       elsif line =~ /^## Introduction/
-        framework["introduction"] = "" 
+        framework["introduction"] = ""
         state = :parse_introduction
         next
       elsif line =~ /^## Links/
@@ -84,7 +84,7 @@ class KdeFrameworksCreator
           end
         end
       end
-      
+
       if state == :parse_introduction
         if line =~ /^##/
           framework["introduction"].strip!
@@ -93,7 +93,7 @@ class KdeFrameworksCreator
           framework["introduction"] += line
         end
       end
-      
+
       if state == :parse_links
         if line =~ /^##/
           state = nil
@@ -110,14 +110,14 @@ class KdeFrameworksCreator
         end
       end
     end
-    
+
     required_fields = []
     [ "title", "introduction", "link_home_page" ].each do |field|
       if !options[:ignore_errors] || !options[:ignore_errors].include?(field)
         required_fields.push field
       end
     end
-    
+
     required_fields.each do |field|
       if !framework.has_key?(field) || framework[field].strip.empty?
         @errors.push( { :name => name, :issue => "missing_" + field } )
@@ -126,7 +126,7 @@ class KdeFrameworksCreator
 
     @frameworks[name] = framework
   end
-  
+
   def parse_metainfo path
     name = extract_name( path )
 
@@ -155,7 +155,7 @@ class KdeFrameworksCreator
                        :details => "AUTHORS" } )
       return
     end
-    
+
     authors = []
     File.open(authors_path).each_line do |line|
       if line =~ /(.* <.*@.*>)/
@@ -166,26 +166,31 @@ class KdeFrameworksCreator
     framework = @frameworks[name] || {}
 
     framework["authors"] = authors
-    
+
     @frameworks[name] = framework
   end
 
   def extract_name path
     path.split("/").last
   end
-  
+
   def create_manifests output_dir
     settings = Settings.new
     settings.manifest_path = output_dir
     @frameworks.each do |name,framework|
       creator = Creator.new settings, name
-      manifest = creator.create_generic_manifest
+      generic_manifest_filename = creator.manifest_basename + ".manifest"
+      if File.exist?(generic_manifest_filename)
+        manifest = Manifest.parse_file(creator.manifest_basename + ".manifest")
+      else
+        manifest = creator.create_generic_manifest
+      end
       fill_in_data framework, manifest
       creator.create_dir
       creator.write_manifest manifest
     end
   end
-  
+
   def fill_in_data framework, manifest
     manifest.display_name = framework["title"]
     manifest.summary = framework["summary"]

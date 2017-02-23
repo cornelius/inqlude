@@ -26,7 +26,7 @@ class Creator
   def is_new?
     return !File.exists?( @dir )
   end
-  
+
   def validate_directory
     if !File.exists? @dir
       raise "Unable to find manifest directory '#{@dir}'"
@@ -36,14 +36,14 @@ class Creator
   def update version, release_date
     filename = File.join @settings.manifest_path, @name,
       "#{@name}.#{release_date}.manifest"
-    
+
     mh = ManifestHandler.new @settings
     mh.read_remote
 
     m = mh.manifest @name
     m.version = version
     m.release_date = release_date
-    
+
     File.open( filename, "w" ) do |file|
       file.puts m.to_json
     end
@@ -68,7 +68,7 @@ class Creator
   end
 
   def write_manifest manifest
-    filename = File.join @settings.manifest_path, @name, @name
+    filename = manifest_basename
     if manifest.release_date
       filename += ".#{manifest.release_date}"
     end
@@ -78,7 +78,11 @@ class Creator
       file.puts manifest.to_json
     end
   end
-  
+
+  def manifest_basename
+    File.join @settings.manifest_path, @name, @name
+  end
+
   def create_generic_manifest
     m = ManifestGeneric.new
     m.name = @name
@@ -92,7 +96,7 @@ class Creator
     m = create_generic_manifest
     write_manifest m
   end
-  
+
   def create version, release_date
     create_dir
     m = create_manifest version, release_date
@@ -113,7 +117,7 @@ class Creator
       "vcs" => vcs,
       "homepage" => "http://community.kde.org/Frameworks"
     }
-    
+
     m["packages"] = {
       "source" => "http://anongit.kde.org/kdelibs/kdelibs-latest.tar.gz"
     }
