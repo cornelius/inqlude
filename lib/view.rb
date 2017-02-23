@@ -18,7 +18,7 @@ class View
 
   attr_accessor :enable_disqus,:enable_search,:manifest,:library,:group_name,:templates
   attr_reader :root
-  
+
   def initialize handler
     @manifest_handler = handler
   end
@@ -31,10 +31,10 @@ class View
     if templates == "two-column"
       system "cp #{view_dir}/ios.ico #{output_dir}"
     end
-    
+
     assert_dir "#{output_dir}/public"
     system "cp #{view_dir}/public/* #{output_dir}/public/"
-    
+
     assert_dir "#{output_dir}/schema"
     system "cp #{schema_dir}/* #{output_dir}/schema"
 
@@ -52,13 +52,13 @@ class View
 
     groups_path = "#{output_dir}/groups/"
     assert_dir groups_path
-    
+
     @root = "../"
-    
+
     @group_name = "kde-frameworks"
     file_name = "groups/kde-frameworks"
     render_template "group", output_dir, file_name
-    
+
 
     library_path = "#{output_dir}/libraries/"
     assert_dir library_path
@@ -220,12 +220,12 @@ class View
   out += "</span>"
   out
   end
-  
+
   def markup_email email
     if email =~ /(.*) <(.*)>/
       name = $1
       email = $2
-      
+
       return "<a href=\"mailto:#{email}\">#{name}</a>"
     else
       return email
@@ -253,11 +253,11 @@ class View
     end
     out
   end
-  
+
   def libraries maturity = nil
     @manifest_handler.libraries(maturity)
   end
-  
+
   def unreleased_libraries
     @manifest_handler.unreleased_libraries
   end
@@ -276,7 +276,7 @@ class View
     end
     ""
   end
-  
+
   def group
     @manifest_handler.group(@group_name)
   end
@@ -288,7 +288,7 @@ class View
   def no_of_libraries topic
     @manifest_handler.no_of_libraries(topic)
   end
-  
+
   def disqus_enabled?
     @enable_disqus
   end
@@ -304,7 +304,7 @@ class View
     end
     return false
   end
-  
+
   def editor_url
     url = "https://github.com/cornelius/inqlude-data/blob/master/"
     url += @manifest.name
@@ -327,11 +327,11 @@ class View
   end
 
   private
-  
+
   def assert_dir name
     Dir::mkdir name unless File.exists? name
-  end    
-  
+  end
+
   def template name
     File.read( view_dir + "#{name}.html.haml" )
   end

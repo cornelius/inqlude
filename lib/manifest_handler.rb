@@ -23,6 +23,9 @@ class ManifestHandler
 
     @libraries = Array.new
     @manifests = Array.new
+
+    @topics_cache = Hash.new
+    @no_of_libraries_cache = Hash.new
   end
 
   def manifest_path manifest
@@ -101,30 +104,38 @@ class ManifestHandler
   end
 
   def topic name
-    return @libraries.select do |l|
-      manifest = l.latest_manifest
-      if manifest.topics
-        manifest.topics.include? name
-      end
-    end
-  end
-
-  def no_of_libraries topic
-    count = 0
-    @libraries.each do |l|
-      topics = l.latest_manifest.topics
-      if topics
-        if l.latest_manifest.topics.include? topic
-          count += 1
+    if !@topics_cache.has_key?(name)
+      @topics_cache[name] = @libraries.select do |l|
+        manifest = l.latest_manifest
+        if manifest.topics
+          manifest.topics.include? name
         end
       end
     end
-    count
+    @topics_cache[name]
+  end
+
+  def no_of_libraries topic
+    if !@no_of_libraries_cache.has_key?(topic)
+      count = 0
+      @libraries.each do |l|
+        topics = l.latest_manifest.topics
+        if topics
+          if l.latest_manifest.topics.include? topic
+            count += 1
+          end
+        end
+      end
+      @no_of_libraries_cache[topic] = count
+    end
+    @no_of_libraries_cache[topic]
   end
 
   def read_remote
     @libraries.clear
     @manifests.clear
+    @topics_cache.clear
+    @no_of_libraries_cache.clear
 
     if !@settings.offline
       fetch_remote

@@ -106,6 +106,26 @@ describe ManifestHandler do
       expect( libraries.count ).to eq 2
       expect( libraries.first.manifests.last.name ).to eq "awesomelib"
     end
+
+    it "returns same results when called again" do
+      libraries = mh.topic("API")
+      expect( libraries.count ).to eq 2
+      expect( libraries.first.manifests.last.name ).to eq "awesomelib"
+
+      libraries2 = mh.topic("API")
+      expect(libraries2).to eq(libraries)
+    end
+  end
+
+  describe "#no_of_libraries" do
+    it "returns number of libraries with given topic" do
+      expect(mh.no_of_libraries("API")).to eq(2)
+    end
+
+    it "returns same result when called again" do
+      no = mh.no_of_libraries("API")
+      expect(mh.no_of_libraries("API")).to eq(no)
+    end
   end
 
   describe "#library" do
