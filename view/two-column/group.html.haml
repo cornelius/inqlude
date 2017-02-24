@@ -6,16 +6,16 @@
 
 %table.table-hover.col-sm-12
   - group.each do |library|
-    %tr 
+    %tr
       %td.name
         - if library.latest_manifest.display_name
           = link_to_library(library.latest_manifest.name, library.latest_manifest.display_name)
         - else
           = link_to_library(library.latest_manifest.name, library.latest_manifest.name)
       %td.summary
-        = library.manifests.last.summary      
+        = library.manifests.last.summary
       %td.platforms
-        %link{:href => "http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css", :rel => "stylesheet"}
+        %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css", :rel => "stylesheet"}
         - if library.manifests.last.platforms.include? 'Linux'
           %i.fa.fa-linux
         - if library.manifests.last.platforms.include? 'OS X'
@@ -31,13 +31,13 @@
           - library.manifests.last.topics.each do |topic|
             - if (topic != library.manifests.last.topics.last)
               = topic + ", "
-            - else 
-              = topic                    
+            - else
+              = topic
       %td.licenses
         - library.manifests.last.licenses.each do |license|
           - if (license != library.manifests.last.licenses.last)
             = license + ", "
-          - else 
+          - else
             = license
 %br
 
