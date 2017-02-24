@@ -1,5 +1,9 @@
 # Change log of Inqlude
 
+## Version 0.11.0
+
+* Change the default view to the new two column layout. This takes advantage of all the new features Nanduni implemented during the Google Summer of Code 2016, such as the topics, the display names, responsive layout, better navigation and searchability. The new default layout now will show up on the Inqlude home page.
+
 ## Version 0.10.0
 
 * Add `linux` attribute for `packages` section for generic links to generic Linux binaries

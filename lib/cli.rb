@@ -66,13 +66,13 @@ class Cli < Thor
 actual domain."
   method_option :disable_search, :type => :boolean,
     :desc => "Disable Google based search."
-  method_option :templates, :type => :string, :aliases => "-t", :default => "one-column",
+  method_option :templates, :type => :string, :aliases => "-t", :default => "two-column",
     :desc => "Switch templates", :required => false
   def view
     process_global_options options
 
     output_dir = options[:output_dir]
-    
+
     if options[:manifest_dir]
       @@settings.manifest_path = options[:manifest_dir]
     end
@@ -82,7 +82,7 @@ actual domain."
     manifest_handler.read_remote
 
     view = View.new(manifest_handler)
-    
+
     view.templates = options[:templates]
 
     if !view.template_directory_exists?
