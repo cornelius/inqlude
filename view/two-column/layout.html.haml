@@ -1,8 +1,8 @@
 !!!
 %head
   %meta{ :charset => 'utf-8' }
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     = style_sheet
   - if enable_search
@@ -26,7 +26,7 @@
   .container-fluid.header
     .col-sm-8.left
       .ribbon
-        = link_to "Alpha", "about"    
+        = link_to "Alpha", "about"
       %h1
         %span.logo><
           = link_to "#in", "index"
@@ -37,7 +37,7 @@
       %h2
         %span.subtitle><
           = link_to "The Qt library archive", "index"
-    .col-sm-4.right  
+    .col-sm-4.right
       - if enable_search
         %gcse:searchbox-only{ resultsUrl: "https://inqlude.org/search.html" }
           Loading...
@@ -45,7 +45,7 @@
 
   .col-sm-3.side-bar
     %p{:class => "description"}
-      Inqlude provides a comprehensive listing of all existing libraries for developers of applications using the #{link_to "Qt toolkit", "http://qt-project.org"}. Inqlude is run by the community and open for contributions.       
+      Inqlude provides a comprehensive listing of all existing libraries for developers of applications using the #{link_to "Qt toolkit", "http://qt-project.org"}. Inqlude is run by the community and open for contributions.
     %ul.titles-list
       %li
         = link_to "About", "about"
@@ -90,7 +90,7 @@
   %br{ :clear => "all" }
 
   %hr
-  
+
   .col-sm-12.footer
     = add_footer
 
