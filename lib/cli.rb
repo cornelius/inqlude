@@ -113,8 +113,9 @@ actual domain."
     v = Verifier.new @@settings
 
     if options[:check_links]
-      Upstream.get_involved "Implement --check-links option", 11
-      exit 1
+      if filename
+        v.check_links filename
+      end
     end
 
     errors = []
