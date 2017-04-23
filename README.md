@@ -66,5 +66,4 @@ Inqlude is licensed under the GPL.
 ## Contact
 
 If you have questions or comments, please contact Cornelius Schumacher
-<schumacher@kde.org> or write to the
-[Inqlude mailing list](mailto:inqlude@kde.org).
+<schumacher@kde.org> or [create an issue](https://github.com/cornelius/inqlude/issues/new).
