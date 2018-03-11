@@ -213,6 +213,8 @@ Supported values are:
 * "Linux"
 * "Windows"
 * "OS X"
+* "Android"
+* "iOS"
 
 *there must be at least one platform*
 
