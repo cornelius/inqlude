@@ -62,7 +62,7 @@ class KdeFrameworksCreator
 
     state = nil
     File.open(File.join(path,"README.md")).each_line do |line|
-      if line =~ /^# (.*)/
+      if line =~ /^# (.*) #/ || line =~ /^# (.*)/
         framework["title"] = $1
         state = :parse_summary
         next
@@ -87,7 +87,6 @@ class KdeFrameworksCreator
 
       if state == :parse_introduction
         if line =~ /^##/
-          framework["introduction"].strip!
           state = nil
         else
           framework["introduction"] += line
@@ -121,6 +120,8 @@ class KdeFrameworksCreator
     required_fields.each do |field|
       if !framework.has_key?(field) || framework[field].strip.empty?
         @errors.push( { :name => name, :issue => "missing_" + field } )
+      else
+        framework[field].strip!
       end
     end
 

@@ -93,7 +93,7 @@ describe KdeFrameworksCreator do
       expect(c.frameworks.count).to eq 0
     end
 
-    it "parses README" do
+    it "parses full README" do
       c = KdeFrameworksCreator.new
 
       framework_path = given_directory "karchive" do
@@ -113,6 +113,24 @@ describe KdeFrameworksCreator do
       expect(karchive["link_git_repository"]).to eq "https://projects.kde.org/projects/frameworks/karchive/repository"
       expect(karchive["link_home_page"]).to eq "http://api.kde.org/frameworks-api/frameworks5-apidocs/karchive/html/index.html"
       expect(karchive["summary"]).to eq "Reading, creation, and manipulation of file archives"
+    end
+
+    it "parses short README" do
+      c = KdeFrameworksCreator.new
+
+      framework_path = given_directory "kholidays" do
+        given_directory(".git")
+        given_file "README.md", :from => "kholidays.readme"
+      end
+
+      c.parse_readme framework_path
+
+      karchive = c.framework("kholidays")
+
+      expect( c.errors.count ).to eq 0
+
+      expect(karchive["title"]).to eq "KHolidays"
+      expect(karchive["introduction"]).to eq "This library provides a C++ API that determines holiday and other\nspecial events for a geographical region."
     end
 
     it "parses metainfo.yaml" do
