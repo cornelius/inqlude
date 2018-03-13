@@ -1,27 +1,18 @@
 !!!
 %head
   %meta{ :charset => 'utf-8' }
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    = style_sheet
+
+  %title Inqlude - The Qt library archive
+
+  %link{ :rel => "stylesheet", :href => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" }
+  %link{ :rel => "stylesheet", :href => "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" }  
+  = style_sheet
   - if enable_search
-    <link href='https://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://www.google.com/cse/style/look/default.css" type="text/css" />
-  <!-- Piwik -->
-  :javascript
-    var _paq = _paq || [];
-    // tracker methods like "setCustomDimension" should be called before "trackPageView"
-    _paq.push(['trackPageView']);
-    _paq.push(['enableLinkTracking']);
-    (function() {
-      var u="//stats.kde.org/";
-      _paq.push(['setTrackerUrl', u+'piwik.php']);
-      _paq.push(['setSiteId', '4']);
-      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-    })();
-  <!-- End Piwik Code -->
+    %link{ :rel => "stylesheet", :href => "https://fonts.googleapis.com/css?family=Droid+Sans" }
+    %link{ :rel => "stylesheet", :href => "https://www.google.com/cse/style/look/default.css" }
+
+    %link{ :rel => "icon", :type => "image/x-icon", :href => "favicon.ico" }
+
 %body
   .container-fluid.header
     .col-sm-8.left
@@ -106,3 +97,20 @@
           var s = document.getElementsByTagName('script')[0];
           s.parentNode.insertBefore(gcse, s);
         })();
+  
+  %script{ :src => "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" }
+
+  <!-- Piwik -->
+  :javascript
+    var _paq = _paq || [];
+    // tracker methods like "setCustomDimension" should be called before "trackPageView"
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.kde.org/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', '4']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+  <!-- End Piwik Code -->
