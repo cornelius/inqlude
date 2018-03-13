@@ -260,3 +260,9 @@ i.fa {
 hr {
   margin-top: 0px;
 }
+
+.ios {
+  background: url("../ios.ico") no-repeat scroll right center rgba(0, 0, 0, 0);
+  padding-left: 20px;
+  background-size: 15px 15px;
+}
