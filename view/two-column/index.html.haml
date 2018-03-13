@@ -21,7 +21,7 @@
         - if library.manifests.last.platforms.include? 'Android'
           %i.fa.fa-android
         - if library.manifests.last.platforms.include? 'iOS'
-          %img{:src => "ios.ico", :height => "15%;"}
+          %span.ios
       %td.topics
         - if library.manifests.last.topics
           - library.manifests.last.topics.each do |topic|
@@ -59,7 +59,7 @@
         - if library.manifests.last.platforms.include? 'Android'
           %i.fa.fa-android
         - if library.manifests.last.platforms.include? 'iOS'
-          %img{:src => "ios.ico", :height => "15%;"}        
+          %span.ios        
       %td.topics
         - if library.manifests.last.topics
           - library.manifests.last.topics.each do |topic|
@@ -93,7 +93,7 @@
         - if library.manifests.last.platforms.include? 'Android'
           %i.fa.fa-android
         - if library.manifests.last.platforms.include? 'iOS'
-          %img{:src => "ios.ico", :height => "15%;"}       
+          %span.ios       
       %td.topics
         - if library.manifests.last.topics
           - library.manifests.last.topics.each do |topic|
@@ -127,7 +127,7 @@
         - if library.manifests.last.platforms.include? 'Android'
           %i.fa.fa-android
         - if library.manifests.last.platforms.include? 'iOS'
-          %img{:src => "ios.ico", :height => "15%;"}         
+          %span.ios        
       %td.topics
         - if library.manifests.last.topics
           - library.manifests.last.topics.each do |topic|
@@ -165,7 +165,7 @@
         - if library.manifests.last.platforms.include? 'Android'
           %i.fa.fa-android
         - if library.manifests.last.platforms.include? 'iOS'
-          %img{:src => "ios.ico", :height => "15%;"}
+          %ispan.ios
       %td.topics
         - if library.manifests.last.topics
           - library.manifests.last.topics.each do |topic|
