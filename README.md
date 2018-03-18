@@ -30,6 +30,14 @@ the native tools.
 There also is an option to generate an HTML overview of all available libraries.
 This can be hosted or used locally.
 
+## Generating the Inqlude website
+
+The [Inqlude website](https://inqlude.org) is automatically generated from the [manifest data in the KDE git repository](https://cgit.kde.org/websites/inqlude-data.git/). The [manifest repoitory on GitHub](https://github.com/cornelius/inqlude-data) is a source for that to collect contributions.
+
+To generate the website locally for development and testing just run `inqlude view`. This will create a directory with static HTML files you can view in your browser.
+
+The site is generated from templates you find in the [view/twocolumns](https://github.com/cornelius/inqlude/tree/master/view/two-column) directory in the git repository.
+
 ## KDE Frameworks
 
 The KDE Frameworks provide more than fifty libraries, which can be used to
