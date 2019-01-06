@@ -1,0 +1,102 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="840" height="340" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <rect x="0" y="0" width="840" height="340" fill="#eee"/>
+  <g font-size="25" font-family="arial" fill="#444">
+    <text x="40" y="50">
+      Labels for cornelius/inqlude
+    </text>
+  </g>
+  <g font-size="25" font-family="arial" fill="#777">
+    <text x="40" y="120">
+      Type
+    </text>
+  </g>
+  <rect x="200" y="90" width="130" height="40" fill="#f9eea7" rx="5"/>
+  <g font-size="15" font-family="arial" fill="white">
+    <text x="213" y="116">
+      Bug
+    </text>
+  </g>
+  <rect x="350" y="90" width="130" height="40" fill="#f9eea7" rx="5"/>
+  <g font-size="15" font-family="arial" fill="white">
+    <text x="363" y="116">
+      Feature
+    </text>
+  </g>
+  <rect x="500" y="90" width="130" height="40" fill="#f9eea7" rx="5"/>
+  <g font-size="15" font-family="arial" fill="white">
+    <text x="513" y="116">
+      Refactoring
+    </text>
+  </g>
+  <g font-size="25" font-family="arial" fill="#777">
+    <text x="40" y="180">
+      Categories
+    </text>
+  </g>
+  <rect x="200" y="150" width="130" height="40" fill="#039634" rx="5"/>
+  <g font-size="15" font-family="arial" fill="white">
+    <text x="213" y="176">
+      CLI
+    </text>
+  </g>
+  <rect x="350" y="150" width="130" height="40" fill="#52e59e" rx="5"/>
+  <g font-size="15" font-family="arial" fill="white">
+    <text x="363" y="176">
+      Data
+    </text>
+  </g>
+  <rect x="500" y="150" width="130" height="40" fill="#cdffa5" rx="5"/>
+  <g font-size="15" font-family="arial" fill="white">
+    <text x="513" y="176">
+      Documentation
+    </text>
+  </g>
+  <rect x="650" y="150" width="130" height="40" fill="#009800" rx="5"/>
+  <g font-size="15" font-family="arial" fill="white">
+    <text x="663" y="176">
+      Web Site
+    </text>
+  </g>
+  <g font-size="25" font-family="arial" fill="#777">
+    <text x="40" y="240">
+      Priorities
+    </text>
+  </g>
+  <rect x="200" y="210" width="130" height="40" fill="#fbca04" rx="5"/>
+  <g font-size="15" font-family="arial" fill="white">
+    <text x="213" y="236">
+      Low Priority
+    </text>
+  </g>
+  <rect x="350" y="210" width="130" height="40" fill="#eb6420" rx="5"/>
+  <g font-size="15" font-family="arial" fill="white">
+    <text x="363" y="236">
+      Medium Priority
+    </text>
+  </g>
+  <rect x="500" y="210" width="130" height="40" fill="#e11d21" rx="5"/>
+  <g font-size="15" font-family="arial" fill="white">
+    <text x="513" y="236">
+      High Priority
+    </text>
+  </g>
+  <g font-size="25" font-family="arial" fill="#777">
+    <text x="40" y="300">
+      Welcome
+    </text>
+  </g>
+  <rect x="200" y="270" width="130" height="40" fill="#5319e7" rx="5"/>
+  <g font-size="15" font-family="arial" fill="white">
+    <text x="213" y="296">
+      good first issue
+    </text>
+  </g>
+  <rect x="350" y="270" width="130" height="40" fill="#b60205" rx="5"/>
+  <g font-size="15" font-family="arial" fill="white">
+    <text x="363" y="296">
+      GSoC
+    </text>
+  </g>
+</svg>
