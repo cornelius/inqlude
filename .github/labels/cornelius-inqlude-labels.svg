@@ -13,19 +13,19 @@
     </text>
   </g>
   <rect x="200" y="90" width="130" height="40" fill="#f9eea7" rx="5"/>
-  <g font-size="15" font-family="arial" fill="white">
+  <g font-size="15" font-family="arial" fill="black">
     <text x="213" y="116">
       Bug
     </text>
   </g>
   <rect x="350" y="90" width="130" height="40" fill="#f9eea7" rx="5"/>
-  <g font-size="15" font-family="arial" fill="white">
+  <g font-size="15" font-family="arial" fill="black">
     <text x="363" y="116">
       Feature
     </text>
   </g>
   <rect x="500" y="90" width="130" height="40" fill="#f9eea7" rx="5"/>
-  <g font-size="15" font-family="arial" fill="white">
+  <g font-size="15" font-family="arial" fill="black">
     <text x="513" y="116">
       Refactoring
     </text>
@@ -48,7 +48,7 @@
     </text>
   </g>
   <rect x="500" y="150" width="130" height="40" fill="#cdffa5" rx="5"/>
-  <g font-size="15" font-family="arial" fill="white">
+  <g font-size="15" font-family="arial" fill="black">
     <text x="513" y="176">
       Documentation
     </text>
@@ -65,7 +65,7 @@
     </text>
   </g>
   <rect x="200" y="210" width="130" height="40" fill="#fbca04" rx="5"/>
-  <g font-size="15" font-family="arial" fill="white">
+  <g font-size="15" font-family="arial" fill="black">
     <text x="213" y="236">
       Low Priority
     </text>
