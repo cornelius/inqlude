@@ -67,6 +67,10 @@ To create release manifests for a KDE Frameworks release runs
 inqlude release_kde_frameworks <release_date> <version>
 ```
 
+## Contributing
+
+Contributions in any form are welcome. See the [contribution guidelines](CONTRIBUTING.md) for more details.
+
 ## License
 
 Inqlude is licensed under the GPL.
