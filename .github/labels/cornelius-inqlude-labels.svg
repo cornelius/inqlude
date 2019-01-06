@@ -12,20 +12,20 @@
       Type
     </text>
   </g>
-  <rect x="200" y="90" width="130" height="40" fill="#f9eea7" rx="5"/>
-  <g font-size="15" font-family="arial" fill="black">
+  <rect x="200" y="90" width="130" height="40" fill="#000080" rx="5"/>
+  <g font-size="15" font-family="arial" fill="white">
     <text x="213" y="116">
       Bug
     </text>
   </g>
-  <rect x="350" y="90" width="130" height="40" fill="#f9eea7" rx="5"/>
-  <g font-size="15" font-family="arial" fill="black">
+  <rect x="350" y="90" width="130" height="40" fill="#1034A6" rx="5"/>
+  <g font-size="15" font-family="arial" fill="white">
     <text x="363" y="116">
       Feature
     </text>
   </g>
-  <rect x="500" y="90" width="130" height="40" fill="#f9eea7" rx="5"/>
-  <g font-size="15" font-family="arial" fill="black">
+  <rect x="500" y="90" width="130" height="40" fill="#0F52BA" rx="5"/>
+  <g font-size="15" font-family="arial" fill="white">
     <text x="513" y="116">
       Refactoring
     </text>
@@ -35,25 +35,25 @@
       Categories
     </text>
   </g>
-  <rect x="200" y="150" width="130" height="40" fill="#039634" rx="5"/>
+  <rect x="200" y="150" width="130" height="40" fill="#228B22" rx="5"/>
   <g font-size="15" font-family="arial" fill="white">
     <text x="213" y="176">
       CLI
     </text>
   </g>
-  <rect x="350" y="150" width="130" height="40" fill="#52e59e" rx="5"/>
+  <rect x="350" y="150" width="130" height="40" fill="#2E8B57" rx="5"/>
   <g font-size="15" font-family="arial" fill="white">
     <text x="363" y="176">
       Data
     </text>
   </g>
-  <rect x="500" y="150" width="130" height="40" fill="#cdffa5" rx="5"/>
-  <g font-size="15" font-family="arial" fill="black">
+  <rect x="500" y="150" width="130" height="40" fill="#3CB371" rx="5"/>
+  <g font-size="15" font-family="arial" fill="white">
     <text x="513" y="176">
       Documentation
     </text>
   </g>
-  <rect x="650" y="150" width="130" height="40" fill="#009800" rx="5"/>
+  <rect x="650" y="150" width="130" height="40" fill="#66CDAA" rx="5"/>
   <g font-size="15" font-family="arial" fill="white">
     <text x="663" y="176">
       Web Site
@@ -93,7 +93,7 @@
       good first issue
     </text>
   </g>
-  <rect x="350" y="270" width="130" height="40" fill="#b60205" rx="5"/>
+  <rect x="350" y="270" width="130" height="40" fill="#5319e7" rx="5"/>
   <g font-size="15" font-family="arial" fill="white">
     <text x="363" y="296">
       GSoC

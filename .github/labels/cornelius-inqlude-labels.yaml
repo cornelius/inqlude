@@ -1,33 +1,33 @@
 categories:
 - name: Type
   labels:
-  - color: f9eea7
+  - color: 000080
     description: 'Issue in existing functionality'
     id: 1181821042a
     name: Bug
-  - color: f9eea7
+  - color: 1034A6
     description: 'New functionality'
     id: 1181821042b
     name: Feature
-  - color: f9eea7
+  - color: 0F52BA
     description: 'Improvement of code without user-visible changes'
     id: 1181821042
     name: Refactoring
 - name: Categories
   labels:
-  - color: 039634
+  - color: 228B22
     description: 'Command Line Interface'
     id: 1181821630
     name: CLI
-  - color: 52e59e
+  - color: 2E8B57
     description: 'Inqlude data, including schema and content'
     id: 1181823572
     name: Data
-  - color: cdffa5
+  - color: 3CB371
     description: ''
     id: 1181820759
     name: Documentation
-  - color: 009800
+  - color: 66CDAA
     description: 'Inqlude web site'
     id: 60095012
     name: Web Site
@@ -46,13 +46,12 @@ categories:
     id: 120813779
     name: High Priority
 - name: Welcome
+  color: 5319e7
   labels:
-  - color: 5319e7
-    description: 'good issue to start with if you are new to the project'
+  - description: 'good issue to start with if you are new to the project'
     id: 761165516
     name: good first issue
-  - color: b60205
-    description: 'possible task or project for GSoC'
+  - description: 'possible task or project for GSoC'
     id: 395340299
     name: GSoC
 org: cornelius
