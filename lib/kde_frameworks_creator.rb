@@ -62,7 +62,7 @@ class KdeFrameworksCreator
 
     state = nil
     File.open(File.join(path,"README.md")).each_line do |line|
-      if line =~ /^# (.*) #/ || line =~ /^# (.*)/
+      if !framework["title"] && (line =~ /^# (.*) #/ || line =~ /^# (.*)/)
         framework["title"] = $1
         state = :parse_summary
         next

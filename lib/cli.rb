@@ -224,6 +224,13 @@ actual domain."
     end
   end
 
+  desc "parse_kde_readme <path>", "Parse README.md of KDE Framework"
+  def parse_kde_readme path
+    k = KdeFrameworksCreator.new
+    k.parse_readme(path)
+    pp k.framework(k.frameworks.first)
+  end
+
   desc "create_kde_frameworks <frameworks-git-checkout> <output_dir>",
     "Create manifests from git checkout of KDE frameworks module in given directory"
   method_option "show-warnings", :type => :boolean,

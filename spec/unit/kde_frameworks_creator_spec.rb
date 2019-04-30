@@ -133,6 +133,21 @@ describe KdeFrameworksCreator do
       expect(karchive["introduction"]).to eq "This library provides a C++ API that determines holiday and other\nspecial events for a geographical region."
     end
 
+    it "parses README with multiple top headers" do
+      c = KdeFrameworksCreator.new
+
+      framework_path = given_directory "kirigami" do
+        given_directory(".git")
+        given_file "README.md", :from => "kirigami.readme"
+      end
+
+      c.parse_readme framework_path
+
+      framework = c.framework("kirigami")
+
+      expect(framework["title"]).to eq("Kirigami")
+    end
+
     it "parses metainfo.yaml" do
       c = KdeFrameworksCreator.new
 
