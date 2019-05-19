@@ -1,5 +1,11 @@
 # Change log of Inqlude
 
+## Version 0.12.0
+
+* Fix parsing of KDE READMEs with multiple top-level headers
+* Parse KHolidays README correctly
+* Various improvements and fixes to the new HTML view
+
 ## Version 0.11.0
 
 * Change the default view to the new two column layout. This takes advantage of all the new features Nanduni implemented during the Google Summer of Code 2016, such as the topics, the display names, responsive layout, better navigation and searchability. The new default layout now will show up on the Inqlude home page.
