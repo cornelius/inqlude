@@ -1,0 +1,79 @@
+org: cornelius
+remote_state:
+  org: cornelius
+  workspace: inqlude-labels
+shared: &welcome
+  name: Welcome
+  color: 5319e7
+  labels:
+  - description: 'good issue to start with if you are new to the project'
+    id: first_issue
+    name: good first issue
+  - description: 'possible task or project for GSoC'
+    id: gsoc
+    name: GSoC
+repos:
+- repo: inqlude
+  categories:
+  - name: Type
+    labels:
+    - color: 000080
+      description: 'Issue in existing functionality'
+      id: bug
+      name: Bug
+    - color: 1034A6
+      description: 'New functionality'
+      id: feature
+      name: Feature
+    - color: 0F52BA
+      description: 'Improvement of code without user-visible changes'
+      id: refactoring
+      name: Refactoring
+  - name: Categories
+    labels:
+    - color: 228B22
+      description: 'Command Line Interface'
+      id: cli
+      name: CLI
+    - color: 2E8B57
+      description: 'Inqlude data, including schema and content'
+      id: data
+      name: Data
+    - color: 3CB371
+      description: ''
+      id: documentation
+      name: Documentation
+    - color: 66CDAA
+      description: 'Inqlude web site'
+      id: web_site
+      name: Web Site
+  - name: Priorities
+    labels:
+    - color: fbca04
+      description: ''
+      id: low
+      name: Low Priority
+    - color: eb6420
+      description: ''
+      id: medium
+      name: Medium Priority
+    - color: e11d21
+      description: ''
+      id: high
+      name: High Priority
+  - *welcome
+- repo: inqlude-data
+  categories:
+  - name: Type
+    color: range-blue
+    labels:
+    - description: 'New manifests'
+      id: new_data
+      name: New Data
+    - description: 'Update manifests'
+      id: update_data
+      name: Update Data
+    - description: 'Manifest Format'
+      id: format
+      name: Format
+  - *welcome

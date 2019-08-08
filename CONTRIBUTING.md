@@ -8,4 +8,10 @@ This is a community project. Thanks for your participation.
 
 We use issue labels to categorize and prioritize issues. See the graphics below for an overview.
 
-![labels](.github/labels/cornelius-inqlude-labels.svg)
+### [inqlude](https://github.com/cornelius/inqlude/labels)
+
+![labels](.github/labels/labels-inqlude.svg)
+
+### [inqlude-data](https://github.com/cornelius/inqlude-data/labels)
+
+![labels](.github/labels/labels-inqlude-data.svg)
